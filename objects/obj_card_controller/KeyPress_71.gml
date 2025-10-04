@@ -1,0 +1,1 @@
+self.end_battle();
