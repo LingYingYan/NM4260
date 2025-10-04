@@ -58,3 +58,7 @@ end_battle = function() {
     self.draw_pile.clear();
     self.discard_pile.clear();
 }
+
+obtain_card = function(card, count = 1) {
+    self.deck.add(card, count);
+}
