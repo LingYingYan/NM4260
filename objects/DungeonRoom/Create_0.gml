@@ -8,3 +8,4 @@ grid_y = 0;
 neighbors = [];
 connected = false;
 degree_cap = 3;
+visited = false;
