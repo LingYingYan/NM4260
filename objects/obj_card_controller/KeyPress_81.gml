@@ -1,1 +1,0 @@
-self.start_turn();

@@ -15,7 +15,7 @@ function Deck() constructor {
             var prev = ds_map_find_value(self.__private.map, card_obj);
             ds_map_replace(self.__private.map, card_obj, prev + count);
         } else {
-            ds_map_add(self.__private.map, card_obj, c);
+            ds_map_add(self.__private.map, card_obj, count);
         }
     };
 
@@ -40,7 +40,10 @@ function Deck() constructor {
     /** @param {Asset.GMObject} card_obj */
     /** @return {real} count */
     static count = function(card_obj) {
-        if (!ds_map_exists(self.__private.map, card_obj)) return 0;
+        if (!ds_map_exists(self.__private.map, card_obj)) {
+            return 0;
+        }
+        
         return ds_map_find_value(self.__private.map, card_obj);
     };
 

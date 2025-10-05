@@ -3,8 +3,7 @@
 // Get the length of our array, that holds all cards in our stack.
 var _cur_len = array_length(card_holder);
 	
-for(var _j = _cur_len; _j > 0; _j--)
-{		
+for(var _j = _cur_len; _j > 0; _j--) {		
 	// If there are cards in our stack.
 	if (_cur_len > 0)
 	{

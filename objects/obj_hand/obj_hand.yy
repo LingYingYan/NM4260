@@ -1,15 +1,11 @@
 {
   "$GMObject":"",
-  "%Name":"obj_card_controller",
+  "%Name":"obj_hand",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":81,"eventType":9,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":69,"eventType":9,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":70,"eventType":9,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":71,"eventType":9,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_card_controller",
+  "name":"obj_hand",
   "overriddenProperties":[],
   "parent":{
     "name":"Cards",
@@ -32,12 +28,16 @@
   "properties":[
     {"$GMObjectProperty":"v1","%Name":"max_hand_capacity","filters":[],"listItems":[],"multiselect":false,"name":"max_hand_capacity","rangeEnabled":true,"rangeMax":20.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"10","varType":1,},
     {"$GMObjectProperty":"v1","%Name":"hand_capacity","filters":[],"listItems":[],"multiselect":false,"name":"hand_capacity","rangeEnabled":true,"rangeMax":20.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"5","varType":1,},
-    {"$GMObjectProperty":"v1","%Name":"spacing","filters":[],"listItems":[],"multiselect":false,"name":"spacing","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"72","varType":0,},
+    {"$GMObjectProperty":"v1","%Name":"spacing","filters":[],"listItems":[],"multiselect":false,"name":"spacing","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"200","varType":0,},
+    {"$GMObjectProperty":"v1","%Name":"hover_move_distance","filters":[],"listItems":[],"multiselect":false,"name":"hover_move_distance","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"50","varType":0,},
   ],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_transparent_box",
+    "path":"sprites/spr_transparent_box/spr_transparent_box.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }

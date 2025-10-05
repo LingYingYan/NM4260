@@ -22,6 +22,7 @@ function CardPile() constructor {
     /** @param {id.instance} card A card */
     static insert = function(card) {
         ds_list_add(self.__private.list, card);
+        self.print_as_list();
         return true;
     };
     
@@ -48,7 +49,7 @@ function CardPile() constructor {
     static draw = function() {
         var idx = irandom_range(0, ds_list_size(self.__private.list) - 1);
         var card = ds_list_find_value(self.__private.list, idx);
-        ds_list_delete(list, idx);
+        ds_list_delete(self.__private.list, idx);
         return card;
     };
     
@@ -76,7 +77,16 @@ function CardPile() constructor {
         
         if (ds_exists(self.__private.list, ds_type_list)) {
             ds_list_destroy(self.__private.list);
-            self.__private.list = noone;
+            self.__private.list = undefined;
         }
     };
+    
+    static print_as_list = function() {
+        var msg = "";
+        for (var i = 0; i < self.size(); i += 1) {
+            msg += string(ds_list_find_value(self.__private.list, i)) + " ";
+        }
+        
+        show_debug_message(msg);
+    }
 }

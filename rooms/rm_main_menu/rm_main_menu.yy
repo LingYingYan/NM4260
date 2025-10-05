@@ -6,7 +6,6 @@
   "inheritCreationOrder":false,
   "inheritLayers":false,
   "instanceCreationOrder":[
-    {"name":"inst_1F4A767C","path":"rooms/rm_main_menu/rm_main_menu.yy",},
     {"name":"inst_43048EA6","path":"rooms/rm_main_menu/rm_main_menu.yy",},
     {"name":"inst_5C629187","path":"rooms/rm_main_menu/rm_main_menu.yy",},
     {"name":"inst_5C6FDFF2","path":"rooms/rm_main_menu/rm_main_menu.yy",},
@@ -38,7 +37,6 @@
         {"$GMRInstance":"v2","%Name":"inst_5C629187","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_5C629187","objectId":{"name":"obj_play_button_title","path":"objects/obj_play_button_title/obj_play_button_title.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":1216.0,"y":1792.0,},
         {"$GMRInstance":"v2","%Name":"inst_5C6FDFF2","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_5C6FDFF2","objectId":{"name":"obj_exit_button_title","path":"objects/obj_exit_button_title/obj_exit_button_title.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":2624.0,"y":1792.0,},
         {"$GMRInstance":"v2","%Name":"inst_43048EA6","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_43048EA6","objectId":{"name":"obj_mute_button","path":"objects/obj_mute_button/obj_mute_button.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":3378.0,"y":384.0,},
-        {"$GMRInstance":"v2","%Name":"inst_1F4A767C","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_1F4A767C","objectId":{"name":"obj_mouse_manager","path":"objects/obj_mouse_manager/obj_mouse_manager.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":16.0,"y":0.0,},
       ],"layers":[],"name":"Buttons","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRAssetLayer":"","%Name":"PFX","assets":[
         {"$GMRParticleSystem":"v1","%Name":"particle_4F1A528A","colour":4294967295,"frozen":false,"ignore":false,"inheritedItemId":null,"inheritItemSettings":false,"name":"particle_4F1A528A","particleSystemId":{"name":"ps_winning_sparkle_passive","path":"particles/ps_winning_sparkle_passive/ps_winning_sparkle_passive.yy",},"resourceType":"GMRParticleSystem","resourceVersion":"2.0","rotation":0.0,"scaleX":2.4398632,"scaleY":2.2937548,"x":1917.0,"y":1078.0,},

@@ -15,3 +15,9 @@ function DebugMessageEvent(_msg) : Event(nameof(DebugMessageEvent)) constructor 
 function CardDroppedEvent(_card) : Event(nameof(CardDroppedEvent)) constructor {
     card = _card;
 }
+
+/// @desc Creates a card hover event.
+/// @param {Id.Instance} _card The card instance.
+function CardDraggedEvent(_card) : Event(nameof(CardDraggedEvent)) constructor {
+    card = _card;
+}

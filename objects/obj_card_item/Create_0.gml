@@ -1,5 +1,6 @@
 // --- Fields ---
 state = CardState.Static;
+original_depth = undefined;
 drag_origin_x = undefined;
 drag_origin_y = undefined;
 
@@ -7,10 +8,9 @@ drag_origin_y = undefined;
 
 /// @desc Drops a card
 /// @param {Id.Instance} to The drop location 
-drop = function Drop(to) {
+drop = function(to) {
     if (to == noone) {
-        self.x = drag_origin_x;
-        self.y = drag_origin_y;
+        self.restore();
     } else {
         self.x = to.x;
         self.y = to.y;
@@ -18,7 +18,26 @@ drop = function Drop(to) {
 }
 
 /// @desc Hovers over a card
-function Hover() {
+hover = function() {
+    if (self.state == CardState.Hovered) {
+        return;
+    }
+    
+    self.original_depth = self.depth;
     self.state = CardState.Hovered;
-    self.depth = 
+}
+
+restore = function() {
+    if (self.state == CardState.Static) {
+        return;
+    }
+    
+    self.depth = self.original_depth
+    self.state = CardState.Static;
+    if (self.drag_origin_x != undefined && self.drag_origin_y != undefined) {
+        self.x = self.drag_origin_x;
+        self.y = self.drag_origin_y;
+        self.drag_origin_x = undefined;
+        self.drag_origin_y = undefined;
+    }
 }

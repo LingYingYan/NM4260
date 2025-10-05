@@ -1,0 +1,1 @@
+obj_battle_manager.start_player_turn();

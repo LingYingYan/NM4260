@@ -10,6 +10,10 @@ function Hand(_capacity) constructor {
         capacity: max(0, _capacity)
     }
     
+    static contains = function(card) {
+        return ds_list_find_index(self.__private.list, card) != -1;
+    }
+    
     /// @desc Checks if the hand is full
     /** @return {bool} True if the hand is full */
     static is_full = function() {
@@ -33,10 +37,10 @@ function Hand(_capacity) constructor {
         }
     
         // clamp index
-        var idx = clamp(index, 0, self.size() - 1);
+        var idx = clamp(index, 0, self.size());
     
         // insertion by shifting: append then rotate portion to emulate insert
-        ds_list_insert(list, idx, card); // now size+1
+        ds_list_insert(self.__private.list, idx, card); // now size+1
         return true;
     };
     
@@ -57,18 +61,18 @@ function Hand(_capacity) constructor {
     /// Get the card at index (or undefined if out of range).
     /** @param {real} index */
     static get = function(index) {
-        if (idx < 0 || idx >= self.size()) {
+        if (index < 0 || index >= self.size()) {
             return undefined;
         }
         
-        return ds_list_find_value(self.__private.list, idx);
+        return ds_list_find_value(self.__private.list, index);
     };
     
     /// Snap the provided card (which must be inside the hand) to a depth value higher
     /// than every other card currently in the hand. This simply sets:
     ///     card.depth = current_max_depth + 1
     /// If the card is not found in the hand, this function returns false.
-    /** @param {id.instance} card       The card instance inside the hand to bring on top. */
+    /** @param {id.instance<obj_card_item>} card       The card instance inside the hand to bring on top. */
     static draw_on_top = function(card) {
         // confirm the card exists in hand
         var idx = ds_list_find_index(self.__private.list, card);
@@ -76,17 +80,19 @@ function Hand(_capacity) constructor {
             return;
         }
     
-        // find maximum depth among cards in hand
-        var max_depth = -99999; // start very low
-        for (var i = 0; i < n; i += 1) {
+        var min_depth = 99999;
+        for (var i = 0; i < self.size(); i += 1) {
             var c = ds_list_find_value(self.__private.list, i);
-            if (!is_undefined(c) && c.depth > max_depth) {
-                max_depth = c.depth;
+            if (!is_undefined(c) && c.depth < min_depth) {
+                min_depth = c.depth;
             }
         }
+        
+        if (card.depth == min_depth) {
+            return;
+        }
     
-        card.depth = max_depth + 1;
-        return true;
+        card.depth = min_depth - 1;
     };
     
     /// Clear the hand.

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"add_to_hand",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"add_to_hand",
+  "parent":{
+    "name":"Cards",
+    "path":"folders/Scripts/Cards.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

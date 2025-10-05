@@ -30,8 +30,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_transparent_box",
-    "path":"sprites/spr_transparent_box/spr_transparent_box.yy",
+    "name":"spr_card_stroke_with_blur",
+    "path":"sprites/spr_card_stroke_with_blur/spr_card_stroke_with_blur.yy",
   },
   "spriteMaskId":null,
   "visible":true,
