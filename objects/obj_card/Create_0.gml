@@ -8,6 +8,8 @@ goal_x = self.x;
 goal_y = self.y;
 normal_depth = self.depth;
 
+card_data = undefined;
+
 state_normal = function() {
 	if (obj_mouse_manager.grabbed_card != self) {
 		if (!self.picked_up) {
@@ -26,3 +28,5 @@ state_normal = function() {
 }
 
 state_update = self.state_normal;
+
+description = "";

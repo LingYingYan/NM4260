@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"add_to_hand",
+  "%Name":"create_initial_deck",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"add_to_hand",
+  "name":"create_initial_deck",
   "parent":{
     "name":"Cards",
     "path":"folders/Scripts/Cards.yy",

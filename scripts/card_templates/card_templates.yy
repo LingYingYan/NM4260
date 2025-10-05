@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"remove_from_hand",
+  "%Name":"card_templates",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"remove_from_hand",
+  "name":"card_templates",
   "parent":{
     "name":"Cards",
     "path":"folders/Scripts/Cards.yy",
