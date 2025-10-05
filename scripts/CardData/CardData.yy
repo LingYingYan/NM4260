@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"card_templates",
+  "%Name":"CardData",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"card_templates",
+  "name":"CardData",
   "parent":{
     "name":"Cards",
     "path":"folders/Scripts/Cards.yy",
