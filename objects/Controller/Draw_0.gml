@@ -1,5 +1,5 @@
 // obj_controller: Draw
-draw_set_color(c_ltgray);
+draw_set_color(c_gray);
 
 for (var r = 0; r < global.GRID_H; r++) {
     for (var c = 0; c < global.GRID_W; c++) {
@@ -8,7 +8,7 @@ for (var r = 0; r < global.GRID_H; r++) {
 
         for (var i = 0; i < array_length(rm.neighbors); i++) {
             var nb = rm.neighbors[i];
-            draw_line(rm.x + 24, rm.y + 24, nb.x + 24, nb.y + 24);
+            draw_line_width(rm.x + 24, rm.y + 24, nb.x + 24, nb.y + 24, 10);
         }
     }
 }
@@ -17,14 +17,24 @@ for (var r = 0; r < global.GRID_H; r++) {
 if (instance_exists(start_room)) {
     for (var i = 0; i < array_length(start_room.neighbors); i++) {
         var nb = start_room.neighbors[i];
-        draw_line(start_room.x + 24, start_room.y + 24, nb.x + 24, nb.y + 24);
+        draw_line(start_room.x + 48, start_room.y - 24, nb.x + 24, nb.y + 24);
     }
 }
 if (instance_exists(end_room)) {
     for (var i = 0; i < array_length(end_room.neighbors); i++) {
         var nb = end_room.neighbors[i];
-        draw_line(end_room.x + 24, end_room.y + 24, nb.x + 24, nb.y + 24);
+        draw_line(end_room.x + 24, end_room.y + 48, nb.x + 24, nb.y + 24);
     }
 }
 
 draw_set_color(c_white);
+
+//Draw all room instances manually (ensures they appear above)
+with (DungeonRoom) {
+    var w = 48;
+    if (room_type == "start") draw_set_color(c_yellow);
+    else if (room_type == "end") draw_set_color(c_red);
+    else draw_set_color(c_white);
+    draw_rectangle(x, y, x + w, y + w, false);
+}
+

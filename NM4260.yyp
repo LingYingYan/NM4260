@@ -37,8 +37,11 @@
   "resources":[
     {"id":{"name":"Controller","path":"objects/Controller/Controller.yy",},},
     {"id":{"name":"DungeonRoom","path":"objects/DungeonRoom/DungeonRoom.yy",},},
+    {"id":{"name":"Player","path":"objects/Player/Player.yy",},},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
+    {"id":{"name":"Script1","path":"scripts/Script1/Script1.yy",},},
     {"id":{"name":"spr_dungeonRoom","path":"sprites/spr_dungeonRoom/spr_dungeonRoom.yy",},},
+    {"id":{"name":"spr_enemyRoom","path":"sprites/spr_enemyRoom/spr_enemyRoom.yy",},},
     {"id":{"name":"Sprite2","path":"sprites/Sprite2/Sprite2.yy",},},
   ],
   "resourceType":"GMProject",

@@ -19,42 +19,6 @@
 //			room_grid[row][col] = room;
 //		} else {
 //			room_grid[row][col] = noone;
-//		}
-//	}
-//}
-//// remove the rooms that have no neighbours
-//for (var row = 0; row < 5; row ++) {
-//	for (var col = 0; col < 4; col++) {
-//		var rm = room_grid[row][col];
-//		if (rm != noone) {
-//			// the room exists
-//			var hasNeighbour = false;
-			
-//			var dirs = [[1,0], [-1,0], [0,1], [0,-1]]; //4 directions
-//            for (var d = 0; d < array_length(dirs); d++) {
-//                var nx = row + dirs[d][0];
-//                var ny = col + dirs[d][1];
-//                if (nx >= 0 && ny >= 0 && nx < 5 && ny < 4) {
-//                    if (room_grid[nx][ny] != noone) {
-//                        hasNeighbor = true;
-//						show_debug_message($"The room ({row},{col}) has neighbours")
-//                        break;
-//                    }
-//                }
-//            }
-			
-//			if (!hasNeighbor) {
-//                instance_destroy(rm);
-//                room_grid[row][col] = noone;
-//                show_debug_message("Removed isolated room at (" + string(row) + "," + string(col) + ")");
-//            }
-//		}
-//	}
-//}
-
-//show_debug_message($"Total rooms left is {instance_number(DungeonRoom)}")
-
-
 
 // ------------------- Helper function -------------------
 function choose_array(arr) {
@@ -212,6 +176,34 @@ repeat (10) { // limit attempts to prevent infinite loop
     if (total_rooms >= 15) break;
 }
 
+// ------------- STEP 5.5: ASSIGN ROOM TYPES -----------------
+var room_lst = [];
+for (var r = 0; r < global.GRID_H; r++) {
+    for (var c = 0; c < global.GRID_W; c++) {
+        var rm = room_grid[r][c];
+        if (rm != noone) {
+            array_push(room_lst, rm);
+        }
+    }
+}
+ // Shuffle rooms randomly
+room_lst = array_shuffle(room_lst);
+
+// Assign Treasure Rooms
+var treasure_count = 2; 
+for (var i = 0; i < array_length(room_lst); i++) {
+    if (i < 10) {
+		//10 enemy rooms
+		room_lst[i].room_type = "enemy";
+		update_room_icon();
+	} else if ( 10 <= i < 12) {
+		// 2 treasure rooms
+		room_lst[i].room_type = "treasure";
+	}
+}
+
+
+
 
 
 // ------------------- STEP 6: ADD START & END ROOMS OUTSIDE GRID -------------------
@@ -254,3 +246,11 @@ if (array_length(top_rooms) > 0) {
     connect_to_end.neighbors[array_length(connect_to_end.neighbors)] = end_room; // link both ways
 }
 
+
+
+// --- STEP 7: CREATE AVATAR ---
+if (instance_exists(start_room)) {
+    var avatar = instance_create_layer(start_room.x, start_room.y, "Instances", Player);
+    avatar.current_room = start_room;
+	show_debug_message($"the current avatar postion is at {avatar.x}, {avatar.y}")
+}

@@ -1,6 +1,6 @@
 {
   "$GMSprite":"",
-  "%Name":"spr_dungeonRoom",
+  "%Name":"spr_enemyRoom",
   "bboxMode":1,
   "bbox_bottom":63,
   "bbox_left":0,
@@ -12,16 +12,16 @@
   "edgeFiltering":false,
   "For3D":false,
   "frames":[
-    {"$GMSpriteFrame":"","%Name":"a78f7d30-852e-464c-a755-f8fbfc46b69b","name":"a78f7d30-852e-464c-a755-f8fbfc46b69b","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"","%Name":"69b8a6c5-9d7b-4a5d-89ff-7f41745afedb","name":"69b8a6c5-9d7b-4a5d-89ff-7f41745afedb","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
   ],
   "gridX":0,
   "gridY":0,
   "height":64,
   "HTile":false,
   "layers":[
-    {"$GMImageLayer":"","%Name":"be508e2f-4e98-4b64-9cea-52ef6d680279","blendMode":0,"displayName":"default","isLocked":false,"name":"be508e2f-4e98-4b64-9cea-52ef6d680279","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
+    {"$GMImageLayer":"","%Name":"eb41ea1b-c464-47d2-b797-2db11b64d198","blendMode":0,"displayName":"default","isLocked":false,"name":"eb41ea1b-c464-47d2-b797-2db11b64d198","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
   ],
-  "name":"spr_dungeonRoom",
+  "name":"spr_enemyRoom",
   "nineSlice":null,
   "origin":0,
   "parent":{
@@ -33,7 +33,7 @@
   "resourceVersion":"2.0",
   "sequence":{
     "$GMSequence":"v1",
-    "%Name":"spr_dungeonRoom",
+    "%Name":"spr_enemyRoom",
     "autoRecord":true,
     "backdropHeight":768,
     "backdropImageOpacity":0.5,
@@ -57,7 +57,7 @@
       "resourceType":"KeyframeStore<MomentsEventKeyframe>",
       "resourceVersion":"2.0",
     },
-    "name":"spr_dungeonRoom",
+    "name":"spr_enemyRoom",
     "playback":1,
     "playbackSpeed":30.0,
     "playbackSpeedType":0,
@@ -71,8 +71,8 @@
     "tracks":[
       {"$GMSpriteFramesTrack":"","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"$KeyframeStore<SpriteFrameKeyframe>":"","Keyframes":[
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"a78f7d30-852e-464c-a755-f8fbfc46b69b","path":"sprites/spr_dungeonRoom/spr_dungeonRoom.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"a436eb4e-af52-4a90-9ab7-469c79de63a9","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"69b8a6c5-9d7b-4a5d-89ff-7f41745afedb","path":"sprites/spr_enemyRoom/spr_enemyRoom.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+              },"Disabled":false,"id":"941ac505-1faa-4481-8031-d8c0f1e113ab","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
           ],"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"2.0",},"modifiers":[],"name":"frames","resourceType":"GMSpriteFramesTrack","resourceVersion":"2.0","spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange":null,
