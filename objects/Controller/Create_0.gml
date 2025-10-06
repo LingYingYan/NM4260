@@ -192,19 +192,36 @@ room_lst = array_shuffle(room_lst);
 // Assign Treasure Rooms
 var treasure_count = 2; 
 for (var i = 0; i < array_length(room_lst); i++) {
-    if (i < 10) {
+	if (i == 0) {
+		room_lst[i].room_type = "bonfire";
+		with (DungeonRoom) {
+			update_room_icon();
+			show_debug_message("icon is updated");
+		}
+	} else if (i < 10) {
 		//10 enemy rooms
 		room_lst[i].room_type = "enemy";
-		update_room_icon();
-	} else if ( 10 <= i < 12) {
+		with (DungeonRoom) {
+			update_room_icon();
+		}
+		
+	} else if (i >=10 && i < 12) {
 		// 2 treasure rooms
 		room_lst[i].room_type = "treasure";
+		with (DungeonRoom) {
+			update_room_icon();
+		}
+	} else {
+		room_lst[i].room_type = "default";
+		with (DungeonRoom) {
+			update_room_icon();
+		}
 	}
 }
 
 
 
-
+instance_create_layer(0, 0, "Instances", FogOfWar);
 
 // ------------------- STEP 6: ADD START & END ROOMS OUTSIDE GRID -------------------
 
@@ -254,3 +271,6 @@ if (instance_exists(start_room)) {
     avatar.current_room = start_room;
 	show_debug_message($"the current avatar postion is at {avatar.x}, {avatar.y}")
 }
+
+instance_create_layer(0, 0, "FogLayer", FogOfWar);
+show_debug_message("Created fog: " + string(instance_exists(FogOfWar)));

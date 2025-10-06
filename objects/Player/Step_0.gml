@@ -6,3 +6,10 @@ if (point_distance(x, y, target_x, target_y) > move_speed) {
     x = target_x;
     y = target_y;
 }
+
+
+if (x == target_x && y == target_y) {
+    if (!current_room.discovered) {
+        reveal_room(current_room);
+    }
+}

@@ -29,6 +29,7 @@ if (instance_exists(end_room)) {
 
 draw_set_color(c_white);
 
+
 //Draw all room instances manually (ensures they appear above)
 with (DungeonRoom) {
     var w = 48;

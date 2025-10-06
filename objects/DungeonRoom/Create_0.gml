@@ -1,5 +1,5 @@
 //variables of room
-discovered = true;
+discovered = false;
 room_type = "default";
 
 grid_x = 0;
@@ -9,3 +9,4 @@ neighbors = [];
 connected = false;
 degree_cap = 3;
 visited = false;
+depth = -10;

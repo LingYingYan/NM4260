@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"Script1",
+  "%Name":"update_room_icon",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"Script1",
+  "name":"update_room_icon",
   "parent":{
     "name":"NM4260",
     "path":"NM4260.yyp",
