@@ -1,1 +1,1 @@
-hp = self.max_health;
+data = undefined;

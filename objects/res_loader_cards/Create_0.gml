@@ -28,6 +28,8 @@ read_row = function(r) {
         self.loaded[array_length(self.loaded)] = card_data;
         self.total_weight += (5 - card_rarity);
     }
+    
+    show_debug_message($"Loaded {card_id}: {card_data}");
 }
 
 /**

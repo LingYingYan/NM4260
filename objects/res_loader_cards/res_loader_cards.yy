@@ -8,6 +8,7 @@
   "name":"res_loader_cards",
   "overriddenProperties":[
     {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"res_loader_spreadsheet","path":"objects/res_loader_spreadsheet/res_loader_spreadsheet.yy",},"propertyId":{"name":"google_sheet_id","path":"objects/res_loader_spreadsheet/res_loader_spreadsheet.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"15h6bBbmkBUX-cnQSuWV97bT1jnyP5GVQmhKgxdNaygk",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"res_loader_spreadsheet","path":"objects/res_loader_spreadsheet/res_loader_spreadsheet.yy",},"propertyId":{"name":"save_file_name","path":"objects/res_loader_spreadsheet/res_loader_spreadsheet.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"card_data.csv",},
   ],
   "parent":{
     "name":"Loaders",

@@ -11,4 +11,5 @@ read_row = function(r) {
     var sprite = asset_get_index(sprite_name);
     var mark_data = make_mark(uid, display_name, sprite, id_dominated);
     ds_map_add(self.loaded, uid, mark_data);
+    show_debug_message($"Loaded {uid}: {mark_data}");
 }

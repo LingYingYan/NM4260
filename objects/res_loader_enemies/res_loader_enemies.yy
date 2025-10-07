@@ -6,12 +6,18 @@
   ],
   "managed":true,
   "name":"res_loader_enemies",
-  "overriddenProperties":[],
+  "overriddenProperties":[
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"res_loader_spreadsheet","path":"objects/res_loader_spreadsheet/res_loader_spreadsheet.yy",},"propertyId":{"name":"google_sheet_id","path":"objects/res_loader_spreadsheet/res_loader_spreadsheet.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"1eV3hLo0S4d5Kh3E-HVNCdPom_az_0ExwdyJQFNYhPDA",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"res_loader_spreadsheet","path":"objects/res_loader_spreadsheet/res_loader_spreadsheet.yy",},"propertyId":{"name":"save_file_name","path":"objects/res_loader_spreadsheet/res_loader_spreadsheet.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"enemy_data.csv",},
+  ],
   "parent":{
     "name":"Loaders",
     "path":"folders/Objects/Resources/Loaders.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"res_loader_spreadsheet",
+    "path":"objects/res_loader_spreadsheet/res_loader_spreadsheet.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
