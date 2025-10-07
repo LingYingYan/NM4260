@@ -1,16 +1,18 @@
 {
   "$GMObject":"",
-  "%Name":"obj_game_manager",
-  "eventList":[],
+  "%Name":"obj_player_deck_manager",
+  "eventList":[
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+  ],
   "managed":true,
-  "name":"obj_game_manager",
+  "name":"obj_player_deck_manager",
   "overriddenProperties":[],
   "parent":{
     "name":"Managers",
     "path":"folders/Objects/Managers.yy",
   },
   "parentObjectId":null,
-  "persistent":false,
+  "persistent":true,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
   "physicsFriction":0.2,

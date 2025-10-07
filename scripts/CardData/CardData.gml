@@ -3,19 +3,21 @@
  * @param {string} card_type Description
  * @param {string} card_name Description
  * @param {Asset.GMSprite} card_sprite Description
+ * @param {real} card_rarity Description
  * @param {Struct.Mark} mark_data Description
  * @param {real} mark_count description
  * @param {real} attack_damage description    
  * @param {real} heal_amount description
  */
 function CardData(
-    card_type, card_name, card_sprite, 
+    card_type, card_name, card_sprite, card_rarity,
     mark_data, mark_count, 
     attack_damage, heal_amount
 ) constructor {
     type = card_type;
     name = card_name;
     sprite = card_sprite;
+    rarity = card_rarity;
     mark = mark_data;
     mark_multiplicity = mark_count;
     damage = attack_damage;
@@ -93,7 +95,7 @@ function make_card_from(resource) {
     var mark_resource = resource.mark;
     var mark = make_mark_from(resource.mark);
     return new CardData(
-        resource.type, resource.name, resource.sprite, 
+        resource.type, resource.name, resource.sprite, resource.rarity,
         mark, resource.mark_multiplicity, 
         resource.damage, resource.heal_amount
     );
