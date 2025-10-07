@@ -77,3 +77,10 @@ denumerate = function() {
     
     return a;
 }
+
+clear = function() {
+    self.__private.card_rarities = [];
+    ds_map_clear(self.__private.card_names_to_count);
+    ds_map_clear(self.__private.card_names_to_data);
+    ds_map_clear(self.__private.card_rarity_to_name);
+}

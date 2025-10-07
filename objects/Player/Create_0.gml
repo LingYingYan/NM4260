@@ -6,3 +6,4 @@ move_speed = 6;
 current_room = noone;
 
 depth = -100;
+

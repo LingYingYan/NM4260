@@ -1,5 +1,5 @@
 var drop_area = instance_place(self.x, self.y, obj_card_drop_area);
-if (drop_area != noone) {
+if (drop_area != noone && drop_area.owner == "Player" && (drop_area.card == noone || drop_area.card == undefined)) {
     place_card(self, drop_area.x, drop_area.y);
     obj_hand.remove(self.id);
     // self.card_data.apply(obj_player, obj_player);

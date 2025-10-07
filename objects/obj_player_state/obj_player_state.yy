@@ -1,0 +1,43 @@
+{
+  "$GMObject":"",
+  "%Name":"obj_player_state",
+  "eventList":[
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+  ],
+  "managed":true,
+  "name":"obj_player_state",
+  "overriddenProperties":[
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_battle_character","path":"objects/obj_battle_character/obj_battle_character.yy",},"propertyId":{"name":"max_health","path":"objects/obj_battle_character/obj_battle_character.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"100",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_battle_character","path":"objects/obj_battle_character/obj_battle_character.yy",},"propertyId":{"name":"name","path":"objects/obj_battle_character/obj_battle_character.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"Player",},
+  ],
+  "parent":{
+    "name":"Game Characters",
+    "path":"folders/Objects/Game Characters.yy",
+  },
+  "parentObjectId":{
+    "name":"obj_battle_character",
+    "path":"objects/obj_battle_character/obj_battle_character.yy",
+  },
+  "persistent":true,
+  "physicsAngularDamping":0.1,
+  "physicsDensity":0.5,
+  "physicsFriction":0.2,
+  "physicsGroup":1,
+  "physicsKinematic":false,
+  "physicsLinearDamping":0.1,
+  "physicsObject":false,
+  "physicsRestitution":0.1,
+  "physicsSensor":false,
+  "physicsShape":1,
+  "physicsShapePoints":[],
+  "physicsStartAwake":true,
+  "properties":[
+    {"$GMObjectProperty":"v1","%Name":"max_vision","filters":[],"listItems":[],"multiselect":false,"name":"max_vision","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"5","varType":0,},
+  ],
+  "resourceType":"GMObject",
+  "resourceVersion":"2.0",
+  "solid":false,
+  "spriteId":null,
+  "spriteMaskId":null,
+  "visible":true,
+}

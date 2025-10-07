@@ -1,0 +1,15 @@
+// Inherit the parent event
+event_inherited();
+
+play_card = function() {
+    var idx = irandom_range(0, array_length(self.data.cards) - 1);
+    var card_data = self.data.cards[idx];
+    var card = instance_create_layer(self.x, -500, "Cards", obj_card);
+    card.card_data = card_data;
+    card.selectable = false;
+    card.grabbable = false;
+    var player = obj_battle_manager.player;
+    var data = player.data;
+    card.set_reveal(obj_battle_manager.player.data.get_revelation());
+    return card;
+}
