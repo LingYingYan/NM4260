@@ -7,7 +7,7 @@ for (var i = 0; i < n; i += 1) {
     }
     
     var idx = array_length(self.loaded[? data.owner]);
-    self.loaded[? data.ower][idx] = data;
+    self.loaded[? data.owner][idx] = data;
 }
 
 /**

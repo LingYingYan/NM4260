@@ -8,6 +8,8 @@ hand = obj_hand;
 
 start_battle = function() {
     transfer_between_piles(self.deck, self.draw_pile);
+    self.draw_pile.shuffle();
+    self.start_player_turn();
 }
 
 start_player_turn = function() {

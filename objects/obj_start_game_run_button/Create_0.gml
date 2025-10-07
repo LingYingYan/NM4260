@@ -8,8 +8,5 @@ on_click = function() {
         obj_player_deck_manager.add(cards[i]);
     }
     
-    var deck = obj_player_deck_manager.denumerate();
-    for (var i = 0; i < array_length(deck); i += 1) {
-        show_debug_message(deck[i].name);
-    }
+    room_goto(Room1);
 }

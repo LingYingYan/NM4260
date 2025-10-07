@@ -1,19 +1,20 @@
-card_piles = [];
-
-var n = instance_number(obj_initial_card_pile);
-for (var i = 0; i < n; i += 1) {
-    card_piles[i] = instance_find(obj_initial_card_pile, i);
-}
-
 pick = function(card_id) {
-    self.find_deck(card_id).remove(card_id);
-    obj_hand.add(card_id);
+    if (room == rm_game_start) {
+        self.find_deck(card_id).remove(card_id);
+        obj_hand.add(card_id);
+    }
 }
 
 find_deck = function(card_id) {
-    for (var i = 0; i < array_length(self.card_piles); i += 1) {
-        if (self.card_piles[i].card.name == card_id.card_data.name) {
-            return self.card_piles[i];
+    var card_piles = [];
+    var n = instance_number(obj_initial_card_pile);
+    for (var i = 0; i < n; i += 1) {
+        card_piles[i] = instance_find(obj_initial_card_pile, i);
+    }
+    
+    for (var i = 0; i < array_length(card_piles); i += 1) {
+        if (card_piles[i].card.name == card_id.card_data.name) {
+            return card_piles[i];
         }
     }
     
@@ -21,6 +22,8 @@ find_deck = function(card_id) {
 }
 
 put_back = function(card_id) {
-    obj_hand.remove(card_id);
-    self.find_deck(card_id).add(card_id);
+    if (room == rm_game_start) {
+        obj_hand.remove(card_id);
+        self.find_deck(card_id).add(card_id);
+    }
 }

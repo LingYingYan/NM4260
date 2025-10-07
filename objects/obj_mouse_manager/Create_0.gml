@@ -9,7 +9,7 @@ update_looking_at = function() {
     var topmost = noone;
     if (collisions > 0) { 
         for (var i = 0; i < collisions; i += 1;) {
-            if (topmost == noone || list[| i].depth < topmost.depth) {
+            if (topmost == noone || list[| i].current_depth < topmost.current_depth) {
                 topmost = list[| i];
             } 
         }

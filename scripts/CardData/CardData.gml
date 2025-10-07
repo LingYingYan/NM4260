@@ -100,3 +100,5 @@ function make_card_from(resource) {
         resource.damage, resource.heal_amount
     );
 }
+
+
