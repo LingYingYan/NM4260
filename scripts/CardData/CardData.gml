@@ -94,17 +94,17 @@ function CardData(
         switch (self.type) {
         	case "Destruction":
                 return knows_mark 
-                    ? $"Deals {min(1, floor(self.damage * p))} {mark.type} damage\n" +
+                    ? $"Deals {max(1, floor(self.damage * p))} {mark.type} damage\n" +
                       $"Target gains {min(1, floor(self.mark_multiplicity * p))} {mark.type} Mark"
-                    : $"Deals {min(1, floor(self.damage * p))} damage";
+                    : $"Deals {max(1, floor(self.damage * p))} damage";
             case "Restoration":
                 return knows_mark 
-                    ? $"Heals {min(1, floor(self.heal * p))} HP\n" +
+                    ? $"Heals {max(1, floor(self.heal * p))} HP\n" +
                       $"Caster gains {min(1, floor(self.mark_multiplicity * p))} {mark.type} Mark"
-                    : $"Heals {min(1, floor(self.heal * p))} HP";
+                    : $"Heals {max(1, floor(self.heal * p))} HP";
             case "Alteration":
                 return knows_mark
-                    ? $"Target gains {min(1, floor(self.mark_multiplicity * p))} {mark.type} Mark"
+                    ? $"Target gains {max(1, floor(self.mark_multiplicity * p))} {mark.type} Mark"
                     : $"Target gains Mark";
         }
     }
