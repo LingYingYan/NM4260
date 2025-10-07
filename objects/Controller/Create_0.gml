@@ -19,343 +19,258 @@
 //			room_grid[row][col] = room;
 //		} else {
 //			room_grid[row][col] = noone;
-//		}
-//	}
-//}
-//// remove the rooms that have no neighbours
-//for (var row = 0; row < 5; row ++) {
-//	for (var col = 0; col < 4; col++) {
-//		var rm = room_grid[row][col];
-//		if (rm != noone) {
-//			// the room exists
-//			var hasNeighbour = false;
-			
-//			var dirs = [[1,0], [-1,0], [0,1], [0,-1]]; //4 directions
-//            for (var d = 0; d < array_length(dirs); d++) {
-//                var nx = row + dirs[d][0];
-//                var ny = col + dirs[d][1];
-//                if (nx >= 0 && ny >= 0 && nx < 5 && ny < 4) {
-//                    if (room_grid[nx][ny] != noone) {
-//                        hasNeighbor = true;
-//						show_debug_message($"The room ({row},{col}) has neighbours")
-//                        break;
-//                    }
-//                }
-//            }
-			
-//			if (!hasNeighbor) {
-//                instance_destroy(rm);
-//                room_grid[row][col] = noone;
-//                show_debug_message("Removed isolated room at (" + string(row) + "," + string(col) + ")");
-//            }
-//		}
-//	}
-//}
 
-//show_debug_message($"Total rooms left is {instance_number(DungeonRoom)}")
+// ------------------- Helper function -------------------
+function choose_array(arr) {
+    return arr[irandom(array_length(arr) - 1)];
+}
 
-
-
-/// obj_map_controller: Create
-
-// ---------------- Parameters ----------------
-global.GRID_W     = 5;        // columns per floor
-global.FLOORS     = 4;       // number of rows (“floors”)
-var CELL       = 64;       // pixel spacing
-var P_NODE     = 0.75;     // probability a slot spawns a node
-var EXTRA_EDGES_PER_FLOOR = 2; // how many extra edges to try per floor (cycles)
-
-// seed randomness so runs differ; swap to random_set_seed(12345) for reproducible runs
 random_set_seed(current_time);
 
-// -------------- Storage ---------------------
-room_grid = array_create(global.FLOORS);       // room_grid[floor][col] = instance or noone
-for (var f = 0; f < global.FLOORS; f++) room_grid[f] = array_create(global.GRID_W);
 
-all_rooms = []; // flat list of every room for convenience
+function _generate_map() {
+    // clear out old rooms if any
+    with (DungeonRoom) instance_destroy();
 
-function _in_bounds(col, floor) {
-    return col >= 0 && col < global.GRID_W && floor >= 0 && floor < global.FLOORS;
-}
+    // --- PARAMETERS ---
+    var ROOM_DENSITY = 0.75;
+    var EXTRA_EDGES = 6;
+    global.GRID_W = 5;
+    global.GRID_H = 4;
+    global.ROOM_SIZE = 64;
 
-function _add_edge(a, b) {
-    if (a == noone || b == noone || a == b) return false;
+    // --- ARRAYS ---
+    room_grid = array_create(global.GRID_H);
+    for (var r = 0; r < global.GRID_H; r++) room_grid[r] = array_create(global.GRID_W);
+    var all_rooms = [];
 
-    // already connected?
-    for (var i = 0; i < array_length(a.neighbors); i++)
-        if (a.neighbors[i] == b) return false;
-
-    // degree caps
-    if (array_length(a.neighbors) >= a.degree_cap) return false;
-    if (array_length(b.neighbors) >= b.degree_cap) return false;
-
-    array_push(a.neighbors, b);
-    array_push(b.neighbors, a);
-    return true;
-}
-
-// Manhattan neighbors (same floor left/right, or adjacent floor up/down same or +/-1 column)
-function _adjacent_pairs_between_floors(floorA, floorB) {
-    // returns list of {a:roomA, b:roomB} that are “grid-adjacent” vertically (same col or +-1)
-    var pairs = [];
-    for (var c = 0; c < global.GRID_W; c++) {
-        var A = room_grid[floorA][c];
-        if (A == noone) continue;
-
-        // connect mostly between consecutive floors (like StS), but permit same-col or offset +/-1
-        for (var dc = -1; dc <= 1; dc++) {
-            var c2 = c + dc;
-            if (!_in_bounds(c2, floorB)) continue;
-            var B = room_grid[floorB][c2];
-            if (B != noone) array_push(pairs, { a: A, b: B });
-        }
-    }
-    return pairs;
-}
-
-// ---------------- Step 1: spawn nodes on a “template” of floors ----------------
-// (Slay the Spire uses a floor-based template then connects between floors. :contentReference[oaicite:1]{index=1})
-for (var f = 0; f < global.FLOORS; f++) {
-    for (var c = 0; c < global.GRID_W; c++) {
-        if (random(1) < P_NODE) {
-            var rx = c * CELL;
-            var ry = (global.FLOORS-1 - f) * CELL; // draw bottom floor at screen bottom
-            var R = instance_create_layer(rx, ry, "Instances", DungeonRoom);
-            R.grid_x = c;
-            R.grid_y = f;     // logical “floor”
-            room_grid[f][c] = R;
-            array_push(all_rooms, R);
-        } else {
-            room_grid[f][c] = noone;
-        }
-    }
-}
-
-// ensure at least one node on top & bottom floors
-function _ensure_floor_has_room(f) {
-    var any = false;
-    for (var c = 0; c < global.GRID_W; c++) if (room_grid[f][c] != noone) { any = true; break; }
-    if (!any) {
-        var pick = irandom(global.GRID_W-1);
-        var rx = pick * CELL;
-        var ry = (global.FLOORS-1 - f) * CELL;
-        var R = instance_create_layer(rx, ry, "Instances", DungeonRoom);
-        R.grid_x = pick; R.grid_y = f;
-        room_grid[f][pick] = R;
-        array_push(all_rooms, R);
-    }
-}
-_ensure_floor_has_room(0);
-_ensure_floor_has_room(global.FLOORS-1);
-
-// ---------------- Step 2: cull isolated singletons (no 4-neighbors at all) ----------------
-for (var f = 0; f < global.FLOORS; f++) {
-    for (var c = 0; c < global.GRID_W; c++) {
-        var R = room_grid[f][c];
-        if (R == noone) continue;
-
-        var neighbors_exist = false;
-
-        // same floor left/right
-        if (_in_bounds(c-1, f) && room_grid[f][c-1] != noone) neighbors_exist = true;
-        if (_in_bounds(c+1, f) && room_grid[f][c+1] != noone) neighbors_exist = true;
-
-        // adjacent floors roughly above/below (same col or +/-1)
-        for (var df = -1; df <= 1; df += 2) {
-            var nf = f + df;
-            if (!_in_bounds(c, nf)) { } else if (room_grid[nf][c] != noone) neighbors_exist = true;
-            if (_in_bounds(c-1, nf) && room_grid[nf][c-1] != noone) neighbors_exist = true;
-            if (_in_bounds(c+1, nf) && room_grid[nf][c+1] != noone) neighbors_exist = true;
-        }
-
-        if (!neighbors_exist) {
-            // remove
-            array_delete_value(all_rooms, R);
-            instance_destroy(R);
-            room_grid[f][c] = noone;
-        }
-    }
-}
-
-// If after culling a floor became empty, ensure it has a node (keeps the vertical flow)
-for (var f = 0; f < global.FLOORS; f++) _ensure_floor_has_room(f);
-
-// ---------------- Step 3: build a spanning tree (guaranteed connectivity) ----------------
-// Strategy: grow upward floor-by-floor (like StS), connecting each room to at least one
-// on the next floor; then union components until all are connected. (StS connects
-// to “closest” rooms in the next floor; we restrict to near columns for grid feel. :contentReference[oaicite:2]{index=2})
-
-// DSU (disjoint-set union) helpers
-global.parent = ds_map_create(); // key: instance id, val: parent id
-global.rank   = ds_map_create();
-
-function _find(x) {
-    var p = ds_map_find_value(global.parent, x);
-    if (p != x) {
-        p = _find(p);
-        ds_map_replace(global.parent, x, p);
-    }
-    return p;
-}
-function _union(a, b) {
-    var ra = _find(a), rb = _find(b);
-    if (ra == rb) return;
-    var rka = ds_map_find_value(global.rank, ra);
-    var rkb = ds_map_find_value(global.rank, rb);
-    if (rka < rkb) {
-        ds_map_replace(global.parent, ra, rb);
-    } else if (rka > rkb) {
-        ds_map_replace(global.parent, rb, ra);
-    } else {
-        ds_map_replace(global.parent, rb, ra);
-        ds_map_replace(global.rank, ra, rka + 1);
-    }
-}
-
-// init DSU sets
-for (var i = 0; i < array_length(all_rooms); i++) {
-    var rm_id = all_rooms[i].id;
-    ds_map_add(global.parent, rm_id, rm_id);
-    ds_map_add(global.rank, rm_id, 0);
-}
-
-// first, “forward” connections between consecutive floors
-for (var f = 0; f < global.FLOORS-1; f++) {
-    var pairs = _adjacent_pairs_between_floors(f, f+1);
-    // shuffle pairs to vary the spanning tree
-    for (var s = array_length(pairs)-1; s > 0; s--) {
-        var j = irandom(s);
-        var tmp = pairs[s]; pairs[s] = pairs[j]; pairs[j] = tmp;
-    }
-
-    // greedily add edges if they help connect components
-    for (var p = 0; p < array_length(pairs); p++) {
-        var a = pairs[p].a, b = pairs[p].b;
-        if (_find(a.id) != _find(b.id)) {
-            if (_add_edge(a, b)) _union(a.id, b.id);
+    // --- STEP 1: PLACE ROOMS ---
+    for (var row = 0; row < global.GRID_H; row++) {
+        for (var col = 0; col < global.GRID_W; col++) {
+            if (random(1) < ROOM_DENSITY) {
+                var rm = instance_create_layer(col * global.ROOM_SIZE, row * global.ROOM_SIZE + global.ROOM_SIZE, "Instances", DungeonRoom);
+                rm.grid_x = col;
+                rm.grid_y = row;
+                room_grid[row][col] = rm;
+                array_push(all_rooms, rm);
+            } else {
+                room_grid[row][col] = noone;
+            }
         }
     }
 
-    // ensure every node on floor f has at least one upward connection if possible
-    for (var c = 0; c < global.GRID_W; c++) {
-        var A = room_grid[f][c];
-        if (A == noone) continue;
+    // ensure at least 1 in top & bottom rows
+    function ensure_row_has_room(r) {
+        var found = false;
+        for (var c = 0; c < global.GRID_W; c++) if (room_grid[r][c] != noone) { found = true; break; }
+        if (!found) {
+            var pick = irandom(global.GRID_W - 1);
+            var rm = instance_create_layer(pick * global.ROOM_SIZE, r * global.ROOM_SIZE + global.ROOM_SIZE, "Instances", DungeonRoom);
+            rm.grid_x = pick;
+            rm.grid_y = r;
+            room_grid[r][pick] = rm;
+            array_push(all_rooms, rm);
+        }
+    }
+    ensure_row_has_room(0);
+    ensure_row_has_room(global.GRID_H - 1);
 
-        var has_up = false;
-        for (var k = 0; k < array_length(A.neighbors); k++)
-            if (A.neighbors[k].grid_y == f+1) { has_up = true; break; }
+    // --- STEP 2: REMOVE ISOLATED ROOMS ---
+    for (var r = 0; r < global.GRID_H; r++) {
+        for (var c = 0; c < global.GRID_W; c++) {
+            var rm = room_grid[r][c];
+            if (rm == noone) continue;
 
-        if (!has_up) {
-            // try to connect to a near column on next floor
-            var columns = [c, c-1, c+1];
-            for (var t = 0; t < array_length(columns) && !has_up; t++) {
-                var cc = columns[t];
-                if (!_in_bounds(cc, f+1)) continue;
-                var B = room_grid[f+1][cc];
-                if (B != noone) {
-                    if (_add_edge(A, B)) {
-                        _union(A.id, B.id);
-                        has_up = true;
-                    }
+            var hasNeighbor = false;
+            var dirs = [[1,0],[-1,0],[0,1],[0,-1]];
+            for (var d = 0; d < array_length(dirs); d++) {
+                var nx = c + dirs[d][0];
+                var ny = r + dirs[d][1];
+                if (nx >= 0 && ny >= 0 && nx < global.GRID_W && ny < global.GRID_H) {
+                    if (room_grid[ny][nx] != noone) { hasNeighbor = true; break; }
                 }
             }
-        }
-    }
-}
 
-// if multiple components remain, connect them by nearest vertical neighbors
-function _components_connected() {
-    if (array_length(all_rooms) <= 1) return true;
-    var root0 = _find(all_rooms[0].id);
-    for (var i = 1; i < array_length(all_rooms); i++)
-        if (_find(all_rooms[i].id) != root0) return false;
-    return true;
-}
-
-if (!_components_connected()) {
-    // brute-force: try to connect across floors where possible while respecting degree caps
-    for (var f = 0; f < global.FLOORS-1 && !_components_connected(); f++) {
-        var pairs = _adjacent_pairs_between_floors(f, f+1);
-        // sort by vertical proximity (already adjacent) then by |column delta|
-        // (simple heuristic to “nearest” in this grid sense)
-        for (var p = 0; p < array_length(pairs); p++) {
-            var a = pairs[p].a, b = pairs[p].b;
-            // if they’re in different components, try link
-            if (_find(a.id) != _find(b.id)) {
-                if (_add_edge(a, b)) _union(a.id, b.id);
+            if (!hasNeighbor) {
+                instance_destroy(rm);
+                room_grid[r][c] = noone;
             }
-            if (_components_connected()) break;
-        }
-        if (_components_connected()) break;
-    }
-}
-
-// ---------------- Step 4: add extra edges to make cycles (respect degree cap) ----------------
-for (var f = 0; f < global.FLOORS-1; f++) {
-    var tries = EXTRA_EDGES_PER_FLOOR;
-    while (tries-- > 0) {
-        var pairs = _adjacent_pairs_between_floors(f, f+1);
-        if (array_length(pairs) == 0) break;
-        var pick = pairs[irandom(array_length(pairs)-1)];
-        _add_edge(pick.a, pick.b); // harmless if degree cap or duplicate prevents it
-    }
-}
-
-// also try occasional horizontal edges within same floor to create short loops
-for (var f = 0; f < global.FLOORS; f++) {
-    for (var c = 0; c < global.GRID_W-1; c++) {
-        var A = room_grid[f][c];
-        var B = room_grid[f][c+1];
-        if (A != noone && B != noone) {
-            if (random(1) < 0.2) _add_edge(A, B);
         }
     }
+
+    // --- STEP 3: CONNECT ROOMS (4-dir) ---
+    function add_edge(a, b) {
+        if (a == noone || b == noone || a == b) return false;
+        if (array_length(a.neighbors) >= a.degree_cap) return false;
+        if (array_length(b.neighbors) >= b.degree_cap) return false;
+        for (var i = 0; i < array_length(a.neighbors); i++) if (a.neighbors[i] == b) return false;
+        array_push(a.neighbors, b);
+        array_push(b.neighbors, a);
+        return true;
+    }
+
+    for (var r = 0; r < global.GRID_H; r++) {
+        for (var c = 0; c < global.GRID_W; c++) {
+            var rm = room_grid[r][c];
+            if (rm == noone) continue;
+            var dirs = [[1,0],[-1,0],[0,1],[0,-1]];
+            for (var d = 0; d < array_length(dirs); d++) {
+                var nx = c + dirs[d][0];
+                var ny = r + dirs[d][1];
+                if (nx < 0 || ny < 0 || nx >= global.GRID_W || ny >= global.GRID_H) continue;
+                var nb = room_grid[ny][nx];
+                if (nb != noone) add_edge(rm, nb);
+            }
+        }
+    }
+
+    // --- STEP 4: FLOOD FILL CONNECTIVITY CHECK ---
+    function flood_fill(sx, sy) {
+        var stack = [[sx, sy]];
+        while (array_length(stack) > 0) {
+            var pos = stack[array_length(stack)-1];
+            array_delete(stack, array_length(stack)-1, 1);
+            var cx = pos[0];
+            var cy = pos[1];
+            var rm = room_grid[cy][cx];
+            if (rm == noone || rm.visited) continue;
+            rm.visited = true;
+            for (var i = 0; i < array_length(rm.neighbors); i++) {
+                var nb = rm.neighbors[i];
+                if (!nb.visited) array_push(stack, [nb.grid_x, nb.grid_y]);
+            }
+        }
+    }
+
+    var start_col = -1;
+    for (var c = 0; c < global.GRID_W; c++)
+        if (room_grid[global.GRID_H - 1][c] != noone) { start_col = c; break; }
+    if (start_col != -1) flood_fill(start_col, global.GRID_H - 1);
+
+    for (var r = 0; r < global.GRID_H; r++) {
+        for (var c = 0; c < global.GRID_W; c++) {
+            var rm = room_grid[r][c];
+            if (rm != noone && !rm.visited) {
+                instance_destroy(rm);
+                room_grid[r][c] = noone;
+            }
+        }
+    }
+
+    // --- STEP 5: COUNT & RETURN ---
+    var count = 0;
+    for (var r = 0; r < global.GRID_H; r++) {
+        for (var c = 0; c < global.GRID_W; c++) {
+            if (room_grid[r][c] != noone) count++;
+        }
+    }
+
+    return count; // total rooms in grid (excluding start/end)
 }
 
-// after edges: remove any nodes that ended up with degree 0
-for (var i = array_length(all_rooms)-1; i >= 0; i--) {
-    var R = all_rooms[i];
-    if (array_length(R.neighbors) == 0) {
-        room_grid[R.grid_y][R.grid_x] = noone;
-        array_delete(all_rooms, i, 1);
-        instance_destroy(R);
+// keep regenerating until enough rooms exist
+var total_rooms = 0;
+repeat (10) { // limit attempts to prevent infinite loop
+    total_rooms = _generate_map();
+    show_debug_message("Generated " + string(total_rooms) + " rooms");
+    if (total_rooms >= 15) break;
+}
+
+// ------------- STEP 5.5: ASSIGN ROOM TYPES -----------------
+var room_lst = [];
+for (var r = 0; r < global.GRID_H; r++) {
+    for (var c = 0; c < global.GRID_W; c++) {
+        var rm = room_grid[r][c];
+        if (rm != noone) {
+            array_push(room_lst, rm);
+        }
     }
 }
+ // Shuffle rooms randomly
+room_lst = array_shuffle(room_lst);
 
-// ---------------- Step 5: choose start (bottom floor) and end (top floor) ----------------
-var bottom = [], top = [];
+// Assign Treasure Rooms
+var treasure_count = 2; 
+for (var i = 0; i < array_length(room_lst); i++) {
+	if (i == 0) {
+		room_lst[i].room_type = "bonfire";
+		with (DungeonRoom) {
+			update_room_icon();
+			show_debug_message("icon is updated");
+		}
+	} else if (i < 10) {
+		//10 enemy rooms
+		room_lst[i].room_type = "enemy";
+		with (DungeonRoom) {
+			update_room_icon();
+		}
+		
+	} else if (i >=10 && i < 12) {
+		// 2 treasure rooms
+		room_lst[i].room_type = "treasure";
+		with (DungeonRoom) {
+			update_room_icon();
+		}
+	} else {
+		room_lst[i].room_type = "default";
+		with (DungeonRoom) {
+			update_room_icon();
+		}
+	}
+}
+
+
+
+instance_create_layer(0, 0, "Instances", FogOfWar);
+
+// ------------------- STEP 6: ADD START & END ROOMS OUTSIDE GRID -------------------
+
+// pick a random bottom room to connect to the start
+var bottom_rooms = [];
 for (var c = 0; c < global.GRID_W; c++) {
-    if (room_grid[0][c] != noone)           array_push(bottom, room_grid[0][c]);
-    if (room_grid[global.FLOORS-1][c] != noone)    array_push(top,  room_grid[global.FLOORS-1][c]);
-}
-if (array_length(bottom) == 0) {
-    // fallback: pick any node from floor 0 by force
-    var col = irandom(global.GRID_W-1);
-    var rx = col * CELL, ry = (global.FLOORS-1 - 0) * CELL;
-    var S = instance_create_layer(rx, ry, "Instances", DungeonRoom);
-    S.grid_x = col; S.grid_y = 0;
-    array_push(bottom, S);
-    room_grid[0][col] = S;
-    array_push(all_rooms, S);
-}
-if (array_length(top) == 0) {
-    var col = irandom(global.GRID_W-1);
-    var rx = col * CELL, ry = (global.FLOORS-1 - (global.FLOORS-1)) * CELL;
-    var E = instance_create_layer(rx, ry, "Instances", DungeonRoom);
-    E.grid_x = col; E.grid_y = global.FLOORS-1;
-    array_push(top, E);
-    room_grid[global.FLOORS-1][col] = E;
-    array_push(all_rooms, E);
+    var rm = room_grid[global.GRID_H - 1][c];
+    if (rm != noone) array_push(bottom_rooms, rm);
 }
 
-// mark
-var start_room = bottom[irandom(array_length(bottom) - 1)];
-var end_room   = top[irandom(array_length(bottom) - 1)];
-start_room.room_type = "start";
-end_room.room_type   = "end";
+if (array_length(bottom_rooms) > 0) {
+    var connect_to_start = bottom_rooms[irandom(array_length(bottom_rooms) - 1)];
 
-// ---------------- tidy DSU maps ----------------
-ds_map_destroy(global.parent);
-ds_map_destroy(global.rank);
+    // create start room one level below the grid
+    start_room = instance_create_layer(connect_to_start.x, connect_to_start.y + global.ROOM_SIZE, "Instances", DungeonRoom);
+    start_room.room_type = "start";
+    start_room.grid_x = connect_to_start.grid_x;
+    start_room.grid_y = global.GRID_H; // logically below the grid
+    start_room.neighbors = [connect_to_start];
+    connect_to_start.neighbors[array_length(connect_to_start.neighbors)] = start_room; // link both ways
+}
+
+// pick a random top room to connect to the end
+var top_rooms = [];
+for (var c = 0; c < global.GRID_W; c++) {
+    var rm = room_grid[0][c];
+    if (rm != noone) array_push(top_rooms, rm);
+}
+
+if (array_length(top_rooms) > 0) {
+    var connect_to_end = top_rooms[irandom(array_length(top_rooms) - 1)];
+
+    // create end room one level above the grid
+    end_room = instance_create_layer(connect_to_end.x, connect_to_end.y - global.ROOM_SIZE, "Instances", DungeonRoom);
+    end_room.room_type = "end";
+    end_room.grid_x = connect_to_end.grid_x;
+    end_room.grid_y = -1; // logically above the grid
+    end_room.neighbors = [connect_to_end];
+    connect_to_end.neighbors[array_length(connect_to_end.neighbors)] = end_room; // link both ways
+}
 
 
+
+// --- STEP 7: CREATE AVATAR ---
+if (instance_exists(start_room)) {
+    var avatar = instance_create_layer(start_room.x, start_room.y, "Instances", Player);
+    avatar.current_room = start_room;
+	show_debug_message($"the current avatar postion is at {avatar.x}, {avatar.y}")
+}
+
+instance_create_layer(0, 0, "FogLayer", FogOfWar);
+show_debug_message("Created fog: " + string(instance_exists(FogOfWar)));
