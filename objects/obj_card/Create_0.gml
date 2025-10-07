@@ -13,6 +13,8 @@ current_depth = self.depth;
 card_data = undefined;
 dropped_area = noone;
 
+reveal = 0;
+
 state_normal = function() {
 	if (obj_mouse_manager.grabbed_card != self) {
 		if (!self.picked_up) {

@@ -6,7 +6,7 @@
   "name":"res_grass_mark",
   "overriddenProperties":[
     {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"res_mark","path":"objects/res_mark/res_mark.yy",},"propertyId":{"name":"type","path":"objects/res_mark/res_mark.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"Grass",},
-    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"res_mark","path":"objects/res_mark/res_mark.yy",},"propertyId":{"name":"sprite","path":"objects/res_mark/res_mark.yy",},"resource":{"name":"spr_grass_mark","path":"sprites/spr_grass_mark/spr_grass_mark.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"spr_grass_mark",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"res_mark","path":"objects/res_mark/res_mark.yy",},"propertyId":{"name":"sprite","path":"objects/res_mark/res_mark.yy",},"resource":{"name":"spr_mark_grass","path":"sprites/spr_mark_grass/spr_mark_grass.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"spr_mark_grass",},
   ],
   "parent":{
     "name":"Marks",

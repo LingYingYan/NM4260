@@ -6,7 +6,7 @@
   "name":"res_fire_mark",
   "overriddenProperties":[
     {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"res_mark","path":"objects/res_mark/res_mark.yy",},"propertyId":{"name":"type","path":"objects/res_mark/res_mark.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"Fire",},
-    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"res_mark","path":"objects/res_mark/res_mark.yy",},"propertyId":{"name":"sprite","path":"objects/res_mark/res_mark.yy",},"resource":{"name":"spr_fire_mark","path":"sprites/spr_fire_mark/spr_fire_mark.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"spr_fire_mark",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"res_mark","path":"objects/res_mark/res_mark.yy",},"propertyId":{"name":"sprite","path":"objects/res_mark/res_mark.yy",},"resource":{"name":"spr_mark_fire","path":"sprites/spr_mark_fire/spr_mark_fire.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"spr_mark_fire",},
   ],
   "parent":{
     "name":"Marks",

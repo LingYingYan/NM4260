@@ -8,8 +8,8 @@ if (self.hovered) {
 
 self.depth = self.current_depth;
 
-if (self.card_data != undefined) {
-    self.sprite_index = self.card_data.sprite;    
+if (self.card_data != undefined && reveal = 100) {
+    draw_sprite(self.card_data, self.image_index, self.x, self.y)    
 }
 
 draw_self();

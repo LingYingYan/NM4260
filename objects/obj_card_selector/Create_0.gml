@@ -13,7 +13,7 @@ find_deck = function(card_id) {
     }
     
     for (var i = 0; i < array_length(card_piles); i += 1) {
-        if (card_piles[i].card.name == card_id.card_data.name) {
+        if (card_piles[i].card == card_id.card_data.uid) {
             return card_piles[i];
         }
     }

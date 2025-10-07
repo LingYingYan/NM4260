@@ -6,7 +6,7 @@
   "name":"res_water_mark",
   "overriddenProperties":[
     {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"res_mark","path":"objects/res_mark/res_mark.yy",},"propertyId":{"name":"type","path":"objects/res_mark/res_mark.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"Water",},
-    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"res_mark","path":"objects/res_mark/res_mark.yy",},"propertyId":{"name":"sprite","path":"objects/res_mark/res_mark.yy",},"resource":{"name":"spr_water_mark","path":"sprites/spr_water_mark/spr_water_mark.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"spr_water_mark",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"res_mark","path":"objects/res_mark/res_mark.yy",},"propertyId":{"name":"sprite","path":"objects/res_mark/res_mark.yy",},"resource":{"name":"spr_mark_water","path":"sprites/spr_mark_water/spr_mark_water.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"spr_mark_water",},
   ],
   "parent":{
     "name":"Marks",

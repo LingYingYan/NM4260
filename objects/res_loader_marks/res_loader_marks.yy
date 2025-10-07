@@ -6,12 +6,17 @@
   ],
   "managed":true,
   "name":"res_loader_marks",
-  "overriddenProperties":[],
+  "overriddenProperties":[
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"res_loader_spreadsheet","path":"objects/res_loader_spreadsheet/res_loader_spreadsheet.yy",},"propertyId":{"name":"google_sheet_id","path":"objects/res_loader_spreadsheet/res_loader_spreadsheet.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"1PZyPfpdNr4jPAGzVYou9y0OT83omTrhDExV5rmMOqiM",},
+  ],
   "parent":{
     "name":"Loaders",
     "path":"folders/Objects/Resources/Loaders.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"res_loader_spreadsheet",
+    "path":"objects/res_loader_spreadsheet/res_loader_spreadsheet.yy",
+  },
   "persistent":true,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
