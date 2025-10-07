@@ -1,11 +1,11 @@
 {
   "$GMObject":"",
-  "%Name":"obj_game_character",
+  "%Name":"obj_battle_character",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_game_character",
+  "name":"obj_battle_character",
   "overriddenProperties":[],
   "parent":{
     "name":"Game Characters",

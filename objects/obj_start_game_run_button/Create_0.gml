@@ -8,5 +8,5 @@ on_click = function() {
         obj_player_deck_manager.add(cards[i]);
     }
     
-    room_goto(Room1);
+    obj_room_manager.goto_map();
 }

@@ -5,16 +5,16 @@
   "managed":true,
   "name":"obj_cultist",
   "overriddenProperties":[
-    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_game_character","path":"objects/obj_game_character/obj_game_character.yy",},"propertyId":{"name":"name","path":"objects/obj_game_character/obj_game_character.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"Cultist",},
-    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_game_character","path":"objects/obj_game_character/obj_game_character.yy",},"propertyId":{"name":"max_health","path":"objects/obj_game_character/obj_game_character.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"50",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_battle_character","path":"objects/obj_battle_character/obj_battle_character.yy",},"propertyId":{"name":"name","path":"objects/obj_battle_character/obj_battle_character.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"Cultist",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_battle_character","path":"objects/obj_battle_character/obj_battle_character.yy",},"propertyId":{"name":"max_health","path":"objects/obj_battle_character/obj_battle_character.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"50",},
   ],
   "parent":{
     "name":"Enemies",
     "path":"folders/Objects/Game Characters/Enemies.yy",
   },
   "parentObjectId":{
-    "name":"obj_game_character",
-    "path":"objects/obj_game_character/obj_game_character.yy",
+    "name":"obj_battle_character",
+    "path":"objects/obj_battle_character/obj_battle_character.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,

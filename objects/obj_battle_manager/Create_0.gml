@@ -1,5 +1,5 @@
 enemy = undefined;
-player = undefined;
+player = obj_battle_player;
 
 draw_pile = obj_draw_pile;
 discard_pile = obj_discard_pile;
@@ -7,8 +7,11 @@ deck = obj_card_pile;
 hand = obj_hand;
 
 start_battle = function() {
-    transfer_between_piles(self.deck, self.draw_pile);
+    transfer_between_piles(self.deck, self.draw_pile, 0, false);
     self.draw_pile.shuffle();
+    //var ac_channel = animcurve_get_channel(ac_enemy_weight_distance_coefficient, "coefficient");
+    //var k = animcurve_channel_evaluate(ac_channel, )
+    self.enemy = res_loader_enemies.get_random_enemy("Characters", room_width / 2, 0);
     self.start_player_turn();
 }
 
@@ -19,8 +22,12 @@ start_player_turn = function() {
             break;
         }
         
+        card.reveal = 100;
+        card.grabbable = true;
         self.hand.add(card);
     }
+    
+    layer_set_visible("BattleScreen", true);
 }
 
 draw = function() {
@@ -52,13 +59,13 @@ end_player_turn = function() {
     while (i < min(array_length(player_cards), array_length(enemy_cards))) {
         var player_card = player_cards[i];
         if (player_card != noone) {
-            player_card.card_data.apply(self.player, self.enemy);
+            player_card.card_data.apply(self.player.data, self.enemy.data);
             self.discard_pile.add(player_card);
         }
         
         var enemy_card = enemy_cards[i];
         if (enemy_card != noone) {
-            enemy_card.card_data.apply(self.enemy, self.player);
+            enemy_card.card_data.apply(self.enemy.data, self.player.data);
         }
         
         i += 1;
@@ -67,7 +74,7 @@ end_player_turn = function() {
     while (i < array_length(player_cards)) {
         var player_card = player_cards[i];
         if (player_card != noone) {
-            player_card.card_data.apply(self.player, self.enemy);
+            player_card.card_data.apply(self.player.data, self.enemy.data);
             self.discard_pile.add(player_card);
         }
         
@@ -77,7 +84,7 @@ end_player_turn = function() {
     while (i < array_length(enemy_cards)) {
         var enemy_card = enemy_cards[i];
         if (enemy_card != noone) {
-            enemy_card.card_data.apply(self, self.player);
+            enemy_card.card_data.apply(self.enemy.data, self.player.data);
         }
         
         i += 1;
@@ -89,5 +96,8 @@ end_player_turn = function() {
 end_battle = function() {
     self.draw_pile.clear();
     self.discard_pile.clear();
-    self.hand.clear()
+    self.hand.clear();
+    self.enemy = undefined;
+    self.player = undefined;
+    obj_room_manager.goto_map();
 }

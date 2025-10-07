@@ -4,4 +4,4 @@ for (var i = 0; i < n; i += 1) {
     loader.load();
 }
 
-layer_set_visible("DeckSelectionScreen", true);
+obj_room_manager.goto_deck_selection();

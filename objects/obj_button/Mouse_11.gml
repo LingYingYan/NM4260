@@ -1,1 +1,1 @@
-self.image_blend = c_white;
+self.image_alpha -= 0.1;

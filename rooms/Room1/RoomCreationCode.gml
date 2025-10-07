@@ -4,3 +4,5 @@ var deck = obj_player_deck_manager.denumerate();
 for (var i = 0; i < array_length(deck); i += 1) {
     show_debug_message(deck[i].name);
 }
+
+obj_room_manager.goto_map();

@@ -1,17 +1,17 @@
 {
   "$GMObject":"",
-  "%Name":"obj_start_game_run_button",
+  "%Name":"obj_end_battle_button",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_start_game_run_button",
+  "name":"obj_end_battle_button",
   "overriddenProperties":[
-    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_button","path":"objects/obj_button/obj_button.yy",},"propertyId":{"name":"button_text","path":"objects/obj_button/obj_button.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"Start",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_button","path":"objects/obj_button/obj_button.yy",},"propertyId":{"name":"button_text","path":"objects/obj_button/obj_button.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"Resolve Turn",},
   ],
   "parent":{
-    "name":"Game",
-    "path":"folders/Objects/Buttons/Game.yy",
+    "name":"Battles",
+    "path":"folders/Objects/Buttons/Battles.yy",
   },
   "parentObjectId":{
     "name":"obj_button",

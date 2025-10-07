@@ -1,12 +1,12 @@
 {
   "$GMObject":"",
-  "%Name":"obj_enemy",
+  "%Name":"obj_battle_player",
   "eventList":[],
   "managed":true,
-  "name":"obj_enemy",
+  "name":"obj_battle_player",
   "overriddenProperties":[
-    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_battle_character","path":"objects/obj_battle_character/obj_battle_character.yy",},"propertyId":{"name":"name","path":"objects/obj_battle_character/obj_battle_character.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"Enemy",},
     {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_battle_character","path":"objects/obj_battle_character/obj_battle_character.yy",},"propertyId":{"name":"max_health","path":"objects/obj_battle_character/obj_battle_character.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"100",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_battle_character","path":"objects/obj_battle_character/obj_battle_character.yy",},"propertyId":{"name":"name","path":"objects/obj_battle_character/obj_battle_character.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"Player",},
   ],
   "parent":{
     "name":"Game Characters",
@@ -16,7 +16,7 @@
     "name":"obj_battle_character",
     "path":"objects/obj_battle_character/obj_battle_character.yy",
   },
-  "persistent":false,
+  "persistent":true,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
   "physicsFriction":0.2,
@@ -29,7 +29,9 @@
   "physicsShape":1,
   "physicsShapePoints":[],
   "physicsStartAwake":true,
-  "properties":[],
+  "properties":[
+    {"$GMObjectProperty":"v1","%Name":"max_vision","filters":[],"listItems":[],"multiselect":false,"name":"max_vision","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"5","varType":0,},
+  ],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,

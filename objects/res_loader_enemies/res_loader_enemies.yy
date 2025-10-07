@@ -18,7 +18,7 @@
     "name":"res_loader_spreadsheet",
     "path":"objects/res_loader_spreadsheet/res_loader_spreadsheet.yy",
   },
-  "persistent":false,
+  "persistent":true,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
   "physicsFriction":0.2,
