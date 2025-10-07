@@ -9,6 +9,7 @@ goal_y = self.y;
 normal_depth = self.depth;
 
 card_data = undefined;
+dropped_area = noone;
 
 state_normal = function() {
 	if (obj_mouse_manager.grabbed_card != self) {

@@ -1,5 +1,9 @@
 cards = ds_list_create();
 
+size = function() {
+    return ds_list_size(self.cards);
+}
+
 /// @desc Add a card
 /// @param {id.instance} card The card
 add = function(card) {
@@ -23,14 +27,14 @@ remove = function(card) {
         return;
     }
     
-    c = self.cards[| idx];
+    var c = self.cards[| idx];
     ds_list_delete(self.cards, idx);
     rearrange_hand(self, ds_list_size(self.cards), self.spacing, self.cards);
     return c;
 }
 
 clear = function() {
-    a = [];
+    var a = [];
     for (var i = 0; i < ds_list_size(self.cards); i += 1) {
         a[i] = self.cards[| i];
     }
