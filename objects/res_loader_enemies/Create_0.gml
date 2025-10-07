@@ -40,12 +40,12 @@ get_random_enemy = function(instance_layer, pos_x = -999, pos_y = -999) {
         cumulative += self.loaded[i].weight;
         if (cumulative >= select) {
             var enemy = instance_create_layer(pos_x, pos_y, instance_layer, obj_enemy);
-            enemy.data = self.loaded[i];
+            enemy.data = self.loaded[i].clone();
             return enemy;
         }
     }
     
     var enemy = instance_create_layer(pos_x, pos_y, instance_layer, obj_enemy);
-    enemy.data = array_last(self.loaded);
+    enemy.data = array_last(self.loaded).clone();
     return enemy;
 }

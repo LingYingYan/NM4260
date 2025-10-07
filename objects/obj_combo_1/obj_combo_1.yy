@@ -5,7 +5,7 @@
   "managed":true,
   "name":"obj_combo_1",
   "overriddenProperties":[
-    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_card_combo","path":"objects/obj_card_combo/obj_card_combo.yy",},"propertyId":{"name":"enemy","path":"objects/obj_card_combo/obj_card_combo.yy",},"resource":{"name":"obj_cultist","path":"objects/obj_cultist/obj_cultist.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"obj_cultist",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_card_combo","path":"objects/obj_card_combo/obj_card_combo.yy",},"propertyId":{"name":"enemy","path":"objects/obj_card_combo/obj_card_combo.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"obj_cultist",},
   ],
   "parent":{
     "name":"Cultist",

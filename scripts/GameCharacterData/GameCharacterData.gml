@@ -6,6 +6,10 @@ function GameCharacterData(curr_hp, total_hp) constructor {
 function PlayerData(curr_hp, total_hp, curr_vision, total_vision) : GameCharacterData(curr_hp, total_hp) constructor {
     vision = curr_vision; 
     max_vision = total_vision;
+    
+    get_revelation = function() {
+        return clamp(self.vision * 16 + irandom_range(0, 20), 0, 100);
+    }
 }
 
 /// @desc Function Description

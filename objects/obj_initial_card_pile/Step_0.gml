@@ -9,6 +9,6 @@ repeat (self.count) {
     card.card_data = card_data;
     card.grabbable = false;
     card.selectable = true;
-    card.reveal = 100;
+    card.set_reveal(100);
     self.add(card.id);
 }

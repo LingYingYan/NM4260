@@ -1,3 +1,4 @@
+self.persistent = true;
 layer_set_visible("DeckSelectionScreen", false);
 
 var deck = obj_player_deck_manager.denumerate();

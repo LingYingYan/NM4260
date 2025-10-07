@@ -1,6 +1,7 @@
 // Inherit the parent event
 event_inherited();
 
+global.new_game = true;
 on_click = function() {
     show_debug_message("Game Started");
     var cards = obj_hand.clear();

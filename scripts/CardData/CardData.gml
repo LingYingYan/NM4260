@@ -57,6 +57,14 @@ function CardData(
                 show_debug_message($"Heal {instigator}: HP {old_hp} -> {instigator.hp}");
                 self.apply_marks(instigator, instigator); 
                 break;
+            case "Alteration":
+                if (instigator == noone || instigator == undefined) {
+                    show_debug_message("Altered");
+                    return;        
+                }
+            
+                self.apply_marks(instigator, target);
+                break; 
         }    
         
         
@@ -78,13 +86,26 @@ function CardData(
         mark.on_apply(target, mark_multiplicity);
     }
     
-    static describe = function() {
+    static describe = function(precision = 100) {
         var mark = res_loader_marks.loaded[? self.mark];
+        var imprecision = 100 - precision;
+        var p = irandom_range(100 - imprecision, 100 + imprecision) / 100.0;
+        var knows_mark = irandom_range(1, 100) > imprecision;
         switch (self.type) {
         	case "Destruction":
-                return $"Deals {self.damage} {mark.type} damage";
+                return knows_mark 
+                    ? $"Deals {min(1, floor(self.damage * p))} {mark.type} damage\n" +
+                      $"Target gains {min(1, floor(self.mark_multiplicity * p))} {mark.type} Mark"
+                    : $"Deals {min(1, floor(self.damage * p))} damage";
             case "Restoration":
-                return $"Heals {self.heal} HP";
+                return knows_mark 
+                    ? $"Heals {min(1, floor(self.heal * p))} HP\n" +
+                      $"Caster gains {min(1, floor(self.mark_multiplicity * p))} {mark.type} Mark"
+                    : $"Heals {min(1, floor(self.heal * p))} HP";
+            case "Alteration":
+                return knows_mark
+                    ? $"Target gains {min(1, floor(self.mark_multiplicity * p))} {mark.type} Mark"
+                    : $"Target gains Mark";
         }
     }
     
