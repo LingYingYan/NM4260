@@ -10,12 +10,16 @@ function Mark(mark_name, mark_sprite) constructor {
 
 /**
  * Factory function to create a mark struct from a resource object
- * @param {id.instance} resource The mark resource object instance
+ * @param {Asset.GMObject} resource The mark resource object instance
  * @return {Struct.Mark} A mark struct
  */
 function make_mark_from(resource) {
-    if (resource == undefined || resource == noone) {
+    if (resource == undefined) {
         return { };
+    }
+    
+    if (!instance_exists(resource)) {
+        instance_create_layer(0, 0, "Instances", resource);    
     }
     
     switch (resource.type) {

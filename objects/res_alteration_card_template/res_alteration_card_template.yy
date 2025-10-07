@@ -1,15 +1,24 @@
 {
   "$GMObject":"",
-  "%Name":"res_card",
+  "%Name":"res_alteration_card_template",
   "eventList":[],
   "managed":true,
-  "name":"res_card",
-  "overriddenProperties":[],
+  "name":"res_alteration_card_template",
+  "overriddenProperties":[
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"res_card","path":"objects/res_card/res_card.yy",},"propertyId":{"name":"type","path":"objects/res_card/res_card.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"\"Alteration\"",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"res_card","path":"objects/res_card/res_card.yy",},"propertyId":{"name":"name","path":"objects/res_card/res_card.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"res_card","path":"objects/res_card/res_card.yy",},"propertyId":{"name":"rarity","path":"objects/res_card/res_card.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"0",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"res_card","path":"objects/res_card/res_card.yy",},"propertyId":{"name":"mark","path":"objects/res_card/res_card.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"res_card","path":"objects/res_card/res_card.yy",},"propertyId":{"name":"mark_multiplicity","path":"objects/res_card/res_card.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"1",},
+  ],
   "parent":{
     "name":"Cards",
     "path":"folders/Objects/Resources/Cards.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"res_card",
+    "path":"objects/res_card/res_card.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,

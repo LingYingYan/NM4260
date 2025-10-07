@@ -1,5 +1,9 @@
 cards = ds_list_create();
 
+contains = function(card_id) {
+    return ds_list_find_index(self.cards, card_id) >= 0;
+}
+
 size = function() {
     return ds_list_size(self.cards);
 }

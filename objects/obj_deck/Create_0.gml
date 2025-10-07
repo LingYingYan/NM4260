@@ -1,6 +1,6 @@
 cards = ds_map_create()
 
-/// @desc Add a card to deck\=
+/// @desc Add a card to deck
 /// @param {id.Instance} card A card
 add = function(card) {
     if (!ds_map_exists(self.cards, card)) {

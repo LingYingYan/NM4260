@@ -3,10 +3,16 @@ function rearrange_hand(hand, size, spacing, cards) {
         ? (size / 2 - 1) * spacing + spacing / 2
         : floor(size / 2) * spacing;
     var start_x = hand.x - half_width;
+    if (start_x <= hand.bbox_left) {
+        start_x = hand.bbox_left;
+        spacing = (hand.bbox_right - hand.bbox_left) / (size - 1);
+    }
+    
     for (var i = 0; i < size; i += 1) {
         var c = cards[| i];
         place_card(c, start_x + i * spacing, hand.y);
         c.normal_depth = hand.depth - i - 1;
         c.depth = hand.depth - i - 1;
+        c.current_depth = hand.depth - i - 1;
     }
 }

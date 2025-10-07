@@ -1,18 +1,15 @@
 {
   "$GMObject":"",
-  "%Name":"obj_basic_fire_attack",
+  "%Name":"obj_game_manager",
   "eventList":[],
   "managed":true,
-  "name":"obj_basic_fire_attack",
+  "name":"obj_game_manager",
   "overriddenProperties":[],
   "parent":{
-    "name":"Assets",
-    "path":"folders/Objects/Cards/Assets.yy",
+    "name":"Managers",
+    "path":"folders/Objects/Managers.yy",
   },
-  "parentObjectId":{
-    "name":"obj_card",
-    "path":"objects/obj_card/obj_card.yy",
-  },
+  "parentObjectId":null,
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
@@ -27,9 +24,9 @@
   "physicsShapePoints":[],
   "physicsStartAwake":true,
   "properties":[
-    {"$GMObjectProperty":"v1","%Name":"variable_name","filters":[
-        "GMObject",
-      ],"listItems":[],"multiselect":false,"name":"variable_name","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"","varType":5,},
+    {"$GMObjectProperty":"v1","%Name":"battle_room","filters":[
+        "GMRoom",
+      ],"listItems":[],"multiselect":false,"name":"battle_room","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resource":{"name":"rm_battle","path":"rooms/rm_battle/rm_battle.yy",},"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"rm_battle","varType":5,},
   ],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",

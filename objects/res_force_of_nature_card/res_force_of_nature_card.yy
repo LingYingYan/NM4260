@@ -1,16 +1,16 @@
 {
   "$GMObject":"",
-  "%Name":"res_destruction_card_template",
+  "%Name":"res_force_of_nature_card",
   "eventList":[],
   "managed":true,
-  "name":"res_destruction_card_template",
+  "name":"res_force_of_nature_card",
   "overriddenProperties":[
     {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"res_card","path":"objects/res_card/res_card.yy",},"propertyId":{"name":"type","path":"objects/res_card/res_card.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"\"Destruction\"",},
     {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"res_card","path":"objects/res_card/res_card.yy",},"propertyId":{"name":"rarity","path":"objects/res_card/res_card.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"0",},
-    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"res_card","path":"objects/res_card/res_card.yy",},"propertyId":{"name":"damage","path":"objects/res_card/res_card.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"0",},
-    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"res_card","path":"objects/res_card/res_card.yy",},"propertyId":{"name":"mark","path":"objects/res_card/res_card.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"res_card","path":"objects/res_card/res_card.yy",},"propertyId":{"name":"damage","path":"objects/res_card/res_card.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"3",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"res_card","path":"objects/res_card/res_card.yy",},"propertyId":{"name":"mark","path":"objects/res_card/res_card.yy",},"resource":{"name":"res_grass_mark","path":"objects/res_grass_mark/res_grass_mark.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"res_grass_mark",},
     {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"res_card","path":"objects/res_card/res_card.yy",},"propertyId":{"name":"mark_multiplicity","path":"objects/res_card/res_card.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"1",},
-    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"res_card","path":"objects/res_card/res_card.yy",},"propertyId":{"name":"name","path":"objects/res_card/res_card.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"res_card","path":"objects/res_card/res_card.yy",},"propertyId":{"name":"name","path":"objects/res_card/res_card.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"Force of Nature",},
   ],
   "parent":{
     "name":"Cards",

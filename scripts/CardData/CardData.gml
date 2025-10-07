@@ -86,10 +86,11 @@ function CardData(
 
 /**
  * Factory function to create a card struct from a resource object
- * @param {id.instance} resource The card resource object instance
+ * @param {Asset.GMObject} resource The card resource object instance
  * @return {Struct.CardData} The card data
  */
 function make_card_from(resource) {
+    var mark_resource = resource.mark;
     var mark = make_mark_from(resource.mark);
     return new CardData(
         resource.type, resource.name, resource.sprite, 

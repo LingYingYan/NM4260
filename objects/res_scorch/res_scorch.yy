@@ -1,20 +1,20 @@
 {
   "$GMObject":"",
-  "%Name":"res_destruction_card_template",
+  "%Name":"res_scorch",
   "eventList":[],
   "managed":true,
-  "name":"res_destruction_card_template",
+  "name":"res_scorch",
   "overriddenProperties":[
     {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"res_card","path":"objects/res_card/res_card.yy",},"propertyId":{"name":"type","path":"objects/res_card/res_card.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"\"Destruction\"",},
     {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"res_card","path":"objects/res_card/res_card.yy",},"propertyId":{"name":"rarity","path":"objects/res_card/res_card.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"0",},
-    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"res_card","path":"objects/res_card/res_card.yy",},"propertyId":{"name":"damage","path":"objects/res_card/res_card.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"0",},
-    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"res_card","path":"objects/res_card/res_card.yy",},"propertyId":{"name":"mark","path":"objects/res_card/res_card.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"res_card","path":"objects/res_card/res_card.yy",},"propertyId":{"name":"damage","path":"objects/res_card/res_card.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"5",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"res_card","path":"objects/res_card/res_card.yy",},"propertyId":{"name":"mark","path":"objects/res_card/res_card.yy",},"resource":{"name":"res_fire_mark","path":"objects/res_fire_mark/res_fire_mark.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"res_fire_mark",},
     {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"res_card","path":"objects/res_card/res_card.yy",},"propertyId":{"name":"mark_multiplicity","path":"objects/res_card/res_card.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"1",},
-    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"res_card","path":"objects/res_card/res_card.yy",},"propertyId":{"name":"name","path":"objects/res_card/res_card.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"res_card","path":"objects/res_card/res_card.yy",},"propertyId":{"name":"name","path":"objects/res_card/res_card.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"Scorch",},
   ],
   "parent":{
-    "name":"Cards",
-    "path":"folders/Objects/Resources/Cards.yy",
+    "name":"Enemy Cards",
+    "path":"folders/Objects/Resources/Cards/Enemy Cards.yy",
   },
   "parentObjectId":{
     "name":"res_card",
