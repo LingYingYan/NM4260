@@ -30,18 +30,54 @@ function make_mark(mark_id, display_name, mark_sprite, dominated_mark) {
 
 function FireMark(mark_id, mark_name, mark_sprite, dominated_mark) : Mark(mark_id, mark_name, mark_sprite, dominated_mark) constructor {
     on_apply = function(target, multiplicity = 1) {
-        show_debug_message("Fire!");
+        var dominated_count = target.count_mark(self.dominated_mark_id);
+        var n_eliminated = min(dominated_count, multiplicity);
+        var remaining = multiplicity - n_eliminated;
+        if (n_eliminated > 0) {
+            target.add_marks(self.dominated_mark_id, -n_eliminated);
+            target.add_status(new Burn(n_eliminated * 2));
+            show_debug_message("Burn +" + string(n_eliminated));
+        }
+        
+        if (remaining > 0) {
+            show_debug_message("Fire +" + string(remaining));
+            target.add_marks(self.uid, multiplicity)
+        }
     }
 } 
 
 function WaterMark(mark_id, mark_name, mark_sprite, dominated_mark) : Mark(mark_id, mark_name, mark_sprite, dominated_mark) constructor {
     on_apply = function(target, multiplicity = 1) {
         show_debug_message("Water!");
+        var dominated_count = target.count_mark(self.dominated_mark_id);
+        var n_eliminated = min(dominated_count, multiplicity);
+        var remaining = multiplicity - n_eliminated;
+        if (n_eliminated > 0) {
+            target.hp -= n_eliminated
+            show_debug_message("Water damage +" + string(n_eliminated));
+        }
+        
+        if (remaining > 0) {
+            show_debug_message("Water +" + string(remaining));
+            target.add_marks(self.uid, multiplicity)
+        }
     }
 } 
 
 function GrassMark(mark_id, mark_name, mark_sprite, dominated_mark) : Mark(mark_id, mark_name, mark_sprite, dominated_mark) constructor {
     on_apply = function(target, multiplicity = 1) {
-        show_debug_message("Grass!");
+        var dominated_count = target.count_mark(self.dominated_mark_id);
+        var n_eliminated = min(dominated_count, multiplicity);
+        var remaining = multiplicity - n_eliminated;
+        if (n_eliminated > 0) {
+            target.add_marks(self.dominated_mark_id, -n_eliminated);
+            target.add_status(new Poison(n_eliminated * 2));
+            show_debug_message("Poison +" + string(n_eliminated));
+        }
+        
+        if (remaining > 0) {
+            show_debug_message("Grass +" + string(remaining));
+            target.add_marks(self.uid, multiplicity)
+        }
     }
 } 

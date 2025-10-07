@@ -1,6 +1,43 @@
 function GameCharacterData(curr_hp, total_hp) constructor {
     hp = curr_hp;
     max_hp = total_hp;
+    status_effects = ds_map_create();
+    marks = ds_map_create();
+    
+    /// @desc description
+    /// @param {Struct.Status} status description description
+    add_status = function(status) {
+        if (!ds_map_exists(self.status_effects, status.name)) {
+            ds_map_add(self.status_effects, status.name, status);
+        } else {
+            self.status_effects[? status.name].level += status.level;
+        }
+    }
+    
+    execute_status_effects = function() {
+        var key = ds_map_find_first(self.status_effects);
+        while (key != undefined) {
+            self.status_effects[? key].execute(self);
+            key = ds_map_find_next(self.status_effects, key);
+        }
+    }
+    
+    add_marks = function(mark_id, multiplicity) {
+        if (!ds_map_exists(self.marks, mark_id)) {
+            if (multiplicity > 0) {
+                ds_map_add(self.marks, mark_id, multiplicity);
+            }
+        } else {
+            self.marks[? mark_id] += multiplicity;
+            if (self.marks[? mark_id] <= 0) {
+                ds_map_delete(self.marks, mark_id);
+            }
+        }
+    }
+    
+    count_mark = function(mark_id) {
+        return ds_map_exists(self.marks, mark_id) ? self.marks[? mark_id] : 0;
+    }
 }
 
 function PlayerData(curr_hp, total_hp, curr_vision, total_vision) : GameCharacterData(curr_hp, total_hp) constructor {

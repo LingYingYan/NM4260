@@ -24,14 +24,18 @@ resolve_turn = function() {
     self.enemy_cards = [];
     self.player_cards = [];
     transfer_between_piles(self.hand, self.discard_pile, 0, false);
-    if (self.enemy.data.hp <= 0) {
+    if (self.player.data.hp <= 0) {
+        self.enemy_win();
+    } else if (self.enemy.data.hp <= 0) {
         self.player_win();
-    } else if (self.player.data.hp <= 0) {
-        obj_player_deck_manager.clear();
-        obj_room_manager.goto_deck_selection();
     } else {
         self.start_player_turn();
     }
+}
+
+enemy_win = function() {
+    obj_player_deck_manager.clear();
+    obj_room_manager.goto_deck_selection();
 }
 
 player_win = function() {
@@ -124,11 +128,15 @@ recycle_player_card = function(card) {
         card.reveal = 0;
     }
     
+    if (self.enemy.data.hp <= 0 || self.player.data.hp <= 0) {
+        self.resolve_turn();
+        return;
+    }
+    
     self.turn_pointer += 1;
     if (self.turn_pointer == self.max_turn_pointer) {
         self.resolve_turn();
     } else {
-        
         self.can_resolve_card = true;
     }
 }
@@ -140,6 +148,11 @@ recycle_enemy_card = function(card) {
         instance_destroy(card);
     }
     
+    if (self.enemy.data.hp <= 0 || self.player.data.hp <= 0) {
+        self.resolve_turn();
+        return;
+    }
+    
     self.turn_pointer += 1;
     if (self.turn_pointer == self.max_turn_pointer) {
         self.resolve_turn();
@@ -149,6 +162,18 @@ recycle_enemy_card = function(card) {
 }
 
 end_player_turn = function() {
+    self.player.data.execute_status_effects();
+    if (self.player.data.hp <= 0) {
+        self.resolve_turn();
+        return;
+    }
+    
+    self.enemy.data.execute_status_effects();
+    if (self.enemy.data.hp <= 0) {
+        self.resolve_turn();
+        return;
+    }
+    
     self.turn_pointer = 0;
     // Collect both sides' cards
     for (var i = 0; i < array_length(self.player_card_slots); i += 1) {
