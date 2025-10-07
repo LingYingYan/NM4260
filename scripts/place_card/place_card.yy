@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"place_card",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"place_card",
+  "parent":{
+    "name":"Cards",
+    "path":"folders/Scripts/Cards.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

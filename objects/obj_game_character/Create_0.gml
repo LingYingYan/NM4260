@@ -1,0 +1,1 @@
+hp = self.max_health;

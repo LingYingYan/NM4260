@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"map_cards_to_enemies",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"map_cards_to_enemies",
+  "parent":{
+    "name":"Cards",
+    "path":"folders/Scripts/Cards.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
