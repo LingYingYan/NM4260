@@ -19,10 +19,15 @@
     {"name":"inst_5DB727C7","path":"rooms/rm_game_start/rm_game_start.yy",},
     {"name":"inst_3492E916","path":"rooms/rm_game_start/rm_game_start.yy",},
     {"name":"inst_D0131C4","path":"rooms/rm_game_start/rm_game_start.yy",},
+<<<<<<< HEAD
+    {"name":"inst_3B404106","path":"roomui/RoomUI/RoomUI.yy",},
+    {"name":"inst_1C0CBB5E","path":"roomui/RoomUI/RoomUI.yy",},
+    {"name":"inst_3607289C","path":"rooms/rm_game_start/rm_game_start.yy",},
+=======
     {"name":"inst_8E8FC06","path":"rooms/rm_game_start/rm_game_start.yy",},
     {"name":"inst_4E17C51","path":"rooms/rm_game_start/rm_game_start.yy",},
     {"name":"inst_1909A89C","path":"rooms/rm_game_start/rm_game_start.yy",},
-    {"name":"inst_3607289C","path":"rooms/rm_game_start/rm_game_start.yy",},
+>>>>>>> origin/master
   ],
   "isDnd":false,
   "layers":[
