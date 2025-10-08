@@ -1,5 +1,5 @@
 randomize();
-
+show_debug_message("GameInit SCript is running")
 global.map_needs_reset = false;
 global.map_inited      = false;
 

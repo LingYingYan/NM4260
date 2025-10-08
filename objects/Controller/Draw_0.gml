@@ -5,6 +5,7 @@ for (var r = 0; r < global.GRID_H; r++) {
         var rm = global.room_grid[r][c];
         if (rm == noone) continue;
 
+
         for (var i = 0; i < array_length(rm.neighbors); i++) {
             var nb = rm.neighbors[i];
             draw_line_width(rm.x + 24, rm.y + 24, nb.x + 24, nb.y + 24, 10);
