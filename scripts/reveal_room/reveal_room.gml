@@ -13,13 +13,17 @@ function trigger_room_event(room) {
     switch (room.room_type) {
     	case "enemy":
             show_debug_message("Enemy room!");
-            room_goto(rm_battle);
+            //room_goto(rm_battle);
             break;
         case "bonfire":
             show_debug_message("Bonfire room!");
+			if (global.bonfire_used == false) {
+				room_goto(rm_bonfire);
+			}		
             break;
         case "treasure":
             show_debug_message("Treasure room!");
+			//room_goto(rm_treasure);
             break;
         case "merchant":
             show_debug_message("Merchant room!");

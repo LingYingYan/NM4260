@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"initialize_map",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"initialize_map",
+  "parent":{
+    "name":"NM4260",
+    "path":"NM4260.yyp",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

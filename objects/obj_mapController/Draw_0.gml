@@ -1,9 +1,8 @@
-// obj_controller: Draw
 draw_set_color(c_gray);
 
 for (var r = 0; r < global.GRID_H; r++) {
     for (var c = 0; c < global.GRID_W; c++) {
-        var rm = room_grid[r][c];
+        var rm = global.room_grid[r][c];
         if (rm == noone) continue;
 
         for (var i = 0; i < array_length(rm.neighbors); i++) {
@@ -14,16 +13,16 @@ for (var r = 0; r < global.GRID_H; r++) {
 }
 
 // Draw connections from start/end (optional clarity)
-if (instance_exists(start_room)) {
-    for (var i = 0; i < array_length(start_room.neighbors); i++) {
-        var nb = start_room.neighbors[i];
-        draw_line(start_room.x + 48, start_room.y - 24, nb.x + 24, nb.y + 24);
+if (instance_exists(global.start_room)) {
+    for (var i = 0; i < array_length(global.start_room.neighbors); i++) {
+        var nb = global.start_room.neighbors[i];
+        draw_line(global.start_room.x + 48, global.start_room.y - 24, nb.x + 24, nb.y + 24);
     }
 }
-if (instance_exists(end_room)) {
-    for (var i = 0; i < array_length(end_room.neighbors); i++) {
-        var nb = end_room.neighbors[i];
-        draw_line(end_room.x + 24, end_room.y + 48, nb.x + 24, nb.y + 24);
+if (instance_exists(global.end_room)) {
+    for (var i = 0; i < array_length(global.end_room.neighbors); i++) {
+        var nb = global.end_room.neighbors[i];
+        draw_line(global.end_room.x + 24, global.end_room.y + 48, nb.x + 24, nb.y + 24);
     }
 }
 

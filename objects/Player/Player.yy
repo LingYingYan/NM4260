@@ -10,8 +10,8 @@
   "name":"Player",
   "overriddenProperties":[],
   "parent":{
-    "name":"NM4260",
-    "path":"NM4260.yyp",
+    "name":"Objects",
+    "path":"folders/Objects.yy",
   },
   "parentObjectId":null,
   "persistent":false,
