@@ -1,10 +1,15 @@
-loaded = ds_map_create();
-var n = instance_number(res_mark);
-for (var i = 0; i < n; i += 1) {
-    var data = instance_find(res_mark, i);
-    ds_map_add(self.loaded, data.object_index, data);
-}
+// Inherit the parent event
+event_inherited();
 
-get = function(object_id) {
-    return self.loaded[? object_id];
+loaded = ds_map_create();
+read_row = function(r) {
+    var uid = self.read_cell(r, 0);
+    var display_name = self.read_cell(r, 1);
+    var id_dominated = self.read_cell(r, 2);
+    
+    var sprite_name = $"spr_{uid}";
+    var sprite = asset_get_index(sprite_name);
+    var mark_data = make_mark(uid, display_name, sprite, id_dominated);
+    ds_map_add(self.loaded, uid, mark_data);
+    show_debug_message($"Loaded {uid}: {mark_data}");
 }

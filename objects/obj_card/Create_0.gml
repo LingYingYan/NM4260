@@ -13,6 +13,18 @@ current_depth = self.depth;
 card_data = undefined;
 dropped_area = noone;
 
+reveal = 0;
+should_reveal = false;
+desc = "";
+
+set_reveal = function(value) {
+    self.reveal = value;
+    self.should_reveal = irandom_range(1, 100) <= value;
+    if (self.card_data != undefined) {
+        self.desc = self.card_data.describe(self.reveal);
+    }
+}
+
 state_normal = function() {
 	if (obj_mouse_manager.grabbed_card != self) {
 		if (!self.picked_up) {
@@ -31,5 +43,3 @@ state_normal = function() {
 }
 
 state_update = self.state_normal;
-
-description = "";

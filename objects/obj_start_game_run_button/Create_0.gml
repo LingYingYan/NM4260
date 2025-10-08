@@ -1,6 +1,7 @@
 // Inherit the parent event
 event_inherited();
 
+global.new_game = true;
 on_click = function() {
     show_debug_message("Game Started");
     var cards = obj_hand.clear();
@@ -8,5 +9,5 @@ on_click = function() {
         obj_player_deck_manager.add(cards[i]);
     }
     
-    room_goto(Room1);
+    obj_room_manager.goto_map();
 }

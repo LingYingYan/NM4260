@@ -1,24 +1,26 @@
 /**
  * Function Description
+ * @param {string} card_id Description
  * @param {string} card_type Description
  * @param {string} card_name Description
  * @param {Asset.GMSprite} card_sprite Description
  * @param {real} card_rarity Description
- * @param {Struct.Mark} mark_data Description
+ * @param {string} mark_id Description
  * @param {real} mark_count description
  * @param {real} attack_damage description    
  * @param {real} heal_amount description
  */
 function CardData(
-    card_type, card_name, card_sprite, card_rarity,
-    mark_data, mark_count, 
+    card_id, card_type, card_name, card_sprite, card_rarity,
+    mark_id, mark_count, 
     attack_damage, heal_amount
 ) constructor {
+    uid = card_id;
     type = card_type;
     name = card_name;
     sprite = card_sprite;
     rarity = card_rarity;
-    mark = mark_data;
+    mark = mark_id;
     mark_multiplicity = mark_count;
     damage = attack_damage;
     heal = heal_amount;
@@ -55,6 +57,14 @@ function CardData(
                 show_debug_message($"Heal {instigator}: HP {old_hp} -> {instigator.hp}");
                 self.apply_marks(instigator, instigator); 
                 break;
+            case "Alteration":
+                if (instigator == noone || instigator == undefined) {
+                    show_debug_message("Altered");
+                    return;        
+                }
+            
+                self.apply_marks(instigator, target);
+                break; 
         }    
         
         
@@ -72,33 +82,41 @@ function CardData(
     }
     
     static apply_marks = function(instigator, target) {
-        self.mark.on_apply(target, self.mark_multiplicity);
+        var mark = res_loader_marks.loaded[? self.mark];
+        mark.on_apply(target, mark_multiplicity);
     }
     
-    static describe = function() {
+    static describe = function(precision = 100) {
+        var mark = res_loader_marks.loaded[? self.mark];
+        var imprecision = 100 - precision;
+        var p = irandom_range(100 - imprecision, 100 + imprecision) / 100.0;
+        var knows_mark = irandom_range(1, 100) > imprecision;
         switch (self.type) {
         	case "Destruction":
-                return $"Deals {self.damage} {self.mark.type} damage";
+                return knows_mark 
+                    ? $"Deals {max(1, floor(self.damage * p))} {mark.type} damage\n" +
+                      $"Target gains {min(1, floor(self.mark_multiplicity * p))} {mark.type} Mark"
+                    : $"Deals {max(1, floor(self.damage * p))} damage";
             case "Restoration":
-                return $"Heals {self.heal} HP";
+                return knows_mark 
+                    ? $"Heals {max(1, floor(self.heal * p))} HP\n" +
+                      $"Caster gains {min(1, floor(self.mark_multiplicity * p))} {mark.type} Mark"
+                    : $"Heals {max(1, floor(self.heal * p))} HP";
+            case "Alteration":
+                return knows_mark
+                    ? $"Target gains {max(1, floor(self.mark_multiplicity * p))} {mark.type} Mark"
+                    : $"Target gains Mark";
         }
+    }
+    
+    static clone = function() {
+        return new CardData(
+            self.uid, self.type, self.name, self.sprite, self.rarity,
+            self.mark, self.mark_multiplicity,
+            self.damage, self.heal
+        );
     }
 }
 
-
-/**
- * Factory function to create a card struct from a resource object
- * @param {Asset.GMObject} resource The card resource object instance
- * @return {Struct.CardData} The card data
- */
-function make_card_from(resource) {
-    var mark_resource = resource.mark;
-    var mark = make_mark_from(resource.mark);
-    return new CardData(
-        resource.type, resource.name, resource.sprite, resource.rarity,
-        mark, resource.mark_multiplicity, 
-        resource.damage, resource.heal_amount
-    );
-}
 
 

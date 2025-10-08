@@ -13,7 +13,7 @@ function trigger_room_event(room) {
     switch (room.room_type) {
     	case "enemy":
             show_debug_message("Enemy room!");
-            //room_goto(rm_battle);
+            obj_room_manager.goto_battle();
             break;
         case "bonfire":
             show_debug_message("Bonfire room!");

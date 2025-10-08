@@ -1,20 +1,22 @@
 {
   "$GMObject":"",
   "%Name":"obj_enemy",
-  "eventList":[],
+  "eventList":[
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+  ],
   "managed":true,
   "name":"obj_enemy",
   "overriddenProperties":[
-    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_game_character","path":"objects/obj_game_character/obj_game_character.yy",},"propertyId":{"name":"name","path":"objects/obj_game_character/obj_game_character.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"Enemy",},
-    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_game_character","path":"objects/obj_game_character/obj_game_character.yy",},"propertyId":{"name":"max_health","path":"objects/obj_game_character/obj_game_character.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"100",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_battle_character","path":"objects/obj_battle_character/obj_battle_character.yy",},"propertyId":{"name":"name","path":"objects/obj_battle_character/obj_battle_character.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"Enemy",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_battle_character","path":"objects/obj_battle_character/obj_battle_character.yy",},"propertyId":{"name":"max_health","path":"objects/obj_battle_character/obj_battle_character.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"100",},
   ],
   "parent":{
     "name":"Game Characters",
     "path":"folders/Objects/Game Characters.yy",
   },
   "parentObjectId":{
-    "name":"obj_game_character",
-    "path":"objects/obj_game_character/obj_game_character.yy",
+    "name":"obj_battle_character",
+    "path":"objects/obj_battle_character/obj_battle_character.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,
