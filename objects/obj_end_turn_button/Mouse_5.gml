@@ -1,2 +1,2 @@
 //REMOVE BEFORE PUSH
-room_goto(Room1);
+obj_room_manager.goto_map();
