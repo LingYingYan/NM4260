@@ -70,6 +70,7 @@ start_battle = function() {
 }
 
 start_player_turn = function() {
+    obj_end_turn_button.is_disabled = false;
     self.enemy.reset_deck();
     self.is_during_player_turn = true;
     for (var i = 0; i < array_length(self.player_card_slots); i += 1) {
@@ -175,6 +176,7 @@ recycle_enemy_card = function(card) {
 }
 
 end_player_turn = function() {
+    obj_end_turn_button.is_disabled = true;
     self.player.data.execute_status_effects();
     if (self.player.data.hp <= 0) {
         self.resolve_turn();
