@@ -113,7 +113,7 @@ execute_player_card = function(card) {
     card.card_data.apply(self.player.data, self.enemy.data);
     time_source_destroy(self.turn_timer);
     self.turn_timer = time_source_create(
-        time_source_game, 0.1, time_source_units_seconds, 
+        time_source_game, 1, time_source_units_seconds, 
         recycle_player_card, [card]
     );
     
@@ -126,7 +126,7 @@ execute_enemy_card = function(card) {
     card_data.apply(self.enemy.data, self.player.data);
     time_source_destroy(self.turn_timer);
     self.turn_timer = time_source_create(
-        time_source_game, 0.1, time_source_units_seconds, 
+        time_source_game, 1, time_source_units_seconds, 
         recycle_enemy_card, [card]
     );
     
