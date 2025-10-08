@@ -45,6 +45,7 @@ player_win = function() {
 }
 
 start_battle = function() {
+    obj_end_battle_button.is_disabled = true;
     var n = instance_number(obj_card_drop_area);
     for (var i = 0; i < n; i += 1) {
         var drop_area = instance_find(obj_card_drop_area, i);
@@ -67,6 +68,15 @@ start_battle = function() {
 }
 
 start_player_turn = function() {
+    obj_end_turn_button.is_disabled = false;
+    for (var i = 0; i < array_length(self.player_card_slots); i += 1) {
+        if (instance_exists(self.player_card_slots[i].card)) {
+            self.player_card_slots[i].card.dropped_area = noone;
+        }
+        
+        self.player_card_slots[i].card = noone;
+    }
+    
     for (var i = 0; i < array_length(self.enemy_card_slots); i += 1) {
         var card = self.enemy.play_card();
         card.image_xscale = self.enemy_card_slots[i].image_xscale;
@@ -76,14 +86,14 @@ start_player_turn = function() {
     }
     
     repeat(5) {
-        var card = self.draw_pile.draw();
+        var card = self.draw();
         if (card == noone) {
             break;
         }
         
         card.set_reveal(100);
         card.grabbable = true;
-        self.hand.add(card);
+        self.hand.add(card.id);
     }
 }
 
@@ -100,7 +110,7 @@ execute_player_card = function(card) {
     card.card_data.apply(self.player.data, self.enemy.data);
     time_source_destroy(self.turn_timer);
     self.turn_timer = time_source_create(
-        time_source_game, 1, time_source_units_seconds, 
+        time_source_game, 0.1, time_source_units_seconds, 
         recycle_player_card, [card]
     );
     
@@ -113,7 +123,7 @@ execute_enemy_card = function(card) {
     card_data.apply(self.enemy.data, self.player.data);
     time_source_destroy(self.turn_timer);
     self.turn_timer = time_source_create(
-        time_source_game, 1, time_source_units_seconds, 
+        time_source_game, 0.1, time_source_units_seconds, 
         recycle_enemy_card, [card]
     );
     
@@ -125,7 +135,7 @@ recycle_player_card = function(card) {
     if (card != noone) {
         self.discard_pile.add(card);
         card.grabbable = false; 
-        card.reveal = 0;
+        card.set_reveal(0);
     }
     
     if (self.enemy.data.hp <= 0 || self.player.data.hp <= 0) {
@@ -162,6 +172,7 @@ recycle_enemy_card = function(card) {
 }
 
 end_player_turn = function() {
+    obj_end_turn_button.is_disabled = true;
     self.player.data.execute_status_effects();
     if (self.player.data.hp <= 0) {
         self.resolve_turn();
