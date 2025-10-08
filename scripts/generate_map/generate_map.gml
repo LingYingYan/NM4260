@@ -1,7 +1,6 @@
-function generate_map() {
+function generate_map(generate_new) {
     // Clean previous rooms in THIS room
     instance_destroy(DungeonRoom);
-	global.room_grid = [];
 
     // Parameters (can live here or in Game Start)
     var ROOM_DENSITY = 0.75;
@@ -9,9 +8,10 @@ function generate_map() {
     var H = global.GRID_H;
     var S = global.ROOM_SIZE;
 
-    // Build fresh grid (GLOBAL to avoid shadowing)
-    global.room_grid = array_create(H);
+	
+	global.room_grid = array_create(H);
     for (var r = 0; r < H; r++) global.room_grid[r] = array_create(W);
+    
 
     var all_rooms = [];
 

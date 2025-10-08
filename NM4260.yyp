@@ -138,6 +138,7 @@
     {"id":{"name":"EventBus","path":"scripts/EventBus/EventBus.yy",},},
     {"id":{"name":"Events","path":"scripts/Events/Events.yy",},},
     {"id":{"name":"GameCharacterData","path":"scripts/GameCharacterData/GameCharacterData.yy",},},
+    {"id":{"name":"generate_from_grid","path":"scripts/generate_from_grid/generate_from_grid.yy",},},
     {"id":{"name":"generate_map","path":"scripts/generate_map/generate_map.yy",},},
     {"id":{"name":"Hand","path":"scripts/Hand/Hand.yy",},},
     {"id":{"name":"initialize_map","path":"scripts/initialize_map/initialize_map.yy",},},
