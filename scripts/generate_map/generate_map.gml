@@ -1,6 +1,7 @@
 function generate_map() {
     // Clean previous rooms in THIS room
-    with (DungeonRoom) instance_destroy();
+    instance_destroy(DungeonRoom);
+	global.room_grid = [];
 
     // Parameters (can live here or in Game Start)
     var ROOM_DENSITY = 0.75;
