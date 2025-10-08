@@ -129,6 +129,7 @@
     {"id":{"name":"rm_play","path":"rooms/rm_play/rm_play.yy",},},
     {"id":{"name":"rm_treasure","path":"rooms/rm_treasure/rm_treasure.yy",},},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
+    {"id":{"name":"RoomUI","path":"roomui/RoomUI/RoomUI.yy",},},
     {"id":{"name":"CardData","path":"scripts/CardData/CardData.yy",},},
     {"id":{"name":"CardPile","path":"scripts/CardPile/CardPile.yy",},},
     {"id":{"name":"CardState","path":"scripts/CardState/CardState.yy",},},

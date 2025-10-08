@@ -5,6 +5,7 @@ goto_battle = function() {
 }
 
 goto_map = function() {
+    layer_set_visible("DeckSelectionScreen", false);
     if (room != Room1) {
         room_goto(Room1);
     }

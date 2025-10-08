@@ -23,6 +23,7 @@
     {"name":"inst_4E17C51","path":"rooms/rm_game_start/rm_game_start.yy",},
     {"name":"inst_1909A89C","path":"rooms/rm_game_start/rm_game_start.yy",},
     {"name":"inst_3607289C","path":"rooms/rm_game_start/rm_game_start.yy",},
+    {"name":"inst_18FA3F55","path":"roomui/RoomUI/RoomUI.yy",},
   ],
   "isDnd":false,
   "layers":[
