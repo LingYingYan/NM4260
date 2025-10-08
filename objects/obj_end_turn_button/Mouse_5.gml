@@ -1,2 +1,2 @@
 //REMOVE BEFORE PUSH
-room_goto(rm_map);
+room_goto(Room1);

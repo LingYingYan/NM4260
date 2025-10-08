@@ -25,7 +25,7 @@ if (point_in_rectangle(mx, my,
     show_message("You chose to rest, hp recovered, map reset");
 	show_debug_message("left button is clicked");
 	global.map_needs_reset = true;  // flag that next room must regenerate
-	room_goto(rm_map);
+	room_goto(Room1);
 }
 
 // Button 2 clicked
@@ -34,5 +34,5 @@ if (point_in_rectangle(mx, my,
     btn2_x + btn_width / 2, buttons_y + btn_height / 2))
 {
     show_message("You chose not to rest");
-	room_goto(rm_map);
+	room_goto(Room1);
 }
