@@ -15,24 +15,20 @@ function GameCharacterData(curr_hp, total_hp) constructor {
         }
     }
     
-    /// @desc description
-    /// @param {string} status_name description description
-    /// @param {real} level 
-    reduce_status = function(status_name, level) {
-        if (ds_map_exists(self.status_effects, status_name)) {
-            self.status_effects[? status_name].level -= level;
-            if (self.status_effects[? status_name].level <= 0) {
-                ds_map_delete(self.status_effects, status_name);
-            }
-        } 
-    }
-    
     execute_status_effects = function() {
+        var to_remove = [];
         var key = ds_map_find_first(self.status_effects);
         while (key != undefined) {
             self.status_effects[? key].execute(self);
-            self.reduce_status(key, 1);
+            if (self.status_effects[? key].level <= 0) {
+                array_push(to_remove, key);
+            }
+            
             key = ds_map_find_next(self.status_effects, key);
+        }
+        
+        for (var i = 0; i < array_length(to_remove); i += 1) {
+        	ds_map_delete(self.status_effects, to_remove[i]);
         }
     }
     
