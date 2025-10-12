@@ -19,6 +19,7 @@ function CardData(
     rarity = card_rarity;
     mark = res_loader_marks[? mark_id];
     mark_multiplicity = mark_count;
+    effectiveness = 1;
 
     /**
      * @desc Applies the card effects
@@ -26,6 +27,12 @@ function CardData(
      * @param {Struct.GameCharacterData} target The target
      */
     apply = function(instigator, target) { }
+    
+    /**
+     * @desc Collides with another card
+     * @param {Struct.CardData} other_card The other card
+     */
+    collide = function(other_card) { }
     
     /**
      * @desc Describe the card
@@ -79,10 +86,34 @@ function DestructionCardData(
         }
             
         var old_hp = target.hp;
-        target.hp -= self.damage;
-        target.hp = max(target.hp, 0);
+        self.effectiveness -= max(0.5, 1 - target.count_mark(self.mark.type) * 0.1);
+        if (self.effectiveness > 0) {
+            var dmg = self.damage * max(0, self.effectiveness);
+            var eliminated = min(target.shields, dmg);
+            dmg -= eliminated;
+            target.shields -= eliminated;
+            target.hp -= max(0, dmg);
+            target.hp = max(target.hp, 0);
+        }
+        
         show_debug_message($"Attack {target}: HP {old_hp} -> {target.hp}");
         self.apply_marks(instigator, target); 
+    }
+    
+    collide = function(other_card) {
+        if (typeof(other_card) == nameof(DefensiveCardData)) {
+            if (other_card.mark == self.mark) {
+                self.effectiveness = 0;
+            }
+        }
+    }
+    
+    /**
+     * @desc Collides with another card
+     * @param {Struct.CardData} other_card The other card
+     */
+    collide = function(other_card) { 
+        
     }
     
     /**
@@ -104,13 +135,13 @@ function DestructionCardData(
     describe = function(visibility) {
         if (visibility >= 4) {
             return $"A {self.mark.type} {self.type} card\n" + 
-                   $"Deals {self.damage} {self.mark.type} damage to you\n" + 
-                   $"Applies {self.mark.type} Mark × {self.mark_multiplicity} to you";
+                   $"Deals {self.damage} {self.mark.type} damage to target\n" + 
+                   $"Applies {self.mark.type} Mark × {self.mark_multiplicity} to target";
         }
         
         if (visibility >= 3) {
             return $"A {self.mark.type} {self.type} card\n" + 
-                   $"Deals {self.damage} {self.mark.type} damage to you"
+                   $"Deals {self.damage} {self.mark.type} damage to target"
         }
         
         if (visibility >= 2) {
@@ -236,7 +267,7 @@ function AlterationCardData(
     card_id, card_name, card_sprite, card_rarity, 
     mark_id, mark_count, transform_from_id
 ) : CardData(
-    card_id, "Restoration", card_name, card_sprite, card_rarity, 
+    card_id, "Alteration", card_name, card_sprite, card_rarity, 
     mark_id, mark_count
 ) constructor {
     transform_from = transform_from_id;
@@ -294,4 +325,83 @@ function AlterationCardData(
     }
 }
 
+/**
+ * Function Description
+ * @param {string} card_id Description
+ * @param {string} card_name Description
+ * @param {Asset.GMSprite} card_sprite Description
+ * @param {real} card_rarity Description
+ * @param {string} mark_id Description
+ * @param {real} mark_count Description
+ * @param {real} defence Description
+ */
+function DefensiveCardData(
+    card_id, card_name, card_sprite, card_rarity, 
+    mark_id, mark_count, defence
+) : CardData(
+    card_id, "Defensive", card_name, card_sprite, card_rarity, 
+    mark_id, mark_count
+) constructor {
+    defence_amount = defence;
+    
+    /**
+     * @desc Applies the card effects
+     * @param {Struct.GameCharacterData} instigator The caster
+     * @param {Struct.GameCharacterData} target The target
+     */
+    apply = function(instigator, target) {
+        if (target == noone || target == undefined) { 
+            show_debug_message("Defended");   
+            return;     
+        }
+            
+        target.shields += self.defence_amount;
+        self.apply_marks(instigator, target); 
+    }
+    
+    collide = function(other_card) {
+        if (typeof(other_card) == nameof(DestructionCardData)) {
+            if (other_card.mark == self.mark) {
+                other_card.effectiveness = 0;
+            }
+        }
+    }
+    
+    /**
+     * @desc Clones the card data
+     * @return {Struct.DestructionCardData} The clone
+     */
+    clone = function() {
+        return new DestructionCardData(
+            self.uid, self.name, self.sprite, self.rarity,
+            self.mark, self.mark_multiplicity, self.defence_amount
+        );
+    }
+    
+    /**
+     * @desc Describe the card
+     * @param {real} visibility Visibility
+     * @return {string} The card description
+     */
+    describe = function(visibility) {
+        if (visibility >= 4) {
+            return $"A {self.mark.type} {self.type} card\n" + 
+                   $"Adds {self.defence_amount} shields to caster\n" + 
+                   $"Applies {self.mark.type} Mark × {self.mark_multiplicity} to caster";
+        }
+        
+        if (visibility >= 3) {
+            return $"A {self.mark.type} {self.type} card\n" + 
+                   $"Adds {self.defence_amount} shields to caster";
+        }
+        
+        if (visibility >= 2) {
+            return $"A {self.mark.type} {self.type} card";
+        }
+        
+        if (visibility >= 1) {
+            return $"A {self.mark.type} card";
+        }
+    }
+}
 
