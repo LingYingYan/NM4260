@@ -3,21 +3,16 @@
   "%Name":"res_loader_cards",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
   "name":"res_loader_cards",
-  "overriddenProperties":[
-    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"res_loader_spreadsheet","path":"objects/res_loader_spreadsheet/res_loader_spreadsheet.yy",},"propertyId":{"name":"google_sheet_id","path":"objects/res_loader_spreadsheet/res_loader_spreadsheet.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"15h6bBbmkBUX-cnQSuWV97bT1jnyP5GVQmhKgxdNaygk",},
-    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"res_loader_spreadsheet","path":"objects/res_loader_spreadsheet/res_loader_spreadsheet.yy",},"propertyId":{"name":"save_file_name","path":"objects/res_loader_spreadsheet/res_loader_spreadsheet.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"card_data.csv",},
-  ],
+  "overriddenProperties":[],
   "parent":{
     "name":"Loaders",
     "path":"folders/Objects/Resources/Loaders.yy",
   },
-  "parentObjectId":{
-    "name":"res_loader_spreadsheet",
-    "path":"objects/res_loader_spreadsheet/res_loader_spreadsheet.yy",
-  },
+  "parentObjectId":null,
   "persistent":true,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,

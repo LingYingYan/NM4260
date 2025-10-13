@@ -27,3 +27,19 @@ function Poison(_level) : Status(_level, nameof(Poison)) constructor {
         self.level -= 1;
     }
 } 
+
+function Paralysed(_level) : Status(_level, nameof(Paralysed)) constructor {
+    /// @desc Execute the status effect
+    /// @param {Struct.CharacterData} target The target
+    execute = function(target) { 
+        self.level -= 1;
+    }
+} 
+
+function Frozen(_level) : Status(_level, nameof(Frozen)) constructor {
+    /// @desc Execute the status effect
+    /// @param {Struct.CharacterData} target The target
+    execute = function(target) { 
+        self.level -= 1;
+    }
+} 

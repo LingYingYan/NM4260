@@ -70,6 +70,7 @@ start_battle = function() {
 }
 
 start_player_turn = function() {
+    obj_end_turn_button.is_disabled = false;
     self.enemy.reset_deck();
     self.is_during_player_turn = true;
     for (var i = 0; i < array_length(self.player_card_slots); i += 1) {
@@ -94,7 +95,7 @@ start_player_turn = function() {
             break;
         }
         
-        card.set_reveal(100);
+        card.set_reveal(self.player.max_vision);
         card.grabbable = true;
         self.hand.add(card.id);
     }
@@ -109,56 +110,44 @@ draw = function() {
     return self.draw_pile.draw();
 }
 
-execute_player_card = function(card) {
-    card.card_data.apply(self.player.data, self.enemy.data);
+/**
+ * @desc 
+ * @param {id.instance} player_card description
+ * @param {id.instance} enemy_card description    
+ */
+execute_cards = function(player_card, enemy_card) {
+    if (player_card != noone && enemy_card != noone) {
+        player_card.card_data.collide(enemy_card.card_data);
+    }
+    
+    if (player_card != noone) {
+        player_card.card_data.apply(self.player.data, self.enemy.data);
+    }
+    
+    if (enemy_card != noone) {
+        enemy_card.card_data.apply(self.enemy.data, self.player.data);
+    }
+    
     time_source_destroy(self.turn_timer);
     self.turn_timer = time_source_create(
         time_source_game, 1, time_source_units_seconds, 
-        recycle_player_card, [card]
+        recycle_cards, [player_card, enemy_card]
     );
     
     time_source_start(self.turn_timer);
 }
-    
-execute_enemy_card = function(card) {
-    card.set_reveal(100);
-    var card_data = card.card_data;
-    card_data.apply(self.enemy.data, self.player.data);
+
+recycle_cards = function(player_card, enemy_card) {
     time_source_destroy(self.turn_timer);
-    self.turn_timer = time_source_create(
-        time_source_game, 1, time_source_units_seconds, 
-        recycle_enemy_card, [card]
-    );
-    
-    time_source_start(self.turn_timer);
-}
-    
-recycle_player_card = function(card) { 
-    time_source_destroy(self.turn_timer);
-    if (card != noone) {
-        self.discard_pile.add(card);
-        card.grabbable = false; 
-        card.set_reveal(0);
+    if (player_card != noone) {
+        self.discard_pile.add(player_card);
+        player_card.grabbable = false; 
+        player_card.set_reveal(0);
     }
     
-    if (self.enemy.data.hp <= 0 || self.player.data.hp <= 0) {
-        self.resolve_turn();
-        return;
-    }
-    
-    self.turn_pointer += 1;
-    if (self.turn_pointer == self.max_turn_pointer) {
-        self.resolve_turn();
-    } else {
-        self.can_resolve_card = true;
-    }
-}
-    
-recycle_enemy_card = function(card) { 
-    time_source_destroy(self.turn_timer);
-    if (card != noone) { 
-        place_card(card, self.enemy.x, -500);
-        instance_destroy(card);
+    if (enemy_card != noone) { 
+        place_card(enemy_card, self.enemy.x, -500);
+        instance_destroy(enemy_card);
     }
     
     if (self.enemy.data.hp <= 0 || self.player.data.hp <= 0) {
@@ -175,6 +164,7 @@ recycle_enemy_card = function(card) {
 }
 
 end_player_turn = function() {
+    obj_end_turn_button.is_disabled = true;
     self.player.data.execute_status_effects();
     if (self.player.data.hp <= 0) {
         self.resolve_turn();
@@ -197,7 +187,7 @@ end_player_turn = function() {
         self.enemy_cards[i] = self.enemy_card_slots[i].card;
     }
     
-    self.max_turn_pointer = max(array_length(self.player_cards), array_length(self.enemy_cards)) * 2;
+    self.max_turn_pointer = max(array_length(self.player_cards), array_length(self.enemy_cards));
     self.can_resolve_card = true;
 }
 
@@ -211,3 +201,12 @@ end_battle = function() {
     self.player_cards = [];
     transfer_between_piles(self.hand, self.discard_pile, 0, false);
 }
+
+// Placeholder functions for card animations
+reveal_cards = function() {
+    if (self.turn_pointer >= array_length(self.enemy_cards)) {
+        return;
+    }
+}
+
+state_update = function() { }
