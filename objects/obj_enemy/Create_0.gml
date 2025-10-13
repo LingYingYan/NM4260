@@ -14,7 +14,7 @@ play_card = function() {
     card.grabbable = false;
     var player = obj_battle_manager.player;
     var data = player.data;
-    card.set_reveal(obj_battle_manager.player.data.get_revelation());
+    card.set_reveal(random_range(0, obj_battle_manager.player.data.vision));
     return card;
 }
 

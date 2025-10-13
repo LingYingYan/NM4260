@@ -149,6 +149,8 @@ function DestructionCardData(
         if (visibility >= 1) {
             return $"A {self.mark.type} card";
         }
+        
+        return "";
     }
 }
 
@@ -248,6 +250,8 @@ function RestorationCardData(
         if (visibility >= 1) {
             return $"A {self.mark.type} card";
         }
+        
+        return "";
     }
 }
 
@@ -320,6 +324,8 @@ function AlterationCardData(
         if (visibility >= 1) {
             return $"A {self.mark.type} card";
         }
+        
+        return "";
     }
 }
 
@@ -400,6 +406,8 @@ function DefensiveCardData(
         if (visibility >= 1) {
             return $"A {self.mark.type} card";
         }
+        
+        return "";
     }
 }
 

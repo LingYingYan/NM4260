@@ -8,8 +8,8 @@ if (self.hovered) {
 
 self.depth = self.current_depth;
 draw_self();
-if (self.card_data != undefined && self.should_reveal) {
-    if (self.reveal >= 100) {
+if (self.card_data != undefined) {
+    if (self.reveal >= obj_player_state.max_vision) {
         draw_sprite(self.card_data.sprite, self.image_index, self.x, self.y);
     }
     
