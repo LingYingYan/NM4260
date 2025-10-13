@@ -101,7 +101,7 @@ function DestructionCardData(
         }
         
         show_debug_message($"Attack {target}: HP {old_hp} -> {target.hp}");
-        self.apply_marks(instigator, target); 
+        self.mark.on_apply(target, self.mark_multiplicity); 
     }
     
     /**
@@ -194,7 +194,7 @@ function RestorationCardData(
         instigator.hp = min(instigator.hp, instigator.max_hp);
         show_debug_message($"Restore {instigator}: HP {old_hp} -> {instigator.hp}");
         instigator.add_marks(self.mark_id_to_remove, -self.mark_count_to_remove);
-        self.apply_marks(instigator, instigator); 
+        self.mark.on_apply(instigator, self.mark_multiplicity); 
     }
     
     /**
@@ -360,7 +360,7 @@ function DefensiveCardData(
         }
             
         target.shields += self.defence_amount;
-        self.apply_marks(instigator, target); 
+        self.mark.on_apply(instigator, self.mark_multiplicity); 
     }
     
     collide = function(other_card) {

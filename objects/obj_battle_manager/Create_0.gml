@@ -133,6 +133,8 @@ execute_cards = function(player_card, enemy_card) {
         time_source_game, 1, time_source_units_seconds, 
         recycle_cards, [player_card, enemy_card]
     );
+    
+    time_source_start(self.turn_timer);
 }
 
 recycle_cards = function(player_card, enemy_card) {
