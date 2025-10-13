@@ -17,10 +17,14 @@ function CardData(
     name = card_name;
     sprite = card_sprite;
     rarity = card_rarity;
-    mark = res_loader_marks[? mark_id];
+    mark = res_loader_marks.loaded[? mark_id];
     mark_multiplicity = mark_count;
     effectiveness = 1;
-
+    
+    get_weight = function() {
+        return 5 - self.rarity;
+    }
+    
     /**
      * @desc Applies the card effects
      * @param {Struct.GameCharacterData} instigator The caster
@@ -100,6 +104,10 @@ function DestructionCardData(
         self.apply_marks(instigator, target); 
     }
     
+    /**
+     * @desc Collides with another card
+     * @param {Struct.CardData} other_card The other card
+     */
     collide = function(other_card) {
         if (typeof(other_card) == nameof(DefensiveCardData)) {
             if (other_card.mark == self.mark) {
@@ -109,21 +117,13 @@ function DestructionCardData(
     }
     
     /**
-     * @desc Collides with another card
-     * @param {Struct.CardData} other_card The other card
-     */
-    collide = function(other_card) { 
-        
-    }
-    
-    /**
      * @desc Clones the card data
      * @return {Struct.DestructionCardData} The clone
      */
     clone = function() {
         return new DestructionCardData(
             self.uid, self.name, self.sprite, self.rarity,
-            self.mark, self.mark_multiplicity, self.damage
+            self.mark.uid, self.mark_multiplicity, self.damage
         );
     }
     
@@ -134,14 +134,12 @@ function DestructionCardData(
      */
     describe = function(visibility) {
         if (visibility >= 4) {
-            return $"A {self.mark.type} {self.type} card\n" + 
-                   $"Deals {self.damage} {self.mark.type} damage to target\n" + 
+            return $"Deals {self.damage} {self.mark.type} damage to target\n" + 
                    $"Applies {self.mark.type} Mark × {self.mark_multiplicity} to target";
         }
         
         if (visibility >= 3) {
-            return $"A {self.mark.type} {self.type} card\n" + 
-                   $"Deals {self.damage} {self.mark.type} damage to target"
+            return $"Deals {self.damage} {self.mark.type} damage to target"
         }
         
         if (visibility >= 2) {
@@ -204,7 +202,7 @@ function RestorationCardData(
     clone = function() {
         return new RestorationCardData(
             self.uid, self.name, self.sprite, self.rarity,
-            self.mark, self.mark_multiplicity, self.mark_id_to_remove, self.mark_count_to_remove,
+            self.mark.uid, self.mark_multiplicity, self.mark_id_to_remove, self.mark_count_to_remove,
             self.amount
         );
     }
@@ -286,7 +284,7 @@ function AlterationCardData(
         var old_count = target.count_mark(self.transform_from);
         target.add_marks(self.transform_from, old_count);
         self.mark.on_apply(target, self.mark_multiplicity * old_count);
-        show_debug_message($"Alter {target}: {res_loader_marks[? self.transform_from].type} × {old_count} -> {res_loader_marks[? self.mark]} × {target.count_mark(self.mark)}");
+        show_debug_message($"Alter {target}: {res_loader_marks.loaded[? self.transform_from].type} × {old_count} -> {self.mark} × {target.count_mark(self.mark.uid)}");
     }
     
     /**
@@ -296,7 +294,7 @@ function AlterationCardData(
     clone = function() {
         return new AlterationCardData(
             self.uid, self.name, self.sprite, self.rarity,
-            self.mark, self.mark_multiplicity, self.transform_from
+            self.mark.uid, self.mark_multiplicity, self.transform_from
         );
     }
     
@@ -306,7 +304,7 @@ function AlterationCardData(
      * @return {string} The card description
      */
     describe = function(visibility) {
-        var transform_from_mark_data = res_loader_marks[? self.transform_from];
+        var transform_from_mark_data = res_loader_marks.loaded[? self.transform_from];
         if (visibility >= 4) {
             return $"Transforms each {transform_from_mark_data.type} Mark to {self.mark.type} Mark × {self.mark_multiplicity} on target";
         }
@@ -374,7 +372,7 @@ function DefensiveCardData(
     clone = function() {
         return new DestructionCardData(
             self.uid, self.name, self.sprite, self.rarity,
-            self.mark, self.mark_multiplicity, self.defence_amount
+            self.mark.uid, self.mark_multiplicity, self.defence_amount
         );
     }
     

@@ -39,8 +39,6 @@ function make_mark(mark_id, display_name, mark_sprite) {
 }
 
 function FireMark(mark_id, mark_name, mark_sprite) : Mark(mark_id, mark_name, mark_sprite) constructor {
-    reactant_coefficient = 0.5;
-    
      /**
      * @desc description
      * @param {Struct.GameCharacterData} target description
@@ -125,9 +123,7 @@ function WaterMark(mark_id, mark_name, mark_sprite) : Mark(mark_id, mark_name, m
     }
 } 
 
-function GrassMark(mark_id, mark_name, mark_sprite) : Mark(mark_id, mark_name, mark_sprite) constructor { reactant_coefficient 
-    reactant_coefficient = 0.5;
-    
+function GrassMark(mark_id, mark_name, mark_sprite) : Mark(mark_id, mark_name, mark_sprite) constructor {
      /**
      * @desc description
      * @param {Struct.GameCharacterData} target description
