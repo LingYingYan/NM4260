@@ -1,6 +1,7 @@
 function GameCharacterData(curr_hp, total_hp) constructor {
     hp = curr_hp;
     max_hp = total_hp;
+    shields = 0
     status_effects = ds_map_create();
     marks = ds_map_create();
     
@@ -15,9 +16,26 @@ function GameCharacterData(curr_hp, total_hp) constructor {
     }
     
     execute_status_effects = function() {
+        var to_remove = [];
         var key = ds_map_find_first(self.status_effects);
         while (key != undefined) {
             self.status_effects[? key].execute(self);
+            if (self.status_effects[? key].level <= 0) {
+                array_push(to_remove, key);
+            }
+            
+            key = ds_map_find_next(self.status_effects, key);
+        }
+        
+        for (var i = 0; i < array_length(to_remove); i += 1) {
+        	ds_map_delete(self.status_effects, to_remove[i]);
+        }
+    }
+    
+    execute_mark_decay = function() {
+        var key = ds_map_find_first(self.marks);
+        while (key != undefined) {
+            self.add_marks(key, -1);
             key = ds_map_find_next(self.status_effects, key);
         }
     }
@@ -48,10 +66,6 @@ function GameCharacterData(curr_hp, total_hp) constructor {
 function PlayerData(curr_hp, total_hp, curr_vision, total_vision) : GameCharacterData(curr_hp, total_hp) constructor {
     vision = curr_vision; 
     max_vision = total_vision;
-    
-    get_revelation = function() {
-        return clamp(self.vision * 16 + irandom_range(0, 20), 0, 100);
-    }
 }
 
 /// @desc Function Description
