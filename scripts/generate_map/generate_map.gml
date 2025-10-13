@@ -19,11 +19,12 @@ function generate_map(generate_new) {
     for (var row = 0; row < H; row++) {
         for (var col = 0; col < W; col++) {
             if (random(1) < ROOM_DENSITY) {
-                var rm = instance_create_layer(col * S, row * S + S, "Instances", DungeonRoom);
-                rm.grid_x = col;
-                rm.grid_y = row;
-                room_neighbors_init(rm);
+				var rm = new RoomData(false,false,"default",col*S, row*S);
+                //var rm = instance_create_layer(col * S, row * S + S, "Instances", DungeonRoom);
+                //room_neighbors_init(rm);
                 global.room_grid[row][col] = rm;
+				var vis = instance_create_layer(col * S, row * S, "Instances", DungeonRoom);
+				vis.data = rm; // link the visual to the data struct
                 array_push(all_rooms, rm);
             } else {
                 global.room_grid[row][col] = noone;
@@ -37,11 +38,14 @@ function generate_map(generate_new) {
         for (var c = 0; c < global.GRID_W; c++) if (global.room_grid[r][c] != noone) { found = true; break; }
         if (!found) {
             var pick = irandom(global.GRID_W - 1);
-            var rm = instance_create_layer(pick * global.ROOM_SIZE, r * global.ROOM_SIZE + global.ROOM_SIZE, "Instances", DungeonRoom);
-            rm.grid_x = pick;
-            rm.grid_y = r;
-            room_neighbors_init(rm);
+			var rm = new RoomData(false,false,"default",pick*global.ROOM_SIZE, r * global.ROOM_SIZE + global.ROOM_SIZE);
+            //var rm = instance_create_layer(pick * global.ROOM_SIZE, r * global.ROOM_SIZE + global.ROOM_SIZE, "Instances", DungeonRoom);
+            //rm.grid_x = pick;
+            //rm.grid_y = r;
+            //room_neighbors_init(rm);
             global.room_grid[r][pick] = rm;
+			var vis = instance_create_layer(pick*global.ROOM_SIZE, r * global.ROOM_SIZE + global.ROOM_SIZE, "Instances", DungeonRoom);
+			vis.data = rm; // link the visual to the data struct
             array_push(all_rooms, rm);
         }
     }
@@ -65,6 +69,7 @@ function generate_map(generate_new) {
             }
             if (!hasNeighbor) {
                 instance_destroy(rm);
+				
                 global.room_grid[r][c] = noone;
             }
         }
