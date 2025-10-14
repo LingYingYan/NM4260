@@ -56,8 +56,16 @@ player_win = function() {
     // Bruh so much work just to curry one variable...
     card_option.on_click = method({this: card_option}, function() {
         obj_loot_panel.hide();
+        var selected = [];
         for (var i = 0; i < 3; i += 1) {
         	var random_card = res_loader_cards.get_random_card("Cards");
+            if (array_contains(selected, random_card.card_data.uid)) {
+                while (array_contains(selected, random_card.card_data.uid)) {
+                    instance_destroy(random_card);
+                    random_card = res_loader_cards.get_random_card("Cards");
+                } 
+            }
+            
             var card_x = room_width / 2 + (i - 1) * 2 * random_card.sprite_width;
             var new_card = instance_create_layer(card_x, room_height / 2, "Cards", obj_pickup_card);
             new_card.card_data = random_card.card_data;
