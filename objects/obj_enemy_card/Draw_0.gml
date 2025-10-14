@@ -1,7 +1,7 @@
 // Inherit the parent event
 event_inherited();
 
-if (self.hovered && self.reveal < obj_player_state.data.max_vision && self.can_reveal) {
+if (!global.pause && self.hovered && self.reveal < obj_player_state.data.max_vision && self.can_reveal) {
     self.image_blend = c_gray;
     var tooltip_w = self.sprite_width * 0.8;
     var tooltip_h = self.sprite_height * 0.2;

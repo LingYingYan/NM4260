@@ -17,4 +17,6 @@ if (!global.pause) {
 		/// Reset grabbed card when not holding anything.
 		self.grabbed_card = noone;
 	}
+} else {
+    update_looking_at();
 }

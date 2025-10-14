@@ -25,10 +25,13 @@
     {"name":"inst_799C15","path":"rooms/rm_battle/rm_battle.yy",},
     {"name":"inst_60C65C6E","path":"rooms/rm_battle/rm_battle.yy",},
     {"name":"inst_5893687A","path":"rooms/rm_battle/rm_battle.yy",},
+    {"name":"inst_F37CBB7","path":"rooms/rm_battle/rm_battle.yy",},
   ],
   "isDnd":false,
   "layers":[
-    {"$GMRInstanceLayer":"","%Name":"Instances","depth":-100,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[],"layers":[
+    {"$GMRInstanceLayer":"","%Name":"Instances","depth":-100,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[
+        {"$GMRInstance":"v2","%Name":"inst_F37CBB7","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_F37CBB7","objectId":{"name":"obj_loot_panel","path":"objects/obj_loot_panel/obj_loot_panel.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":1952.0,"y":992.0,},
+      ],"layers":[
         {"$GMRInstanceLayer":"","%Name":"Characters","depth":0,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[
             {"$GMRInstance":"v2","%Name":"inst_713D25E5","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_713D25E5","objectId":{"name":"obj_player_state","path":"objects/obj_player_state/obj_player_state.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":0.0,"y":2144.0,},
             {"$GMRInstance":"v2","%Name":"inst_3A3EFE80","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":true,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_3A3EFE80","objectId":{"name":"obj_ui_health_bar","path":"objects/obj_ui_health_bar/obj_ui_health_bar.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":128.0,"y":1440.0,},

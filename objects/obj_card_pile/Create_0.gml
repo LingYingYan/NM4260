@@ -26,6 +26,10 @@ remove = function(card) {
     ds_list_delete(self.cards, ds_list_find_index(self.cards, card));
 }
 
+/**
+ * @desc 
+ * @return {id.instance} description
+ */
 draw = function() {
     if (self.is_empty()) {
         return noone;

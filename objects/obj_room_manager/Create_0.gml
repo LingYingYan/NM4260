@@ -7,6 +7,7 @@ goto_battle = function() {
 }
 
 goto_map = function() {
+    global.map_inited = false;
     layer_set_visible("DeckSelectionScreen", false);
     layer_set_visible("BattleScreen", false);
     if (room != Room1) {

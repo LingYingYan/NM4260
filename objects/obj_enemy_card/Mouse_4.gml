@@ -1,4 +1,4 @@
-if (!self.can_reveal) {
+if (!self.can_reveal || global.pause) {
     exit;
 }
 
