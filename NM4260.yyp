@@ -157,6 +157,7 @@
     {"id":{"name":"rearrange_hand","path":"scripts/rearrange_hand/rearrange_hand.yy",},},
     {"id":{"name":"reset_map","path":"scripts/reset_map/reset_map.yy",},},
     {"id":{"name":"reveal_room","path":"scripts/reveal_room/reveal_room.yy",},},
+    {"id":{"name":"room_to_gui","path":"scripts/room_to_gui/room_to_gui.yy",},},
     {"id":{"name":"Status","path":"scripts/Status/Status.yy",},},
     {"id":{"name":"transfer_between_piles","path":"scripts/transfer_between_piles/transfer_between_piles.yy",},},
     {"id":{"name":"transfer_stack","path":"scripts/transfer_stack/transfer_stack.yy",},},

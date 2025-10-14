@@ -15,12 +15,14 @@ if (self.card_data != undefined) {
     var y_padding = 25 * self.image_yscale;
     var text_x = self.x - self.sprite_width / 2 + x_padding;
     var text_y = self.y - self.sprite_height / 2 + y_padding;
-   
+    
     if (self.reveal >= obj_player_state.max_vision) {
         draw_set_halign(fa_center);
         draw_set_valign(fa_middle);
         
         draw_sprite(self.card_data.sprite, self.image_index, self.x, self.y - self.sprite_height / 4 + y_padding);
+        // Draw mark icon
+        draw_sprite(self.card_data.mark.sprite, self.image_index, text_x, text_y);
         
         draw_set_valign(fa_top);
         draw_set_halign(fa_left);
