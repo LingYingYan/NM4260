@@ -87,7 +87,8 @@ function FireMark(mark_id, mark_name, mark_sprite) : Mark(mark_id, mark_name, ma
     
     describe = function() {
         return "1 Fire Mark reacts on 1 Grass Mark = Burn × 2\n" +
-               "1 Fire Mark reacts on 1 Ice Mark = Water Mark × 1";
+               "1 Fire Mark reacts on 1 Ice Mark = Water Mark × 1\n\n" +
+               "Burn: cause 1 damage per turn";
     }
 } 
 
@@ -150,7 +151,8 @@ function GrassMark(mark_id, mark_name, mark_sprite) : Mark(mark_id, mark_name, m
     }
     
     describe = function() {
-        return "1 Grass Mark reacts on 1 Water Mark = Poison × 2\n";
+        return "1 Grass Mark reacts on 1 Water Mark = Poison × 2\n\n" +
+               "Poison: cause 1 damage per turn";
     }
 } 
 
@@ -181,7 +183,8 @@ function LightningMark(mark_id, mark_name, mark_sprite) : Mark(mark_id, mark_nam
     }
     
     describe = function() {
-        return "1 Lightning Mark reacts on 1 Water Mark = Paralysed × 1";
+        return "1 Lightning Mark reacts on 1 Water Mark = Paralysed × 1\n\n" +
+               "Paralysed: weakens card effectiveness by 25%";
     }
 } 
 
@@ -212,6 +215,7 @@ function IceMark(mark_id, mark_name, mark_sprite) : Mark(mark_id, mark_name, mar
     }
     
     describe = function() {
-        return "1 Ice Mark reacts on 5 Water Marks = Frozen × 1";
+        return "1 Ice Mark reacts on 5 Water Marks = Frozen × 1\n\n" +
+               "Frozen: only 1 card may be played per turn";
     }
 } 
