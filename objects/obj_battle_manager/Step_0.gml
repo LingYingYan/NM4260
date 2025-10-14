@@ -14,10 +14,9 @@ if (player_card == noone && enemy_card == noone) {
     self.turn_pointer += 1;
 } else {
     self.can_resolve_card = false;
-    enemy_card.set_reveal(self.player.max_vision);
     self.turn_timer = time_source_create(
         time_source_game, 1, time_source_units_seconds, 
-        execute_cards, [player_card, enemy_card]
+        flip_cards, [player_card, enemy_card]
     );
         
     time_source_start(self.turn_timer);

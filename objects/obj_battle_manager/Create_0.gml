@@ -133,6 +133,7 @@ start_player_turn = function() {
         var card = self.enemy.play_card();
         card.image_xscale = self.enemy_card_slots[i].image_xscale;
         card.image_yscale = self.enemy_card_slots[i].image_yscale;
+        card.scale = self.enemy_card_slots[i].image_xscale;
         place_card(card, self.enemy_card_slots[i].x, self.enemy_card_slots[i].y);
         enemy_card_slots[i].card = card;
     }
@@ -158,9 +159,33 @@ draw = function() {
         self.player.data.modify_card(card.card_data);  
         card.set_reveal(self.player.max_vision);
         card.grabbable = true;  
+        card.scale = self.player_card_slots[0].image_xscale;
     }
     
     return card;
+}
+
+/**
+ * @desc  
+ * @param {id.instance} player_card description
+ * @param {id.instance} enemy_card description    
+ */
+flip_cards = function(player_card, enemy_card) {
+    if (player_card != noone) {
+        player_card.state_update = player_card.state_flip;
+    }
+    
+    if (enemy_card != noone) {
+        enemy_card.state_update = enemy_card.state_flip;
+    }
+    
+    time_source_destroy(self.turn_timer);
+    self.turn_timer = time_source_create(
+        time_source_game, 2, time_source_units_seconds, 
+        execute_cards, [player_card, enemy_card]
+    );
+    
+    time_source_start(self.turn_timer);
 }
 
 /**
@@ -194,6 +219,8 @@ recycle_cards = function(player_card, enemy_card) {
     time_source_destroy(self.turn_timer);
     if (instance_exists(player_card)) {
         self.discard_pile.add(player_card);
+        player_card.image_xscale = player_card.scale;
+        player_card.image_yscale = player_card.scale;
         player_card.grabbable = false; 
         player_card.set_reveal(0);
     }

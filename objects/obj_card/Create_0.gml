@@ -14,6 +14,9 @@ dropped_area = noone;
 reveal = 0;
 desc = "";
 
+ac_timestamp = 0;
+anim = ac_card_flip;
+
 set_reveal = function(value) {
     self.reveal = value;
     if (self.card_data != undefined) {
@@ -36,6 +39,23 @@ state_normal = function() {
 		picked_up = true;
 		self.current_depth = -10000;
     }
+}
+
+state_flip = function() {
+    self.ac_timestamp += delta_time / 1000000;
+    var animation_x = animcurve_get_channel(self.anim, "xScale");
+    var animation_y = animcurve_get_channel(self.anim, "yScale");
+    self.image_xscale = self.scale * animcurve_channel_evaluate(animation_x, self.ac_timestamp);
+    self.image_yscale = self.scale * animcurve_channel_evaluate(animation_y, self.ac_timestamp);
+    if (self.ac_timestamp >= 0.5 && self.reveal < obj_player_state.data.max_vision) {
+        self.normal_depth -= 10000;
+        self.set_reveal(obj_player_state.data.max_vision);
+    }
+    
+    if (self.ac_timestamp >= 1) {
+        self.ac_timestamp = 0;
+        self.state_update = self.state_normal;
+    } 
 }
 
 state_update = self.state_normal;

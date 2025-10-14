@@ -61,6 +61,7 @@
   },
   "name":"NM4260",
   "resources":[
+    {"id":{"name":"ac_card_enlarge","path":"animcurves/ac_card_enlarge/ac_card_enlarge.yy",},},
     {"id":{"name":"ac_card_flip","path":"animcurves/ac_card_flip/ac_card_flip.yy",},},
     {"id":{"name":"ac_enemy_weight_distance_coefficient","path":"animcurves/ac_enemy_weight_distance_coefficient/ac_enemy_weight_distance_coefficient.yy",},},
     {"id":{"name":"fnt_default_large","path":"fonts/fnt_default_large/fnt_default_large.yy",},},
