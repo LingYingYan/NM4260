@@ -90,7 +90,7 @@ function DestructionCardData(
         }
             
         var old_hp = target.hp;
-        self.effectiveness -= max(0.5, 1 - target.count_mark(self.mark.type) * 0.1);
+        self.effectiveness -= min(0.5, target.count_mark(self.mark.type) * 0.1);
         if (self.effectiveness > 0) {
             var dmg = self.damage * max(0, self.effectiveness);
             var eliminated = min(target.shields, dmg);
