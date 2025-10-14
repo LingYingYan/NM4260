@@ -1,7 +1,5 @@
 moused = false;
 hovered = false;
-grabbable = true;
-selectable = false;
 picked_up = false;
 scale = self.image_xscale;
 

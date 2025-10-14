@@ -216,27 +216,34 @@ function RestorationCardData(
      */
     describe = function(visibility) {
         if (visibility >= 4) {
-            var desc = $"A {self.mark.type} {self.type} card";
+            var desc = "";
             if (self.amount > 0) {
-                desc += $"\nHeals {self.amount} for caster";
+                desc += $"Heals {self.amount} HP for caster";
             }
             
             if (self.mark_id_to_remove != "" && self.mark_count_to_remove > 0) {
                 var removed_mark_data = res_loader_marks.loaded[? self.mark_id_to_remove];
-                desc += $"\nRemoves {removed_mark_data.type} × {self.mark_count_to_remove} Mark from caster";
+                if (desc != "") {
+                    desc += "\n";
+                }
+                desc += $"Removes {removed_mark_data.type} × {self.mark_count_to_remove} Mark from caster";
             }
             
             return desc + $"\nApplies {self.mark.type} × {self.mark_multiplicity} Mark to caster";
         }
         
         if (visibility >= 3) {
-            var desc = $"A {mark_data.type} {self.type} card";
+            var desc = "";
             if (self.amount > 0) {
-                desc += $"\nHeals {self.amount} for caster";
+                desc += $"Heals {self.amount} for caster";
             }
             
             if (self.mark_id_to_remove != "" && self.mark_count_to_remove > 0) {
                 var removed_mark_data = res_loader_marks.loaded[? self.mark_id_to_remove];
+                if (desc != "") {
+                    desc += "\n";
+                }
+                
                 desc += $"\nRemoves {removed_mark_data.type} Mark from caster";
             }
             
@@ -389,8 +396,7 @@ function DefensiveCardData(
      */
     describe = function(visibility) {
         if (visibility >= 4) {
-            return $"A {self.mark.type} {self.type} card\n" + 
-                   $"Adds {self.defence_amount} shields to caster\n" + 
+            return $"Adds {self.defence_amount} shields to caster\n" + 
                    $"Applies {self.mark.type} Mark × {self.mark_multiplicity} to caster";
         }
         

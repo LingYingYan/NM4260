@@ -1,13 +1,16 @@
 {
   "$GMObject":"",
-  "%Name":"obj_card_cultist_attack_1",
-  "eventList":[],
+  "%Name":"obj_pickup_card",
+  "eventList":[
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":4,"eventType":6,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":7,"eventType":6,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+  ],
   "managed":true,
-  "name":"obj_card_cultist_attack_1",
+  "name":"obj_pickup_card",
   "overriddenProperties":[],
   "parent":{
-    "name":"Cultist",
-    "path":"folders/Objects/Cards/Enemy Card Combo/Cultist.yy",
+    "name":"Cards",
+    "path":"folders/Objects/Cards.yy",
   },
   "parentObjectId":{
     "name":"obj_card",
@@ -30,7 +33,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_card_demo",
+    "path":"sprites/spr_card_demo/spr_card_demo.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }

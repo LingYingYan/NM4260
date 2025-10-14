@@ -1,1 +1,1 @@
-data = new PlayerData(self.max_health, self.max_health, 0, self.max_vision);
+data = new PlayerData(self.max_health, self.max_health, 3, self.max_vision);
