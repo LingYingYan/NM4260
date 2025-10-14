@@ -4,6 +4,19 @@ function GameCharacterData(curr_hp, total_hp) constructor {
     shields = 0
     status_effects = ds_map_create();
     marks = ds_map_create();
+    card_effectiveness_modifier = 0;
+
+    /**
+     * @desc 
+     * @param {Struct.CardData} card_data description
+     */    
+    modify_card = function(card_data) {
+        card_data.effectiveness += self.card_effectiveness_modifier;
+    }
+    
+    clear_shields = function() {
+        self.shields = 0;
+    }
     
     /// @desc description
     /// @param {Struct.Status} status description description
@@ -29,14 +42,6 @@ function GameCharacterData(curr_hp, total_hp) constructor {
         
         for (var i = 0; i < array_length(to_remove); i += 1) {
         	ds_map_delete(self.status_effects, to_remove[i]);
-        }
-    }
-    
-    execute_mark_decay = function() {
-        var key = ds_map_find_first(self.marks);
-        while (key != undefined) {
-            self.add_marks(key, -1);
-            key = ds_map_find_next(self.status_effects, key);
         }
     }
     

@@ -6,13 +6,13 @@ function Status(_level, _name) constructor {
     name = _name;
     
     /// @desc Execute the status effect
-    /// @param {Struct.CharacterData} target The target
+    /// @param {Struct.GameCharacterData} target The target
     execute = function(target) { }
 }
 
 function Burn(_level) : Status(_level, nameof(Burn)) constructor {
     /// @desc Execute the status effect
-    /// @param {Struct.CharacterData} target The target
+    /// @param {Struct.GameCharacterData} target The target
     execute = function(target) { 
         target.hp -= self.level;
         self.level -= 1;
@@ -21,7 +21,7 @@ function Burn(_level) : Status(_level, nameof(Burn)) constructor {
 
 function Poison(_level) : Status(_level, nameof(Poison)) constructor {
     /// @desc Execute the status effect
-    /// @param {Struct.CharacterData} target The target
+    /// @param {Struct.GameCharacterData} target The target
     execute = function(target) { 
         target.hp -= self.level;
         self.level -= 1;
@@ -30,15 +30,16 @@ function Poison(_level) : Status(_level, nameof(Poison)) constructor {
 
 function Paralysed(_level) : Status(_level, nameof(Paralysed)) constructor {
     /// @desc Execute the status effect
-    /// @param {Struct.CharacterData} target The target
+    /// @param {Struct.GameCharacterData} target The target
     execute = function(target) { 
+        target.card_effectiveness_modifier = -0.25;
         self.level -= 1;
     }
 } 
 
 function Frozen(_level) : Status(_level, nameof(Frozen)) constructor {
     /// @desc Execute the status effect
-    /// @param {Struct.CharacterData} target The target
+    /// @param {Struct.GameCharacterData} target The target
     execute = function(target) { 
         self.level -= 1;
     }

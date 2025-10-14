@@ -25,6 +25,8 @@ resolve_turn = function() {
     self.enemy_cards = [];
     self.player_cards = [];
     transfer_between_piles(self.hand, self.discard_pile, 0, false);
+    self.enemy.data.clear_shields();
+    self.player.data.clear_shields();
     if (self.player.data.hp <= 0) {
         self.enemy_win();
     } else if (self.enemy.data.hp <= 0) {
@@ -95,6 +97,7 @@ start_player_turn = function() {
             break;
         }
         
+        self.player.data.modify_card(card.card_data);
         card.set_reveal(self.player.max_vision);
         card.grabbable = true;
         self.hand.add(card.id);
