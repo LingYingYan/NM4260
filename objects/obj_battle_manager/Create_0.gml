@@ -76,6 +76,7 @@ player_win = function() {
     exit_option.button_text = "Finish Battle";
     obj_loot_panel.add_item(exit_option);
     exit_option.on_click = function() {
+        show_debug_message($"HP: {self.player.data.hp}");
         obj_room_manager.goto_map();
     }
     
