@@ -11,38 +11,34 @@ if (self.hovered) {
 self.depth = self.current_depth;
 draw_self();
 if (self.card_data != undefined) {
-    var x_padding = 25;
-    var y_padding = 25;
+    var x_padding = 25 * self.image_xscale;
+    var y_padding = 25 * self.image_yscale;
     var text_x = self.x - self.sprite_width / 2 + x_padding;
     var text_y = self.y - self.sprite_height / 2 + y_padding;
-    
+   
     if (self.reveal >= obj_player_state.max_vision) {
         draw_set_halign(fa_center);
-        
         draw_set_valign(fa_middle);
         
         draw_sprite(self.card_data.sprite, self.image_index, self.x, self.y - self.sprite_height / 4 + y_padding);
         
         draw_set_valign(fa_top);
-        
-        draw_set_font(fnt_default_large);
-        
-        draw_text_ext_color(
-            self.x, text_y, self.card_data.name, 
-            20, self.sprite_width - 2 * x_padding,
-            c_black, c_black, c_black, c_black, 1
-        );
-        
-        draw_set_font(fnt_default);
-        
         draw_set_halign(fa_left);
+        
+        put_text(
+            self.card_data.name, self, 
+            fa_center, fa_middle, self.x, text_y,
+            x_padding, x_padding, y_padding, y_padding,
+            c_black, 1, fnt_default_large
+        );
     }
     
     text_y = self.y + y_padding;
     
-    draw_text_ext_color(
-        text_x, text_y, self.desc, 
-        25, self.sprite_width - 2 * x_padding,
-        c_black, c_black, c_black, c_black, 1
-    );   
+    put_text(
+        self.desc, self, 
+        fa_left, fa_top, text_x, text_y,
+        x_padding, x_padding, y_padding, y_padding,
+        c_black, 1
+    );
 } 

@@ -14,7 +14,7 @@ play_card = function() {
     var data = player.data;
     card.set_reveal(random_range(0, data.vision));
     card.can_reveal = true;
-    self.modify_card(card_data);
+    self.data.modify_card(card_data);
     return card;
 }
 

@@ -138,6 +138,7 @@
     {"id":{"name":"CardState","path":"scripts/CardState/CardState.yy",},},
     {"id":{"name":"CollectionUtils","path":"scripts/CollectionUtils/CollectionUtils.yy",},},
     {"id":{"name":"Deck","path":"scripts/Deck/Deck.yy",},},
+    {"id":{"name":"DrawUtils","path":"scripts/DrawUtils/DrawUtils.yy",},},
     {"id":{"name":"EventBus","path":"scripts/EventBus/EventBus.yy",},},
     {"id":{"name":"Events","path":"scripts/Events/Events.yy",},},
     {"id":{"name":"GameCharacterData","path":"scripts/GameCharacterData/GameCharacterData.yy",},},
