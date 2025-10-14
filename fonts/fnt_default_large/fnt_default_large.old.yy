@@ -1,6 +1,6 @@
 {
   "$GMFont":"",
-  "%Name":"fnt_default",
+  "%Name":"fnt_default_large",
   "AntiAlias":1,
   "applyKerning":0,
   "ascender":20,
@@ -1749,7 +1749,7 @@
   "last":0,
   "lineHeight":25,
   "maintainGms1Font":false,
-  "name":"fnt_default",
+  "name":"fnt_default_large",
   "parent":{
     "name":"Fonts",
     "path":"folders/Fonts.yy",
@@ -1767,10 +1767,7 @@
   "sdfSpread":8,
   "size":16.0,
   "styleName":"Regular",
-  "textureGroupId":{
-    "name":"Default",
-    "path":"texturegroups/Default",
-  },
+  "textureGroupId":null,
   "TTFName":"C:\\Users\\Emily\\GameMakerProjects\\Solitaire Template\\Solitaire Template\\fonts\\fnt_righteous\\Righteous-Regular.ttf",
   "usesSDF":true,
 }

@@ -22,14 +22,17 @@ if (self.card_data != undefined) {
         
         draw_sprite(self.card_data.sprite, self.image_index, self.x, self.y - self.sprite_height / 4 + y_padding);
         // Draw mark icon
-        draw_sprite(self.card_data.mark.sprite, self.image_index, text_x, text_y);
+        draw_sprite(
+            self.card_data.mark.sprite, self.image_index, 
+            text_x, text_y
+        );
         
         draw_set_valign(fa_top);
         draw_set_halign(fa_left);
         
         put_text(
             self.card_data.name, self, 
-            fa_center, fa_middle, self.x, text_y,
+            fa_center, fa_top, self.x, text_y,
             x_padding, x_padding, y_padding, y_padding,
             c_black, 1, fnt_default_large
         );
