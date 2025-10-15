@@ -7,7 +7,6 @@ function Mark(mark_id, mark_name, mark_sprite) constructor {
     uid = mark_id;
     type = mark_name;
     sprite = mark_sprite;
-    reactant_coefficient = 1;
     
     /**
      * @desc description
@@ -16,7 +15,15 @@ function Mark(mark_id, mark_name, mark_sprite) constructor {
      */
     on_apply = function(target, multiplicity = 1) { }
     
-    describe = function() { }
+    describe = function() { 
+        return "";
+    }
+}
+
+function Empty(mark_id) : Mark(mark_id, "Non-elemental", spr_none) constructor {
+    describe = function() { 
+        return "Non-elemental";
+    }
 }
 
 /// @desc Function Description
@@ -35,6 +42,8 @@ function make_mark(mark_id) {
             return new IceMark(mark_id, "Ice", sprite);
         case "mark_lightning":
             return new LightningMark(mark_id, "Lightning", sprite);
+        case "none":
+            return new Empty(mark_id);
     }
 }
 

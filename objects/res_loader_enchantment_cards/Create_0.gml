@@ -13,12 +13,15 @@ read_row = function(r) {
     var is_obtainable = bool(self.read_cell(r, 5));
     var card_status = self.read_cell(r, 6);
     var card_status_level = real(self.read_cell(r, 7))
+    var special_effects = string_split(self.read_cell(r, 8), ", ", true);
     
     var sprite_name = $"spr_{card_id}";
     var sprite = asset_get_index(sprite_name);
     var card_data = new EnchantmentCardData(
         card_id, card_name, sprite, card_rarity,
-        card_mark_id, card_mark_multiplicity, card_status, card_status_level
+        card_mark_id, card_mark_multiplicity, 
+        make_status(card_status, card_status_level),
+        special_effects
     );
     
     ds_map_add(self.loaded_map, card_id, card_data);

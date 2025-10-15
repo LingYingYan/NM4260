@@ -27,6 +27,7 @@
     {"name":"inst_18C6849D","path":"rooms/rm_game_start/rm_game_start.yy",},
     {"name":"inst_FDCB33B","path":"rooms/rm_game_start/rm_game_start.yy",},
     {"name":"inst_655BE6CE","path":"rooms/rm_game_start/rm_game_start.yy",},
+    {"name":"inst_12684D59","path":"rooms/rm_game_start/rm_game_start.yy",},
   ],
   "isDnd":false,
   "layers":[
@@ -75,6 +76,10 @@
             {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_initial_card_pile","path":"objects/obj_initial_card_pile/obj_initial_card_pile.yy",},"propertyId":{"name":"card","path":"objects/obj_initial_card_pile/obj_initial_card_pile.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"card_grass_healing",},
             {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_initial_card_pile","path":"objects/obj_initial_card_pile/obj_initial_card_pile.yy",},"propertyId":{"name":"count","path":"objects/obj_initial_card_pile/obj_initial_card_pile.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"2",},
           ],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":896.0,"y":608.0,},
+        {"$GMRInstance":"v2","%Name":"inst_12684D59","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_12684D59","objectId":{"name":"obj_initial_card_pile","path":"objects/obj_initial_card_pile/obj_initial_card_pile.yy",},"properties":[
+            {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_initial_card_pile","path":"objects/obj_initial_card_pile/obj_initial_card_pile.yy",},"propertyId":{"name":"card","path":"objects/obj_initial_card_pile/obj_initial_card_pile.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"card_ward",},
+            {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_initial_card_pile","path":"objects/obj_initial_card_pile/obj_initial_card_pile.yy",},"propertyId":{"name":"count","path":"objects/obj_initial_card_pile/obj_initial_card_pile.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"5",},
+          ],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":1248.0,"y":608.0,},
         {"$GMRInstance":"v2","%Name":"inst_D0131C4","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_D0131C4","objectId":{"name":"obj_player_state","path":"objects/obj_player_state/obj_player_state.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":960.0,"y":800.0,},
         {"$GMRInstance":"v2","%Name":"inst_FDCB33B","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_FDCB33B","objectId":{"name":"obj_start_game_run_button","path":"objects/obj_start_game_run_button/obj_start_game_run_button.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":1600.0,"y":160.0,},
       ],"layers":[],"name":"Instances","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},

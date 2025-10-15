@@ -45,12 +45,6 @@ function CardData(
     apply = function(instigator, target) { }
     
     /**
-     * @desc Collides with another card
-     * @param {Struct.CardData} other_card The other card
-     */
-    collide = function(other_card) { }
-    
-    /**
      * @desc Describe the card
      * @param {real} visibility Visibility
      * @return {string} The card description
@@ -96,35 +90,23 @@ function DestructionCardData(
      * @param {Struct.GameCharacterData} target The target
      */
     apply = function(instigator, target) {
-        if (target == noone || target == undefined) { 
+        if (target == noone || target == undefined || self.is_nullified) { 
             show_debug_message("Attacked");   
             return;     
         }
             
         var old_hp = target.hp;
-        if (!self.is_nullified) {
-            var dmg = self.get_magnitude(self.damage, instigator.modifiers.card_effectiveness);
-            var eliminated = min(target.modifiers.shield, dmg);
-            dmg -= eliminated;
-            target.modifiers.shield -= eliminated;
-            target.add_status(new Shield(-eliminated));
-            target.hp -= max(0, dmg);
-            target.hp = max(target.hp, 0);
+        var dmg = self.get_magnitude(self.damage, instigator.modifiers.card_effectiveness);
+        var eliminated = min(target.modifiers.shield, dmg);
+        dmg -= eliminated;
+        target.add_status(new Shield(-eliminated));
+        target.hp -= max(0, dmg);
+        target.hp = max(target.hp, 0);
+        if (self.mark != undefined) {
             self.mark.on_apply(target, self.get_magnitude(self.mark_multiplicity, instigator.modifiers.card_effectiveness));
-            show_debug_message($"Attack {target}: HP {old_hp} -> {target.hp}");
         }
-    }
-    
-    /**
-     * @desc Collides with another card
-     * @param {Struct.CardData} other_card The other card
-     */
-    collide = function(other_card) {
-        if (typeof(other_card) == nameof(DefensiveCardData)) {
-            if (other_card.mark == self.mark) {
-                self.is_nullified = true;
-            }
-        }
+        
+        show_debug_message($"Attack {target}: HP {old_hp} -> {target.hp}");
     }
     
     /**
@@ -196,7 +178,7 @@ function RestorationCardData(
      * @param {Struct.GameCharacterData} target The target
      */
     apply = function(instigator, target) {
-        if (instigator == noone || instigator == undefined) { 
+        if (instigator == noone || instigator == undefined || self.is_nullified) { 
             show_debug_message("Restored");   
             return;     
         }
@@ -210,8 +192,10 @@ function RestorationCardData(
         if (mark_remove_count > 0) {
             instigator.add_marks(self.mark_id_to_remove, -mark_remove_count);
         }
-            
-        self.mark.on_apply(instigator, self.get_magnitude(self.mark_multiplicity, effect_modifier)); 
+           
+        if (self.mark != undefined) { 
+            self.mark.on_apply(instigator, self.get_magnitude(self.mark_multiplicity, effect_modifier)); 
+        }
     }
     
     /**
@@ -304,7 +288,7 @@ function AlterationCardData(
      * @param {Struct.GameCharacterData} target The target
      */
     apply = function(instigator, target) {
-        if (target == noone || target == undefined) { 
+        if (target == noone || target == undefined || self.is_nullified) { 
             show_debug_message("Altered");   
             return;     
         }
@@ -312,7 +296,10 @@ function AlterationCardData(
         var old_count = target.count_mark(self.transform_from);
         var effect_modifier = instigator.modifiers.card_effectiveness;
         target.add_marks(self.transform_from, -old_count);
-        self.mark.on_apply(target, self.get_magnitude(self.mark_multiplicity, effect_modifier) * old_count);
+        if (self.mark != undefined) {
+            self.mark.on_apply(target, self.get_magnitude(self.mark_multiplicity, effect_modifier) * old_count);
+        }
+        
         show_debug_message($"Alter {target}: {make_mark(self.transform_from).type} × {old_count} -> {self.mark} × {target.count_mark(self.mark.uid)}");
     }
     
@@ -363,17 +350,15 @@ function AlterationCardData(
  * @param {string} mark_id Description
  * @param {real} mark_count Description
  * @param {Struct.Status} status_data
- * @param {real} status_level
  */
 function EnchantmentCardData(
     card_id, card_name, card_sprite, card_rarity, 
-    mark_id, mark_count, status_data, status_level, special_effects = []
+    mark_id, mark_count, status_data, special_effects = []
 ) : CardData(
     card_id, "Enchantment", card_name, card_sprite, card_rarity, 
     mark_id, mark_count, special_effects
 ) constructor {
     status = status_data;
-    level = status_level;
     is_offensive = false;
     
     /**
@@ -382,21 +367,17 @@ function EnchantmentCardData(
      * @param {Struct.GameCharacterData} target The target
      */
     apply = function(instigator, target) {
-        if (target == noone || target == undefined) { 
+        if (target == noone || target == undefined || self.is_nullified) { 
             show_debug_message("Enchanted");   
             return;     
         }
             
-        instigator.modifiers.shield += self.defence_amount;
-        self.mark.on_apply(instigator, self.mark_multiplicity); 
-    }
-    
-    collide = function(other_card) {
-        if (typeof(other_card) == nameof(DestructionCardData)) {
-            if (other_card.mark == self.mark) {
-                other_card.effectiveness = 0;
-            }
-        }
+        var effect_modifier = instigator.modifiers.card_effectiveness;
+        var status = make_status(self.status.name, self.get_magnitude(self.status.level, effect_modifier))
+        instigator.add_status(status);
+        if (self.mark.type != undefined) {
+            self.mark.on_apply(instigator, self.get_magnitude(self.mark_multiplicity, effect_modifier));
+        } 
     }
     
     /**
@@ -406,7 +387,7 @@ function EnchantmentCardData(
     clone = function() {
         return new EnchantmentCardData(
             self.uid, self.name, self.sprite, self.rarity,
-            self.mark.uid, self.mark_multiplicity, self.status, self.level
+            self.mark == undefined ? "none" : self.mark.uid, self.mark_multiplicity, self.status
         );
     }
     
@@ -417,13 +398,19 @@ function EnchantmentCardData(
      */
     describe = function(visibility) {
         if (visibility >= 4) {
-            return $"Adds {self.status.name} × {self.level} to caster\n" + 
-                   $"Applies {self.mark.type} Mark × {self.mark_multiplicity} to caster";
+            var str = $"Adds {self.status.name} × {self.status.level} to caster"; 
+            if (self.mark.type != "Non-elemental") {
+                str += $"\nApplies {self.mark.type} Mark × {self.mark_multiplicity} to caster";
+            } else {
+                str = "A Non-elemental card\n" + str;
+            }
+            
+            return str;
         }
         
         if (visibility >= 3) {
             return $"A {self.mark.type} {self.type} card\n" + 
-                   $"Adds {self.status.name} × {self.level} to caster";
+                   $"Adds {self.status.name} to caster";
         }
         
         if (visibility >= 2) {

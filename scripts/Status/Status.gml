@@ -7,10 +7,29 @@ function Status(_level, _name) constructor {
     
     /// @desc Execute the status effect
     /// @param {Struct.GameCharacterData} target The target
+    initialise = function(target) { }
+    
+    /// @desc Execute the status effect
+    /// @param {Struct.GameCharacterData} target The target
     execute = function(target) { }
     
     decay = function() { 
         self.level -= 1;
+    }
+}
+
+function make_status(type, level) {
+    switch (type) {
+    	case "Burn":
+            return new Burn(level);
+        case "Poison":
+            return new Poison(level);
+        case "Paralysed":
+            return new Paralysed(level);
+        case "Frozen":
+            return new Frozen(level);
+        case "Shield":
+            return new Shield(level);
     }
 }
 
@@ -49,7 +68,7 @@ function Frozen(_level) : Status(_level, nameof(Frozen)) constructor {
 function Shield(_level) : Status(_level, nameof(Shield)) constructor {
     /// @desc Execute the status effect
     /// @param {Struct.GameCharacterData} target The target
-    execute = function(target) { 
+    initialise = function(target) { 
         target.modifiers.shield += self.level;
     }
     

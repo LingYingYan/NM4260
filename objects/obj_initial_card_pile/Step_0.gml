@@ -3,7 +3,8 @@ if (!res_loader_cards.is_loaded || self.is_initialised) {
 }
 
 self.is_initialised = true;
-var card_data = res_loader_cards.loaded_map[? self.card].clone();
+var loaded_card = res_loader_cards.loaded_map[? self.card];
+var card_data = loaded_card.clone();
 repeat (self.count) {
     var card = instance_create_layer(self.x, self.y, "Instances", obj_player_card);
     card.card_data = card_data;

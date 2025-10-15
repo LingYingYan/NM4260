@@ -211,9 +211,9 @@ flip_cards = function(player_card, enemy_card) {
  * @param {id.instance} enemy_card description    
  */
 execute_cards = function(player_card, enemy_card) {
-    if (player_card != noone && enemy_card != noone) {
-        player_card.card_data.collide(enemy_card.card_data);
-    }
+    var player_card_data = player_card == noone ? noone : player_card.card_data;
+    var enemy_card_data = enemy_card == noone ? noone : enemy_card.card_data;
+    apply_special_effects(self.player.data, player_card_data, self.enemy.data, enemy_card_data);
     
     if (player_card != noone) {
         player_card.card_data.apply(self.player.data, self.enemy.data);
@@ -235,6 +235,7 @@ execute_cards = function(player_card, enemy_card) {
 recycle_cards = function(player_card, enemy_card) {
     time_source_destroy(self.turn_timer);
     if (instance_exists(player_card)) {
+        player_card.card_data.is_nullified = false;
         self.discard_pile.add(player_card);
         player_card.image_xscale = player_card.scale;
         player_card.image_yscale = player_card.scale;
@@ -243,6 +244,7 @@ recycle_cards = function(player_card, enemy_card) {
     }
     
     if (instance_exists(enemy_card)) { 
+        enemy_card.card_data.is_nullified = false;
         place_card(enemy_card, self.enemy.x, -500);
         instance_destroy(enemy_card);
     }

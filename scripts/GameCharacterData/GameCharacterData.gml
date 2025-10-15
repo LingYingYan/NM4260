@@ -25,9 +25,11 @@ function GameCharacterData(curr_hp, total_hp) constructor {
             self.status_effects[? status.name].level += status.level;
         }
         
+        status.initialise(self);
+        
         if (self.status_effects[? status.name].level <= 0) {
             ds_map_delete(self.status_effects, status.name);
-        }
+        } 
     }
     
     reset_modifiers = function() {
@@ -69,6 +71,10 @@ function GameCharacterData(curr_hp, total_hp) constructor {
     }
     
     add_marks = function(mark_id, multiplicity) {
+        if (mark_id == "none") {
+            return;
+        }
+        
         if (!ds_map_exists(self.marks, mark_id)) {
             if (multiplicity > 0) {
                 ds_map_add(self.marks, mark_id, multiplicity);
