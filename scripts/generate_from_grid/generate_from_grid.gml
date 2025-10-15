@@ -10,6 +10,10 @@ function generate_from_grid(){
             }
         }
     }
+	// regenerate start room
+	var start = global.start_room;
+	var vis_start = instance_create_layer(start.x, start.y, "Instances", DungeonRoom);
+	vis_start.data = start;
 
     // Recreate the player
 	if (is_struct(global.player_current_room)) {
