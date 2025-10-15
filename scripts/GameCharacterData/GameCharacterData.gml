@@ -9,7 +9,8 @@ function GameCharacterData(curr_hp, total_hp) constructor {
     modifiers = {
         card_effectiveness: 0,
         strength: 0,
-        shield: 0
+        shield: 0,
+        frozen_slots: 0
     };
     
     /// @desc description
@@ -36,7 +37,8 @@ function GameCharacterData(curr_hp, total_hp) constructor {
         self.modifiers = {
             card_effectiveness: 0,
             strength: 0,
-            shield: 0
+            shield: 0,
+            frozen_slots: 0
         };
     }
     

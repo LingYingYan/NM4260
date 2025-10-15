@@ -3,7 +3,7 @@ if (instance_exists(drop_area) && instance_exists(drop_area.card)) {
     var dropped_card = drop_area.card.card_data;
 }
 
-if (drop_area != noone && drop_area.owner == "Player" && (drop_area.card == noone || drop_area.card == undefined)) {
+if (drop_area != noone && drop_area.owner == "Player" && !drop_area.is_disabled && (drop_area.card == noone || drop_area.card == undefined)) {
     place_card(self, drop_area.x, drop_area.y);
     obj_hand.remove(self.id);
     // self.card_data.apply(obj_player, obj_player);

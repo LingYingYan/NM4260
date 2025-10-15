@@ -61,7 +61,7 @@ function Frozen(_level) : Status(_level, nameof(Frozen)) constructor {
     /// @desc Execute the status effect
     /// @param {Struct.GameCharacterData} target The target
     execute = function(target) { 
-
+        target.modifiers.frozen_slots += 2;
     }
 } 
 

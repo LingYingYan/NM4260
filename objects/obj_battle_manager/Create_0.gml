@@ -109,8 +109,6 @@ start_battle = function() {
     
     transfer_between_piles(self.deck, self.draw_pile, 0, false);
     self.draw_pile.shuffle();
-    //var ac_channel = animcurve_get_channel(ac_enemy_weight_distance_coefficient, "coefficient");
-    //var k = animcurve_channel_evaluate(ac_channel, )
     self.enemy = res_loader_enemies.get_random_enemy("Characters", room_width / 2, 0);
     self.enemy.data.clear_marks_and_statuses();
     self.start_player_turn();
@@ -146,8 +144,26 @@ start_player_turn = function() {
         self.player_card_slots[i].card = noone;
     }
     
-    // Enemy plays
     for (var i = 0; i < array_length(self.enemy_card_slots); i += 1) {
+        if (instance_exists(self.enemy_card_slots[i].card)) {
+            self.enemy_card_slots[i].card.dropped_area = noone;
+            instance_destroy(self.enemy_card_slots[i].card);
+        }
+        
+        self.enemy_card_slots[i].card = noone;
+    }
+    
+    // Freeze card slots
+    for (var i = 0; i < array_length(self.player_card_slots); i += 1) {
+        self.player_card_slots[i].is_disabled = i >= array_length(self.player_card_slots) - self.player.data.modifiers.frozen_slots;
+    }
+    
+    for (var i = 0; i < array_length(self.enemy_card_slots); i += 1) {
+        self.enemy_card_slots[i].is_disabled = i >= array_length(self.enemy_card_slots) - self.enemy.data.modifiers.frozen_slots;
+    }
+    
+    // Enemy plays
+    for (var i = 0; i < array_length(self.enemy_card_slots) - self.enemy.data.modifiers.frozen_slots; i += 1) {
         var card = self.enemy.play_card();
         card.image_xscale = self.enemy_card_slots[i].image_xscale;
         card.image_yscale = self.enemy_card_slots[i].image_yscale;
@@ -247,7 +263,6 @@ recycle_cards = function(player_card, enemy_card) {
     if (instance_exists(enemy_card)) { 
         enemy_card.card_data.is_nullified = false;
         place_card(enemy_card, self.enemy.x, -500);
-        instance_destroy(enemy_card);
     }
     
     if (self.enemy.data.hp <= 0 || self.player.data.hp <= 0) {

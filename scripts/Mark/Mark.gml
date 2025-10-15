@@ -207,7 +207,7 @@ function IceMark(mark_id, mark_name, mark_sprite) : Mark(mark_id, mark_name, mar
         var dominated_count = target.count_mark("mark_water");
         var n_eliminated = min(dominated_count, multiplicity);
         var remaining = multiplicity - n_eliminated;
-        var n_reactant = floor(n_eliminated / 5);
+        var n_reactant = floor(n_eliminated / 1);
         if (n_eliminated > 0) {
             target.add_marks("mark_water", -n_eliminated);
         }
