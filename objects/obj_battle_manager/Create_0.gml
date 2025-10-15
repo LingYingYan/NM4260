@@ -42,6 +42,7 @@ player_win = function() {
     show_debug_message("Player win!");
     self.player.data.clear_marks_and_statuses();
     self.player.data.vision += 1;
+    self.player.data.vision = max(self.player.data.vision, self.player.max_vision);
     self.end_battle();
     obj_loot_panel.visible = true;
     
