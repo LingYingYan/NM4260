@@ -5,4 +5,5 @@ for (var i = 0; i < array_length(deck); i += 1) {
     show_debug_message(deck[i].name);
 }
 
+obj_ui_health_bar.visible = true;
 obj_room_manager.goto_map();

@@ -5,7 +5,6 @@ goto_battle = function() {
 }
 
 goto_map = function() {
-    global.map_inited = false;
     show_debug_message($"HP: {obj_player_state.data.hp}");
     if (room != Room1) {
         room_goto(Room1);
