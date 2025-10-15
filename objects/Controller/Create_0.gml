@@ -15,3 +15,4 @@ if (!variable_global_exists("map_inited"))     { global.map_inited = false; show
 //} else {
 //    show_debug_message("Map already inited: reusing existing layout");
 //}
+

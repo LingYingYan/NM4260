@@ -30,5 +30,6 @@ if (player.current_room != noone) {
 		//self.data.discovered = true;
     } else {
         show_debug_message("Cannot move — not connected!");
+		show_message("Not Connected! Find another path.")
     }
 }
