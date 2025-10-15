@@ -1,7 +1,7 @@
 var text = "";
 var key = ds_map_find_first(obj_player_state.data.marks);
 while (key != undefined) {
-    text += $"{make_mark(key)}: {obj_player_state.data.marks[? key]}   ";
+    text += $"{make_mark(key).type}: {obj_player_state.data.marks[? key]}   ";
     key = ds_map_find_next(obj_player_state.data.marks, key);
 }
 

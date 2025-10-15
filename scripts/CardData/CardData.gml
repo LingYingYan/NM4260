@@ -207,7 +207,7 @@ function RestorationCardData(
             instigator.add_marks(self.mark_id_to_remove, -mark_remove_count);
         }
             
-        self.mark.on_apply(instigator, floor(self.mark_multiplicity * effectiveness)); 
+        self.mark.on_apply(instigator, self.get_magnitude(self.mark_multiplicity, effect_modifier)); 
     }
     
     /**
@@ -309,7 +309,7 @@ function AlterationCardData(
         var effect_modifier = instigator.modifiers.card_effectiveness;
         target.add_marks(self.transform_from, -old_count);
         self.mark.on_apply(target, self.get_magnitude(self.mark_multiplicity, effect_modifier) * old_count);
-        show_debug_message($"Alter {target}: {make_mark(self.mark_id_to_remove).type} × {old_count} -> {self.mark} × {target.count_mark(self.mark.uid)}");
+        show_debug_message($"Alter {target}: {make_mark(self.transform_from).type} × {old_count} -> {self.mark} × {target.count_mark(self.mark.uid)}");
     }
     
     /**
@@ -396,10 +396,10 @@ function EnchantmentCardData(
     
     /**
      * @desc Clones the card data
-     * @return {Struct.DestructionCardData} The clone
+     * @return {Struct.EnchantmentCardData} The clone
      */
     clone = function() {
-        return new DestructionCardData(
+        return new EnchantmentCardData(
             self.uid, self.name, self.sprite, self.rarity,
             self.mark.uid, self.mark_multiplicity, self.status, self.level
         );

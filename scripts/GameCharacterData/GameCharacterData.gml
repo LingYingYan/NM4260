@@ -15,13 +15,19 @@ function GameCharacterData(curr_hp, total_hp) constructor {
     /// @desc description
     /// @param {Struct.Status} status description description
     add_status = function(status) {
+        if (status.level == 0) {
+            return;
+        }
+        
         if (!ds_map_exists(self.status_effects, status.name)) {
             ds_map_add(self.status_effects, status.name, status);
         } else {
             self.status_effects[? status.name].level += status.level;
         }
         
-        
+        if (self.status_effects[? status.name].level <= 0) {
+            ds_map_delete(self.status_effects, status.name);
+        }
     }
     
     reset_modifiers = function() {
