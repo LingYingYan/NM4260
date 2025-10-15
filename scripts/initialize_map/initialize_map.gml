@@ -1,11 +1,12 @@
 function initialize_map(min_rooms_required, spawn_at_bonfire) {
-    if (argument_count < 1) min_rooms_required = 15;
-    if (argument_count < 2) spawn_at_bonfire = false;
+    //if (argument_count < 1) min_rooms_required = 15;
+    //if (argument_count < 2) spawn_at_bonfire = false;
+	show_debug_message($"current spawn_at_bonfire is {spawn_at_bonfire}");
 
     var tries = 0, total_rooms = 0, res, grid;
 
     repeat (10) {
-        res = generate_map(); // fills global.room_grid
+        res = generate_map(true); // fills global.room_grid
         total_rooms = res[0];
         if (total_rooms >= min_rooms_required) break;
         tries++;

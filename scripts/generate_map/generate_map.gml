@@ -1,7 +1,6 @@
-function generate_map() {
+function generate_map(generate_new) {
     // Clean previous rooms in THIS room
     instance_destroy(DungeonRoom);
-	global.room_grid = [];
 
     // Parameters (can live here or in Game Start)
     var ROOM_DENSITY = 0.75;
@@ -9,9 +8,10 @@ function generate_map() {
     var H = global.GRID_H;
     var S = global.ROOM_SIZE;
 
-    // Build fresh grid (GLOBAL to avoid shadowing)
-    global.room_grid = array_create(H);
+	
+	global.room_grid = array_create(H);
     for (var r = 0; r < H; r++) global.room_grid[r] = array_create(W);
+    
 
     var all_rooms = [];
 
@@ -19,11 +19,12 @@ function generate_map() {
     for (var row = 0; row < H; row++) {
         for (var col = 0; col < W; col++) {
             if (random(1) < ROOM_DENSITY) {
-                var rm = instance_create_layer(col * S, row * S + S, "Instances", DungeonRoom);
-                rm.grid_x = col;
-                rm.grid_y = row;
-                room_neighbors_init(rm);
+				var rm = new RoomData(false,false,"default",col, row);
+                //var rm = instance_create_layer(col * S, row * S + S, "Instances", DungeonRoom);
+                //room_neighbors_init(rm);
                 global.room_grid[row][col] = rm;
+				var vis = instance_create_layer(col * S, row * S, "Instances", DungeonRoom);
+				vis.data = rm; // link the visual to the data struct
                 array_push(all_rooms, rm);
             } else {
                 global.room_grid[row][col] = noone;
@@ -32,21 +33,24 @@ function generate_map() {
     }
 
     // ensure top & bottom rows have at least one room
-    function ensure_row_has_room(r) {
+    function ensure_row_has_room(r, all_rooms) {
         var found = false;
         for (var c = 0; c < global.GRID_W; c++) if (global.room_grid[r][c] != noone) { found = true; break; }
         if (!found) {
             var pick = irandom(global.GRID_W - 1);
-            var rm = instance_create_layer(pick * global.ROOM_SIZE, r * global.ROOM_SIZE + global.ROOM_SIZE, "Instances", DungeonRoom);
-            rm.grid_x = pick;
-            rm.grid_y = r;
-            room_neighbors_init(rm);
+			var rm = new RoomData(false,false,"default",pick, r+1);
+            //var rm = instance_create_layer(pick * global.ROOM_SIZE, r * global.ROOM_SIZE + global.ROOM_SIZE, "Instances", DungeonRoom);
+            //rm.grid_x = pick;
+            //rm.grid_y = r;
+            //room_neighbors_init(rm);
             global.room_grid[r][pick] = rm;
+			var vis = instance_create_layer(pick*global.ROOM_SIZE, r * global.ROOM_SIZE + global.ROOM_SIZE, "Instances", DungeonRoom);
+			vis.data = rm; // link the visual to the data struct
             array_push(all_rooms, rm);
         }
     }
-    ensure_row_has_room(0);
-    ensure_row_has_room(H - 1);
+    ensure_row_has_room(0, all_rooms);
+    ensure_row_has_room(H - 1, all_rooms);
 
     // STEP 2: remove isolated rooms
     for (var r = 0; r < H; r++) {
@@ -65,6 +69,7 @@ function generate_map() {
             }
             if (!hasNeighbor) {
                 instance_destroy(rm);
+				
                 global.room_grid[r][c] = noone;
             }
         }
@@ -91,6 +96,7 @@ function generate_map() {
         var stack = [[sx, sy]];
         while (array_length(stack) > 0) {
             var pos = stack[array_length(stack)-1];
+			show_debug_message($"pos is {pos}")
             array_delete(stack, array_length(stack)-1, 1);
             var cx = pos[0], cy = pos[1];
             var rm = global.room_grid[cy][cx];

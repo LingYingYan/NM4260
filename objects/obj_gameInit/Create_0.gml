@@ -10,3 +10,7 @@ global.ROOM_SIZE = 64;
 global.room_grid = []; // will be filled by generate_map()
 
 global.bonfire_used = false; // deactivate bonfire after used once
+global.generate_new = true;
+global.player_current_room = noone;
+
+global.just_exited_bonfire = false;
