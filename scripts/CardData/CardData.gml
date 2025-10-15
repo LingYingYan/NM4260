@@ -7,10 +7,11 @@
  * @param {real} card_rarity Description
  * @param {string} mark_id Description
  * @param {real} mark_count description
+ * @param {array<string>} special_effects
  */
 function CardData(
     card_id, card_type, card_name, card_sprite, card_rarity,
-    mark_id, mark_count
+    mark_id, mark_count, special_effects = []
 ) constructor {
     uid = card_id;
     type = card_type;
@@ -19,6 +20,9 @@ function CardData(
     rarity = card_rarity;
     mark = make_mark(mark_id);
     mark_multiplicity = mark_count;
+    keywords = special_effects;
+    is_offensive = true;
+    is_nullified = false;
     
     get_weight = function() {
         return 5 - self.rarity;
@@ -79,13 +83,12 @@ function CardData(
  */
 function DestructionCardData(
     card_id, card_name, card_sprite, card_rarity, 
-    mark_id, mark_count, attack_damage
+    mark_id, mark_count, attack_damage, special_effects = []
 ) : CardData(
     card_id, "Destruction", card_name, card_sprite, card_rarity, 
-    mark_id, mark_count
+    mark_id, mark_count, special_effects
 ) constructor {
     damage = attack_damage;
-    is_nullified = false;
     
     /**
      * @desc Applies the card effects
@@ -177,14 +180,15 @@ function DestructionCardData(
 function RestorationCardData(
     card_id, card_name, card_sprite, card_rarity, 
     mark_id, mark_count, removed_mark_id, removed_mark_count,
-    heal_amount
+    heal_amount, special_effects = []
 ) : CardData(
     card_id, "Restoration", card_name, card_sprite, card_rarity, 
-    mark_id, mark_count
+    mark_id, mark_count, special_effects
 ) constructor {
     amount = heal_amount;
     mark_id_to_remove = removed_mark_id;
     mark_count_to_remove = removed_mark_count;
+    is_offensive = false;
     
     /**
      * @desc Applies the card effects
@@ -287,10 +291,10 @@ function RestorationCardData(
  */
 function AlterationCardData(
     card_id, card_name, card_sprite, card_rarity, 
-    mark_id, mark_count, transform_from_id
+    mark_id, mark_count, transform_from_id, special_effects = []
 ) : CardData(
     card_id, "Alteration", card_name, card_sprite, card_rarity, 
-    mark_id, mark_count
+    mark_id, mark_count, special_effects
 ) constructor {
     transform_from = transform_from_id;
     
@@ -363,13 +367,14 @@ function AlterationCardData(
  */
 function EnchantmentCardData(
     card_id, card_name, card_sprite, card_rarity, 
-    mark_id, mark_count, status_data, status_level
+    mark_id, mark_count, status_data, status_level, special_effects = []
 ) : CardData(
     card_id, "Enchantment", card_name, card_sprite, card_rarity, 
-    mark_id, mark_count
+    mark_id, mark_count, special_effects
 ) constructor {
     status = status_data;
     level = status_level;
+    is_offensive = false;
     
     /**
      * @desc Applies the card effects
@@ -433,3 +438,33 @@ function EnchantmentCardData(
     }
 }
 
+
+/**
+ * Function Description
+ * @param {Struct.GameCharacterData} player_data Description
+ * @param {Struct.CardData} player_card Description
+ * @param {Struct.GameCharacterData} enemy_data Description
+ * @param {Struct.CardData} enemy_card Description
+ */
+function apply_special_effects(player_data, player_card, enemy_data, enemy_card) {
+    apply_ward(player_card, enemy_card);
+}
+
+/**
+ * Function Description
+ * @param {Struct.CardData} player_card Description
+ * @param {Struct.CardData} enemy_card Description
+ */
+function apply_ward(player_card, enemy_card) {
+    if (player_card == undefined || player_card == noone || enemy_card == undefined || enemy_card == noone) {
+        return;
+    }
+    
+    if (array_contains(player_card.keywords, "Ward") && enemy_card.is_offensive) {
+        enemy_card.is_nullified = true;
+    }
+    
+    if (array_contains(enemy_card.keywords, "Ward") && player_card.is_offensive) {
+        player_card.is_nullified = true;
+    }
+}
