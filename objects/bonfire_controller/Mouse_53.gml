@@ -34,5 +34,7 @@ if (point_in_rectangle(mx, my,
     btn2_x + btn_width / 2, buttons_y + btn_height / 2))
 {
     show_message("You chose not to rest");
+	global.just_exited_bonfire = true;
+	global.bonfire_used = false;
 	room_goto(Room1);
 }

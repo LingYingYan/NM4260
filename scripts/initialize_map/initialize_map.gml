@@ -1,6 +1,7 @@
 function initialize_map(min_rooms_required, spawn_at_bonfire) {
-    if (argument_count < 1) min_rooms_required = 15;
-    if (argument_count < 2) spawn_at_bonfire = false;
+    //if (argument_count < 1) min_rooms_required = 15;
+    //if (argument_count < 2) spawn_at_bonfire = false;
+	show_debug_message($"current spawn_at_bonfire is {spawn_at_bonfire}");
 
     var tries = 0, total_rooms = 0, res, grid;
 

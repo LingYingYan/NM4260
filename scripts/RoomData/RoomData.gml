@@ -3,6 +3,8 @@ function RoomData(discovered, visited, room_type, grid_x, grid_y) constructor{
 	self.room_type = room_type;
 	self.grid_x = grid_x;
     self.grid_y = grid_y;
+	self.x = grid_x * global.ROOM_SIZE;
+	self.y = grid_y * global.ROOM_SIZE;
     self.visited = visited;
     self.discovered = discovered;
     self.neighbors = [];

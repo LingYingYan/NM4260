@@ -1,13 +1,19 @@
 function reveal_room(rm){
     if (rm == noone) return;
-    rm.discovered = true;  // reveal this room
-    trigger_room_event(rm);
+    //rm.discovered = true;  // reveal this room
+    //trigger_room_event(rm);
+	if (is_struct(rm)) {
+        rm.discovered = true;      // reveal logical room
+        rm.visited = true;
+        trigger_room_event(rm);    // trigger event using the struct
+    } else {
+        show_debug_message("ERROR: no valid data struct!");
+    }
 }
 
 
 /**
  * Triggers the room event based on room type
- * @param {id.instance} room The dungeon room
  */
 function trigger_room_event(room) {
     switch (room.room_type) {
@@ -25,6 +31,9 @@ function trigger_room_event(room) {
             show_debug_message("Treasure room!");
 			//room_goto(rm_treasure);
             break;
+		case "end":
+			show_debug_message("Boss Fight!");
+			obj_room_manager.goto_battle();
         case "merchant":
             show_debug_message("Merchant room!");
             break;

@@ -1,4 +1,3 @@
-/// obj_room: Left Pressed
 // Only respond if there's an avatar in play
 show_debug_message("the left press event is triggered")
 
@@ -13,16 +12,22 @@ if (player.current_room != noone) {
 
     // check if this room is a neighbor
     for (var i = 0; i < array_length(curr.neighbors); i++) {
-        if (curr.neighbors[i].id == id) {
+        if (curr.neighbors[i] == self.data) {
             canMove = true;
             break;
         }
     }
+	
+	show_debug_message($"CanMove is {canMove}");
 
     if (canMove) {
         player.target_x = x;
         player.target_y = y;
-        player.current_room = id;
+        player.current_room = self.data;
+		global.player_current_room = self.data;
+		
+		//self.data.visited = true;
+		//self.data.discovered = true;
     } else {
         show_debug_message("Cannot move — not connected!");
     }

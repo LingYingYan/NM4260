@@ -120,6 +120,7 @@ function find_furthest_room(start_room) {
 
 function connect_start_end_and_spawn_player(spawn_at_bonfire) {
     var S = global.ROOM_SIZE;
+	show_debug_message($"inside connect_and_spawn_player, spawn_at_bonfire: {spawn_at_bonfire}");
 
     // Bottom rooms for Start connection
     var bottom_rooms = [];
@@ -127,15 +128,24 @@ function connect_start_end_and_spawn_player(spawn_at_bonfire) {
         var rm = global.room_grid[global.GRID_H - 1][c];
         if (rm != noone) array_push(bottom_rooms, rm);
     }
+	show_debug_message($"length of room_grid: {array_length(global.room_grid)}");
+	show_debug_message($"length of bottom_rooms: {array_length(bottom_rooms)}");
 
     global.start_room = noone;
     if (array_length(bottom_rooms) > 0) {
         var base = choose_array(bottom_rooms);
-        global.start_room = instance_create_layer(base.x, base.y + S, "Instances", DungeonRoom);
+		var start = new RoomData(true, true, "start", base.x/S, base.y/S+1);
+		array_push(base.neighbors, start);
+		array_push(start.neighbors, base);
+        global.start_room = start
+		//instance_create_layer(base.x, base.y + S, "Instances", DungeonRoom);
+		var vis = instance_create_layer(base.x, base.y + S, "Instances", DungeonRoom);
+				vis.data = start;
+				vis.discovered = true;
         //room_neighbors_init(global.start_room);
-        global.start_room.room_type = "start";
-        global.start_room.grid_x = base.grid_x;
-        global.start_room.grid_y = global.GRID_H;
+        //global.start_room.room_type = "start";
+        //global.start_room.grid_x = base.grid_x;
+        //global.start_room.grid_y = global.GRID_H;
         add_edge(global.start_room, base);
     }
 
@@ -158,7 +168,7 @@ function connect_start_end_and_spawn_player(spawn_at_bonfire) {
     //}
 	
 	// find the end room
-	global.end_room = find_farthest_room(global.start_room);
+	global.end_room = find_furthest_room(global.start_room);
 
 	// Mark it as end
 	if (is_struct(global.end_room)) {
@@ -167,10 +177,25 @@ function connect_start_end_and_spawn_player(spawn_at_bonfire) {
 
     // Find bonfire room
     global.bonfire_room = noone;
-    with (DungeonRoom) if (room_type == "bonfire") global.bonfire_room = id;
+    //with (DungeonRoom) if (room_type == "bonfire") global.bonfire_room = self.data;
+	for (var r = 0; r < global.GRID_H; r++) {
+	    for (var c = 0; c < global.GRID_W; c++) {
+	        var rm = global.room_grid[r][c];
+	        if (is_struct(rm) && rm.room_type == "bonfire") {
+	            global.bonfire_room = rm;
+	            break;
+	        }
+	    }
+	}	
+	// debug chunk
+	show_debug_message(">>> DEBUG: spawn_at_bonfire=" + string(spawn_at_bonfire));
+	show_debug_message(">>> DEBUG: start_room=" + string(global.start_room));
+	show_debug_message(">>> DEBUG: bonfire_room=" + string(global.bonfire_room));
+
 
     // Spawn or move player
     var spawn_target = spawn_at_bonfire ? global.bonfire_room : global.start_room;
+	show_debug_message($"spawn_target is at {spawn_target.x}, {spawn_target.y}")
 
     if (spawn_target != noone) {
         if (instance_exists(Player)) {
@@ -181,6 +206,7 @@ function connect_start_end_and_spawn_player(spawn_at_bonfire) {
                 y = spawn_target.y;
                 current_room = spawn_target;
             }
+			global.player_current_room = spawn_target;
 			show_debug_message($"glocal bonfire is at {global.bonfire_room.x}, {global.bonfire_room.y}")
 			show_debug_message($"user is current at {Player.x}, {Player.y}");
         } else {
@@ -191,6 +217,7 @@ function connect_start_end_and_spawn_player(spawn_at_bonfire) {
     }
 
     if (!instance_exists(FogOfWar)) {
-        instance_create_layer(0, 0, "FogLayer", FogOfWar);
+        //instance_create_layer(0, 0, "FogLayer", FogOfWar);
+		show_debug_message("Creating Fog of War")
     }
 }
