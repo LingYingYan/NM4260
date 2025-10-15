@@ -17,12 +17,20 @@ function CardData(
     name = card_name;
     sprite = card_sprite;
     rarity = card_rarity;
-    mark = res_loader_marks.loaded[? mark_id];
+    mark = make_mark(mark_id);
     mark_multiplicity = mark_count;
-    effectiveness = 1;
     
     get_weight = function() {
         return 5 - self.rarity;
+    }
+    
+    get_magnitude = function(raw, modifier) {
+        var value = floor(raw * max(0, (100 + modifier) / 100));
+        if (value == 0 && modifier > -100) {
+            return 1;
+        }
+        
+        return value;
     }
     
     /**
@@ -77,6 +85,7 @@ function DestructionCardData(
     mark_id, mark_count
 ) constructor {
     damage = attack_damage;
+    is_nullified = false;
     
     /**
      * @desc Applies the card effects
@@ -90,18 +99,17 @@ function DestructionCardData(
         }
             
         var old_hp = target.hp;
-        self.effectiveness -= min(0.5, target.count_mark(self.mark.type) * 0.1);
-        if (self.effectiveness > 0) {
-            var dmg = self.damage * max(0, self.effectiveness);
-            var eliminated = min(target.shields, dmg);
+        if (!self.is_nullified) {
+            var dmg = self.get_magnitude(self.damage, instigator.modifiers.card_effectiveness);
+            var eliminated = min(target.modifiers.shield, dmg);
             dmg -= eliminated;
-            target.shields -= eliminated;
+            target.modifiers.shield -= eliminated;
+            target.add_status(new Shield(-eliminated));
             target.hp -= max(0, dmg);
             target.hp = max(target.hp, 0);
+            self.mark.on_apply(target, self.get_magnitude(self.mark_multiplicity, instigator.modifiers.card_effectiveness));
+            show_debug_message($"Attack {target}: HP {old_hp} -> {target.hp}");
         }
-        
-        show_debug_message($"Attack {target}: HP {old_hp} -> {target.hp}");
-        self.mark.on_apply(target, self.mark_multiplicity); 
     }
     
     /**
@@ -111,7 +119,7 @@ function DestructionCardData(
     collide = function(other_card) {
         if (typeof(other_card) == nameof(DefensiveCardData)) {
             if (other_card.mark == self.mark) {
-                self.effectiveness = 0;
+                self.is_nullified = true;
             }
         }
     }
@@ -190,11 +198,16 @@ function RestorationCardData(
         }
             
         var old_hp = instigator.hp;
-        instigator.hp += self.amount;
+        var effect_modifier = instigator.modifiers.card_effectiveness;
+        instigator.hp += self.get_magnitude(self.amount, effect_modifier);
         instigator.hp = min(instigator.hp, instigator.max_hp);
         show_debug_message($"Restore {instigator}: HP {old_hp} -> {instigator.hp}");
-        instigator.add_marks(self.mark_id_to_remove, -self.mark_count_to_remove);
-        self.mark.on_apply(instigator, self.mark_multiplicity); 
+        var mark_remove_count = self.get_magnitude(self.mark_count_to_remove, effect_modifier);
+        if (mark_remove_count > 0) {
+            instigator.add_marks(self.mark_id_to_remove, -mark_remove_count);
+        }
+            
+        self.mark.on_apply(instigator, floor(self.mark_multiplicity * effectiveness)); 
     }
     
     /**
@@ -222,7 +235,7 @@ function RestorationCardData(
             }
             
             if (self.mark_id_to_remove != "" && self.mark_count_to_remove > 0) {
-                var removed_mark_data = res_loader_marks.loaded[? self.mark_id_to_remove];
+                var removed_mark_data = make_mark(self.mark_id_to_remove);
                 if (desc != "") {
                     desc += "\n";
                 }
@@ -239,7 +252,7 @@ function RestorationCardData(
             }
             
             if (self.mark_id_to_remove != "" && self.mark_count_to_remove > 0) {
-                var removed_mark_data = res_loader_marks.loaded[? self.mark_id_to_remove];
+                var removed_mark_data = make_mark(self.mark_id_to_remove);
                 if (desc != "") {
                     desc += "\n";
                 }
@@ -293,9 +306,10 @@ function AlterationCardData(
         }
             
         var old_count = target.count_mark(self.transform_from);
-        target.add_marks(self.transform_from, old_count);
-        self.mark.on_apply(target, self.mark_multiplicity * old_count);
-        show_debug_message($"Alter {target}: {res_loader_marks.loaded[? self.transform_from].type} × {old_count} -> {self.mark} × {target.count_mark(self.mark.uid)}");
+        var effect_modifier = instigator.modifiers.card_effectiveness;
+        target.add_marks(self.transform_from, -old_count);
+        self.mark.on_apply(target, self.get_magnitude(self.mark_multiplicity, effect_modifier) * old_count);
+        show_debug_message($"Alter {target}: {make_mark(self.mark_id_to_remove).type} × {old_count} -> {self.mark} × {target.count_mark(self.mark.uid)}");
     }
     
     /**
@@ -315,7 +329,7 @@ function AlterationCardData(
      * @return {string} The card description
      */
     describe = function(visibility) {
-        var transform_from_mark_data = res_loader_marks.loaded[? self.transform_from];
+        var transform_from_mark_data = make_mark(self.transform_from);
         if (visibility >= 4) {
             return $"Transforms each {transform_from_mark_data.type} Mark to {self.mark.type} Mark × {self.mark_multiplicity} on target";
         }
@@ -344,16 +358,18 @@ function AlterationCardData(
  * @param {real} card_rarity Description
  * @param {string} mark_id Description
  * @param {real} mark_count Description
- * @param {real} defence Description
+ * @param {Struct.Status} status_data
+ * @param {real} status_level
  */
-function DefensiveCardData(
+function EnchantmentCardData(
     card_id, card_name, card_sprite, card_rarity, 
-    mark_id, mark_count, defence
+    mark_id, mark_count, status_data, status_level
 ) : CardData(
-    card_id, "Defensive", card_name, card_sprite, card_rarity, 
+    card_id, "Enchantment", card_name, card_sprite, card_rarity, 
     mark_id, mark_count
 ) constructor {
-    defence_amount = defence;
+    status = status_data;
+    level = status_level;
     
     /**
      * @desc Applies the card effects
@@ -362,11 +378,11 @@ function DefensiveCardData(
      */
     apply = function(instigator, target) {
         if (target == noone || target == undefined) { 
-            show_debug_message("Defended");   
+            show_debug_message("Enchanted");   
             return;     
         }
             
-        target.shields += self.defence_amount;
+        instigator.modifiers.shield += self.defence_amount;
         self.mark.on_apply(instigator, self.mark_multiplicity); 
     }
     
@@ -385,7 +401,7 @@ function DefensiveCardData(
     clone = function() {
         return new DestructionCardData(
             self.uid, self.name, self.sprite, self.rarity,
-            self.mark.uid, self.mark_multiplicity, self.defence_amount
+            self.mark.uid, self.mark_multiplicity, self.status, self.level
         );
     }
     
@@ -396,13 +412,13 @@ function DefensiveCardData(
      */
     describe = function(visibility) {
         if (visibility >= 4) {
-            return $"Adds {self.defence_amount} shields to caster\n" + 
+            return $"Adds {self.status.name} × {self.level} to caster\n" + 
                    $"Applies {self.mark.type} Mark × {self.mark_multiplicity} to caster";
         }
         
         if (visibility >= 3) {
             return $"A {self.mark.type} {self.type} card\n" + 
-                   $"Adds {self.defence_amount} shields to caster";
+                   $"Adds {self.status.name} × {self.level} to caster";
         }
         
         if (visibility >= 2) {

@@ -5,18 +5,12 @@ function GameCharacterData(curr_hp, total_hp) constructor {
     status_effects = ds_map_create();
     marks = ds_map_create();
     card_effectiveness_modifier = 0;
-
-    /**
-     * @desc 
-     * @param {Struct.CardData} card_data description
-     */    
-    modify_card = function(card_data) {
-        card_data.effectiveness += self.card_effectiveness_modifier;
-    }
     
-    clear_shields = function() {
-        self.shields = 0;
-    }
+    modifiers = {
+        card_effectiveness: 0,
+        strength: 0,
+        shield: 0
+    };
     
     /// @desc description
     /// @param {Struct.Status} status description description
@@ -26,6 +20,16 @@ function GameCharacterData(curr_hp, total_hp) constructor {
         } else {
             self.status_effects[? status.name].level += status.level;
         }
+        
+        
+    }
+    
+    reset_modifiers = function() {
+        self.modifiers = {
+            card_effectiveness: 0,
+            strength: 0,
+            shield: 0
+        };
     }
     
     execute_status_effects = function() {
@@ -33,6 +37,19 @@ function GameCharacterData(curr_hp, total_hp) constructor {
         var key = ds_map_find_first(self.status_effects);
         while (key != undefined) {
             self.status_effects[? key].execute(self);
+            key = ds_map_find_next(self.status_effects, key);
+        }
+        
+        for (var i = 0; i < array_length(to_remove); i += 1) {
+        	ds_map_delete(self.status_effects, to_remove[i]);
+        }
+    }
+    
+    update_status_effects = function() {
+        var to_remove = [];
+        var key = ds_map_find_first(self.status_effects);
+        while (key != undefined) {
+            self.status_effects[? key].decay();
             if (self.status_effects[? key].level <= 0) {
                 array_push(to_remove, key);
             }

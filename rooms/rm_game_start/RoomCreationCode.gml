@@ -5,6 +5,9 @@ var n = instance_number(res_loader_spreadsheet);
 //    loader.load();
 //}
 
-res_loader_marks.load();
+res_loader_destruction_cards.load();
+res_loader_restoration_cards.load();
+res_loader_alteration_cards.load();
+res_loader_enchantment_cards.load();
 
 obj_room_manager.goto_deck_selection();

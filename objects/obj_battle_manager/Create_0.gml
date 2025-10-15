@@ -12,7 +12,6 @@ player_card_slots = [];
 max_turn_pointer = 0;
 turn_pointer = 0; 
 can_resolve_card = false;
-is_during_player_turn = false;
 enemy_cards = []; 
 player_cards = [];
 
@@ -25,8 +24,6 @@ resolve_turn = function() {
     self.enemy_cards = [];
     self.player_cards = [];
     transfer_between_piles(self.hand, self.discard_pile, 0, false);
-    self.enemy.data.clear_shields();
-    self.player.data.clear_shields();
     if (self.player.data.hp <= 0) {
         self.enemy_win();
     } else if (self.enemy.data.hp <= 0) {
@@ -43,6 +40,7 @@ enemy_win = function() {
 
 player_win = function() {
     show_debug_message("Player win!");
+    self.player.data.clear_marks_and_statuses();
     self.player.data.vision += 1;
     self.end_battle();
     obj_loot_panel.visible = true;
@@ -119,8 +117,26 @@ start_battle = function() {
 
 start_player_turn = function() {
     obj_end_turn_button.is_disabled = false;
+    
+    // Update modifiers and status effects
+    self.enemy.data.reset_modifiers();
+    self.enemy.data.execute_status_effects();
+    self.player.data.reset_modifiers();
+    self.player.data.execute_status_effects();
+    
+    // If anyone dies, end the battle here
+    if (self.player.data.hp <= 0) {
+        self.resolve_turn();
+        return;
+    }
+    
+    if (self.enemy.data.hp <= 0) {
+        self.resolve_turn();
+        return;
+    }
+    
+    // Set up deck and card slots
     self.enemy.reset_deck();
-    self.is_during_player_turn = true;
     for (var i = 0; i < array_length(self.player_card_slots); i += 1) {
         if (instance_exists(self.player_card_slots[i].card)) {
             self.player_card_slots[i].card.dropped_area = noone;
@@ -129,6 +145,7 @@ start_player_turn = function() {
         self.player_card_slots[i].card = noone;
     }
     
+    // Enemy plays
     for (var i = 0; i < array_length(self.enemy_card_slots); i += 1) {
         var card = self.enemy.play_card();
         card.image_xscale = self.enemy_card_slots[i].image_xscale;
@@ -138,6 +155,7 @@ start_player_turn = function() {
         enemy_card_slots[i].card = card;
     }
     
+    // Player draws
     repeat(5) {
         var card = self.draw();
         if (card == noone) {
@@ -156,7 +174,6 @@ draw = function() {
     
     var card = self.draw_pile.draw();
     if (instance_exists(card)) {
-        self.player.data.modify_card(card.card_data);  
         card.set_reveal(self.player.max_vision);
         card.grabbable = true;  
         card.scale = self.player_card_slots[0].image_xscale;
@@ -245,19 +262,12 @@ recycle_cards = function(player_card, enemy_card) {
 
 end_player_turn = function() {
     obj_end_turn_button.is_disabled = true;
-    self.player.data.execute_status_effects();
-    if (self.player.data.hp <= 0) {
-        self.resolve_turn();
-        return;
-    }
     
-    self.enemy.data.execute_status_effects();
-    if (self.enemy.data.hp <= 0) {
-        self.resolve_turn();
-        return;
-    }
+    self.enemy.data.update_status_effects();
+    self.player.data.update_status_effects();
     
     self.turn_pointer = 0;
+    
     // Collect both sides' cards
     for (var i = 0; i < array_length(self.player_card_slots); i += 1) {
         self.player_cards[i] = self.player_card_slots[i].card;

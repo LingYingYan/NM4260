@@ -13,7 +13,6 @@ play_card = function() {
     // Create the card instance
     var card = instance_create_layer(self.x, -500, "Cards", obj_enemy_card);
     card.card_data = card_data;
-    self.data.modify_card(card_data);
     
     // Randomly reveal the card
     var player = obj_battle_manager.player;

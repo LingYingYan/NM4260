@@ -1,4 +1,4 @@
-if (!res_loader_cards.is_loaded || !res_loader_marks.is_loaded || self.is_initialised) {
+if (!res_loader_cards.is_loaded || self.is_initialised) {
     exit;
 }
 

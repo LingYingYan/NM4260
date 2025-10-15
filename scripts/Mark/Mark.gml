@@ -21,20 +21,20 @@ function Mark(mark_id, mark_name, mark_sprite) constructor {
 
 /// @desc Function Description
 /// @param {string} mark_id description
-/// @param {string} display_name Description
-/// @param {Asset.GMSprite} mark_sprite description
-function make_mark(mark_id, display_name, mark_sprite) {
+function make_mark(mark_id) {
+    var sprite_name = $"spr_{mark_id}";
+    var sprite = asset_get_index(sprite_name);
     switch (mark_id) {
     	case "mark_fire":
-            return new FireMark(mark_id, display_name, mark_sprite);
+            return new FireMark(mark_id, "Fire", sprite);
         case "mark_water":
-            return new WaterMark(mark_id, display_name, mark_sprite);
+            return new WaterMark(mark_id, "Water", sprite);
         case "mark_grass":
-            return new GrassMark(mark_id, display_name, mark_sprite);
+            return new GrassMark(mark_id, "Grass", sprite);
         case "mark_ice":
-            return new IceMark(mark_id, display_name, mark_sprite);
+            return new IceMark(mark_id, "Ice", sprite);
         case "mark_lightning":
-            return new LightningMark(mark_id, display_name, mark_sprite);
+            return new LightningMark(mark_id, "Lightning", sprite);
     }
 }
 
