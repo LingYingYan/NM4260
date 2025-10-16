@@ -139,7 +139,7 @@ function connect_start_end_and_spawn_player(spawn_at_bonfire) {
 		array_push(start.neighbors, base);
         global.start_room = start
 		//instance_create_layer(base.x, base.y + S, "Instances", DungeonRoom);
-		var vis = instance_create_layer(base.x, base.y + S, "Instances", DungeonRoom);
+		var vis = instance_create_layer(base.x + global.map_offset_x, base.y + S + global.map_offset_y, "Instances", DungeonRoom);
 				vis.data = start;
 				vis.discovered = true;
         //room_neighbors_init(global.start_room);
@@ -188,9 +188,9 @@ function connect_start_end_and_spawn_player(spawn_at_bonfire) {
 	    }
 	}	
 	// debug chunk
-	show_debug_message(">>> DEBUG: spawn_at_bonfire=" + string(spawn_at_bonfire));
-	show_debug_message(">>> DEBUG: start_room=" + string(global.start_room));
-	show_debug_message(">>> DEBUG: bonfire_room=" + string(global.bonfire_room));
+	//show_debug_message(">>> DEBUG: spawn_at_bonfire=" + string(spawn_at_bonfire));
+	//show_debug_message(">>> DEBUG: start_room=" + string(global.start_room));
+	//show_debug_message(">>> DEBUG: bonfire_room=" + string(global.bonfire_room));
 
 
     // Spawn or move player
@@ -210,9 +210,9 @@ function connect_start_end_and_spawn_player(spawn_at_bonfire) {
 			show_debug_message($"glocal bonfire is at {global.bonfire_room.x}, {global.bonfire_room.y}")
 			show_debug_message($"user is current at {Player.x}, {Player.y}");
         } else {
-            var avatar = instance_create_layer(spawn_target.x, spawn_target.y, "Instances", Player);
+            var avatar = instance_create_layer(spawn_target.x + global.map_offset_x, spawn_target.y + global.map_offset_y, "Instances", Player);
             avatar.current_room = spawn_target;
-			show_debug_message($"user if newly spawned at {spawn_target}");
+			show_debug_message($"user is newly spawned at {spawn_target}");
         }
     }
 

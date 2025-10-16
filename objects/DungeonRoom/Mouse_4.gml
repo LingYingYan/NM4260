@@ -3,7 +3,7 @@ show_debug_message("the left press event is triggered")
 
 if (!instance_exists(Player)) exit;
 var player = instance_find(Player, 0);
-show_debug_message($"current room {player.current_room}")
+//show_debug_message($"current room {player.current_room}")
 
 // Only allow move if this room is adjacent (connected)
 if (player.current_room != noone) {
@@ -18,7 +18,7 @@ if (player.current_room != noone) {
         }
     }
 	
-	show_debug_message($"CanMove is {canMove}");
+	//show_debug_message($"CanMove is {canMove}");
 
     if (canMove) {
         player.target_x = x;

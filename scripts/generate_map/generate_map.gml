@@ -7,6 +7,15 @@ function generate_map(generate_new) {
     var W = global.GRID_W;
     var H = global.GRID_H;
     var S = global.ROOM_SIZE;
+	
+	var map_w = W * S;
+	var map_h = H * S;
+	var offset_x = (room_width - map_w) / 2;
+	var offset_y = (room_height - map_h) / 2;
+	
+	global.map_offset_x = offset_x;
+	global.map_offset_y = offset_y;
+	
 
 	
 	global.room_grid = array_create(H);
@@ -23,7 +32,7 @@ function generate_map(generate_new) {
                 //var rm = instance_create_layer(col * S, row * S + S, "Instances", DungeonRoom);
                 //room_neighbors_init(rm);
                 global.room_grid[row][col] = rm;
-				var vis = instance_create_layer(col * S, row * S, "Instances", DungeonRoom);
+				var vis = instance_create_layer(col * S + global.map_offset_x, row * S + global.map_offset_y, "Instances", DungeonRoom);
 				vis.data = rm; // link the visual to the data struct
                 array_push(all_rooms, rm);
             } else {
@@ -44,7 +53,7 @@ function generate_map(generate_new) {
             //rm.grid_y = r;
             //room_neighbors_init(rm);
             global.room_grid[r][pick] = rm;
-			var vis = instance_create_layer(pick*global.ROOM_SIZE, r * global.ROOM_SIZE + global.ROOM_SIZE, "Instances", DungeonRoom);
+			var vis = instance_create_layer(pick*global.ROOM_SIZE + global.map_offset_x, r * global.ROOM_SIZE + global.ROOM_SIZE + global.map_offset_y, "Instances", DungeonRoom);
 			vis.data = rm; // link the visual to the data struct
             array_push(all_rooms, rm);
         }
