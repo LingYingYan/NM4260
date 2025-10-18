@@ -215,6 +215,7 @@
     {"id":{"name":"spr_card_ward","path":"sprites/spr_card_ward/spr_card_ward.yy",},},
     {"id":{"name":"spr_card_water_healing","path":"sprites/spr_card_water_healing/spr_card_water_healing.yy",},},
     {"id":{"name":"spr_card_water_shield","path":"sprites/spr_card_water_shield/spr_card_water_shield.yy",},},
+    {"id":{"name":"spr_cross_overlay","path":"sprites/spr_cross_overlay/spr_cross_overlay.yy",},},
     {"id":{"name":"spr_dungeonRoom","path":"sprites/spr_dungeonRoom/spr_dungeonRoom.yy",},},
     {"id":{"name":"spr_endRoom","path":"sprites/spr_endRoom/spr_endRoom.yy",},},
     {"id":{"name":"spr_enemyRoom","path":"sprites/spr_enemyRoom/spr_enemyRoom.yy",},},

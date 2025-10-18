@@ -4,7 +4,7 @@ function generate_from_grid(){
         for (var col = 0; col < array_length(global.room_grid[row]); col++) {
             var rm = global.room_grid[row][col];
             if (is_struct(rm)) {
-                var vis = instance_create_layer(rm.x, rm.y, "Instances", DungeonRoom);
+                var vis = instance_create_layer(rm.x + global.map_offset_x, rm.y + global.map_offset_y, "Instances", DungeonRoom);
                 vis.data = rm;
                 //rm.id = vis.id; 
             }
@@ -12,7 +12,7 @@ function generate_from_grid(){
     }
 	// regenerate start room
 	var start = global.start_room;
-	var vis_start = instance_create_layer(start.x, start.y, "Instances", DungeonRoom);
+	var vis_start = instance_create_layer(start.x + global.map_offset_x, start.y + global.map_offset_y, "Instances", DungeonRoom);
 	vis_start.data = start;
 
     // Recreate the player
@@ -30,7 +30,7 @@ function generate_from_grid(){
 	// Spawn the player instance
 	var px = target_room.x;
 	var py = target_room.y;
-	var player_inst = instance_create_layer(px, py, "Instances", Player);
+	var player_inst = instance_create_layer(px + global.map_offset_x, py + global.map_offset_y, "Instances", Player);
 
 	player_inst.current_room = target_room;
 	player_inst.prev_room = target_room;

@@ -27,7 +27,7 @@ if (x == target_x && y == target_y) {
         else if (current_room.room_type == "bonfire" && !global.bonfire_used) {
             reveal_room(current_room);
         }
-		show_debug_message($"TRACKING")
+		//show_debug_message($"TRACKING")
         prev_room = current_room; // update memory of where we are
     }
 } else {
