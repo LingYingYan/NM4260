@@ -3,6 +3,10 @@ event_inherited();
 
 global.new_game = true;
 on_click = function() {
+    if (obj_hand.size() < 10) {
+        return;
+    }
+    
     show_debug_message("Game Started");
     var cards = obj_hand.clear();
     for (var i = 0; i < array_length(cards); i += 1) {

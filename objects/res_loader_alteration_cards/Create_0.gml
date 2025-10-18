@@ -12,12 +12,14 @@ read_row = function(r) {
     var card_mark_multiplicity = real(self.read_cell(r, 4));
     var is_obtainable = bool(self.read_cell(r, 5));
     var card_transform_from_id = self.read_cell(r, 6);
+    var special_effects = string_split(self.read_cell(r, 7), ", ", true);
     
     var sprite_name = $"spr_{card_id}";
     var sprite = asset_get_index(sprite_name);
     var card_data = new AlterationCardData(
         card_id, card_name, sprite, card_rarity,
-        card_mark_id, card_mark_multiplicity, card_transform_from_id
+        card_mark_id, card_mark_multiplicity, card_transform_from_id,
+        special_effects
     );
     
     ds_map_add(self.loaded_map, card_id, card_data);
