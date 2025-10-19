@@ -7,7 +7,6 @@ function Mark(mark_id, mark_name, mark_sprite) constructor {
     uid = mark_id;
     type = mark_name;
     sprite = mark_sprite;
-    reactant_coefficient = 1;
     
     /**
      * @desc description
@@ -16,25 +15,35 @@ function Mark(mark_id, mark_name, mark_sprite) constructor {
      */
     on_apply = function(target, multiplicity = 1) { }
     
-    describe = function() { }
+    describe = function() { 
+        return "";
+    }
+}
+
+function Empty(mark_id) : Mark(mark_id, "Non-elemental", spr_none) constructor {
+    describe = function() { 
+        return "Non-elemental";
+    }
 }
 
 /// @desc Function Description
 /// @param {string} mark_id description
-/// @param {string} display_name Description
-/// @param {Asset.GMSprite} mark_sprite description
-function make_mark(mark_id, display_name, mark_sprite) {
+function make_mark(mark_id) {
+    var sprite_name = $"spr_{mark_id}";
+    var sprite = asset_get_index(sprite_name);
     switch (mark_id) {
     	case "mark_fire":
-            return new FireMark(mark_id, display_name, mark_sprite);
+            return new FireMark(mark_id, "Fire", sprite);
         case "mark_water":
-            return new WaterMark(mark_id, display_name, mark_sprite);
+            return new WaterMark(mark_id, "Water", sprite);
         case "mark_grass":
-            return new GrassMark(mark_id, display_name, mark_sprite);
+            return new GrassMark(mark_id, "Grass", sprite);
         case "mark_ice":
-            return new IceMark(mark_id, display_name, mark_sprite);
+            return new IceMark(mark_id, "Ice", sprite);
         case "mark_lightning":
-            return new LightningMark(mark_id, display_name, mark_sprite);
+            return new LightningMark(mark_id, "Lightning", sprite);
+        case "none":
+            return new Empty(mark_id);
     }
 }
 
@@ -87,7 +96,8 @@ function FireMark(mark_id, mark_name, mark_sprite) : Mark(mark_id, mark_name, ma
     
     describe = function() {
         return "1 Fire Mark reacts on 1 Grass Mark = Burn × 2\n" +
-               "1 Fire Mark reacts on 1 Ice Mark = Water Mark × 1";
+               "1 Fire Mark reacts on 1 Ice Mark = Water Mark × 1\n\n" +
+               "Burn: cause 1 damage per turn";
     }
 } 
 
@@ -150,7 +160,8 @@ function GrassMark(mark_id, mark_name, mark_sprite) : Mark(mark_id, mark_name, m
     }
     
     describe = function() {
-        return "1 Grass Mark reacts on 1 Water Mark = Poison × 2\n";
+        return "1 Grass Mark reacts on 1 Water Mark = Poison × 2\n\n" +
+               "Poison: cause 1 damage per turn";
     }
 } 
 
@@ -181,7 +192,8 @@ function LightningMark(mark_id, mark_name, mark_sprite) : Mark(mark_id, mark_nam
     }
     
     describe = function() {
-        return "1 Lightning Mark reacts on 1 Water Mark = Paralysed × 1";
+        return "1 Lightning Mark reacts on 1 Water Mark = Paralysed × 1\n\n" +
+               "Paralysed: weakens card effectiveness by 25%";
     }
 } 
 
@@ -195,7 +207,7 @@ function IceMark(mark_id, mark_name, mark_sprite) : Mark(mark_id, mark_name, mar
         var dominated_count = target.count_mark("mark_water");
         var n_eliminated = min(dominated_count, multiplicity);
         var remaining = multiplicity - n_eliminated;
-        var n_reactant = floor(n_eliminated / 5);
+        var n_reactant = floor(n_eliminated / 1);
         if (n_eliminated > 0) {
             target.add_marks("mark_water", -n_eliminated);
         }
@@ -212,6 +224,7 @@ function IceMark(mark_id, mark_name, mark_sprite) : Mark(mark_id, mark_name, mar
     }
     
     describe = function() {
-        return "1 Ice Mark reacts on 5 Water Marks = Frozen × 1";
+        return "1 Ice Mark reacts on 5 Water Marks = Frozen × 1\n\n" +
+               "Frozen: only 1 card may be played per turn";
     }
 } 

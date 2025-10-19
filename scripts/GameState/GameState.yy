@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"GameState",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"GameState",
+  "parent":{
+    "name":"Enums",
+    "path":"folders/Scripts/Enums.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -5,6 +5,7 @@ function transfer_between_piles(from, to, reveal, is_grabbale) {
         cards[i].set_reveal(reveal);
         cards[i].grabbable = is_grabbale;
         cards[i].selectable = false;
+        cards[i].card_data.effectiveness = 1;
         to.add(cards[i]);
     }
 }

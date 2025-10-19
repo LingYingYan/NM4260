@@ -14,13 +14,15 @@ read_row = function(r) {
     var card_heal = real(self.read_cell(r, 6));
     var mark_id_to_remove = self.read_cell(r, 7);
     var remove_count = real(self.read_cell(r, 8));
+    var special_effects = string_split(self.read_cell(r, 9), ", ", true);
     
     var sprite_name = $"spr_{card_id}";
     var sprite = asset_get_index(sprite_name);
     var card_data = new RestorationCardData(
         card_id, card_name, sprite, card_rarity,
         card_mark_id, card_mark_multiplicity, 
-        mark_id_to_remove, remove_count, card_heal
+        mark_id_to_remove, remove_count, card_heal,
+        special_effects
     );
     
     ds_map_add(self.loaded_map, card_id, card_data);
