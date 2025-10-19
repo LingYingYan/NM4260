@@ -29,7 +29,7 @@ function trigger_room_event(room) {
             break;
         case "treasure":
             show_debug_message("Treasure room!");
-			//room_goto(rm_treasure);
+			room_goto(rm_treasure);
             break;
 		case "end":
 			show_debug_message("Boss Fight!");

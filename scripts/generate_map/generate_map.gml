@@ -119,7 +119,7 @@ function generate_map(generate_new) {
     }
 
     // reset visited
-    with (DungeonRoom) visited = false;
+    with (DungeonRoom) data.visited = false;
 
     var start_col = -1;
     for (var c = 0; c < W; c++)
@@ -133,6 +133,16 @@ function generate_map(generate_new) {
             if (rm != noone && !rm.visited) {
                 instance_destroy(rm);
                 global.room_grid[r][c] = noone;
+            }
+        }
+    }
+	
+	// set the roomData to be unvisited
+	for (var r = 0; r < H; r++) {
+        for (var c = 0; c < W; c++) {
+            var rm = global.room_grid[r][c];
+            if (rm != noone) {
+                rm.visited = false;
             }
         }
     }
