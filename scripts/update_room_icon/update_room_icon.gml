@@ -4,6 +4,7 @@ function update_room_icon(){
         case "enemy":    sprite_index = spr_enemyRoom; break;
 		case "treasure": sprite_index = spr_treasureRoom; break;
 		case "bonfire":  sprite_index = spr_bonfire; break;
+		case "shop":	 sprite_index = spr_shop; break;
         default:         sprite_index = spr_dungeonRoom; break;
     }
 }

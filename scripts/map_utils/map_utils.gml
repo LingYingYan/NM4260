@@ -61,16 +61,16 @@ function assign_room_types_and_icons() {
             rm.room_type = "bonfire";
 			rm.is_bonfire_used = false;
             with (rm) update_room_icon();
-        }
-        else if (i < 10) {
-            rm.room_type = "enemy";
-            with (rm) update_room_icon();
-        }
-        else if (i < 12) { // 10..11
+        } else if (i < 3) { //
             rm.room_type = "treasure";
             with (rm) update_room_icon();
-        }
-        else {
+        } else if (i < 5) {
+			rm.room_type = "shop";
+			with (rm) update_room_icon();
+		} else if (i < 15) {
+			rm.room_type = "enemy";
+	        with (rm) update_room_icon();
+		} else {
             rm.room_type = "default";
             with (rm) update_room_icon();
         }

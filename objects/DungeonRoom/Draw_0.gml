@@ -7,6 +7,7 @@ if (is_struct(self.data)) {
         case "start": spr = spr_startRoom; break;
 		case "bonfire": spr = spr_bonfire; break;
 		case "end" : spr = spr_endRoom; break;
+		case "shop": spr = spr_shop; break
         default: spr = spr_dungeonRoom;
     }
 	draw_sprite(spr, 0, x, y)
