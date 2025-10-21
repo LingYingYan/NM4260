@@ -7,6 +7,6 @@ ac_timestamp = 0;
 change_by = function(k) {
     var old_value = self.status_level;
     self.status_level += k;
-    self.status_level = max(0, self.mark_level);
+    self.status_level = max(0, self.status_level);
     self.is_updating = self.status_level != old_value;
 }

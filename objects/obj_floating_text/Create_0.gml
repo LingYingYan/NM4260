@@ -5,8 +5,8 @@ self.image_speed = 0;
 y_goal = self.y + move_dist;
 
 step = function() {
-    self.image_xscale = lerp(self.image_xscale, 1, self.lerp_speed);
-    self.image_yscale = lerp(self.image_yscale, 1, self.lerp_speed);
+    self.image_xscale = lerp(self.image_xscale, 2, self.lerp_speed);
+    self.image_yscale = lerp(self.image_yscale, 2, self.lerp_speed);
     self.image_alpha -= 0.01;
     if (self.image_alpha <= 0) {
         instance_destroy(self.id);

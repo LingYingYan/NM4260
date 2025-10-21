@@ -22,6 +22,28 @@ function Status(_level, _name) constructor {
     }
 }
 
+function get_coloured_label(status_name) {
+    var icon = $"[c_white][spr_{string_lower(status_name)}_small][/c]";
+    switch (status_name) {
+    	case "Burn":
+            return icon + $"[c_orange][b]{status_name}![/b][/c]";
+        case "Poison":
+            return icon + $"[c_green][b]{status_name}![/b][/c]";
+        case "Paralysed":
+            return icon + $"[c_purple][b]{status_name}![/b][/c]";
+        case "Frozen":
+            return icon + $"[c_aqua][b]{status_name}![/b][/c]";
+        case "Shield":
+            return icon + $"[c_gray][b]{status_name}![/b][/c]";
+        case "Strength":
+            return icon + $"[c_red][b]{status_name}![/b][/c]";
+        case "Coalesence":
+            return icon + $"[c_lime][b]{status_name}![/b][/c]";
+        case "Bleed":
+            return icon + $"[c_maroon][b]{status_name}![/b][/c]";
+    }
+}
+
 /// @desc Function Description
 /// @param {string} type Description
 /// @param {real} level Description

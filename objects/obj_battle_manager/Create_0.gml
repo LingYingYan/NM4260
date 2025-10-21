@@ -68,8 +68,8 @@ player_win = function() {
             var card_x = room_width / 2 + (i - 1) * 2 * random_card.sprite_width;
             var new_card = instance_create_layer(card_x, room_height / 2, "Cards", obj_pickup_card);
             new_card.card_data = random_card.card_data;
-            new_card.image_xscale = 1.5;
-            new_card.image_yscale = 1.5;
+            new_card.image_xscale = 0.66;
+            new_card.image_yscale = 0.66;
             new_card.set_reveal(obj_player_state.data.max_vision);
             new_card.on_click = method({source: this}, function() {
                 obj_loot_panel.remove_item(source);
