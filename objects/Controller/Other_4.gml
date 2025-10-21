@@ -2,10 +2,10 @@ if (!global.map_inited || global.map_needs_reset) {
 
     if (global.map_needs_reset) {
         show_debug_message("Resetting map...");
-        reset_map(15); // bonfire reset 
+        reset_map(18); // bonfire reset 
     } else {
         show_debug_message("Initializing new map...");
-        initialize_map(15, false); // first time generation
+        initialize_map(18, false); // first time generation
     }
 
     global.map_inited = true;

@@ -71,6 +71,9 @@ function assign_room_types_and_icons() {
 		} else if (i < 15) {
 			rm.room_type = "enemy";
 	        with (rm) update_room_icon();
+		} else if (i < 18) {
+			rm.room_type = "encounter";
+			with(rm) update_room_icon();
 		} else {
             rm.room_type = "default";
             with (rm) update_room_icon();

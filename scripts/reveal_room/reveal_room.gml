@@ -42,12 +42,13 @@ function trigger_room_event(room) {
 			show_debug_message("Shop!!");
 			room_goto(rm_shop);
 			break;
+		case "encounter":
+			show_debug_message("Encounter Room!");
+			room_goto(rm_encounter);
+			break;
 		case "end":
 			show_debug_message("Boss Fight!");
 			obj_room_manager.goto_battle();
 			break;
-        case "encounter":
-            show_debug_message("Encounter room!");
-            break;
     }
 }
