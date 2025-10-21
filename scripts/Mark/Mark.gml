@@ -15,7 +15,19 @@ function Mark(mark_id, mark_name, mark_sprite) constructor {
      */
     on_apply = function(target, multiplicity = 1) { }
     
-    describe = function() { 
+    describe_with_context = function(is_offensive = true) { 
+        return is_offensive ? "[bi]Target:[/bi]\n" + self.describe() : "[bi]Caster:[/bi]\n" + self.describe();
+    }
+    
+    describe = function() {
+        return "";
+    }
+    
+    get_label = function() {
+        return $"[region,keyword-mark-{self.type}][c_white][spr_{self.uid}_small][/c][c_gold][b]{self.type}[/b][/c][/region]";
+    }
+    
+    describe_alt = function(level) {
         return "";
     }
 }
@@ -28,6 +40,7 @@ function Empty(mark_id) : Mark(mark_id, "Non-elemental", spr_none) constructor {
 
 /// @desc Function Description
 /// @param {string} mark_id description
+/// @return {Struct.Mark} The mark
 function make_mark(mark_id) {
     var sprite_name = $"spr_{mark_id}";
     var sprite = asset_get_index(sprite_name);
@@ -95,9 +108,14 @@ function FireMark(mark_id, mark_name, mark_sprite) : Mark(mark_id, mark_name, ma
     }
     
     describe = function() {
-        return "1 Fire Mark reacts on 1 Grass Mark = Burn × 2\n" +
-               "1 Fire Mark reacts on 1 Ice Mark = Water Mark × 1\n\n" +
-               "Burn: cause 1 damage per turn";
+        return $"  For each {make_mark("mark_grass").get_label()} Mark:\n" +
+               $"    Gains [b]2[/b] layers of {make_status("Burn", 0).get_label()}\n" +
+               $"  For each {make_mark("mark_ice").get_label()} Mark:\n" +
+               $"    Gains [b]1[/b] {make_mark("mark_water").get_label()} Mark";
+    }
+    
+    describe_alt = function(level) {
+        return $"{self.get_label()}\n[b]-1[/b] HP for each {make_mark("mark_water").get_label()} Mark received";
     }
 } 
 
@@ -129,7 +147,19 @@ function WaterMark(mark_id, mark_name, mark_sprite) : Mark(mark_id, mark_name, m
     }
     
     describe = function() {
-        return "1 Water Mark reacts on 1 Fire Mark = Extra Damage + 1";
+        return $"  For each {make_mark("mark_fire").get_label()} Mark:\n" +
+                "    Loses [b]1[/b] HP\n";
+    }
+    
+    describe_alt = function(level) {
+        var text = $"{self.get_label()}\n" + 
+                   $"[b]+2[/b] layer of {make_status("Poison", 0).get_label()} for each {make_mark("mark_ice").get_label()} Mark received\n" +
+                   $"[b]+1[/b] layer of {make_status("Paralysed", 0).get_label()} for each {make_mark("mark_lightning").get_label()} Mark received";
+        if (level >= 5) {
+            text += $"\n[b]+1[/b] layer of Frozen for each {make_mark("mark_ice").get_label()} Mark received";
+        }
+        
+        return text;
     }
 } 
 
@@ -160,8 +190,12 @@ function GrassMark(mark_id, mark_name, mark_sprite) : Mark(mark_id, mark_name, m
     }
     
     describe = function() {
-        return "1 Grass Mark reacts on 1 Water Mark = Poison × 2\n\n" +
-               "Poison: cause 1 damage per turn";
+        return $"  For each {make_mark("mark_water").get_label()} Mark:\n" +
+               $"    Gains [b]2[/b] layers of {make_status("Poison", 0).get_label()}";
+    }
+    
+    describe_alt = function(level) {
+        return $"{self.get_label()}\n[b]+2[/b] layer of {make_status("Burn", 0).get_label()} for each {make_mark("mark_fire").get_label()} Mark received";
     }
 } 
 
@@ -192,8 +226,12 @@ function LightningMark(mark_id, mark_name, mark_sprite) : Mark(mark_id, mark_nam
     }
     
     describe = function() {
-        return "1 Lightning Mark reacts on 1 Water Mark = Paralysed × 1\n\n" +
-               "Paralysed: weakens card effectiveness by 25%";
+        return $"  For each {make_mark("mark_water").get_label()} Mark:\n" +
+               $"    Gains [b]1[/b] layer of {make_status("Paralysed", 0).get_label()}";
+    }
+    
+    describe_alt = function(level) {
+        return $"{self.get_label()}";
     }
 } 
 
@@ -224,7 +262,11 @@ function IceMark(mark_id, mark_name, mark_sprite) : Mark(mark_id, mark_name, mar
     }
     
     describe = function() {
-        return "1 Ice Mark reacts on 5 Water Marks = Frozen × 1\n\n" +
-               "Frozen: only 1 card may be played per turn";
+        return $"  For every 5 {make_mark("mark_water").get_label()} Marks:\n" +
+               $"    Gains [b]1[/b] layer of {make_status("Frozen", 0).get_label()}";
+    }
+    
+    describe_alt = function(level) {
+        return $"{self.get_label()}\n[b]+1[/b] {make_mark("mark_water").get_label()} Mark for each {make_mark("mark_fire").get_label()} Mark received";
     }
 } 

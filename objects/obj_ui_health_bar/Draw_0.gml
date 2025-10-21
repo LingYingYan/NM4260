@@ -4,10 +4,7 @@ if (room == rm_game_start) {
 
 draw_self();
 
-var label_x = self.x + self.sprite_width / self.image_xscale + 10;
-var label_y = self.y;
+var label_x = self.x;
+var label_y = self.label_below_bar ? self.y + self.sprite_height : self.y - self.sprite_height;
 
-put_label(
-    $"{self.current}/{self.max_value}", self,
-    fa_left, fa_middle, label_x, label_y, c_black
-);
+scribble($"{self.current}/{self.max_value}").align(fa_center, fa_middle).draw(label_x, label_y);

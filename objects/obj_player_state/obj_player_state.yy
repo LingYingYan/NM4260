@@ -37,7 +37,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_transparent_box",
+    "path":"sprites/spr_transparent_box/spr_transparent_box.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }

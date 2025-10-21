@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"text_styles",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"text_styles",
+  "parent":{
+    "name":"Utils",
+    "path":"folders/Scripts/Utils.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

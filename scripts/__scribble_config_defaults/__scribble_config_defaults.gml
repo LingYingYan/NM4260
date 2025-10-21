@@ -1,12 +1,15 @@
 // Feather disable all
 // Default font is set by scribble_font_set_default()
 
-
+scribble_font_set_style_family("font_game_text", "font_game_text_bf", "font_game_text_it", "font_game_text_bfit");
+scribble_font_set_default("font_game_text");
+scribble_font_bake_outline_4dir("font_game_text", "font_game_text_outlined", c_black, true);
+scribble_font_bake_outline_4dir("font_game_text_bf", "font_game_text_bf_outlined", c_black, true);
 
 //Default vertex colour when drawing text models. This can be overwritten by the
 //`.starting_format()` text element method. This will not affect `draw_text_scribble()`
 //which instead uses `draw_get_color()`.
-#macro SCRIBBLE_DEFAULT_COLOR  c_white
+#macro SCRIBBLE_DEFAULT_COLOR  c_black
 
 //Default horizontal alignment for text. This can be changed using the `.align()` text element
 //method. This will not affect `draw_text_scribble()` which instead uses `draw_get_halign()`.

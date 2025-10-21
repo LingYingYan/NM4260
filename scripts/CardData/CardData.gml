@@ -28,13 +28,17 @@ function CardData(
         return 5 - self.rarity;
     }
     
-    get_magnitude = function(raw, modifier) {
-        var value = floor(raw * max(0, (100 + modifier) / 100));
-        if (value == 0 && modifier > -100) {
-            return 1;
+    /**
+     * @desc Evaluates mark application count
+     * @param {Struct.GameCharacterData} instigator The caster
+     * @param {Struct.GameCharacterData} target The target
+     */
+    get_mark_application_count = function(instigator, target) {
+        if (instigator == undefined || target == undefined) {
+            return self.mark_multiplicity;
         }
         
-        return value;
+        return instigator.modifiers.paralysed ? max(0, floor(self.mark_multiplicity * 0.75)) : self.mark_multiplicity;
     }
     
     /**
@@ -47,9 +51,11 @@ function CardData(
     /**
      * @desc Describe the card
      * @param {real} visibility Visibility
+     * @param {Struct.GameCharacterData} instigator The caster
+     * @param {Struct.GameCharacterData} target The target
      * @return {string} The card description
      */
-    describe = function(visibility) {
+    describe = function(visibility, instigator, target) {
         return "?";
     }
     
@@ -60,7 +66,7 @@ function CardData(
     clone = function() {
         return new CardData(
             self.uid, self.type, self.name, self.sprite, self.rarity,
-            self.mark, self.mark_multiplicity
+            self.mark.uid, self.mark_multiplicity
         );
     }
 }
@@ -85,28 +91,51 @@ function DestructionCardData(
     damage = attack_damage;
     
     /**
+     * @desc Computes damage
+     * @param {Struct.GameCharacterData} instigator The caster
+     * @param {Struct.GameCharacterData} target The target
+     */
+    get_damage = function(instigator, target) {
+        if (instigator == undefined || target == undefined) {
+            return self.damage;
+        }
+        
+        var dmg = self.damage;
+        if (instigator.modifiers.paralysed && !target.modifiers.bleeding) {
+            dmg *= 0.75;
+        } else if (target.modifiers.bleeding && !instigator.modifiers.paralysed) {
+            dmg *= 1.25;
+        }
+        
+        return max(0, floor(dmg));
+    }
+    
+    /**
      * @desc Applies the card effects
      * @param {Struct.GameCharacterData} instigator The caster
      * @param {Struct.GameCharacterData} target The target
      */
     apply = function(instigator, target) {
-        if (target == noone || target == undefined || self.is_nullified) { 
-            show_debug_message("Attacked");   
+        if (target == undefined || self.is_nullified) { 
             return;     
         }
             
-        var old_hp = target.hp;
-        var dmg = self.get_magnitude(self.damage, instigator.modifiers.card_effectiveness);
-        var eliminated = min(target.modifiers.shield, dmg);
-        dmg -= eliminated;
-        target.add_status(new Shield(-eliminated));
-        target.hp -= max(0, dmg);
-        target.hp = max(target.hp, 0);
-        if (self.mark != undefined) {
-            self.mark.on_apply(target, self.get_magnitude(self.mark_multiplicity, instigator.modifiers.card_effectiveness));
-        }
+        // Calculate modified damage
+        var dmg = self.get_damage(instigator, target);
         
-        show_debug_message($"Attack {target}: HP {old_hp} -> {target.hp}");
+        // Eliminate shields
+        var eliminated_shields = min(target.modifiers.shield, dmg);
+        dmg -= eliminated_shields;
+        target.add_status(new Shield(-eliminated_shields));
+        
+        // Apply damage
+        target.hp = max(target.hp - max(0, dmg), 0);
+        target.hp = max(target.hp, 0);
+        
+        // Apply mark
+        if (self.mark != undefined) {
+            self.mark.on_apply(target, self.get_mark_application_count(instigator, target));
+        }
     }
     
     /**
@@ -116,31 +145,43 @@ function DestructionCardData(
     clone = function() {
         return new DestructionCardData(
             self.uid, self.name, self.sprite, self.rarity,
-            self.mark.uid, self.mark_multiplicity, self.damage
+            self.mark.uid, self.mark_multiplicity, 
+            self.damage, self.keywords
         );
     }
     
     /**
      * @desc Describe the card
      * @param {real} visibility Visibility
+     * @param {Struct.GameCharacterData} instigator The caster
+     * @param {Struct.GameCharacterData} target The target
      * @return {string} The card description
      */
-    describe = function(visibility) {
+    describe = function(visibility, instigator, target) {
+        var dmg = self.get_damage(instigator, target);
+        var dmg_text = stylise_numeric_text(dmg, self.damage);
+        var mark_application_count = self.get_mark_application_count(instigator, target);
+        var mark_application_text = stylise_numeric_text(mark_application_count, self.mark_multiplicity);
+        
         if (visibility >= 4) {
-            return $"Deals {self.damage} {self.mark.type} damage to target\n" + 
-                   $"Applies {self.mark.type} Mark × {self.mark_multiplicity} to target";
+            return $"{self.mark.get_label()} [b]{self.type}[/b]\n" +
+                   $"[bi]Target[/bi]:\n" + 
+                   $"  Receives {dmg_text} damage\n" + 
+                   $"  {self.mark.get_label()} Mark + {mark_application_text}";
         }
         
         if (visibility >= 3) {
-            return $"Deals {self.damage} {self.mark.type} damage to target"
+            return $"{self.mark.get_label()} [b]{self.type}[/b]\n" + 
+                   $"[i]Target[/i]:\n" + 
+                   $"  Receives {dmg_text} damage";
         }
         
         if (visibility >= 2) {
-            return $"A {self.mark.type} {self.type} card";
+            return $"{self.mark.get_label()} [b]{self.type}[/b]";
         }
         
         if (visibility >= 1) {
-            return $"A {self.mark.type} card";
+            return $"{self.mark.get_label()}";
         }
         
         return "";
@@ -173,28 +214,54 @@ function RestorationCardData(
     is_offensive = false;
     
     /**
+     * @desc Computes healing
+     * @param {Struct.GameCharacterData} instigator The caster
+     * @param {Struct.GameCharacterData} target The target
+     */
+    get_heal = function(instigator, target) {
+        if (instigator == undefined || target == undefined) {
+            return self.amount;
+        }
+        
+        var heal = self.amount;
+        if (instigator.modifiers.paralysed) {
+            heal *= 0.75;
+        }
+        
+        return max(0, floor(heal));
+    }
+    
+    /**
+     * @desc Computes mark removal
+     * @param {Struct.GameCharacterData} instigator The caster
+     * @param {Struct.GameCharacterData} target The target
+     */
+    get_mark_removal = function(instigator, target) {
+        if (instigator == undefined || target == undefined) {
+            return self.mark_count_to_remove;
+        }
+        
+        return instigator.modifiers.paralysed ? max(0, floor(self.mark_count_to_remove * 0.75)) : self.mark_count_to_remove;
+    }
+    
+    /**
      * @desc Applies the card effects
      * @param {Struct.GameCharacterData} instigator The caster
      * @param {Struct.GameCharacterData} target The target
      */
     apply = function(instigator, target) {
-        if (instigator == noone || instigator == undefined || self.is_nullified) { 
-            show_debug_message("Restored");   
+        if (instigator == undefined || self.is_nullified) { 
             return;     
         }
             
-        var old_hp = instigator.hp;
-        var effect_modifier = instigator.modifiers.card_effectiveness;
-        instigator.hp += self.get_magnitude(self.amount, effect_modifier);
-        instigator.hp = min(instigator.hp, instigator.max_hp);
-        show_debug_message($"Restore {instigator}: HP {old_hp} -> {instigator.hp}");
-        var mark_remove_count = self.get_magnitude(self.mark_count_to_remove, effect_modifier);
+        instigator.hp = min(instigator.hp + self.get_heal(instigator, target), instigator.max_hp);
+        var mark_remove_count = self.get_mark_removal(instigator, target);
         if (mark_remove_count > 0) {
             instigator.add_marks(self.mark_id_to_remove, -mark_remove_count);
         }
            
         if (self.mark != undefined) { 
-            self.mark.on_apply(instigator, self.get_magnitude(self.mark_multiplicity, effect_modifier)); 
+            self.mark.on_apply(instigator, self.get_mark_application_count(instigator, target)); 
         }
     }
     
@@ -213,50 +280,56 @@ function RestorationCardData(
     /**
      * @desc Describe the card
      * @param {real} visibility Visibility
+     * @param {Struct.GameCharacterData} instigator The caster
+     * @param {Struct.GameCharacterData} target The target
      * @return {string} The card description
      */
-    describe = function(visibility) {
+    describe = function(visibility, instigator, target) {
+        var heal = self.get_heal(instigator, target);
+        var heal_text = stylise_numeric_text(heal);
+        var remove = self.get_mark_removal(instigator, target);
+        var remove_text = stylise_numeric_text(remove);
+        var mark_application_count = self.get_mark_application_count(instigator, target);
+        var mark_application_text = stylise_numeric_text(mark_application_count, self.mark_multiplicity);
+        
         if (visibility >= 4) {
-            var desc = "";
+            var desc = $"{self.mark.get_label()} [b]{self.type}[/b]\n[bi]Caster:[/bi]";
             if (self.amount > 0) {
-                desc += $"Heals {self.amount} HP for caster";
+                desc += $"\n  Restores {heal_text} HP";
             }
             
             if (self.mark_id_to_remove != "" && self.mark_count_to_remove > 0) {
                 var removed_mark_data = make_mark(self.mark_id_to_remove);
-                if (desc != "") {
-                    desc += "\n";
-                }
-                desc += $"Removes {removed_mark_data.type} × {self.mark_count_to_remove} Mark from caster";
+                desc += $"\n  {removed_mark_data.get_label()} Mark - {remove_text}";
             }
             
-            return desc + $"\nApplies {self.mark.type} × {self.mark_multiplicity} Mark to caster";
+            return desc + $"\n  {self.mark.get_label()} Mark + {mark_application_text}";
         }
         
         if (visibility >= 3) {
-            var desc = "";
+            var desc = $"{self.mark.get_label()} [b]{self.type}[/b]\n[bi]Caster:[/bi]";
             if (self.amount > 0) {
                 desc += $"Heals {self.amount} for caster";
             }
             
-            if (self.mark_id_to_remove != "" && self.mark_count_to_remove > 0) {
-                var removed_mark_data = make_mark(self.mark_id_to_remove);
-                if (desc != "") {
-                    desc += "\n";
-                }
-                
-                desc += $"\nRemoves {removed_mark_data.type} Mark from caster";
+            if (self.amount > 0) {
+                desc += $"\n  Restores {heal_text} HP";
             }
             
-            return desc + $"\nApplies {self.mark.type} Mark to caster";
+            if (self.mark_id_to_remove != "" && self.mark_count_to_remove > 0) {
+                var removed_mark_data = make_mark(self.mark_id_to_remove);
+                desc += $"\n  {removed_mark_data.get_label()} Mark - ?";
+            }
+            
+            return desc + $"\n  {self.mark.get_label()} Mark + ?";
         }
         
         if (visibility >= 2) {
-            return $"A {self.mark.type} {self.type} card";
+            return $"{self.mark.get_label()} [b]{self.type}[/b]";
         }
         
         if (visibility >= 1) {
-            return $"A {self.mark.type} card";
+            return $"{self.mark.get_label()}";
         }
         
         return "";
@@ -264,7 +337,7 @@ function RestorationCardData(
 }
 
 /**
- * Function Description
+ * DEPRECATED
  * @param {string} card_id Description
  * @param {string} card_name Description
  * @param {Asset.GMSprite} card_sprite Description
@@ -297,7 +370,7 @@ function AlterationCardData(
         var effect_modifier = instigator.modifiers.card_effectiveness;
         target.add_marks(self.transform_from, -old_count);
         if (self.mark != undefined) {
-            self.mark.on_apply(target, self.get_magnitude(self.mark_multiplicity, effect_modifier) * old_count);
+            self.mark.on_apply(target, old_count);
         }
         
         show_debug_message($"Alter {target}: {make_mark(self.transform_from).type} × {old_count} -> {self.mark} × {target.count_mark(self.mark.uid)}");
@@ -414,15 +487,37 @@ function EnchantmentCardData(
         }
         
         if (visibility >= 2) {
-            return $"A {self.mark.type} {self.type} card";
+            return $"{self.mark.get_label()} [b]{self.type}[/b]"
         }
         
         if (visibility >= 1) {
-            return $"A {self.mark.type} card";
+            return $"{self.mark.get_label()}";
         }
         
         return "";
     }
+}
+
+/**
+ * A card that applies a status effect to its target.
+ * @param {string} card_id Description
+ * @param {string} card_name Description
+ * @param {Asset.GMSprite} card_sprite Description
+ * @param {real} card_rarity Description
+ * @param {string} mark_id Description
+ * @param {real} mark_count Description
+ * @param {Struct.Status} status_data
+ * @param {array} [special_effects] description
+ */
+function CurseCardData(
+    card_id, card_name, card_sprite, card_rarity, 
+    mark_id, mark_count, 
+    status_data, special_effects = []
+) : CardData(
+    card_id, "Curse", card_name, card_sprite, card_rarity, 
+    mark_id, mark_count, special_effects
+) constructor {
+            
 }
 
 
@@ -455,3 +550,4 @@ function apply_ward(player_card, enemy_card) {
         player_card.is_nullified = true;
     }
 }
+

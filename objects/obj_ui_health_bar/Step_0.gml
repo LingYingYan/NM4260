@@ -1,6 +1,6 @@
-if (obj_player_state != noone) {
-    self.current = obj_player_state.data.hp;    
-    self.max_value = obj_player_state.data.max_hp;
+if (self.source != undefined) {
+    self.current = self.source.hp;    
+    self.max_value = self.source.max_hp;
 }
 
 if (max_value > 0) {
