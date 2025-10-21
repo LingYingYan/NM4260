@@ -6,6 +6,12 @@ function reveal_room(rm){
         rm.discovered = true;      // reveal logical room
 		// if its a shop room
 		rm.visited = true;
+		rm.used = true;
+		
+		if (rm.room_type == "shop") {
+			handle_shop_cards(rm);
+		}
+
         trigger_room_event(rm);    // trigger event using the struct
     } else {
         show_debug_message("ERROR: no valid data struct!");

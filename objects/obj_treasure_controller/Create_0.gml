@@ -12,9 +12,9 @@ var card_h = sprite_get_height(spr_card_demo);
 var spacing = 50;
 
 var total_width = (3 * card_w) + (2 * spacing);
-var start_x = (surface_get_width(application_surface) - total_width) / 2;
+var start_x = (room_width - total_width) / 2 + card_w/2;
 
-var pos_y = surface_get_height(application_surface)/2;
+var pos_y = room_height/2;
 
 var selected_cards = [];
 

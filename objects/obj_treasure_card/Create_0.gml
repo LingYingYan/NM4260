@@ -12,3 +12,6 @@ anim_speed = 0.1;
 selected = false;
 
 alarm_setted = false;
+
+hovered = false;
+hover_scale = 1;

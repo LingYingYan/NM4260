@@ -12,8 +12,4 @@ with (obj_shop_card) {
     var text_y = y + (sprite_get_height(spr_card_demo) * image_yscale / 2) + 20; // 20px below bottom
     var cost_str = "- " + string(cost) + " Vision"; // adjust field name to your data
     draw_text(x, text_y, cost_str);
-	if (sold) {
-		instance_destroy();
-		show_debug_message("the card is sold");
-	}
 }

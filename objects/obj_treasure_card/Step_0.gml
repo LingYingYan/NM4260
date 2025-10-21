@@ -1,3 +1,5 @@
+event_inherited();
+
 if (selected) {
     // Smoothly interpolate position and scale
 	normal_depth = -25000;
@@ -14,4 +16,10 @@ if (selected) {
 		obj_player_deck_manager.add(self.id);
 		show_debug_message($"Added card {self.id} to player deck");
     }
+}
+
+if (hovered) {
+    hover_scale = lerp(hover_scale, 1.1, 0.15); // grow smoothly
+} else {
+    hover_scale = lerp(hover_scale, 1.0, 0.15); // shrink smoothly
 }

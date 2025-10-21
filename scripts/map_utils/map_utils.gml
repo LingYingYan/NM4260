@@ -66,6 +66,7 @@ function assign_room_types_and_icons() {
             with (rm) update_room_icon();
         } else if (i < 5) {
 			rm.room_type = "shop";
+			rm.room_name = "shop" + string(i-2); //naming shops shop1 and shop2
 			with (rm) update_room_icon();
 		} else if (i < 15) {
 			rm.room_type = "enemy";
@@ -134,7 +135,7 @@ function connect_start_end_and_spawn_player(spawn_at_bonfire) {
     global.start_room = noone;
     if (array_length(bottom_rooms) > 0) {
         var base = choose_array(bottom_rooms);
-		var start = new RoomData(true, true, "start", base.x/S, base.y/S+1);
+		var start = new RoomData(true, true, false, "start", base.x/S, base.y/S+1);
 		array_push(base.neighbors, start);
 		array_push(start.neighbors, base);
         global.start_room = start

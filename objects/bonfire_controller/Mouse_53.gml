@@ -24,6 +24,9 @@ if (point_in_rectangle(mx, my,
     }
 	var full_hp = obj_player_state.data.max_hp;
 	obj_player_state.data.hp = full_hp;
+	
+	empty_shop_card();
+	
 	global.map_needs_reset = true;  // flag that next room must regenerate
 	room_goto(Room1);
 }

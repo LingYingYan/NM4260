@@ -4,6 +4,12 @@ function generate_from_grid(){
         for (var col = 0; col < array_length(global.room_grid[row]); col++) {
             var rm = global.room_grid[row][col];
             if (is_struct(rm)) {
+				if (rm.room_type == "bonfire" && !global.bonfire_used) {
+					rm.used = false;
+				}
+				if (rm.room_type == "shop" && !global.shop_used) {
+					rm.used = false;
+				}
                 var vis = instance_create_layer(rm.x + global.map_offset_x, rm.y + global.map_offset_y, "Instances", DungeonRoom);
                 vis.data = rm;
                 //rm.id = vis.id; 
