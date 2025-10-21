@@ -24,6 +24,33 @@ function CardData(
     is_offensive = true;
     is_nullified = false;
     
+    get_modifier_by_mark = function(mult, instigator, target) {
+        switch (self.mark.type) {
+            case "Fire":
+                mult += (instigator.modifiers[$ "fire_power_mult"] ?? 0);
+                mult += (target.modifiers[$ "fire_weakness_mult"] ?? 0);
+                break;
+            case "Water":
+                mult += (instigator.modifiers[$ "water_power_mult"] ?? 0);
+                mult += (target.modifiers[$ "water_weakness_mult"] ?? 0);
+                break;
+            case "Grass":
+                mult += (instigator.modifiers[$ "grass_power_mult"] ?? 0);
+                mult += (target.modifiers[$ "grass_weakness_mult"] ?? 0);
+                break;
+            case "Lightning":
+                mult += (instigator.modifiers[$ "lightning_power_mult"] ?? 0);
+                mult += (target.modifiers[$ "lightning_weakness_mult"] ?? 0);
+                break;
+            case "Ice":
+                mult += (instigator.modifiers[$ "ice_power_mult"] ?? 0);
+                mult += (target.modifiers[$ "ice_weakness_mult"] ?? 0);
+                break;
+        }
+
+        return mult
+    }
+    
     get_weight = function() {
         return 5 - self.rarity;
     }
@@ -101,13 +128,18 @@ function DestructionCardData(
         }
         
         var dmg = self.damage;
-        if (instigator.modifiers.paralysed && !target.modifiers.bleeding) {
-            dmg *= 0.75;
-        } else if (target.modifiers.bleeding && !instigator.modifiers.paralysed) {
-            dmg *= 1.25;
+        var mult = 100;
+        if (instigator.modifiers.paralysed) {
+            mult -= 25;
+        } 
+        
+        if (target.modifiers.bleeding) {
+            mult += 25;
         }
         
-        return max(0, floor(dmg));
+        mult = self.get_modifier_by_mark(mult, instigator, target);
+        mult += (instigator.modifiers[$ "destruction_power_mult"] ?? 0);
+        return max(0, floor(dmg * mult / 100));
     }
     
     /**
@@ -224,11 +256,14 @@ function RestorationCardData(
         }
         
         var heal = self.amount;
+        var mult = 100;
         if (instigator.modifiers.paralysed) {
-            heal *= 0.75;
+            mult -= 25;
         }
         
-        return max(0, floor(heal));
+        mult = self.get_modifier_by_mark(mult, instigator, target);
+        mult += (instigator.modifiers[$ "restoration_power_mult"] ?? 0);
+        return max(0, floor(heal * mult / 100));
     }
     
     /**
@@ -241,7 +276,15 @@ function RestorationCardData(
             return self.mark_count_to_remove;
         }
         
-        return instigator.modifiers.paralysed ? max(0, floor(self.mark_count_to_remove * 0.75)) : self.mark_count_to_remove;
+        var count = self.mark_count_to_remove;
+        var mult = 100;
+        if (instigator.modifiers.paralysed) {
+            mult -= 25;
+        }
+        
+        mult = self.get_modifier_by_mark(mult, instigator, target);
+        mult += (instigator.modifiers[$ "restoration_power_mult"] ?? 0);
+        return max(0, floor(self.mark_count_to_remove * mult / 100));
     }
     
     /**

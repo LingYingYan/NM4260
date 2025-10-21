@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"Script152",
+  "%Name":"Trait",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"Script152",
+  "name":"Trait",
   "parent":{
     "name":"Traits",
     "path":"folders/Scripts/Game Characters/Traits.yy",

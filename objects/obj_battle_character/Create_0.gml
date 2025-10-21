@@ -27,7 +27,7 @@ add_marks = function(mark_id, multiplicity) {
     }
 }
 
-add_status = function(status_name, count) {
+add_status = function(status_name, count, success = true) {
     if (count == 0) {
         return;
     }

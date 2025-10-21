@@ -20,7 +20,8 @@ function GameCharacterData(curr_hp, total_hp) constructor {
     
     /// @desc description
     /// @param {Struct.Status} status description description
-    add_status = function(status) { }
+    /// @param {bool} [success]=true description
+    add_status = function(status, success = true) { }
     
     reset_modifiers = function() {
         self.dirty_keys = [];
@@ -45,22 +46,7 @@ function GameCharacterData(curr_hp, total_hp) constructor {
     
     update_status_effects = function() { }
     
-    add_marks = function(mark_id, multiplicity) {
-        if (mark_id == "none") {
-            return;
-        }
-        
-        if (!ds_map_exists(self.marks, mark_id)) {
-            if (multiplicity > 0) {
-                ds_map_add(self.marks, mark_id, multiplicity);
-            }
-        } else {
-            self.marks[? mark_id] += multiplicity;
-            if (self.marks[? mark_id] <= 0) {
-                ds_map_delete(self.marks, mark_id);
-            }
-        }
-    }
+    add_marks = function(mark_id, multiplicity) { }
     
     count_mark = function(mark_id) {
         return ds_map_exists(self.marks, mark_id) ? self.marks[? mark_id] : 0;
@@ -78,12 +64,16 @@ function PlayerData(curr_hp, total_hp, curr_vision, total_vision) : GameCharacte
     
     /// @desc description
     /// @param {Struct.Status} status description description
-    add_status = function(status) {
+    add_status = function(status, success = true) {
         if (status.level == 0) {
             return;
         }
         
-        obj_player_state.add_status(status.name, status.level);
+        obj_player_state.add_status(status.name, status.level, success);
+        if (!success) {
+            return;
+        }
+        
         if (!ds_map_exists(self.status_effects, status.name)) {
             ds_map_add(self.status_effects, status.name, status);
         } else {
@@ -117,7 +107,7 @@ function PlayerData(curr_hp, total_hp, curr_vision, total_vision) : GameCharacte
     }
     
     add_marks = function(mark_id, multiplicity) {
-        if (mark_id == "none") {
+        if (mark_id == "none" || multiplicity == 0) {
             return;
         }
         
@@ -166,12 +156,16 @@ function EnemyData(enemy_id, enemy_name, enemy_weight, enemy_hp) : GameCharacter
     
     /// @desc description
     /// @param {Struct.Status} status description description
-    add_status = function(status) {
+    add_status = function(status, success = true) {
         if (status.level == 0) {
             return;
         }
         
-        obj_enemy.add_status(status.name, status.level);
+        obj_enemy.add_status(status.name, status.level, success);
+        if (!success) {
+            return;
+        }
+        
         if (!ds_map_exists(self.status_effects, status.name)) {
             ds_map_add(self.status_effects, status.name, status);
         } else {
