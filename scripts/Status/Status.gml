@@ -18,6 +18,10 @@ function Status(_level, _name) constructor {
     }
 }
 
+/// @desc Function Description
+/// @param {string} type Description
+/// @param {real} level Description
+/// @return {Struct.Status}
 function make_status(type, level) {
     switch (type) {
     	case "Burn":
@@ -76,3 +80,29 @@ function Shield(_level) : Status(_level, nameof(Shield)) constructor {
         self.level = 0;
     }
 }
+
+function Strength(_level) : Status(_level, nameof(Strength)) constructor {
+    /// @desc Execute the status effect
+    /// @param {Struct.GameCharacterData} target The target
+    initialise = function(target) { 
+        target.modifiers.strength += self.level;
+    }
+}
+
+function Coalesence(_level) : Status(_level, nameof(Coalesence)) constructor {
+    /// @desc Execute the status effect
+    /// @param {Struct.GameCharacterData} target The target
+    initialise = function(target) { 
+        target.modifiers.coalesencing = true;
+    }
+}
+
+function Bleed(_level) : Status(_level, nameof(Bleed)) constructor {
+    /// @desc Execute the status effect
+    /// @param {Struct.GameCharacterData} target The target
+    initialise = function(target) { 
+        target.modifiers.bleeding = true;
+    }
+}
+
+
