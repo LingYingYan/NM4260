@@ -29,14 +29,14 @@ global.encounter_cases = [
 		[
 			make_option(
 				"Listen Closely", 
-				"The voices reveal a hidden rune sequence. (-1 Vision)",
+				"The voices reveal a hidden rune sequence. (-1 Vision, +1 Card)",
 				function() {
 					var new_card = res_loader_cards.get_random_card("Instances");
 					show_debug_message($"card data of the acquired card: {new_card.card_data}")
 					var card_int = instance_create_layer(room_width/2, room_height/2, "Instances", obj_treasure_card);
 					card_int.card_data = new_card.card_data;
 					obj_player_deck_manager.add(new_card);
-					obj_player_state.data.vision -= 2;
+					obj_player_state.data.vision -= 1;
 					show_debug_message($"now the player deck length is {array_length(obj_player_deck_manager.denumerate())}")
 				}
 			),
@@ -70,7 +70,7 @@ global.encounter_cases = [
 						}
 						if (count <= 0) break;
 					}
-					obj_player_state.data.vision -= 2;
+					obj_player_state.data.vision -= 1;
 					show_debug_message("revealed 3 rooms on the map")
 				}	
 			),

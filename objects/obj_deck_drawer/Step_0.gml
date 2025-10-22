@@ -17,20 +17,28 @@ with (obj_deck_drawer_card) {
 	y = 50 + idx * (other.card_height + other.card_spacing) - other.scroll_y;
 	
 	if (selected && !removed) {
+		removed = true;
 		// remove the card from the deck
 		if (count > 1) {
 			// count - 1
 			count -= 1;
+			
+			obj_player_state.data.vision -= 0.5;
+			// loop through player deck and remove the card instance
+			//var card_id = card_data.uid;
+			obj_player_deck_manager.remove_first(card_data);
 		} else {
+			//removed = true;
+			obj_player_state.data.vision -= 0.5;
+			// loop through player deck and remove the card instance
+			//var card_id = card_data.uid;
+			obj_player_deck_manager.remove_first(card_data);
 			// remove the instance
 			instance_destroy();
 		}
 		// - 0.5 vision
-		obj_player_state.data.vision -= 0.5;
-		// loop through player deck and remove the card instance
-		//var card_id = card_data.uid;
-		obj_player_deck_manager.remove_first(card_data);
-		removed = true;
+		
+		
 		show_debug_message($"Removed the card");
 		
 	}
