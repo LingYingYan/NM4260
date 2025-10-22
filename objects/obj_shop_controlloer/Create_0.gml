@@ -2,7 +2,7 @@
 //var cards_in_row = [4, 4];
 //var spacing_x = 40;
 //var spacing_y = 120;
-var scale = 0.6;
+var scale = 0.8;
 
 show_debug_message($"length of curr_shops_card: {array_length(global.curr_shop_cards)}");
 for (i = 0; i < array_length(global.curr_shop_cards); i ++) {

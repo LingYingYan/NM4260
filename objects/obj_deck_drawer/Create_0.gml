@@ -1,3 +1,5 @@
+depth = -25000;
+
 scale = 0.5
 
 drawer_width = 300;
@@ -12,25 +14,13 @@ scroll_speed = 20;
 
 card_width = sprite_get_width(spr_card_demo) * scale;
 card_height = sprite_get_height(spr_card_demo) * scale;
-card_spacing = 20;
+card_spacing = 80;
 
 player_deck = obj_player_deck_manager.denumerate();
 show_debug_message($"Player deck is {player_deck}");
 
 max_scroll = max(0, array_length(player_deck) * (card_height + card_spacing) - drawer_height);
 
-//for (var i = 0; i < array_length(player_deck); i++) {
-//    var card_y = 50 + i * (card_height + card_spacing);
-//    var new_card = instance_create_layer(drawer_x + drawer_width / 2, card_y, "Instances", obj_deck_drawer_card);
-//    new_card.card_data = player_deck[i];
-//	new_card.image_xscale = scale;
-//	new_card.image_yscale = scale;
-//	new_card.set_reveal(obj_player_state.data.max_vision);
-//	show_debug_message("Deck Card is generated")
-	
-//	ds_map_add(player_deck_map, player_deck[i], i);
-//	show_debug_message($"Current deck map is {ds_map_size(player_deck_map)}");
-//}
 player_deck_map = ds_map_create(); 
 var scroll_index = 0; // index for scrolling
 
@@ -59,7 +49,7 @@ for (var i = 0; i < array_length(keys); i++) {
     var idx = info[0];
     var count = info[1];
     
-    var card_y = 100 + idx * (card_height + card_spacing);
+    var card_y = 500 + idx * (card_height + card_spacing);
     var card_x = drawer_x + drawer_width / 2;
     
     // one instance per unique card
