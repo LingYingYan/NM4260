@@ -39,7 +39,7 @@ add_status = function(status_name, count, success = true) {
             text: $"[c_red]Resisted[/c] {get_coloured_label(status_name)}",
             move_dist: text_displacement
         });   
-    } else {
+    } else if (count > 0) {
         var text_displacement = self.y < room_height / 2 ? irandom_range(40, 60) : irandom_range(-40, -60);
         var spawn_y = self.y < room_height / 2 ? self.y + 150 : self.y - 150;
         instance_create_depth(self.x, spawn_y, self.depth - 10001, obj_floating_text, {

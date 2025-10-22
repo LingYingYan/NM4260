@@ -201,7 +201,7 @@ execute_player_card = function(player_card, enemy_card) {
     
     time_source_destroy(self.turn_timer);
     self.turn_timer = time_source_create(
-        time_source_game, 1, time_source_units_seconds, 
+        time_source_game, 0.25, time_source_units_seconds, 
         recycle_player_card, [player_card, enemy_card]
     );
         
@@ -226,7 +226,7 @@ recycle_player_card = function(player_card, enemy_card) {
     
     time_source_destroy(self.turn_timer);
     self.turn_timer = time_source_create(
-        time_source_game, 1, time_source_units_seconds, 
+        time_source_game, 0.5, time_source_units_seconds, 
         execute_enemy_card, [enemy_card]
     );
         
@@ -240,7 +240,7 @@ execute_enemy_card = function(enemy_card) {
     
     time_source_destroy(self.turn_timer);
     self.turn_timer = time_source_create(
-        time_source_game, 1, time_source_units_seconds, 
+        time_source_game, 0.25, time_source_units_seconds, 
         recycle_enemy_card, [enemy_card]
     );
         
