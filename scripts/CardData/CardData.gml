@@ -489,10 +489,10 @@ function EnchantmentCardData(
         }
             
         var effect_modifier = instigator.modifiers.card_effectiveness;
-        var status = make_status(self.status.name, self.get_magnitude(self.status.level, effect_modifier))
+        var status = make_status(self.status.name, self.status.level)
         instigator.add_status(status);
         if (self.mark.type != undefined) {
-            self.mark.on_apply(instigator, self.get_magnitude(self.mark_multiplicity, effect_modifier));
+            self.mark.on_apply(instigator, self.mark_multiplicity);
         } 
     }
     
