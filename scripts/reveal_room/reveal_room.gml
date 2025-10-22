@@ -4,7 +4,14 @@ function reveal_room(rm){
     //trigger_room_event(rm);
 	if (is_struct(rm)) {
         rm.discovered = true;      // reveal logical room
-        rm.visited = true;
+		// if its a shop room
+		rm.visited = true;
+		rm.used = true;
+		
+		if (rm.room_type == "shop") {
+			handle_shop_cards(rm);
+		}
+
         trigger_room_event(rm);    // trigger event using the struct
     } else {
         show_debug_message("ERROR: no valid data struct!");
@@ -29,16 +36,19 @@ function trigger_room_event(room) {
             break;
         case "treasure":
             show_debug_message("Treasure room!");
-			//room_goto(rm_treasure);
+			room_goto(rm_treasure);
             break;
+		case "shop":
+			show_debug_message("Shop!!");
+			room_goto(rm_shop);
+			break;
+		case "encounter":
+			show_debug_message("Encounter Room!");
+			room_goto(rm_encounter);
+			break;
 		case "end":
 			show_debug_message("Boss Fight!");
 			obj_room_manager.goto_battle();
-        case "merchant":
-            show_debug_message("Merchant room!");
-            break;
-        case "encounter":
-            show_debug_message("Encounter room!");
-            break;
+			break;
     }
 }

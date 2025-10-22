@@ -22,8 +22,11 @@ if (point_in_rectangle(mx, my,
     if (instance_exists(global.bonfire_room)) {
         global.bonfire_room.is_bonfire_used = true;
     }
-    show_message("You chose to rest, hp recovered, map reset");
-	show_debug_message("left button is clicked");
+	var full_hp = obj_player_state.data.max_hp;
+	obj_player_state.data.hp = full_hp;
+	
+	empty_shop_card();
+	
 	global.map_needs_reset = true;  // flag that next room must regenerate
 	room_goto(Room1);
 }

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"make_option",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"make_option",
+  "parent":{
+    "name":"NM4260",
+    "path":"NM4260.yyp",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

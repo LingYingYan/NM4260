@@ -1,445 +1,2577 @@
 {
-  "$GMProject":"v1",
-  "%Name":"NM4260",
-  "AudioGroups":[
-    {"$GMAudioGroup":"","%Name":"audiogroup_default","name":"audiogroup_default","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
+  "$GMProject": "v1",
+  "%Name": "NM4260",
+  "AudioGroups": [
+    {
+      "$GMAudioGroup": "",
+      "%Name": "audiogroup_default",
+      "name": "audiogroup_default",
+      "resourceType": "GMAudioGroup",
+      "resourceVersion": "2.0",
+      "targets": -1
+    }
   ],
-  "configs":{
-    "children":[],
-    "name":"Default",
+  "configs": {
+    "children": [],
+    "name": "Default"
   },
-  "defaultScriptType":1,
-  "Folders":[
-    {"$GMFolder":"","%Name":"Animation Curves","folderPath":"folders/Animation Curves.yy","name":"Animation Curves","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Extensions","folderPath":"folders/Extensions.yy","name":"Extensions","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Fonts","folderPath":"folders/Fonts.yy","name":"Fonts","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Notes","folderPath":"folders/Notes.yy","name":"Notes","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Objects","folderPath":"folders/Objects.yy","name":"Objects","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Buttons","folderPath":"folders/Objects/Buttons.yy","name":"Buttons","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Battles","folderPath":"folders/Objects/Buttons/Battles.yy","name":"Battles","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Game","folderPath":"folders/Objects/Buttons/Game.yy","name":"Game","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Cards","folderPath":"folders/Objects/Cards.yy","name":"Cards","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Debug","folderPath":"folders/Objects/Debug.yy","name":"Debug","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Game Characters","folderPath":"folders/Objects/Game Characters.yy","name":"Game Characters","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Managers","folderPath":"folders/Objects/Managers.yy","name":"Managers","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Resources","folderPath":"folders/Objects/Resources.yy","name":"Resources","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Loaders","folderPath":"folders/Objects/Resources/Loaders.yy","name":"Loaders","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"UI","folderPath":"folders/Objects/UI.yy","name":"UI","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Particle Systems","folderPath":"folders/Particle Systems.yy","name":"Particle Systems","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Cards In Decks","folderPath":"folders/Particle Systems/Cards In Decks.yy","name":"Cards In Decks","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Winning","folderPath":"folders/Particle Systems/Winning.yy","name":"Winning","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Paths","folderPath":"folders/Paths.yy","name":"Paths","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Rooms","folderPath":"folders/Rooms.yy","name":"Rooms","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Scribble","folderPath":"folders/Scribble.yy","name":"Scribble","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"(System - don't call these functions)","folderPath":"folders/Scribble/(System - don't call these functions).yy","name":"(System - don't call these functions)","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Classes","folderPath":"folders/Scribble/(System - don't call these functions)/Classes.yy","name":"Classes","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Deprecated","folderPath":"folders/Scribble/(System - don't call these functions)/Deprecated.yy","name":"Deprecated","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Outline","folderPath":"folders/Scribble/(System - don't call these functions)/Deprecated/Outline.yy","name":"Outline","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Generator","folderPath":"folders/Scribble/(System - don't call these functions)/Generator.yy","name":"Generator","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Initialization","folderPath":"folders/Scribble/(System - don't call these functions)/Initialization.yy","name":"Initialization","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Shaders","folderPath":"folders/Scribble/(System - don't call these functions)/Shaders.yy","name":"Shaders","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Animation","folderPath":"folders/Scribble/Animation.yy","name":"Animation","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Colours","folderPath":"folders/Scribble/Colours.yy","name":"Colours","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Configuration - Please edit these!","folderPath":"folders/Scribble/Configuration - Please edit these!.yy","name":"Configuration - Please edit these!","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"External Assets","folderPath":"folders/Scribble/External Assets.yy","name":"External Assets","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Font Modification","folderPath":"folders/Scribble/Font Modification.yy","name":"Font Modification","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Fonts","folderPath":"folders/Scribble/Fonts.yy","name":"Fonts","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Legacy","folderPath":"folders/Scribble/Legacy.yy","name":"Legacy","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Miscellaneous","folderPath":"folders/Scribble/Miscellaneous.yy","name":"Miscellaneous","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Quick Functions","folderPath":"folders/Scribble/Quick Functions.yy","name":"Quick Functions","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Superfonts","folderPath":"folders/Scribble/Superfonts.yy","name":"Superfonts","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Scripts","folderPath":"folders/Scripts.yy","name":"Scripts","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Cards","folderPath":"folders/Scripts/Cards.yy","name":"Cards","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Enums","folderPath":"folders/Scripts/Enums.yy","name":"Enums","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Game Characters","folderPath":"folders/Scripts/Game Characters.yy","name":"Game Characters","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Traits","folderPath":"folders/Scripts/Game Characters/Traits.yy","name":"Traits","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Rooms","folderPath":"folders/Scripts/Rooms.yy","name":"Rooms","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Structs","folderPath":"folders/Scripts/Structs.yy","name":"Structs","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Utils","folderPath":"folders/Scripts/Utils.yy","name":"Utils","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Sequences","folderPath":"folders/Sequences.yy","name":"Sequences","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Lose","folderPath":"folders/Sequences/Lose.yy","name":"Lose","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Pause","folderPath":"folders/Sequences/Pause.yy","name":"Pause","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Title Screen","folderPath":"folders/Sequences/Title Screen.yy","name":"Title Screen","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"You Win","folderPath":"folders/Sequences/You Win.yy","name":"You Win","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Shaders","folderPath":"folders/Shaders.yy","name":"Shaders","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Sounds","folderPath":"folders/Sounds.yy","name":"Sounds","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Sprites","folderPath":"folders/Sprites.yy","name":"Sprites","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Cards","folderPath":"folders/Sprites/Cards.yy","name":"Cards","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Marks","folderPath":"folders/Sprites/Cards/Marks.yy","name":"Marks","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Statuses","folderPath":"folders/Sprites/Cards/Statuses.yy","name":"Statuses","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Test","folderPath":"folders/Sprites/Test.yy","name":"Test","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"UI","folderPath":"folders/Sprites/UI.yy","name":"UI","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Buttons","folderPath":"folders/Sprites/UI/Buttons.yy","name":"Buttons","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Tile Sets","folderPath":"folders/Tile Sets.yy","name":"Tile Sets","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Timelines","folderPath":"folders/Timelines.yy","name":"Timelines","resourceType":"GMFolder","resourceVersion":"2.0",},
+  "defaultScriptType": 1,
+  "Folders": [
+    {
+      "$GMFolder": "",
+      "%Name": "Animation Curves",
+      "folderPath": "folders/Animation Curves.yy",
+      "name": "Animation Curves",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Extensions",
+      "folderPath": "folders/Extensions.yy",
+      "name": "Extensions",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Fonts",
+      "folderPath": "folders/Fonts.yy",
+      "name": "Fonts",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Notes",
+      "folderPath": "folders/Notes.yy",
+      "name": "Notes",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Objects",
+      "folderPath": "folders/Objects.yy",
+      "name": "Objects",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Buttons",
+      "folderPath": "folders/Objects/Buttons.yy",
+      "name": "Buttons",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Battles",
+      "folderPath": "folders/Objects/Buttons/Battles.yy",
+      "name": "Battles",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Game",
+      "folderPath": "folders/Objects/Buttons/Game.yy",
+      "name": "Game",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Cards",
+      "folderPath": "folders/Objects/Cards.yy",
+      "name": "Cards",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Debug",
+      "folderPath": "folders/Objects/Debug.yy",
+      "name": "Debug",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Game Characters",
+      "folderPath": "folders/Objects/Game Characters.yy",
+      "name": "Game Characters",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Managers",
+      "folderPath": "folders/Objects/Managers.yy",
+      "name": "Managers",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Resources",
+      "folderPath": "folders/Objects/Resources.yy",
+      "name": "Resources",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Loaders",
+      "folderPath": "folders/Objects/Resources/Loaders.yy",
+      "name": "Loaders",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "UI",
+      "folderPath": "folders/Objects/UI.yy",
+      "name": "UI",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Particle Systems",
+      "folderPath": "folders/Particle Systems.yy",
+      "name": "Particle Systems",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Cards In Decks",
+      "folderPath": "folders/Particle Systems/Cards In Decks.yy",
+      "name": "Cards In Decks",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Winning",
+      "folderPath": "folders/Particle Systems/Winning.yy",
+      "name": "Winning",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Paths",
+      "folderPath": "folders/Paths.yy",
+      "name": "Paths",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Rooms",
+      "folderPath": "folders/Rooms.yy",
+      "name": "Rooms",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Scribble",
+      "folderPath": "folders/Scribble.yy",
+      "name": "Scribble",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "(System - don't call these functions)",
+      "folderPath": "folders/Scribble/(System - don't call these functions).yy",
+      "name": "(System - don't call these functions)",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Classes",
+      "folderPath": "folders/Scribble/(System - don't call these functions)/Classes.yy",
+      "name": "Classes",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Deprecated",
+      "folderPath": "folders/Scribble/(System - don't call these functions)/Deprecated.yy",
+      "name": "Deprecated",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Outline",
+      "folderPath": "folders/Scribble/(System - don't call these functions)/Deprecated/Outline.yy",
+      "name": "Outline",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Generator",
+      "folderPath": "folders/Scribble/(System - don't call these functions)/Generator.yy",
+      "name": "Generator",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Initialization",
+      "folderPath": "folders/Scribble/(System - don't call these functions)/Initialization.yy",
+      "name": "Initialization",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Shaders",
+      "folderPath": "folders/Scribble/(System - don't call these functions)/Shaders.yy",
+      "name": "Shaders",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Animation",
+      "folderPath": "folders/Scribble/Animation.yy",
+      "name": "Animation",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Colours",
+      "folderPath": "folders/Scribble/Colours.yy",
+      "name": "Colours",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Configuration - Please edit these!",
+      "folderPath": "folders/Scribble/Configuration - Please edit these!.yy",
+      "name": "Configuration - Please edit these!",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "External Assets",
+      "folderPath": "folders/Scribble/External Assets.yy",
+      "name": "External Assets",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Font Modification",
+      "folderPath": "folders/Scribble/Font Modification.yy",
+      "name": "Font Modification",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Fonts",
+      "folderPath": "folders/Scribble/Fonts.yy",
+      "name": "Fonts",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Legacy",
+      "folderPath": "folders/Scribble/Legacy.yy",
+      "name": "Legacy",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Miscellaneous",
+      "folderPath": "folders/Scribble/Miscellaneous.yy",
+      "name": "Miscellaneous",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Quick Functions",
+      "folderPath": "folders/Scribble/Quick Functions.yy",
+      "name": "Quick Functions",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Superfonts",
+      "folderPath": "folders/Scribble/Superfonts.yy",
+      "name": "Superfonts",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Scripts",
+      "folderPath": "folders/Scripts.yy",
+      "name": "Scripts",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Cards",
+      "folderPath": "folders/Scripts/Cards.yy",
+      "name": "Cards",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Enums",
+      "folderPath": "folders/Scripts/Enums.yy",
+      "name": "Enums",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Game Characters",
+      "folderPath": "folders/Scripts/Game Characters.yy",
+      "name": "Game Characters",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Traits",
+      "folderPath": "folders/Scripts/Game Characters/Traits.yy",
+      "name": "Traits",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Rooms",
+      "folderPath": "folders/Scripts/Rooms.yy",
+      "name": "Rooms",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Structs",
+      "folderPath": "folders/Scripts/Structs.yy",
+      "name": "Structs",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Utils",
+      "folderPath": "folders/Scripts/Utils.yy",
+      "name": "Utils",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Sequences",
+      "folderPath": "folders/Sequences.yy",
+      "name": "Sequences",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Lose",
+      "folderPath": "folders/Sequences/Lose.yy",
+      "name": "Lose",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Pause",
+      "folderPath": "folders/Sequences/Pause.yy",
+      "name": "Pause",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Title Screen",
+      "folderPath": "folders/Sequences/Title Screen.yy",
+      "name": "Title Screen",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "You Win",
+      "folderPath": "folders/Sequences/You Win.yy",
+      "name": "You Win",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Shaders",
+      "folderPath": "folders/Shaders.yy",
+      "name": "Shaders",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Sounds",
+      "folderPath": "folders/Sounds.yy",
+      "name": "Sounds",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Sprites",
+      "folderPath": "folders/Sprites.yy",
+      "name": "Sprites",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Cards",
+      "folderPath": "folders/Sprites/Cards.yy",
+      "name": "Cards",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Marks",
+      "folderPath": "folders/Sprites/Cards/Marks.yy",
+      "name": "Marks",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Statuses",
+      "folderPath": "folders/Sprites/Cards/Statuses.yy",
+      "name": "Statuses",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Test",
+      "folderPath": "folders/Sprites/Test.yy",
+      "name": "Test",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "UI",
+      "folderPath": "folders/Sprites/UI.yy",
+      "name": "UI",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Buttons",
+      "folderPath": "folders/Sprites/UI/Buttons.yy",
+      "name": "Buttons",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Tile Sets",
+      "folderPath": "folders/Tile Sets.yy",
+      "name": "Tile Sets",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMFolder": "",
+      "%Name": "Timelines",
+      "folderPath": "folders/Timelines.yy",
+      "name": "Timelines",
+      "resourceType": "GMFolder",
+      "resourceVersion": "2.0"
+    }
   ],
-  "ForcedPrefabProjectReferences":[],
-  "IncludedFiles":[
-    {"$GMIncludedFile":"","%Name":"scribble_license.txt","CopyToMask":-1,"filePath":"datafiles","name":"scribble_license.txt","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
+  "ForcedPrefabProjectReferences": [],
+  "IncludedFiles": [
+    {
+      "$GMIncludedFile": "",
+      "%Name": "scribble_license.txt",
+      "CopyToMask": -1,
+      "filePath": "datafiles",
+      "name": "scribble_license.txt",
+      "resourceType": "GMIncludedFile",
+      "resourceVersion": "2.0"
+    }
   ],
-  "isEcma":false,
-  "LibraryEmitters":[],
-  "MetaData":{
-    "IDEVersion":"2024.13.1.193",
+  "isEcma": false,
+  "LibraryEmitters": [],
+  "MetaData": {
+    "IDEVersion": "2024.13.1.193"
   },
-  "name":"NM4260",
-  "resources":[
-    {"id":{"name":"ac_card_enlarge","path":"animcurves/ac_card_enlarge/ac_card_enlarge.yy",},},
-    {"id":{"name":"ac_card_flip","path":"animcurves/ac_card_flip/ac_card_flip.yy",},},
-    {"id":{"name":"ac_enemy_weight_distance_coefficient","path":"animcurves/ac_enemy_weight_distance_coefficient/ac_enemy_weight_distance_coefficient.yy",},},
-    {"id":{"name":"ac_icon_scaling","path":"animcurves/ac_icon_scaling/ac_icon_scaling.yy",},},
-    {"id":{"name":"fnt_default_large","path":"fonts/fnt_default_large/fnt_default_large.yy",},},
-    {"id":{"name":"fnt_default","path":"fonts/fnt_default/fnt_default.yy",},},
-    {"id":{"name":"fnt_righteous","path":"fonts/fnt_righteous/fnt_righteous.yy",},},
-    {"id":{"name":"font_game_text_bf","path":"fonts/font_game_text_bf/font_game_text_bf.yy",},},
-    {"id":{"name":"font_game_text_bfit","path":"fonts/font_game_text_bfit/font_game_text_bfit.yy",},},
-    {"id":{"name":"font_game_text_it","path":"fonts/font_game_text_it/font_game_text_it.yy",},},
-    {"id":{"name":"font_game_text","path":"fonts/font_game_text/font_game_text.yy",},},
-    {"id":{"name":"scribble_fallback_font","path":"fonts/scribble_fallback_font/scribble_fallback_font.yy",},},
-    {"id":{"name":"bonfire_controller","path":"objects/bonfire_controller/bonfire_controller.yy",},},
-    {"id":{"name":"Controller","path":"objects/Controller/Controller.yy",},},
-    {"id":{"name":"DungeonRoom","path":"objects/DungeonRoom/DungeonRoom.yy",},},
-    {"id":{"name":"FogOfWar","path":"objects/FogOfWar/FogOfWar.yy",},},
-    {"id":{"name":"obj_backdrop","path":"objects/obj_backdrop/obj_backdrop.yy",},},
-    {"id":{"name":"obj_battle_character","path":"objects/obj_battle_character/obj_battle_character.yy",},},
-    {"id":{"name":"obj_battle_manager","path":"objects/obj_battle_manager/obj_battle_manager.yy",},},
-    {"id":{"name":"obj_button","path":"objects/obj_button/obj_button.yy",},},
-    {"id":{"name":"obj_card_drop_area","path":"objects/obj_card_drop_area/obj_card_drop_area.yy",},},
-    {"id":{"name":"obj_card_loot","path":"objects/obj_card_loot/obj_card_loot.yy",},},
-    {"id":{"name":"obj_card_pile","path":"objects/obj_card_pile/obj_card_pile.yy",},},
-    {"id":{"name":"obj_card_selector","path":"objects/obj_card_selector/obj_card_selector.yy",},},
-    {"id":{"name":"obj_card","path":"objects/obj_card/obj_card.yy",},},
-    {"id":{"name":"obj_confirm_button","path":"objects/obj_confirm_button/obj_confirm_button.yy",},},
-    {"id":{"name":"obj_deck_test","path":"objects/obj_deck_test/obj_deck_test.yy",},},
-    {"id":{"name":"obj_deck","path":"objects/obj_deck/obj_deck.yy",},},
-    {"id":{"name":"obj_discard_pile","path":"objects/obj_discard_pile/obj_discard_pile.yy",},},
-    {"id":{"name":"obj_draw_pile","path":"objects/obj_draw_pile/obj_draw_pile.yy",},},
-    {"id":{"name":"obj_end_battle_button","path":"objects/obj_end_battle_button/obj_end_battle_button.yy",},},
-    {"id":{"name":"obj_end_turn_button","path":"objects/obj_end_turn_button/obj_end_turn_button.yy",},},
-    {"id":{"name":"obj_enemy_card","path":"objects/obj_enemy_card/obj_enemy_card.yy",},},
-    {"id":{"name":"obj_enemy_draw_pile","path":"objects/obj_enemy_draw_pile/obj_enemy_draw_pile.yy",},},
-    {"id":{"name":"obj_enemy_status_indicator","path":"objects/obj_enemy_status_indicator/obj_enemy_status_indicator.yy",},},
-    {"id":{"name":"obj_enemy","path":"objects/obj_enemy/obj_enemy.yy",},},
-    {"id":{"name":"obj_floating_text","path":"objects/obj_floating_text/obj_floating_text.yy",},},
-    {"id":{"name":"obj_gameInit","path":"objects/obj_gameInit/obj_gameInit.yy",},},
-    {"id":{"name":"obj_hand","path":"objects/obj_hand/obj_hand.yy",},},
-    {"id":{"name":"obj_initial_card_pile","path":"objects/obj_initial_card_pile/obj_initial_card_pile.yy",},},
-    {"id":{"name":"obj_loot_panel","path":"objects/obj_loot_panel/obj_loot_panel.yy",},},
-    {"id":{"name":"obj_mark","path":"objects/obj_mark/obj_mark.yy",},},
-    {"id":{"name":"obj_modal_backdrop","path":"objects/obj_modal_backdrop/obj_modal_backdrop.yy",},},
-    {"id":{"name":"obj_mouse_debugger","path":"objects/obj_mouse_debugger/obj_mouse_debugger.yy",},},
-    {"id":{"name":"obj_mouse_manager","path":"objects/obj_mouse_manager/obj_mouse_manager.yy",},},
-    {"id":{"name":"obj_option_button","path":"objects/obj_option_button/obj_option_button.yy",},},
-    {"id":{"name":"obj_pickup_card","path":"objects/obj_pickup_card/obj_pickup_card.yy",},},
-    {"id":{"name":"obj_player_card","path":"objects/obj_player_card/obj_player_card.yy",},},
-    {"id":{"name":"obj_player_deck_manager","path":"objects/obj_player_deck_manager/obj_player_deck_manager.yy",},},
-    {"id":{"name":"obj_player_state","path":"objects/obj_player_state/obj_player_state.yy",},},
-    {"id":{"name":"obj_room_manager","path":"objects/obj_room_manager/obj_room_manager.yy",},},
-    {"id":{"name":"obj_start_game_run_button","path":"objects/obj_start_game_run_button/obj_start_game_run_button.yy",},},
-    {"id":{"name":"obj_status_indicator","path":"objects/obj_status_indicator/obj_status_indicator.yy",},},
-    {"id":{"name":"obj_status","path":"objects/obj_status/obj_status.yy",},},
-    {"id":{"name":"obj_tooltip","path":"objects/obj_tooltip/obj_tooltip.yy",},},
-    {"id":{"name":"obj_trait_loot","path":"objects/obj_trait_loot/obj_trait_loot.yy",},},
-    {"id":{"name":"obj_traits_manager","path":"objects/obj_traits_manager/obj_traits_manager.yy",},},
-    {"id":{"name":"obj_treasure_controller","path":"objects/obj_treasure_controller/obj_treasure_controller.yy",},},
-    {"id":{"name":"obj_ui_health_bar_enemy","path":"objects/obj_ui_health_bar_enemy/obj_ui_health_bar_enemy.yy",},},
-    {"id":{"name":"obj_ui_health_bar","path":"objects/obj_ui_health_bar/obj_ui_health_bar.yy",},},
-    {"id":{"name":"obj_vision_indicator","path":"objects/obj_vision_indicator/obj_vision_indicator.yy",},},
-    {"id":{"name":"obj_zone","path":"objects/obj_zone/obj_zone.yy",},},
-    {"id":{"name":"Player","path":"objects/Player/Player.yy",},},
-    {"id":{"name":"res_loader_alteration_cards","path":"objects/res_loader_alteration_cards/res_loader_alteration_cards.yy",},},
-    {"id":{"name":"res_loader_cards","path":"objects/res_loader_cards/res_loader_cards.yy",},},
-    {"id":{"name":"res_loader_destruction_cards","path":"objects/res_loader_destruction_cards/res_loader_destruction_cards.yy",},},
-    {"id":{"name":"res_loader_enchantment_cards","path":"objects/res_loader_enchantment_cards/res_loader_enchantment_cards.yy",},},
-    {"id":{"name":"res_loader_enemies","path":"objects/res_loader_enemies/res_loader_enemies.yy",},},
-    {"id":{"name":"res_loader_restoration_cards","path":"objects/res_loader_restoration_cards/res_loader_restoration_cards.yy",},},
-    {"id":{"name":"res_loader_spreadsheet","path":"objects/res_loader_spreadsheet/res_loader_spreadsheet.yy",},},
-    {"id":{"name":"res_loader_traits","path":"objects/res_loader_traits/res_loader_traits.yy",},},
-    {"id":{"name":"ps_all_cards_in_deck","path":"particles/ps_all_cards_in_deck/ps_all_cards_in_deck.yy",},},
-    {"id":{"name":"ps_auto_complete","path":"particles/ps_auto_complete/ps_auto_complete.yy",},},
-    {"id":{"name":"ps_card_highlight","path":"particles/ps_card_highlight/ps_card_highlight.yy",},},
-    {"id":{"name":"ps_card_in_club_pile","path":"particles/ps_card_in_club_pile/ps_card_in_club_pile.yy",},},
-    {"id":{"name":"ps_card_in_diamond_pile","path":"particles/ps_card_in_diamond_pile/ps_card_in_diamond_pile.yy",},},
-    {"id":{"name":"ps_card_in_heart_pile","path":"particles/ps_card_in_heart_pile/ps_card_in_heart_pile.yy",},},
-    {"id":{"name":"ps_card_in_spade_pile","path":"particles/ps_card_in_spade_pile/ps_card_in_spade_pile.yy",},},
-    {"id":{"name":"ps_card_placed","path":"particles/ps_card_placed/ps_card_placed.yy",},},
-    {"id":{"name":"ps_sparkle","path":"particles/ps_sparkle/ps_sparkle.yy",},},
-    {"id":{"name":"ps_suits_placed_on_deck","path":"particles/ps_suits_placed_on_deck/ps_suits_placed_on_deck.yy",},},
-    {"id":{"name":"ps_winning_confetti","path":"particles/ps_winning_confetti/ps_winning_confetti.yy",},},
-    {"id":{"name":"ps_winning_sparkle_passive","path":"particles/ps_winning_sparkle_passive/ps_winning_sparkle_passive.yy",},},
-    {"id":{"name":"ps_winning_sparkle","path":"particles/ps_winning_sparkle/ps_winning_sparkle.yy",},},
-    {"id":{"name":"rm_battle","path":"rooms/rm_battle/rm_battle.yy",},},
-    {"id":{"name":"rm_bonfire","path":"rooms/rm_bonfire/rm_bonfire.yy",},},
-    {"id":{"name":"rm_game_start","path":"rooms/rm_game_start/rm_game_start.yy",},},
-    {"id":{"name":"rm_main_menu","path":"rooms/rm_main_menu/rm_main_menu.yy",},},
-    {"id":{"name":"rm_play","path":"rooms/rm_play/rm_play.yy",},},
-    {"id":{"name":"rm_treasure","path":"rooms/rm_treasure/rm_treasure.yy",},},
-    {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
-    {"id":{"name":"__scribble_class_element","path":"scripts/__scribble_class_element/__scribble_class_element.yy",},},
-    {"id":{"name":"__scribble_class_event","path":"scripts/__scribble_class_event/__scribble_class_event.yy",},},
-    {"id":{"name":"__scribble_class_font","path":"scripts/__scribble_class_font/__scribble_class_font.yy",},},
-    {"id":{"name":"__scribble_class_generator_state","path":"scripts/__scribble_class_generator_state/__scribble_class_generator_state.yy",},},
-    {"id":{"name":"__scribble_class_line","path":"scripts/__scribble_class_line/__scribble_class_line.yy",},},
-    {"id":{"name":"__scribble_class_material","path":"scripts/__scribble_class_material/__scribble_class_material.yy",},},
-    {"id":{"name":"__scribble_class_model","path":"scripts/__scribble_class_model/__scribble_class_model.yy",},},
-    {"id":{"name":"__scribble_class_null_element","path":"scripts/__scribble_class_null_element/__scribble_class_null_element.yy",},},
-    {"id":{"name":"__scribble_class_page","path":"scripts/__scribble_class_page/__scribble_class_page.yy",},},
-    {"id":{"name":"__scribble_class_typist","path":"scripts/__scribble_class_typist/__scribble_class_typist.yy",},},
-    {"id":{"name":"__scribble_config_behaviours","path":"scripts/__scribble_config_behaviours/__scribble_config_behaviours.yy",},},
-    {"id":{"name":"__scribble_config_colours","path":"scripts/__scribble_config_colours/__scribble_config_colours.yy",},},
-    {"id":{"name":"__scribble_config_defaults","path":"scripts/__scribble_config_defaults/__scribble_config_defaults.yy",},},
-    {"id":{"name":"__scribble_constants","path":"scripts/__scribble_constants/__scribble_constants.yy",},},
-    {"id":{"name":"__scribble_font_add_all_from_bundle","path":"scripts/__scribble_font_add_all_from_bundle/__scribble_font_add_all_from_bundle.yy",},},
-    {"id":{"name":"__scribble_font_add_from_bundle","path":"scripts/__scribble_font_add_from_bundle/__scribble_font_add_from_bundle.yy",},},
-    {"id":{"name":"__scribble_font_add_from_info","path":"scripts/__scribble_font_add_from_info/__scribble_font_add_from_info.yy",},},
-    {"id":{"name":"__scribble_font_add_sprite","path":"scripts/__scribble_font_add_sprite/__scribble_font_add_sprite.yy",},},
-    {"id":{"name":"__scribble_gen_1_model_limits_and_bezier_curves","path":"scripts/__scribble_gen_1_model_limits_and_bezier_curves/__scribble_gen_1_model_limits_and_bezier_curves.yy",},},
-    {"id":{"name":"__scribble_gen_10_write_vbuffs","path":"scripts/__scribble_gen_10_write_vbuffs/__scribble_gen_10_write_vbuffs.yy",},},
-    {"id":{"name":"__scribble_gen_11_set_padding_flags","path":"scripts/__scribble_gen_11_set_padding_flags/__scribble_gen_11_set_padding_flags.yy",},},
-    {"id":{"name":"__scribble_gen_2_parser","path":"scripts/__scribble_gen_2_parser/__scribble_gen_2_parser.yy",},},
-    {"id":{"name":"__scribble_gen_3_devanagari","path":"scripts/__scribble_gen_3_devanagari/__scribble_gen_3_devanagari.yy",},},
-    {"id":{"name":"__scribble_gen_4_build_words","path":"scripts/__scribble_gen_4_build_words/__scribble_gen_4_build_words.yy",},},
-    {"id":{"name":"__scribble_gen_5_finalize_bidi","path":"scripts/__scribble_gen_5_finalize_bidi/__scribble_gen_5_finalize_bidi.yy",},},
-    {"id":{"name":"__scribble_gen_6_build_lines","path":"scripts/__scribble_gen_6_build_lines/__scribble_gen_6_build_lines.yy",},},
-    {"id":{"name":"__scribble_gen_7_build_pages","path":"scripts/__scribble_gen_7_build_pages/__scribble_gen_7_build_pages.yy",},},
-    {"id":{"name":"__scribble_gen_8_position_glyphs","path":"scripts/__scribble_gen_8_position_glyphs/__scribble_gen_8_position_glyphs.yy",},},
-    {"id":{"name":"__scribble_gen_9_build_vbuff_grids","path":"scripts/__scribble_gen_9_build_vbuff_grids/__scribble_gen_9_build_vbuff_grids.yy",},},
-    {"id":{"name":"__scribble_get_material","path":"scripts/__scribble_get_material/__scribble_get_material.yy",},},
-    {"id":{"name":"__scribble_glyph_data_initialize","path":"scripts/__scribble_glyph_data_initialize/__scribble_glyph_data_initialize.yy",},},
-    {"id":{"name":"__scribble_krutidev_lookup_map_initialize","path":"scripts/__scribble_krutidev_lookup_map_initialize/__scribble_krutidev_lookup_map_initialize.yy",},},
-    {"id":{"name":"__scribble_krutidev_matra_lookup_map_initialize","path":"scripts/__scribble_krutidev_matra_lookup_map_initialize/__scribble_krutidev_matra_lookup_map_initialize.yy",},},
-    {"id":{"name":"__scribble_make_material_key","path":"scripts/__scribble_make_material_key/__scribble_make_material_key.yy",},},
-    {"id":{"name":"__scribble_misc_functions","path":"scripts/__scribble_misc_functions/__scribble_misc_functions.yy",},},
-    {"id":{"name":"__scribble_no_preprocessing","path":"scripts/__scribble_no_preprocessing/__scribble_no_preprocessing.yy",},},
-    {"id":{"name":"__scribble_parse_sound_array_string","path":"scripts/__scribble_parse_sound_array_string/__scribble_parse_sound_array_string.yy",},},
-    {"id":{"name":"__scribble_play_sound","path":"scripts/__scribble_play_sound/__scribble_play_sound.yy",},},
-    {"id":{"name":"__scribble_sprite_get_material","path":"scripts/__scribble_sprite_get_material/__scribble_sprite_get_material.yy",},},
-    {"id":{"name":"__scribble_sprite_get_texture_index","path":"scripts/__scribble_sprite_get_texture_index/__scribble_sprite_get_texture_index.yy",},},
-    {"id":{"name":"__scribble_surface_get_material","path":"scripts/__scribble_surface_get_material/__scribble_surface_get_material.yy",},},
-    {"id":{"name":"__scribble_system","path":"scripts/__scribble_system/__scribble_system.yy",},},
-    {"id":{"name":"__scribble_texture_get_material","path":"scripts/__scribble_texture_get_material/__scribble_texture_get_material.yy",},},
-    {"id":{"name":"__scribble_texture_group_get_ready","path":"scripts/__scribble_texture_group_get_ready/__scribble_texture_group_get_ready.yy",},},
-    {"id":{"name":"__scribble_tick","path":"scripts/__scribble_tick/__scribble_tick.yy",},},
-    {"id":{"name":"CardData","path":"scripts/CardData/CardData.yy",},},
-    {"id":{"name":"CardPile","path":"scripts/CardPile/CardPile.yy",},},
-    {"id":{"name":"CardState","path":"scripts/CardState/CardState.yy",},},
-    {"id":{"name":"CollectionUtils","path":"scripts/CollectionUtils/CollectionUtils.yy",},},
-    {"id":{"name":"Deck","path":"scripts/Deck/Deck.yy",},},
-    {"id":{"name":"draw_text_scribble_ext","path":"scripts/draw_text_scribble_ext/draw_text_scribble_ext.yy",},},
-    {"id":{"name":"draw_text_scribble","path":"scripts/draw_text_scribble/draw_text_scribble.yy",},},
-    {"id":{"name":"DrawUtils","path":"scripts/DrawUtils/DrawUtils.yy",},},
-    {"id":{"name":"EventBus","path":"scripts/EventBus/EventBus.yy",},},
-    {"id":{"name":"Events","path":"scripts/Events/Events.yy",},},
-    {"id":{"name":"GameCharacterData","path":"scripts/GameCharacterData/GameCharacterData.yy",},},
-    {"id":{"name":"GameState","path":"scripts/GameState/GameState.yy",},},
-    {"id":{"name":"generate_from_grid","path":"scripts/generate_from_grid/generate_from_grid.yy",},},
-    {"id":{"name":"generate_map","path":"scripts/generate_map/generate_map.yy",},},
-    {"id":{"name":"Hand","path":"scripts/Hand/Hand.yy",},},
-    {"id":{"name":"initialize_map","path":"scripts/initialize_map/initialize_map.yy",},},
-    {"id":{"name":"map_cards_to_enemies","path":"scripts/map_cards_to_enemies/map_cards_to_enemies.yy",},},
-    {"id":{"name":"map_utils","path":"scripts/map_utils/map_utils.yy",},},
-    {"id":{"name":"Mark","path":"scripts/Mark/Mark.yy",},},
-    {"id":{"name":"menu_card_swap","path":"scripts/menu_card_swap/menu_card_swap.yy",},},
-    {"id":{"name":"place_card","path":"scripts/place_card/place_card.yy",},},
-    {"id":{"name":"rearrange_hand","path":"scripts/rearrange_hand/rearrange_hand.yy",},},
-    {"id":{"name":"reset_map","path":"scripts/reset_map/reset_map.yy",},},
-    {"id":{"name":"reveal_room","path":"scripts/reveal_room/reveal_room.yy",},},
-    {"id":{"name":"room_to_gui","path":"scripts/room_to_gui/room_to_gui.yy",},},
-    {"id":{"name":"RoomData","path":"scripts/RoomData/RoomData.yy",},},
-    {"id":{"name":"scribble_add_macro","path":"scripts/scribble_add_macro/scribble_add_macro.yy",},},
-    {"id":{"name":"scribble_anim_blink","path":"scripts/scribble_anim_blink/scribble_anim_blink.yy",},},
-    {"id":{"name":"scribble_anim_cycle","path":"scripts/scribble_anim_cycle/scribble_anim_cycle.yy",},},
-    {"id":{"name":"scribble_anim_disabled","path":"scripts/scribble_anim_disabled/scribble_anim_disabled.yy",},},
-    {"id":{"name":"scribble_anim_get_disabled","path":"scripts/scribble_anim_get_disabled/scribble_anim_get_disabled.yy",},},
-    {"id":{"name":"scribble_anim_jitter","path":"scripts/scribble_anim_jitter/scribble_anim_jitter.yy",},},
-    {"id":{"name":"scribble_anim_pulse","path":"scripts/scribble_anim_pulse/scribble_anim_pulse.yy",},},
-    {"id":{"name":"scribble_anim_rainbow","path":"scripts/scribble_anim_rainbow/scribble_anim_rainbow.yy",},},
-    {"id":{"name":"scribble_anim_reset","path":"scripts/scribble_anim_reset/scribble_anim_reset.yy",},},
-    {"id":{"name":"scribble_anim_shake","path":"scripts/scribble_anim_shake/scribble_anim_shake.yy",},},
-    {"id":{"name":"scribble_anim_wave","path":"scripts/scribble_anim_wave/scribble_anim_wave.yy",},},
-    {"id":{"name":"scribble_anim_wheel","path":"scripts/scribble_anim_wheel/scribble_anim_wheel.yy",},},
-    {"id":{"name":"scribble_anim_wobble","path":"scripts/scribble_anim_wobble/scribble_anim_wobble.yy",},},
-    {"id":{"name":"scribble_color_get","path":"scripts/scribble_color_get/scribble_color_get.yy",},},
-    {"id":{"name":"scribble_color_set","path":"scripts/scribble_color_set/scribble_color_set.yy",},},
-    {"id":{"name":"scribble_default_preprocessor_get","path":"scripts/scribble_default_preprocessor_get/scribble_default_preprocessor_get.yy",},},
-    {"id":{"name":"scribble_default_preprocessor_set","path":"scripts/scribble_default_preprocessor_set/scribble_default_preprocessor_set.yy",},},
-    {"id":{"name":"scribble_external_font_add","path":"scripts/scribble_external_font_add/scribble_external_font_add.yy",},},
-    {"id":{"name":"scribble_external_font_exists","path":"scripts/scribble_external_font_exists/scribble_external_font_exists.yy",},},
-    {"id":{"name":"scribble_external_font_remove","path":"scripts/scribble_external_font_remove/scribble_external_font_remove.yy",},},
-    {"id":{"name":"scribble_external_sound_add","path":"scripts/scribble_external_sound_add/scribble_external_sound_add.yy",},},
-    {"id":{"name":"scribble_external_sound_exists","path":"scripts/scribble_external_sound_exists/scribble_external_sound_exists.yy",},},
-    {"id":{"name":"scribble_external_sound_remove","path":"scripts/scribble_external_sound_remove/scribble_external_sound_remove.yy",},},
-    {"id":{"name":"scribble_external_sprite_add","path":"scripts/scribble_external_sprite_add/scribble_external_sprite_add.yy",},},
-    {"id":{"name":"scribble_external_sprite_exists","path":"scripts/scribble_external_sprite_exists/scribble_external_sprite_exists.yy",},},
-    {"id":{"name":"scribble_external_sprite_remove","path":"scripts/scribble_external_sprite_remove/scribble_external_sprite_remove.yy",},},
-    {"id":{"name":"scribble_flush_everything","path":"scripts/scribble_flush_everything/scribble_flush_everything.yy",},},
-    {"id":{"name":"scribble_flush_shader_uniforms","path":"scripts/scribble_flush_shader_uniforms/scribble_flush_shader_uniforms.yy",},},
-    {"id":{"name":"scribble_font_bake_outline_4dir","path":"scripts/scribble_font_bake_outline_4dir/scribble_font_bake_outline_4dir.yy",},},
-    {"id":{"name":"scribble_font_bake_outline_8dir_2px","path":"scripts/scribble_font_bake_outline_8dir_2px/scribble_font_bake_outline_8dir_2px.yy",},},
-    {"id":{"name":"scribble_font_bake_outline_8dir","path":"scripts/scribble_font_bake_outline_8dir/scribble_font_bake_outline_8dir.yy",},},
-    {"id":{"name":"scribble_font_bake_outline_and_shadow","path":"scripts/scribble_font_bake_outline_and_shadow/scribble_font_bake_outline_and_shadow.yy",},},
-    {"id":{"name":"scribble_font_bake_shader","path":"scripts/scribble_font_bake_shader/scribble_font_bake_shader.yy",},},
-    {"id":{"name":"scribble_font_bake_shadow","path":"scripts/scribble_font_bake_shadow/scribble_font_bake_shadow.yy",},},
-    {"id":{"name":"scribble_font_delete","path":"scripts/scribble_font_delete/scribble_font_delete.yy",},},
-    {"id":{"name":"scribble_font_duplicate","path":"scripts/scribble_font_duplicate/scribble_font_duplicate.yy",},},
-    {"id":{"name":"scribble_font_exists","path":"scripts/scribble_font_exists/scribble_font_exists.yy",},},
-    {"id":{"name":"scribble_font_force_bilinear_filtering","path":"scripts/scribble_font_force_bilinear_filtering/scribble_font_force_bilinear_filtering.yy",},},
-    {"id":{"name":"scribble_font_get_default","path":"scripts/scribble_font_get_default/scribble_font_get_default.yy",},},
-    {"id":{"name":"scribble_font_get_glyph_ranges","path":"scripts/scribble_font_get_glyph_ranges/scribble_font_get_glyph_ranges.yy",},},
-    {"id":{"name":"scribble_font_get_remap","path":"scripts/scribble_font_get_remap/scribble_font_get_remap.yy",},},
-    {"id":{"name":"scribble_font_has_character","path":"scripts/scribble_font_has_character/scribble_font_has_character.yy",},},
-    {"id":{"name":"scribble_font_rename","path":"scripts/scribble_font_rename/scribble_font_rename.yy",},},
-    {"id":{"name":"scribble_font_scale","path":"scripts/scribble_font_scale/scribble_font_scale.yy",},},
-    {"id":{"name":"scribble_font_set_default","path":"scripts/scribble_font_set_default/scribble_font_set_default.yy",},},
-    {"id":{"name":"scribble_font_set_halign_offset","path":"scripts/scribble_font_set_halign_offset/scribble_font_set_halign_offset.yy",},},
-    {"id":{"name":"scribble_font_set_remap","path":"scripts/scribble_font_set_remap/scribble_font_set_remap.yy",},},
-    {"id":{"name":"scribble_font_set_style_family","path":"scripts/scribble_font_set_style_family/scribble_font_set_style_family.yy",},},
-    {"id":{"name":"scribble_font_set_valign_offset","path":"scripts/scribble_font_set_valign_offset/scribble_font_set_valign_offset.yy",},},
-    {"id":{"name":"scribble_glyph_get","path":"scripts/scribble_glyph_get/scribble_glyph_get.yy",},},
-    {"id":{"name":"scribble_glyph_set","path":"scripts/scribble_glyph_set/scribble_glyph_set.yy",},},
-    {"id":{"name":"scribble_initialize","path":"scripts/scribble_initialize/scribble_initialize.yy",},},
-    {"id":{"name":"scribble_is_text_element","path":"scripts/scribble_is_text_element/scribble_is_text_element.yy",},},
-    {"id":{"name":"scribble_kerning_pair_get","path":"scripts/scribble_kerning_pair_get/scribble_kerning_pair_get.yy",},},
-    {"id":{"name":"scribble_kerning_pair_set","path":"scripts/scribble_kerning_pair_set/scribble_kerning_pair_set.yy",},},
-    {"id":{"name":"scribble_markdown_format","path":"scripts/scribble_markdown_format/scribble_markdown_format.yy",},},
-    {"id":{"name":"scribble_markdown_set_styles","path":"scripts/scribble_markdown_set_styles/scribble_markdown_set_styles.yy",},},
-    {"id":{"name":"scribble_msdf_thickness_offset","path":"scripts/scribble_msdf_thickness_offset/scribble_msdf_thickness_offset.yy",},},
-    {"id":{"name":"scribble_refresh_everything","path":"scripts/scribble_refresh_everything/scribble_refresh_everything.yy",},},
-    {"id":{"name":"scribble_rgb_to_bgr","path":"scripts/scribble_rgb_to_bgr/scribble_rgb_to_bgr.yy",},},
-    {"id":{"name":"scribble_super_clear","path":"scripts/scribble_super_clear/scribble_super_clear.yy",},},
-    {"id":{"name":"scribble_super_create","path":"scripts/scribble_super_create/scribble_super_create.yy",},},
-    {"id":{"name":"scribble_super_glyph_copy_all","path":"scripts/scribble_super_glyph_copy_all/scribble_super_glyph_copy_all.yy",},},
-    {"id":{"name":"scribble_super_glyph_copy","path":"scripts/scribble_super_glyph_copy/scribble_super_glyph_copy.yy",},},
-    {"id":{"name":"scribble_super_glyph_delete","path":"scripts/scribble_super_glyph_delete/scribble_super_glyph_delete.yy",},},
-    {"id":{"name":"scribble_typist","path":"scripts/scribble_typist/scribble_typist.yy",},},
-    {"id":{"name":"scribble_typists_add_event","path":"scripts/scribble_typists_add_event/scribble_typists_add_event.yy",},},
-    {"id":{"name":"scribble_whitelist_sound","path":"scripts/scribble_whitelist_sound/scribble_whitelist_sound.yy",},},
-    {"id":{"name":"scribble_whitelist_sprite","path":"scripts/scribble_whitelist_sprite/scribble_whitelist_sprite.yy",},},
-    {"id":{"name":"scribble","path":"scripts/scribble/scribble.yy",},},
-    {"id":{"name":"Status","path":"scripts/Status/Status.yy",},},
-    {"id":{"name":"string_height_scribble_ext","path":"scripts/string_height_scribble_ext/string_height_scribble_ext.yy",},},
-    {"id":{"name":"string_height_scribble","path":"scripts/string_height_scribble/string_height_scribble.yy",},},
-    {"id":{"name":"string_length_scribble","path":"scripts/string_length_scribble/string_length_scribble.yy",},},
-    {"id":{"name":"string_width_scribble_ext","path":"scripts/string_width_scribble_ext/string_width_scribble_ext.yy",},},
-    {"id":{"name":"string_width_scribble","path":"scripts/string_width_scribble/string_width_scribble.yy",},},
-    {"id":{"name":"text_styles","path":"scripts/text_styles/text_styles.yy",},},
-    {"id":{"name":"Trait","path":"scripts/Trait/Trait.yy",},},
-    {"id":{"name":"transfer_between_piles","path":"scripts/transfer_between_piles/transfer_between_piles.yy",},},
-    {"id":{"name":"transfer_stack","path":"scripts/transfer_stack/transfer_stack.yy",},},
-    {"id":{"name":"update_room_icon","path":"scripts/update_room_icon/update_room_icon.yy",},},
-    {"id":{"name":"seq_3_card_draw","path":"sequences/seq_3_card_draw/seq_3_card_draw.yy",},},
-    {"id":{"name":"seq_auto_complete_pop_up","path":"sequences/seq_auto_complete_pop_up/seq_auto_complete_pop_up.yy",},},
-    {"id":{"name":"seq_card_fan","path":"sequences/seq_card_fan/seq_card_fan.yy",},},
-    {"id":{"name":"seq_card_reveal","path":"sequences/seq_card_reveal/seq_card_reveal.yy",},},
-    {"id":{"name":"seq_pause_pop_up_old","path":"sequences/seq_pause_pop_up_old/seq_pause_pop_up_old.yy",},},
-    {"id":{"name":"seq_pause_pop_up","path":"sequences/seq_pause_pop_up/seq_pause_pop_up.yy",},},
-    {"id":{"name":"seq_you_lose_button_pop_up","path":"sequences/seq_you_lose_button_pop_up/seq_you_lose_button_pop_up.yy",},},
-    {"id":{"name":"seq_you_lose","path":"sequences/seq_you_lose/seq_you_lose.yy",},},
-    {"id":{"name":"seq_you_win_pop_up","path":"sequences/seq_you_win_pop_up/seq_you_win_pop_up.yy",},},
-    {"id":{"name":"__shd_scribble_bake_effect_4dir","path":"shaders/__shd_scribble_bake_effect_4dir/__shd_scribble_bake_effect_4dir.yy",},},
-    {"id":{"name":"__shd_scribble_bake_effect_8dir_2px","path":"shaders/__shd_scribble_bake_effect_8dir_2px/__shd_scribble_bake_effect_8dir_2px.yy",},},
-    {"id":{"name":"__shd_scribble_bake_effect_8dir","path":"shaders/__shd_scribble_bake_effect_8dir/__shd_scribble_bake_effect_8dir.yy",},},
-    {"id":{"name":"__shd_scribble_bake_effect_no_outline","path":"shaders/__shd_scribble_bake_effect_no_outline/__shd_scribble_bake_effect_no_outline.yy",},},
-    {"id":{"name":"__shd_scribble_bake_outline_4dir","path":"shaders/__shd_scribble_bake_outline_4dir/__shd_scribble_bake_outline_4dir.yy",},},
-    {"id":{"name":"__shd_scribble_bake_outline_8dir_2px","path":"shaders/__shd_scribble_bake_outline_8dir_2px/__shd_scribble_bake_outline_8dir_2px.yy",},},
-    {"id":{"name":"__shd_scribble_bake_outline_8dir","path":"shaders/__shd_scribble_bake_outline_8dir/__shd_scribble_bake_outline_8dir.yy",},},
-    {"id":{"name":"__shd_scribble_bake_shadow","path":"shaders/__shd_scribble_bake_shadow/__shd_scribble_bake_shadow.yy",},},
-    {"id":{"name":"__shd_scribble","path":"shaders/__shd_scribble/__shd_scribble.yy",},},
-    {"id":{"name":"snd_button_hover","path":"sounds/snd_button_hover/snd_button_hover.yy",},},
-    {"id":{"name":"snd_button_press","path":"sounds/snd_button_press/snd_button_press.yy",},},
-    {"id":{"name":"snd_card_deck_shuffle","path":"sounds/snd_card_deck_shuffle/snd_card_deck_shuffle.yy",},},
-    {"id":{"name":"snd_card_flip_1","path":"sounds/snd_card_flip_1/snd_card_flip_1.yy",},},
-    {"id":{"name":"snd_card_flip_2","path":"sounds/snd_card_flip_2/snd_card_flip_2.yy",},},
-    {"id":{"name":"snd_game_lose","path":"sounds/snd_game_lose/snd_game_lose.yy",},},
-    {"id":{"name":"snd_game_music","path":"sounds/snd_game_music/snd_game_music.yy",},},
-    {"id":{"name":"snd_game_win","path":"sounds/snd_game_win/snd_game_win.yy",},},
-    {"id":{"name":"snd_main_menu_music","path":"sounds/snd_main_menu_music/snd_main_menu_music.yy",},},
-    {"id":{"name":"snd_one_card_placed_1","path":"sounds/snd_one_card_placed_1/snd_one_card_placed_1.yy",},},
-    {"id":{"name":"snd_one_card_placed_2","path":"sounds/snd_one_card_placed_2/snd_one_card_placed_2.yy",},},
-    {"id":{"name":"snd_one_card_placed_3","path":"sounds/snd_one_card_placed_3/snd_one_card_placed_3.yy",},},
-    {"id":{"name":"snd_one_card_placed_4","path":"sounds/snd_one_card_placed_4/snd_one_card_placed_4.yy",},},
-    {"id":{"name":"snd_pause","path":"sounds/snd_pause/snd_pause.yy",},},
-    {"id":{"name":"snd_start_game_button","path":"sounds/snd_start_game_button/snd_start_game_button.yy",},},
-    {"id":{"name":"snd_three_cards_placed","path":"sounds/snd_three_cards_placed/snd_three_cards_placed.yy",},},
-    {"id":{"name":"snd_title_cards_animation","path":"sounds/snd_title_cards_animation/snd_title_cards_animation.yy",},},
-    {"id":{"name":"scribble_fallback_bulletpoint","path":"sprites/scribble_fallback_bulletpoint/scribble_fallback_bulletpoint.yy",},},
-    {"id":{"name":"spr_bg_demo","path":"sprites/spr_bg_demo/spr_bg_demo.yy",},},
-    {"id":{"name":"spr_bleed_small","path":"sprites/spr_bleed_small/spr_bleed_small.yy",},},
-    {"id":{"name":"spr_bleed","path":"sprites/spr_bleed/spr_bleed.yy",},},
-    {"id":{"name":"spr_bonfire","path":"sprites/spr_bonfire/spr_bonfire.yy",},},
-    {"id":{"name":"spr_burn_small","path":"sprites/spr_burn_small/spr_burn_small.yy",},},
-    {"id":{"name":"spr_burn","path":"sprites/spr_burn/spr_burn.yy",},},
-    {"id":{"name":"spr_button","path":"sprites/spr_button/spr_button.yy",},},
-    {"id":{"name":"spr_card_curse_of_old_gods","path":"sprites/spr_card_curse_of_old_gods/spr_card_curse_of_old_gods.yy",},},
-    {"id":{"name":"spr_card_demo","path":"sprites/spr_card_demo/spr_card_demo.yy",},},
-    {"id":{"name":"spr_card_earthquake","path":"sprites/spr_card_earthquake/spr_card_earthquake.yy",},},
-    {"id":{"name":"spr_card_fire_healing","path":"sprites/spr_card_fire_healing/spr_card_fire_healing.yy",},},
-    {"id":{"name":"spr_card_fire_storm","path":"sprites/spr_card_fire_storm/spr_card_fire_storm.yy",},},
-    {"id":{"name":"spr_card_fireball","path":"sprites/spr_card_fireball/spr_card_fireball.yy",},},
-    {"id":{"name":"spr_card_flame_shield","path":"sprites/spr_card_flame_shield/spr_card_flame_shield.yy",},},
-    {"id":{"name":"spr_card_force_of_nature","path":"sprites/spr_card_force_of_nature/spr_card_force_of_nature.yy",},},
-    {"id":{"name":"spr_card_forest_shield","path":"sprites/spr_card_forest_shield/spr_card_forest_shield.yy",},},
-    {"id":{"name":"spr_card_grass_healing","path":"sprites/spr_card_grass_healing/spr_card_grass_healing.yy",},},
-    {"id":{"name":"spr_card_healing","path":"sprites/spr_card_healing/spr_card_healing.yy",},},
-    {"id":{"name":"spr_card_icycles","path":"sprites/spr_card_icycles/spr_card_icycles.yy",},},
-    {"id":{"name":"spr_card_rainstorm","path":"sprites/spr_card_rainstorm/spr_card_rainstorm.yy",},},
-    {"id":{"name":"spr_card_reap","path":"sprites/spr_card_reap/spr_card_reap.yy",},},
-    {"id":{"name":"spr_card_scorch","path":"sprites/spr_card_scorch/spr_card_scorch.yy",},},
-    {"id":{"name":"spr_card_stroke_blur","path":"sprites/spr_card_stroke_blur/spr_card_stroke_blur.yy",},},
-    {"id":{"name":"spr_card_stroke_with_blur","path":"sprites/spr_card_stroke_with_blur/spr_card_stroke_with_blur.yy",},},
-    {"id":{"name":"spr_card_stroke","path":"sprites/spr_card_stroke/spr_card_stroke.yy",},},
-    {"id":{"name":"spr_card_ward","path":"sprites/spr_card_ward/spr_card_ward.yy",},},
-    {"id":{"name":"spr_card_water_healing","path":"sprites/spr_card_water_healing/spr_card_water_healing.yy",},},
-    {"id":{"name":"spr_card_water_shield","path":"sprites/spr_card_water_shield/spr_card_water_shield.yy",},},
-    {"id":{"name":"spr_coalesence_small","path":"sprites/spr_coalesence_small/spr_coalesence_small.yy",},},
-    {"id":{"name":"spr_coalesence","path":"sprites/spr_coalesence/spr_coalesence.yy",},},
-    {"id":{"name":"spr_cross_overlay","path":"sprites/spr_cross_overlay/spr_cross_overlay.yy",},},
-    {"id":{"name":"spr_dungeonRoom","path":"sprites/spr_dungeonRoom/spr_dungeonRoom.yy",},},
-    {"id":{"name":"spr_endRoom","path":"sprites/spr_endRoom/spr_endRoom.yy",},},
-    {"id":{"name":"spr_enemyRoom","path":"sprites/spr_enemyRoom/spr_enemyRoom.yy",},},
-    {"id":{"name":"spr_frozen_small","path":"sprites/spr_frozen_small/spr_frozen_small.yy",},},
-    {"id":{"name":"spr_frozen","path":"sprites/spr_frozen/spr_frozen.yy",},},
-    {"id":{"name":"spr_health_bar","path":"sprites/spr_health_bar/spr_health_bar.yy",},},
-    {"id":{"name":"spr_mark_fire_small","path":"sprites/spr_mark_fire_small/spr_mark_fire_small.yy",},},
-    {"id":{"name":"spr_mark_fire","path":"sprites/spr_mark_fire/spr_mark_fire.yy",},},
-    {"id":{"name":"spr_mark_grass_small","path":"sprites/spr_mark_grass_small/spr_mark_grass_small.yy",},},
-    {"id":{"name":"spr_mark_grass","path":"sprites/spr_mark_grass/spr_mark_grass.yy",},},
-    {"id":{"name":"spr_mark_ice_small","path":"sprites/spr_mark_ice_small/spr_mark_ice_small.yy",},},
-    {"id":{"name":"spr_mark_ice","path":"sprites/spr_mark_ice/spr_mark_ice.yy",},},
-    {"id":{"name":"spr_mark_lightning_small","path":"sprites/spr_mark_lightning_small/spr_mark_lightning_small.yy",},},
-    {"id":{"name":"spr_mark_water_small","path":"sprites/spr_mark_water_small/spr_mark_water_small.yy",},},
-    {"id":{"name":"spr_mark_water","path":"sprites/spr_mark_water/spr_mark_water.yy",},},
-    {"id":{"name":"spr_modal_backdrop","path":"sprites/spr_modal_backdrop/spr_modal_backdrop.yy",},},
-    {"id":{"name":"spr_none","path":"sprites/spr_none/spr_none.yy",},},
-    {"id":{"name":"spr_option_button","path":"sprites/spr_option_button/spr_option_button.yy",},},
-    {"id":{"name":"spr_panel","path":"sprites/spr_panel/spr_panel.yy",},},
-    {"id":{"name":"spr_paralysed_small","path":"sprites/spr_paralysed_small/spr_paralysed_small.yy",},},
-    {"id":{"name":"spr_paralysed","path":"sprites/spr_paralysed/spr_paralysed.yy",},},
-    {"id":{"name":"spr_poison_small","path":"sprites/spr_poison_small/spr_poison_small.yy",},},
-    {"id":{"name":"spr_poison","path":"sprites/spr_poison/spr_poison.yy",},},
-    {"id":{"name":"spr_reveal_tooltip","path":"sprites/spr_reveal_tooltip/spr_reveal_tooltip.yy",},},
-    {"id":{"name":"spr_shield_small","path":"sprites/spr_shield_small/spr_shield_small.yy",},},
-    {"id":{"name":"spr_shield","path":"sprites/spr_shield/spr_shield.yy",},},
-    {"id":{"name":"spr_startRoom","path":"sprites/spr_startRoom/spr_startRoom.yy",},},
-    {"id":{"name":"spr_strength_small","path":"sprites/spr_strength_small/spr_strength_small.yy",},},
-    {"id":{"name":"spr_strength","path":"sprites/spr_strength/spr_strength.yy",},},
-    {"id":{"name":"spr_transparent_box","path":"sprites/spr_transparent_box/spr_transparent_box.yy",},},
-    {"id":{"name":"spr_treasureRoom","path":"sprites/spr_treasureRoom/spr_treasureRoom.yy",},},
-    {"id":{"name":"Sprite2","path":"sprites/Sprite2/Sprite2.yy",},},
+  "name": "NM4260",
+  "resources": [
+    {
+      "id": {
+        "name": "ac_card_enlarge",
+        "path": "animcurves/ac_card_enlarge/ac_card_enlarge.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "ac_card_flip",
+        "path": "animcurves/ac_card_flip/ac_card_flip.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "ac_enemy_weight_distance_coefficient",
+        "path": "animcurves/ac_enemy_weight_distance_coefficient/ac_enemy_weight_distance_coefficient.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "ac_icon_scaling",
+        "path": "animcurves/ac_icon_scaling/ac_icon_scaling.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "fnt_default_large",
+        "path": "fonts/fnt_default_large/fnt_default_large.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "fnt_default",
+        "path": "fonts/fnt_default/fnt_default.yy"
+      }
+    },
+    {
+      "id": { "name": "fnt_header", "path": "fonts/fnt_header/fnt_header.yy" }
+    },
+    {
+      "id": {
+        "name": "fnt_righteous",
+        "path": "fonts/fnt_righteous/fnt_righteous.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "font_game_text_bf",
+        "path": "fonts/font_game_text_bf/font_game_text_bf.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "font_game_text_bfit",
+        "path": "fonts/font_game_text_bfit/font_game_text_bfit.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "font_game_text_it",
+        "path": "fonts/font_game_text_it/font_game_text_it.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "font_game_text",
+        "path": "fonts/font_game_text/font_game_text.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_fallback_font",
+        "path": "fonts/scribble_fallback_font/scribble_fallback_font.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "bonfire_controller",
+        "path": "objects/bonfire_controller/bonfire_controller.yy"
+      }
+    },
+    {
+      "id": { "name": "Controller", "path": "objects/Controller/Controller.yy" }
+    },
+    {
+      "id": {
+        "name": "DungeonRoom",
+        "path": "objects/DungeonRoom/DungeonRoom.yy"
+      }
+    },
+    { "id": { "name": "FogOfWar", "path": "objects/FogOfWar/FogOfWar.yy" } },
+    {
+      "id": {
+        "name": "obj_backdrop",
+        "path": "objects/obj_backdrop/obj_backdrop.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "obj_battle_character",
+        "path": "objects/obj_battle_character/obj_battle_character.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "obj_battle_manager",
+        "path": "objects/obj_battle_manager/obj_battle_manager.yy"
+      }
+    },
+    {
+      "id": { "name": "obj_button", "path": "objects/obj_button/obj_button.yy" }
+    },
+    {
+      "id": {
+        "name": "obj_card_drop_area",
+        "path": "objects/obj_card_drop_area/obj_card_drop_area.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "obj_card_loot",
+        "path": "objects/obj_card_loot/obj_card_loot.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "obj_card_pile",
+        "path": "objects/obj_card_pile/obj_card_pile.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "obj_card_selector",
+        "path": "objects/obj_card_selector/obj_card_selector.yy"
+      }
+    },
+    { "id": { "name": "obj_card", "path": "objects/obj_card/obj_card.yy" } },
+    {
+      "id": {
+        "name": "obj_deck_drawer_card",
+        "path": "objects/obj_deck_drawer_card/obj_deck_drawer_card.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "obj_deck_drawer",
+        "path": "objects/obj_deck_drawer/obj_deck_drawer.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "obj_confirm_button",
+        "path": "objects/obj_confirm_button/obj_confirm_button.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "obj_deck_test",
+        "path": "objects/obj_deck_test/obj_deck_test.yy"
+      }
+    },
+    { "id": { "name": "obj_deck", "path": "objects/obj_deck/obj_deck.yy" } },
+    {
+      "id": {
+        "name": "obj_discard_pile",
+        "path": "objects/obj_discard_pile/obj_discard_pile.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "obj_draw_pile",
+        "path": "objects/obj_draw_pile/obj_draw_pile.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "obj_encounter_button",
+        "path": "objects/obj_encounter_button/obj_encounter_button.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "obj_encounter_controller",
+        "path": "objects/obj_encounter_controller/obj_encounter_controller.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "obj_encounter_display",
+        "path": "objects/obj_encounter_display/obj_encounter_display.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "obj_end_battle_button",
+        "path": "objects/obj_end_battle_button/obj_end_battle_button.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "obj_end_turn_button",
+        "path": "objects/obj_end_turn_button/obj_end_turn_button.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "obj_enemy_card",
+        "path": "objects/obj_enemy_card/obj_enemy_card.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "obj_enemy_draw_pile",
+        "path": "objects/obj_enemy_draw_pile/obj_enemy_draw_pile.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "obj_enemy_status_indicator",
+        "path": "objects/obj_enemy_status_indicator/obj_enemy_status_indicator.yy"
+      }
+    },
+    { "id": { "name": "obj_enemy", "path": "objects/obj_enemy/obj_enemy.yy" } },
+    {
+      "id": {
+        "name": "obj_floating_text",
+        "path": "objects/obj_floating_text/obj_floating_text.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "obj_gameInit",
+        "path": "objects/obj_gameInit/obj_gameInit.yy"
+      }
+    },
+    { "id": { "name": "obj_hand", "path": "objects/obj_hand/obj_hand.yy" } },
+    {
+      "id": {
+        "name": "obj_initial_card_pile",
+        "path": "objects/obj_initial_card_pile/obj_initial_card_pile.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "obj_loot_panel",
+        "path": "objects/obj_loot_panel/obj_loot_panel.yy"
+      }
+    },
+    { "id": { "name": "obj_mark", "path": "objects/obj_mark/obj_mark.yy" } },
+    {
+      "id": {
+        "name": "obj_modal_backdrop",
+        "path": "objects/obj_modal_backdrop/obj_modal_backdrop.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "obj_mouse_debugger",
+        "path": "objects/obj_mouse_debugger/obj_mouse_debugger.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "obj_mouse_manager",
+        "path": "objects/obj_mouse_manager/obj_mouse_manager.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "obj_option_button",
+        "path": "objects/obj_option_button/obj_option_button.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "obj_pickup_card",
+        "path": "objects/obj_pickup_card/obj_pickup_card.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "obj_player_card",
+        "path": "objects/obj_player_card/obj_player_card.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "obj_player_deck_manager",
+        "path": "objects/obj_player_deck_manager/obj_player_deck_manager.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "obj_player_state",
+        "path": "objects/obj_player_state/obj_player_state.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "obj_room_manager",
+        "path": "objects/obj_room_manager/obj_room_manager.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "obj_shop_card",
+        "path": "objects/obj_shop_card/obj_shop_card.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "obj_shop_controlloer",
+        "path": "objects/obj_shop_controlloer/obj_shop_controlloer.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "obj_start_game_run_button",
+        "path": "objects/obj_start_game_run_button/obj_start_game_run_button.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "obj_status_indicator",
+        "path": "objects/obj_status_indicator/obj_status_indicator.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "obj_treasure_card",
+        "path": "objects/obj_treasure_card/obj_treasure_card.yy"
+      }
+    },
+    {
+      "id": { "name": "obj_status", "path": "objects/obj_status/obj_status.yy" }
+    },
+    {
+      "id": {
+        "name": "obj_tooltip",
+        "path": "objects/obj_tooltip/obj_tooltip.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "obj_trait_loot",
+        "path": "objects/obj_trait_loot/obj_trait_loot.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "obj_traits_manager",
+        "path": "objects/obj_traits_manager/obj_traits_manager.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "obj_treasure_controller",
+        "path": "objects/obj_treasure_controller/obj_treasure_controller.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "obj_ui_health_bar_enemy",
+        "path": "objects/obj_ui_health_bar_enemy/obj_ui_health_bar_enemy.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "obj_ui_health_bar",
+        "path": "objects/obj_ui_health_bar/obj_ui_health_bar.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "obj_vision_indicator",
+        "path": "objects/obj_vision_indicator/obj_vision_indicator.yy"
+      }
+    },
+    { "id": { "name": "obj_zone", "path": "objects/obj_zone/obj_zone.yy" } },
+    { "id": { "name": "Player", "path": "objects/Player/Player.yy" } },
+    {
+      "id": {
+        "name": "res_loader_alteration_cards",
+        "path": "objects/res_loader_alteration_cards/res_loader_alteration_cards.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "res_loader_cards",
+        "path": "objects/res_loader_cards/res_loader_cards.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "res_loader_destruction_cards",
+        "path": "objects/res_loader_destruction_cards/res_loader_destruction_cards.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "res_loader_enchantment_cards",
+        "path": "objects/res_loader_enchantment_cards/res_loader_enchantment_cards.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "res_loader_enemies",
+        "path": "objects/res_loader_enemies/res_loader_enemies.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "res_loader_restoration_cards",
+        "path": "objects/res_loader_restoration_cards/res_loader_restoration_cards.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "res_loader_spreadsheet",
+        "path": "objects/res_loader_spreadsheet/res_loader_spreadsheet.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "res_loader_traits",
+        "path": "objects/res_loader_traits/res_loader_traits.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "ps_all_cards_in_deck",
+        "path": "particles/ps_all_cards_in_deck/ps_all_cards_in_deck.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "ps_auto_complete",
+        "path": "particles/ps_auto_complete/ps_auto_complete.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "ps_card_highlight",
+        "path": "particles/ps_card_highlight/ps_card_highlight.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "ps_card_in_club_pile",
+        "path": "particles/ps_card_in_club_pile/ps_card_in_club_pile.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "ps_card_in_diamond_pile",
+        "path": "particles/ps_card_in_diamond_pile/ps_card_in_diamond_pile.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "ps_card_in_heart_pile",
+        "path": "particles/ps_card_in_heart_pile/ps_card_in_heart_pile.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "ps_card_in_spade_pile",
+        "path": "particles/ps_card_in_spade_pile/ps_card_in_spade_pile.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "ps_card_placed",
+        "path": "particles/ps_card_placed/ps_card_placed.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "ps_sparkle",
+        "path": "particles/ps_sparkle/ps_sparkle.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "ps_suits_placed_on_deck",
+        "path": "particles/ps_suits_placed_on_deck/ps_suits_placed_on_deck.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "ps_winning_confetti",
+        "path": "particles/ps_winning_confetti/ps_winning_confetti.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "ps_winning_sparkle_passive",
+        "path": "particles/ps_winning_sparkle_passive/ps_winning_sparkle_passive.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "ps_winning_sparkle",
+        "path": "particles/ps_winning_sparkle/ps_winning_sparkle.yy"
+      }
+    },
+    { "id": { "name": "rm_battle", "path": "rooms/rm_battle/rm_battle.yy" } },
+    {
+      "id": { "name": "rm_bonfire", "path": "rooms/rm_bonfire/rm_bonfire.yy" }
+    },
+    {
+      "id": {
+        "name": "rm_encounter",
+        "path": "rooms/rm_encounter/rm_encounter.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "rm_game_start",
+        "path": "rooms/rm_game_start/rm_game_start.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "rm_main_menu",
+        "path": "rooms/rm_main_menu/rm_main_menu.yy"
+      }
+    },
+    { "id": { "name": "rm_play", "path": "rooms/rm_play/rm_play.yy" } },
+    { "id": { "name": "rm_shop", "path": "rooms/rm_shop/rm_shop.yy" } },
+    {
+      "id": {
+        "name": "rm_treasure",
+        "path": "rooms/rm_treasure/rm_treasure.yy"
+      }
+    },
+    { "id": { "name": "Room1", "path": "rooms/Room1/Room1.yy" } },
+    {
+      "id": {
+        "name": "__scribble_class_element",
+        "path": "scripts/__scribble_class_element/__scribble_class_element.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_class_event",
+        "path": "scripts/__scribble_class_event/__scribble_class_event.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_class_font",
+        "path": "scripts/__scribble_class_font/__scribble_class_font.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_class_generator_state",
+        "path": "scripts/__scribble_class_generator_state/__scribble_class_generator_state.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_class_line",
+        "path": "scripts/__scribble_class_line/__scribble_class_line.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_class_material",
+        "path": "scripts/__scribble_class_material/__scribble_class_material.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_class_model",
+        "path": "scripts/__scribble_class_model/__scribble_class_model.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_class_null_element",
+        "path": "scripts/__scribble_class_null_element/__scribble_class_null_element.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_class_page",
+        "path": "scripts/__scribble_class_page/__scribble_class_page.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_class_typist",
+        "path": "scripts/__scribble_class_typist/__scribble_class_typist.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_config_behaviours",
+        "path": "scripts/__scribble_config_behaviours/__scribble_config_behaviours.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_config_colours",
+        "path": "scripts/__scribble_config_colours/__scribble_config_colours.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_config_defaults",
+        "path": "scripts/__scribble_config_defaults/__scribble_config_defaults.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_constants",
+        "path": "scripts/__scribble_constants/__scribble_constants.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_font_add_all_from_bundle",
+        "path": "scripts/__scribble_font_add_all_from_bundle/__scribble_font_add_all_from_bundle.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_font_add_from_bundle",
+        "path": "scripts/__scribble_font_add_from_bundle/__scribble_font_add_from_bundle.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_font_add_from_info",
+        "path": "scripts/__scribble_font_add_from_info/__scribble_font_add_from_info.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_font_add_sprite",
+        "path": "scripts/__scribble_font_add_sprite/__scribble_font_add_sprite.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_gen_1_model_limits_and_bezier_curves",
+        "path": "scripts/__scribble_gen_1_model_limits_and_bezier_curves/__scribble_gen_1_model_limits_and_bezier_curves.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_gen_10_write_vbuffs",
+        "path": "scripts/__scribble_gen_10_write_vbuffs/__scribble_gen_10_write_vbuffs.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_gen_11_set_padding_flags",
+        "path": "scripts/__scribble_gen_11_set_padding_flags/__scribble_gen_11_set_padding_flags.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_gen_2_parser",
+        "path": "scripts/__scribble_gen_2_parser/__scribble_gen_2_parser.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_gen_3_devanagari",
+        "path": "scripts/__scribble_gen_3_devanagari/__scribble_gen_3_devanagari.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_gen_4_build_words",
+        "path": "scripts/__scribble_gen_4_build_words/__scribble_gen_4_build_words.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_gen_5_finalize_bidi",
+        "path": "scripts/__scribble_gen_5_finalize_bidi/__scribble_gen_5_finalize_bidi.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_gen_6_build_lines",
+        "path": "scripts/__scribble_gen_6_build_lines/__scribble_gen_6_build_lines.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_gen_7_build_pages",
+        "path": "scripts/__scribble_gen_7_build_pages/__scribble_gen_7_build_pages.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_gen_8_position_glyphs",
+        "path": "scripts/__scribble_gen_8_position_glyphs/__scribble_gen_8_position_glyphs.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_gen_9_build_vbuff_grids",
+        "path": "scripts/__scribble_gen_9_build_vbuff_grids/__scribble_gen_9_build_vbuff_grids.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_get_material",
+        "path": "scripts/__scribble_get_material/__scribble_get_material.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_glyph_data_initialize",
+        "path": "scripts/__scribble_glyph_data_initialize/__scribble_glyph_data_initialize.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_krutidev_lookup_map_initialize",
+        "path": "scripts/__scribble_krutidev_lookup_map_initialize/__scribble_krutidev_lookup_map_initialize.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_krutidev_matra_lookup_map_initialize",
+        "path": "scripts/__scribble_krutidev_matra_lookup_map_initialize/__scribble_krutidev_matra_lookup_map_initialize.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_make_material_key",
+        "path": "scripts/__scribble_make_material_key/__scribble_make_material_key.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_misc_functions",
+        "path": "scripts/__scribble_misc_functions/__scribble_misc_functions.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_no_preprocessing",
+        "path": "scripts/__scribble_no_preprocessing/__scribble_no_preprocessing.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_parse_sound_array_string",
+        "path": "scripts/__scribble_parse_sound_array_string/__scribble_parse_sound_array_string.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_play_sound",
+        "path": "scripts/__scribble_play_sound/__scribble_play_sound.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_sprite_get_material",
+        "path": "scripts/__scribble_sprite_get_material/__scribble_sprite_get_material.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_sprite_get_texture_index",
+        "path": "scripts/__scribble_sprite_get_texture_index/__scribble_sprite_get_texture_index.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_surface_get_material",
+        "path": "scripts/__scribble_surface_get_material/__scribble_surface_get_material.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_system",
+        "path": "scripts/__scribble_system/__scribble_system.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_texture_get_material",
+        "path": "scripts/__scribble_texture_get_material/__scribble_texture_get_material.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_texture_group_get_ready",
+        "path": "scripts/__scribble_texture_group_get_ready/__scribble_texture_group_get_ready.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__scribble_tick",
+        "path": "scripts/__scribble_tick/__scribble_tick.yy"
+      }
+    },
+    { "id": { "name": "CardData", "path": "scripts/CardData/CardData.yy" } },
+    { "id": { "name": "CardPile", "path": "scripts/CardPile/CardPile.yy" } },
+    { "id": { "name": "CardState", "path": "scripts/CardState/CardState.yy" } },
+    {
+      "id": {
+        "name": "CollectionUtils",
+        "path": "scripts/CollectionUtils/CollectionUtils.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "create_shop_cards",
+        "path": "scripts/create_shop_cards/create_shop_cards.yy"
+      }
+    },
+    { "id": { "name": "Deck", "path": "scripts/Deck/Deck.yy" } },
+    {
+      "id": {
+        "name": "draw_text_scribble_ext",
+        "path": "scripts/draw_text_scribble_ext/draw_text_scribble_ext.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "draw_text_scribble",
+        "path": "scripts/draw_text_scribble/draw_text_scribble.yy"
+      }
+    },
+    { "id": { "name": "DrawUtils", "path": "scripts/DrawUtils/DrawUtils.yy" } },
+    { "id": { "name": "EventBus", "path": "scripts/EventBus/EventBus.yy" } },
+    { "id": { "name": "Events", "path": "scripts/Events/Events.yy" } },
+    {
+      "id": {
+        "name": "GameCharacterData",
+        "path": "scripts/GameCharacterData/GameCharacterData.yy"
+      }
+    },
+    { "id": { "name": "GameState", "path": "scripts/GameState/GameState.yy" } },
+    {
+      "id": {
+        "name": "generate_from_grid",
+        "path": "scripts/generate_from_grid/generate_from_grid.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "generate_map",
+        "path": "scripts/generate_map/generate_map.yy"
+      }
+    },
+    { "id": { "name": "Hand", "path": "scripts/Hand/Hand.yy" } },
+    {
+      "id": {
+        "name": "initialize_map",
+        "path": "scripts/initialize_map/initialize_map.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "make_encounter",
+        "path": "scripts/make_encounter/make_encounter.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "make_option",
+        "path": "scripts/make_option/make_option.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "map_cards_to_enemies",
+        "path": "scripts/map_cards_to_enemies/map_cards_to_enemies.yy"
+      }
+    },
+    { "id": { "name": "map_utils", "path": "scripts/map_utils/map_utils.yy" } },
+    { "id": { "name": "Mark", "path": "scripts/Mark/Mark.yy" } },
+    {
+      "id": {
+        "name": "menu_card_swap",
+        "path": "scripts/menu_card_swap/menu_card_swap.yy"
+      }
+    },
+    {
+      "id": { "name": "place_card", "path": "scripts/place_card/place_card.yy" }
+    },
+    {
+      "id": {
+        "name": "rearrange_hand",
+        "path": "scripts/rearrange_hand/rearrange_hand.yy"
+      }
+    },
+    { "id": { "name": "reset_map", "path": "scripts/reset_map/reset_map.yy" } },
+    {
+      "id": {
+        "name": "reveal_room",
+        "path": "scripts/reveal_room/reveal_room.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "room_to_gui",
+        "path": "scripts/room_to_gui/room_to_gui.yy"
+      }
+    },
+    { "id": { "name": "RoomData", "path": "scripts/RoomData/RoomData.yy" } },
+    {
+      "id": {
+        "name": "scribble_add_macro",
+        "path": "scripts/scribble_add_macro/scribble_add_macro.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_anim_blink",
+        "path": "scripts/scribble_anim_blink/scribble_anim_blink.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_anim_cycle",
+        "path": "scripts/scribble_anim_cycle/scribble_anim_cycle.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_anim_disabled",
+        "path": "scripts/scribble_anim_disabled/scribble_anim_disabled.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_anim_get_disabled",
+        "path": "scripts/scribble_anim_get_disabled/scribble_anim_get_disabled.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_anim_jitter",
+        "path": "scripts/scribble_anim_jitter/scribble_anim_jitter.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_anim_pulse",
+        "path": "scripts/scribble_anim_pulse/scribble_anim_pulse.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_anim_rainbow",
+        "path": "scripts/scribble_anim_rainbow/scribble_anim_rainbow.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_anim_reset",
+        "path": "scripts/scribble_anim_reset/scribble_anim_reset.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_anim_shake",
+        "path": "scripts/scribble_anim_shake/scribble_anim_shake.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_anim_wave",
+        "path": "scripts/scribble_anim_wave/scribble_anim_wave.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_anim_wheel",
+        "path": "scripts/scribble_anim_wheel/scribble_anim_wheel.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_anim_wobble",
+        "path": "scripts/scribble_anim_wobble/scribble_anim_wobble.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_color_get",
+        "path": "scripts/scribble_color_get/scribble_color_get.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_color_set",
+        "path": "scripts/scribble_color_set/scribble_color_set.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_default_preprocessor_get",
+        "path": "scripts/scribble_default_preprocessor_get/scribble_default_preprocessor_get.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_default_preprocessor_set",
+        "path": "scripts/scribble_default_preprocessor_set/scribble_default_preprocessor_set.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_external_font_add",
+        "path": "scripts/scribble_external_font_add/scribble_external_font_add.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_external_font_exists",
+        "path": "scripts/scribble_external_font_exists/scribble_external_font_exists.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_external_font_remove",
+        "path": "scripts/scribble_external_font_remove/scribble_external_font_remove.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_external_sound_add",
+        "path": "scripts/scribble_external_sound_add/scribble_external_sound_add.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_external_sound_exists",
+        "path": "scripts/scribble_external_sound_exists/scribble_external_sound_exists.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_external_sound_remove",
+        "path": "scripts/scribble_external_sound_remove/scribble_external_sound_remove.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_external_sprite_add",
+        "path": "scripts/scribble_external_sprite_add/scribble_external_sprite_add.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_external_sprite_exists",
+        "path": "scripts/scribble_external_sprite_exists/scribble_external_sprite_exists.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_external_sprite_remove",
+        "path": "scripts/scribble_external_sprite_remove/scribble_external_sprite_remove.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_flush_everything",
+        "path": "scripts/scribble_flush_everything/scribble_flush_everything.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_flush_shader_uniforms",
+        "path": "scripts/scribble_flush_shader_uniforms/scribble_flush_shader_uniforms.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_font_bake_outline_4dir",
+        "path": "scripts/scribble_font_bake_outline_4dir/scribble_font_bake_outline_4dir.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_font_bake_outline_8dir_2px",
+        "path": "scripts/scribble_font_bake_outline_8dir_2px/scribble_font_bake_outline_8dir_2px.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_font_bake_outline_8dir",
+        "path": "scripts/scribble_font_bake_outline_8dir/scribble_font_bake_outline_8dir.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_font_bake_outline_and_shadow",
+        "path": "scripts/scribble_font_bake_outline_and_shadow/scribble_font_bake_outline_and_shadow.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_font_bake_shader",
+        "path": "scripts/scribble_font_bake_shader/scribble_font_bake_shader.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_font_bake_shadow",
+        "path": "scripts/scribble_font_bake_shadow/scribble_font_bake_shadow.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_font_delete",
+        "path": "scripts/scribble_font_delete/scribble_font_delete.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_font_duplicate",
+        "path": "scripts/scribble_font_duplicate/scribble_font_duplicate.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_font_exists",
+        "path": "scripts/scribble_font_exists/scribble_font_exists.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_font_force_bilinear_filtering",
+        "path": "scripts/scribble_font_force_bilinear_filtering/scribble_font_force_bilinear_filtering.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_font_get_default",
+        "path": "scripts/scribble_font_get_default/scribble_font_get_default.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_font_get_glyph_ranges",
+        "path": "scripts/scribble_font_get_glyph_ranges/scribble_font_get_glyph_ranges.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_font_get_remap",
+        "path": "scripts/scribble_font_get_remap/scribble_font_get_remap.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_font_has_character",
+        "path": "scripts/scribble_font_has_character/scribble_font_has_character.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_font_rename",
+        "path": "scripts/scribble_font_rename/scribble_font_rename.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_font_scale",
+        "path": "scripts/scribble_font_scale/scribble_font_scale.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_font_set_default",
+        "path": "scripts/scribble_font_set_default/scribble_font_set_default.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_font_set_halign_offset",
+        "path": "scripts/scribble_font_set_halign_offset/scribble_font_set_halign_offset.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_font_set_remap",
+        "path": "scripts/scribble_font_set_remap/scribble_font_set_remap.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_font_set_style_family",
+        "path": "scripts/scribble_font_set_style_family/scribble_font_set_style_family.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_font_set_valign_offset",
+        "path": "scripts/scribble_font_set_valign_offset/scribble_font_set_valign_offset.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_glyph_get",
+        "path": "scripts/scribble_glyph_get/scribble_glyph_get.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_glyph_set",
+        "path": "scripts/scribble_glyph_set/scribble_glyph_set.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_initialize",
+        "path": "scripts/scribble_initialize/scribble_initialize.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_is_text_element",
+        "path": "scripts/scribble_is_text_element/scribble_is_text_element.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_kerning_pair_get",
+        "path": "scripts/scribble_kerning_pair_get/scribble_kerning_pair_get.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_kerning_pair_set",
+        "path": "scripts/scribble_kerning_pair_set/scribble_kerning_pair_set.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_markdown_format",
+        "path": "scripts/scribble_markdown_format/scribble_markdown_format.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_markdown_set_styles",
+        "path": "scripts/scribble_markdown_set_styles/scribble_markdown_set_styles.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_msdf_thickness_offset",
+        "path": "scripts/scribble_msdf_thickness_offset/scribble_msdf_thickness_offset.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_refresh_everything",
+        "path": "scripts/scribble_refresh_everything/scribble_refresh_everything.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_rgb_to_bgr",
+        "path": "scripts/scribble_rgb_to_bgr/scribble_rgb_to_bgr.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_super_clear",
+        "path": "scripts/scribble_super_clear/scribble_super_clear.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_super_create",
+        "path": "scripts/scribble_super_create/scribble_super_create.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_super_glyph_copy_all",
+        "path": "scripts/scribble_super_glyph_copy_all/scribble_super_glyph_copy_all.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_super_glyph_copy",
+        "path": "scripts/scribble_super_glyph_copy/scribble_super_glyph_copy.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_super_glyph_delete",
+        "path": "scripts/scribble_super_glyph_delete/scribble_super_glyph_delete.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_typist",
+        "path": "scripts/scribble_typist/scribble_typist.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_typists_add_event",
+        "path": "scripts/scribble_typists_add_event/scribble_typists_add_event.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_whitelist_sound",
+        "path": "scripts/scribble_whitelist_sound/scribble_whitelist_sound.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_whitelist_sprite",
+        "path": "scripts/scribble_whitelist_sprite/scribble_whitelist_sprite.yy"
+      }
+    },
+    { "id": { "name": "scribble", "path": "scripts/scribble/scribble.yy" } },
+    { "id": { "name": "Status", "path": "scripts/Status/Status.yy" } },
+    {
+      "id": {
+        "name": "string_height_scribble_ext",
+        "path": "scripts/string_height_scribble_ext/string_height_scribble_ext.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "string_height_scribble",
+        "path": "scripts/string_height_scribble/string_height_scribble.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "string_length_scribble",
+        "path": "scripts/string_length_scribble/string_length_scribble.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "string_width_scribble_ext",
+        "path": "scripts/string_width_scribble_ext/string_width_scribble_ext.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "string_width_scribble",
+        "path": "scripts/string_width_scribble/string_width_scribble.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "text_styles",
+        "path": "scripts/text_styles/text_styles.yy"
+      }
+    },
+    { "id": { "name": "Trait", "path": "scripts/Trait/Trait.yy" } },
+    {
+      "id": {
+        "name": "transfer_between_piles",
+        "path": "scripts/transfer_between_piles/transfer_between_piles.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "transfer_stack",
+        "path": "scripts/transfer_stack/transfer_stack.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "update_room_icon",
+        "path": "scripts/update_room_icon/update_room_icon.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "seq_3_card_draw",
+        "path": "sequences/seq_3_card_draw/seq_3_card_draw.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "seq_auto_complete_pop_up",
+        "path": "sequences/seq_auto_complete_pop_up/seq_auto_complete_pop_up.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "seq_card_fan",
+        "path": "sequences/seq_card_fan/seq_card_fan.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "seq_card_reveal",
+        "path": "sequences/seq_card_reveal/seq_card_reveal.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "seq_pause_pop_up_old",
+        "path": "sequences/seq_pause_pop_up_old/seq_pause_pop_up_old.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "seq_pause_pop_up",
+        "path": "sequences/seq_pause_pop_up/seq_pause_pop_up.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "seq_you_lose_button_pop_up",
+        "path": "sequences/seq_you_lose_button_pop_up/seq_you_lose_button_pop_up.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "seq_you_lose",
+        "path": "sequences/seq_you_lose/seq_you_lose.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "seq_you_win_pop_up",
+        "path": "sequences/seq_you_win_pop_up/seq_you_win_pop_up.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__shd_scribble_bake_effect_4dir",
+        "path": "shaders/__shd_scribble_bake_effect_4dir/__shd_scribble_bake_effect_4dir.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__shd_scribble_bake_effect_8dir_2px",
+        "path": "shaders/__shd_scribble_bake_effect_8dir_2px/__shd_scribble_bake_effect_8dir_2px.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__shd_scribble_bake_effect_8dir",
+        "path": "shaders/__shd_scribble_bake_effect_8dir/__shd_scribble_bake_effect_8dir.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__shd_scribble_bake_effect_no_outline",
+        "path": "shaders/__shd_scribble_bake_effect_no_outline/__shd_scribble_bake_effect_no_outline.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__shd_scribble_bake_outline_4dir",
+        "path": "shaders/__shd_scribble_bake_outline_4dir/__shd_scribble_bake_outline_4dir.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__shd_scribble_bake_outline_8dir_2px",
+        "path": "shaders/__shd_scribble_bake_outline_8dir_2px/__shd_scribble_bake_outline_8dir_2px.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__shd_scribble_bake_outline_8dir",
+        "path": "shaders/__shd_scribble_bake_outline_8dir/__shd_scribble_bake_outline_8dir.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__shd_scribble_bake_shadow",
+        "path": "shaders/__shd_scribble_bake_shadow/__shd_scribble_bake_shadow.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "__shd_scribble",
+        "path": "shaders/__shd_scribble/__shd_scribble.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "snd_button_hover",
+        "path": "sounds/snd_button_hover/snd_button_hover.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "snd_button_press",
+        "path": "sounds/snd_button_press/snd_button_press.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "snd_card_deck_shuffle",
+        "path": "sounds/snd_card_deck_shuffle/snd_card_deck_shuffle.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "snd_card_flip_1",
+        "path": "sounds/snd_card_flip_1/snd_card_flip_1.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "snd_card_flip_2",
+        "path": "sounds/snd_card_flip_2/snd_card_flip_2.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "snd_game_lose",
+        "path": "sounds/snd_game_lose/snd_game_lose.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "snd_game_music",
+        "path": "sounds/snd_game_music/snd_game_music.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "snd_game_win",
+        "path": "sounds/snd_game_win/snd_game_win.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "snd_main_menu_music",
+        "path": "sounds/snd_main_menu_music/snd_main_menu_music.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "snd_one_card_placed_1",
+        "path": "sounds/snd_one_card_placed_1/snd_one_card_placed_1.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "snd_one_card_placed_2",
+        "path": "sounds/snd_one_card_placed_2/snd_one_card_placed_2.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "snd_one_card_placed_3",
+        "path": "sounds/snd_one_card_placed_3/snd_one_card_placed_3.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "snd_one_card_placed_4",
+        "path": "sounds/snd_one_card_placed_4/snd_one_card_placed_4.yy"
+      }
+    },
+    { "id": { "name": "snd_pause", "path": "sounds/snd_pause/snd_pause.yy" } },
+    {
+      "id": {
+        "name": "snd_start_game_button",
+        "path": "sounds/snd_start_game_button/snd_start_game_button.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "snd_three_cards_placed",
+        "path": "sounds/snd_three_cards_placed/snd_three_cards_placed.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "snd_title_cards_animation",
+        "path": "sounds/snd_title_cards_animation/snd_title_cards_animation.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "scribble_fallback_bulletpoint",
+        "path": "sprites/scribble_fallback_bulletpoint/scribble_fallback_bulletpoint.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_bg_demo",
+        "path": "sprites/spr_bg_demo/spr_bg_demo.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_bleed_small",
+        "path": "sprites/spr_bleed_small/spr_bleed_small.yy"
+      }
+    },
+    { "id": { "name": "spr_bleed", "path": "sprites/spr_bleed/spr_bleed.yy" } },
+    {
+      "id": {
+        "name": "spr_bonfire",
+        "path": "sprites/spr_bonfire/spr_bonfire.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_burn_small",
+        "path": "sprites/spr_burn_small/spr_burn_small.yy"
+      }
+    },
+    { "id": { "name": "spr_burn", "path": "sprites/spr_burn/spr_burn.yy" } },
+    {
+      "id": { "name": "spr_button", "path": "sprites/spr_button/spr_button.yy" }
+    },
+    {
+      "id": {
+        "name": "spr_card_curse_of_old_gods",
+        "path": "sprites/spr_card_curse_of_old_gods/spr_card_curse_of_old_gods.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_card_demo",
+        "path": "sprites/spr_card_demo/spr_card_demo.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_card_earthquake",
+        "path": "sprites/spr_card_earthquake/spr_card_earthquake.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_card_fire_healing",
+        "path": "sprites/spr_card_fire_healing/spr_card_fire_healing.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_card_fire_storm",
+        "path": "sprites/spr_card_fire_storm/spr_card_fire_storm.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_card_fireball",
+        "path": "sprites/spr_card_fireball/spr_card_fireball.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_card_flame_shield",
+        "path": "sprites/spr_card_flame_shield/spr_card_flame_shield.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_card_force_of_nature",
+        "path": "sprites/spr_card_force_of_nature/spr_card_force_of_nature.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_card_forest_shield",
+        "path": "sprites/spr_card_forest_shield/spr_card_forest_shield.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_card_grass_healing",
+        "path": "sprites/spr_card_grass_healing/spr_card_grass_healing.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_card_healing",
+        "path": "sprites/spr_card_healing/spr_card_healing.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_card_icycles",
+        "path": "sprites/spr_card_icycles/spr_card_icycles.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_card_rainstorm",
+        "path": "sprites/spr_card_rainstorm/spr_card_rainstorm.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_card_reap",
+        "path": "sprites/spr_card_reap/spr_card_reap.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_card_scorch",
+        "path": "sprites/spr_card_scorch/spr_card_scorch.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_card_stroke_blur",
+        "path": "sprites/spr_card_stroke_blur/spr_card_stroke_blur.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_card_stroke_with_blur",
+        "path": "sprites/spr_card_stroke_with_blur/spr_card_stroke_with_blur.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_card_stroke",
+        "path": "sprites/spr_card_stroke/spr_card_stroke.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_card_ward",
+        "path": "sprites/spr_card_ward/spr_card_ward.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_card_water_healing",
+        "path": "sprites/spr_card_water_healing/spr_card_water_healing.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_card_water_shield",
+        "path": "sprites/spr_card_water_shield/spr_card_water_shield.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_coalesence_small",
+        "path": "sprites/spr_coalesence_small/spr_coalesence_small.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_coalesence",
+        "path": "sprites/spr_coalesence/spr_coalesence.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_cross_overlay",
+        "path": "sprites/spr_cross_overlay/spr_cross_overlay.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_deck_drawer_button",
+        "path": "sprites/spr_deck_drawer_button/spr_deck_drawer_button.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_dungeonRoom",
+        "path": "sprites/spr_dungeonRoom/spr_dungeonRoom.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_enc_visionPool",
+        "path": "sprites/spr_enc_visionPool/spr_enc_visionPool.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_enc_whisperingWall",
+        "path": "sprites/spr_enc_whisperingWall/spr_enc_whisperingWall.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_encounter_option_button",
+        "path": "sprites/spr_encounter_option_button/spr_encounter_option_button.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_encounter",
+        "path": "sprites/spr_encounter/spr_encounter.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_endRoom",
+        "path": "sprites/spr_endRoom/spr_endRoom.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_enemyRoom",
+        "path": "sprites/spr_enemyRoom/spr_enemyRoom.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_frozen_small",
+        "path": "sprites/spr_frozen_small/spr_frozen_small.yy"
+      }
+    },
+    {
+      "id": { "name": "spr_frozen", "path": "sprites/spr_frozen/spr_frozen.yy" }
+    },
+    {
+      "id": {
+        "name": "spr_health_bar",
+        "path": "sprites/spr_health_bar/spr_health_bar.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_mark_fire_small",
+        "path": "sprites/spr_mark_fire_small/spr_mark_fire_small.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_mark_fire",
+        "path": "sprites/spr_mark_fire/spr_mark_fire.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_mark_grass_small",
+        "path": "sprites/spr_mark_grass_small/spr_mark_grass_small.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_mark_grass",
+        "path": "sprites/spr_mark_grass/spr_mark_grass.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_mark_ice_small",
+        "path": "sprites/spr_mark_ice_small/spr_mark_ice_small.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_mark_ice",
+        "path": "sprites/spr_mark_ice/spr_mark_ice.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_mark_lightning_small",
+        "path": "sprites/spr_mark_lightning_small/spr_mark_lightning_small.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_mark_water_small",
+        "path": "sprites/spr_mark_water_small/spr_mark_water_small.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_mark_water",
+        "path": "sprites/spr_mark_water/spr_mark_water.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_modal_backdrop",
+        "path": "sprites/spr_modal_backdrop/spr_modal_backdrop.yy"
+      }
+    },
+    { "id": { "name": "spr_none", "path": "sprites/spr_none/spr_none.yy" } },
+    {
+      "id": {
+        "name": "spr_option_button",
+        "path": "sprites/spr_option_button/spr_option_button.yy"
+      }
+    },
+    { "id": { "name": "spr_panel", "path": "sprites/spr_panel/spr_panel.yy" } },
+    {
+      "id": {
+        "name": "spr_paralysed_small",
+        "path": "sprites/spr_paralysed_small/spr_paralysed_small.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_paralysed",
+        "path": "sprites/spr_paralysed/spr_paralysed.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_poison_small",
+        "path": "sprites/spr_poison_small/spr_poison_small.yy"
+      }
+    },
+    {
+      "id": { "name": "spr_poison", "path": "sprites/spr_poison/spr_poison.yy" }
+    },
+    {
+      "id": {
+        "name": "spr_reveal_tooltip",
+        "path": "sprites/spr_reveal_tooltip/spr_reveal_tooltip.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_shield_small",
+        "path": "sprites/spr_shield_small/spr_shield_small.yy"
+      }
+    },
+    {
+      "id": { "name": "spr_shield", "path": "sprites/spr_shield/spr_shield.yy" }
+    },
+    { "id": { "name": "spr_shop", "path": "sprites/spr_shop/spr_shop.yy" } },
+    {
+      "id": {
+        "name": "spr_sold_label",
+        "path": "sprites/spr_sold_label/spr_sold_label.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_startRoom",
+        "path": "sprites/spr_startRoom/spr_startRoom.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_strength_small",
+        "path": "sprites/spr_strength_small/spr_strength_small.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_strength",
+        "path": "sprites/spr_strength/spr_strength.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_transparent_box",
+        "path": "sprites/spr_transparent_box/spr_transparent_box.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_treasure_bg",
+        "path": "sprites/spr_treasure_bg/spr_treasure_bg.yy"
+      }
+    },
+    {
+      "id": {
+        "name": "spr_treasureRoom",
+        "path": "sprites/spr_treasureRoom/spr_treasureRoom.yy"
+      }
+    },
+    { "id": { "name": "Sprite2", "path": "sprites/Sprite2/Sprite2.yy" } },
+    { "id": { "name": "Sprite47", "path": "sprites/Sprite47/Sprite47.yy" } }
   ],
-  "resourceType":"GMProject",
-  "resourceVersion":"2.0",
-  "RoomOrderNodes":[
-    {"roomId":{"name":"rm_game_start","path":"rooms/rm_game_start/rm_game_start.yy",},},
-    {"roomId":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
-    {"roomId":{"name":"rm_battle","path":"rooms/rm_battle/rm_battle.yy",},},
-    {"roomId":{"name":"rm_main_menu","path":"rooms/rm_main_menu/rm_main_menu.yy",},},
-    {"roomId":{"name":"rm_play","path":"rooms/rm_play/rm_play.yy",},},
-    {"roomId":{"name":"rm_bonfire","path":"rooms/rm_bonfire/rm_bonfire.yy",},},
-    {"roomId":{"name":"rm_treasure","path":"rooms/rm_treasure/rm_treasure.yy",},},
+  "resourceType": "GMProject",
+  "resourceVersion": "2.0",
+  "RoomOrderNodes": [
+    {
+      "roomId": {
+        "name": "rm_game_start",
+        "path": "rooms/rm_game_start/rm_game_start.yy"
+      }
+    },
+    { "roomId": { "name": "Room1", "path": "rooms/Room1/Room1.yy" } },
+    {
+      "roomId": { "name": "rm_battle", "path": "rooms/rm_battle/rm_battle.yy" }
+    },
+    {
+      "roomId": {
+        "name": "rm_main_menu",
+        "path": "rooms/rm_main_menu/rm_main_menu.yy"
+      }
+    },
+    { "roomId": { "name": "rm_play", "path": "rooms/rm_play/rm_play.yy" } },
+    {
+      "roomId": {
+        "name": "rm_bonfire",
+        "path": "rooms/rm_bonfire/rm_bonfire.yy"
+      }
+    },
+    {
+      "roomId": {
+        "name": "rm_treasure",
+        "path": "rooms/rm_treasure/rm_treasure.yy"
+      }
+    },
+    { "roomId": { "name": "rm_shop", "path": "rooms/rm_shop/rm_shop.yy" } },
+    {
+      "roomId": {
+        "name": "rm_encounter",
+        "path": "rooms/rm_encounter/rm_encounter.yy"
+      }
+    }
   ],
-  "templateType":"game",
-  "TextureGroups":[
-    {"$GMTextureGroup":"","%Name":"Default","autocrop":true,"border":2,"compressFormat":"bz2","customOptions":"","directory":"","groupParent":null,"isScaled":true,"loadType":"default","mipsToGenerate":0,"name":"Default","resourceType":"GMTextureGroup","resourceVersion":"2.0","targets":-1,},
-  ],
+  "templateType": "game",
+  "TextureGroups": [
+    {
+      "$GMTextureGroup": "",
+      "%Name": "Default",
+      "autocrop": true,
+      "border": 2,
+      "compressFormat": "bz2",
+      "customOptions": "",
+      "directory": "",
+      "groupParent": null,
+      "isScaled": true,
+      "loadType": "default",
+      "mipsToGenerate": 0,
+      "name": "Default",
+      "resourceType": "GMTextureGroup",
+      "resourceVersion": "2.0",
+      "targets": -1
+    }
+  ]
 }

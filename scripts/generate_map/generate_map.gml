@@ -3,7 +3,7 @@ function generate_map(generate_new) {
     instance_destroy(DungeonRoom);
 
     // Parameters (can live here or in Game Start)
-    var ROOM_DENSITY = 0.75;
+    var ROOM_DENSITY = 0.8;
     var W = global.GRID_W;
     var H = global.GRID_H;
     var S = global.ROOM_SIZE;
@@ -28,7 +28,7 @@ function generate_map(generate_new) {
     for (var row = 0; row < H; row++) {
         for (var col = 0; col < W; col++) {
             if (random(1) < ROOM_DENSITY) {
-				var rm = new RoomData(false,false,"default",col, row);
+				var rm = new RoomData(false,false,false,"default",col, row);
                 //var rm = instance_create_layer(col * S, row * S + S, "Instances", DungeonRoom);
                 //room_neighbors_init(rm);
                 global.room_grid[row][col] = rm;
@@ -47,7 +47,7 @@ function generate_map(generate_new) {
         for (var c = 0; c < global.GRID_W; c++) if (global.room_grid[r][c] != noone) { found = true; break; }
         if (!found) {
             var pick = irandom(global.GRID_W - 1);
-			var rm = new RoomData(false,false,"default",pick, r+1);
+			var rm = new RoomData(false,false, false, "default",pick, r+1);
             //var rm = instance_create_layer(pick * global.ROOM_SIZE, r * global.ROOM_SIZE + global.ROOM_SIZE, "Instances", DungeonRoom);
             //rm.grid_x = pick;
             //rm.grid_y = r;
@@ -119,7 +119,7 @@ function generate_map(generate_new) {
     }
 
     // reset visited
-    with (DungeonRoom) visited = false;
+    with (DungeonRoom) data.visited = false;
 
     var start_col = -1;
     for (var c = 0; c < W; c++)
@@ -133,6 +133,16 @@ function generate_map(generate_new) {
             if (rm != noone && !rm.visited) {
                 instance_destroy(rm);
                 global.room_grid[r][c] = noone;
+            }
+        }
+    }
+	
+	// set the roomData to be unvisited
+	for (var r = 0; r < H; r++) {
+        for (var c = 0; c < W; c++) {
+            var rm = global.room_grid[r][c];
+            if (rm != noone) {
+                rm.visited = false;
             }
         }
     }

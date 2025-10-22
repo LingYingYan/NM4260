@@ -24,7 +24,7 @@ if (x == target_x && y == target_y) {
         if (!current_room.discovered) {
             reveal_room(current_room);
         }
-        else if (current_room.room_type == "bonfire" && !global.bonfire_used) {
+        else if (!current_room.used) {
             reveal_room(current_room);
         }
 		//show_debug_message($"TRACKING")
