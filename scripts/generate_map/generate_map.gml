@@ -3,7 +3,7 @@ function generate_map(generate_new) {
     instance_destroy(DungeonRoom);
 
     // Parameters (can live here or in Game Start)
-    var ROOM_DENSITY = 0.75;
+    var ROOM_DENSITY = 0.8;
     var W = global.GRID_W;
     var H = global.GRID_H;
     var S = global.ROOM_SIZE;

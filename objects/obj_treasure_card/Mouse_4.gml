@@ -23,6 +23,7 @@ if (!selected) {
     target_x = room_width / 2;
     target_y = room_height / 2;
     target_scale = 2; // enlarge to 2x size
+	show_debug_message($"Card {card_data.name} is selected")
 }
 
 show_debug_message("Card is pressed")

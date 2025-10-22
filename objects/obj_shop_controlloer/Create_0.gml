@@ -14,4 +14,6 @@ for (i = 0; i < array_length(global.curr_shop_cards); i ++) {
 	new_card.set_reveal(obj_player_state.data.max_vision);
 }
 
+var drawer = instance_create_layer(room_width - 20, room_height/2, "Instances", obj_deck_drawer);
+
 

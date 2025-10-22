@@ -35,8 +35,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_option_button",
-    "path":"sprites/spr_option_button/spr_option_button.yy",
+    "name":"spr_encounter_option_button",
+    "path":"sprites/spr_encounter_option_button/spr_encounter_option_button.yy",
   },
   "spriteMaskId":null,
   "visible":true,

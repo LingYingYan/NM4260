@@ -1,2 +1,2 @@
 show_debug_message("going to main map")
-room_goto(Room1);
+obj_room_manager.goto_map();
