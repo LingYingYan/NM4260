@@ -28,6 +28,7 @@ add_trait = function(trait) {
         icon: spr_trait_default,
         desc: trait.desc
     });
+    
     array_push(self.traits, trait_obj);
 }
 
@@ -56,7 +57,7 @@ rearrange_traits = function() {
     });
     
     var pos_y = self.bbox_top - 100;
-    for (var i = 0; i < array_length(self.mark_indicators); i += 1) {
+    for (var i = 0; i < array_length(self.traits); i += 1) {
         self.traits[i].y = pos_y;
         pos_y -= (self.traits[i].get_height() + 25);
     }
