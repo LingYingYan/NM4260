@@ -17,7 +17,7 @@ for (var i = 0; i < 3; i += 1) {
 
     new_card.on_click = function() {
         var roll = irandom_range(1, 100);
-        if (roll <= 100) {
+        if (roll <= 25) {
             instance_create_depth(self.x, self.y, self.depth, obj_trait_loot);
             instance_destroy(obj_card_loot);
         } else {
