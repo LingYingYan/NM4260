@@ -1,13 +1,9 @@
 {
   "$GMObject":"",
-  "%Name":"obj_vision_indicator",
-  "eventList":[
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-  ],
+  "%Name":"obj_backdrop",
+  "eventList":[],
   "managed":true,
-  "name":"obj_vision_indicator",
+  "name":"obj_backdrop",
   "overriddenProperties":[],
   "parent":{
     "name":"UI",
@@ -31,7 +27,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_modal_backdrop",
+    "path":"sprites/spr_modal_backdrop/spr_modal_backdrop.yy",
+  },
   "spriteMaskId":null,
-  "visible":true,
+  "visible":false,
 }

@@ -39,56 +39,14 @@ enemy_win = function() {
 }
 
 player_win = function() {
-    show_debug_message("Player win!");
     self.player.data.clear_marks_and_statuses();
     self.player.data.vision += 1;
     self.player.data.vision = min(self.player.data.vision, self.player.max_vision);
     self.end_battle();
-    obj_loot_panel.visible = true;
-    
-    // Create the button to pick a new card
-    var card_option = instance_create_layer(0, 0, "Instances", obj_option_button);
-    card_option.button_text = "New Card!";
-    obj_loot_panel.add_item(card_option);
-    
-    // On click, collect a card and remove the button
-    // Bruh so much work just to curry one variable...
-    card_option.on_click = method({this: card_option}, function() {
-        obj_loot_panel.hide();
-        var selected = [];
-        for (var i = 0; i < 3; i += 1) {
-        	var random_card = res_loader_cards.get_random_card("Cards");
-            if (array_contains(selected, random_card.card_data.uid)) {
-                while (array_contains(selected, random_card.card_data.uid)) {
-                    instance_destroy(random_card);
-                    random_card = res_loader_cards.get_random_card("Cards");
-                } 
-            }
-            
-            var card_x = room_width / 2 + (i - 1) * 2 * random_card.sprite_width;
-            var new_card = instance_create_layer(card_x, room_height / 2, "Cards", obj_pickup_card);
-            new_card.card_data = random_card.card_data;
-            new_card.image_xscale = 0.66;
-            new_card.image_yscale = 0.66;
-            new_card.set_reveal(obj_player_state.data.max_vision);
-            new_card.on_click = method({source: this}, function() {
-                obj_loot_panel.remove_item(source);
-                obj_loot_panel.show();
-            });
-        }
-    });
-    
-    // Create the button to go back to map
-    var exit_option = instance_create_layer(0, 0, "Instances", obj_option_button);
-    exit_option.button_text = "Finish Battle";
-    obj_loot_panel.add_item(exit_option);
-    exit_option.on_click = function() {
-        show_debug_message($"HP: {self.player.data.hp}");
-        obj_room_manager.goto_map();
-    }
-    
-    
-    global.pause = true;
+
+    obj_backdrop.visible = true;
+    // Create new cards to pick
+    instance_create_layer(room_width / 2, room_height / 2, "Instances", obj_card_loot);
 }
 
 start_battle = function() {
@@ -260,6 +218,7 @@ recycle_player_card = function(player_card, enemy_card) {
         player_card.set_reveal(0);
     }
     
+    self.player_cards[self.turn_pointer] = noone;
     if (self.enemy.data.hp <= 0 || self.player.data.hp <= 0) {
         self.resolve_turn();
         return;
@@ -295,6 +254,7 @@ recycle_enemy_card = function(enemy_card) {
         place_card(enemy_card, self.enemy.x, -500);
     }
     
+    self.enemy_cards[self.turn_pointer] = noone;
     if (self.enemy.data.hp <= 0 || self.player.data.hp <= 0) {
         self.resolve_turn();
         return;
@@ -330,6 +290,13 @@ end_player_turn = function() {
 }
 
 end_battle = function() {
+    array_foreach(self.player_cards, function(card) {
+        if (card != noone) {
+            instance_destroy(card.id);
+        }    
+    })
+    
+    instance_destroy(obj_enemy_card);
     self.player_card_slots = [];
     self.enemy_card_slots = [];
     self.can_resolve_card = false;

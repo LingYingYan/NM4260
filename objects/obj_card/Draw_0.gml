@@ -37,8 +37,13 @@ if (self.card_data != undefined) {
     scribble_text.draw(text_x, text_y);
     var region = scribble_text.region_detect(text_x, text_y, device_mouse_x_to_gui(0), device_mouse_y_to_gui(0));
     if (region != undefined && string_starts_with(region, "keyword-mark-")) {
-        self.tooltip_text = string(self.card_data.mark.describe_with_context(self.card_data.is_offensive)); 
+        var text = string(self.card_data.mark.describe_with_context(self.card_data.is_offensive)); 
+        self.tooltip_text = text;
     } else {
         self.tooltip_text = "";
     }
+    
+    if (self.hovered && self.reveal >= 1) {
+        obj_tooltip.tooltip_text = self.tooltip_text;
+    } 
 } 

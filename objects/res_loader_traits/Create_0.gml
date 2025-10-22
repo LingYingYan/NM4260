@@ -20,5 +20,7 @@ read_row = function(r) {
     }
     
     var flags = string_split(read_cell(r, 5), ",");
+    
+    array_push(self.loaded, trait);
 }
 

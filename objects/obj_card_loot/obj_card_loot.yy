@@ -1,22 +1,19 @@
 {
   "$GMObject":"",
-  "%Name":"obj_discard_pile",
+  "%Name":"obj_card_loot",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_discard_pile",
+  "name":"obj_card_loot",
   "overriddenProperties":[],
   "parent":{
     "name":"Cards",
     "path":"folders/Objects/Cards.yy",
   },
-  "parentObjectId":{
-    "name":"obj_card_pile",
-    "path":"objects/obj_card_pile/obj_card_pile.yy",
-  },
+  "parentObjectId":null,
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
@@ -34,10 +31,7 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":{
-    "name":"spr_card_stroke",
-    "path":"sprites/spr_card_stroke/spr_card_stroke.yy",
-  },
+  "spriteId":null,
   "spriteMaskId":null,
   "visible":true,
 }
