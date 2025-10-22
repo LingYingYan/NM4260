@@ -1,15 +1,8 @@
-var pos_x = 0;
-repeat(floor(self.current)) {
-    pos_x += 50;
-    draw_circle_color(pos_x, 500, 25, c_aqua, c_black, false);
+if (mouse_x <= self.x || mouse_x >= self.right_end || mouse_y <= self.y - self.orb_radius || mouse_y >= self.y + self.orb_radius) {
+    exit;
 }
 
-repeat(floor(self.max_value - floor(self.current))) {
-	pos_x += 50;
-    draw_circle_color(pos_x, 500, 25, c_aqua, c_black, true);
-}
-
-draw_text_color(    
-    375, 500, $"Vision: {self.current}/{self.max_value}",
-    c_black, c_black, c_black, c_black, 1
-);
+obj_tooltip.tooltip_text = "[b]Vision[/b]\n" + 
+                           "Vison helps you foresee your enemy's cards. " + 
+                           "The higher the Vision, the more information you are likely to foresee.\n\n" + 
+                           "[bi]Once per turn[/bi], you may consume [b]1[/b] Vision to fully reveal a card played by the enemy.";
