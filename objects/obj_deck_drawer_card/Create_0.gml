@@ -12,3 +12,5 @@ sold = false;
 
 hovered = false;
 hover_scale = 1;
+
+selected = false;
