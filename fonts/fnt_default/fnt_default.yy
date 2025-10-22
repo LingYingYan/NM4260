@@ -1767,10 +1767,7 @@
   "sdfSpread":8,
   "size":16.0,
   "styleName":"Regular",
-  "textureGroupId":{
-    "name":"Default",
-    "path":"texturegroups/Default",
-  },
+  "textureGroupId":null,
   "TTFName":"C:\\Users\\Emily\\GameMakerProjects\\Solitaire Template\\Solitaire Template\\fonts\\fnt_righteous\\Righteous-Regular.ttf",
   "usesSDF":true,
 }

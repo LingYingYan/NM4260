@@ -1,7 +1,15 @@
 // Inherit the parent event
 event_inherited();
 
+indicators_y = self.bbox_bottom;
+
 played_cards = [];
+
+initialise = function() { 
+    var health_bar = instance_create_depth(self.x, self.bbox_bottom, self.depth - 1, obj_ui_health_bar);
+    health_bar.label_below_bar = true;
+    health_bar.source = data;
+}
 
 play_card = function() {
     // Remove a random card from the deck
@@ -15,9 +23,7 @@ play_card = function() {
     card.card_data = card_data;
     
     // Randomly reveal the card
-    var player = obj_battle_manager.player;
-    var data = player.data;
-    card.set_reveal(random_range(0, data.vision));
+    card.set_reveal(random_range(0, obj_battle_manager.player.data.vision), self.data, obj_battle_manager.player.data);
     card.can_reveal = true;
     
     return card;

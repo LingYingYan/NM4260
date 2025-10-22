@@ -21,29 +21,35 @@ if (self.card_data != undefined) {
         draw_set_valign(fa_middle);
         
         draw_sprite(self.card_data.sprite, self.image_index, self.x, self.y - self.sprite_height / 4 + y_padding);
-        // Draw mark icon
-        draw_sprite(
-            self.card_data.mark.sprite, self.image_index, 
-            text_x, text_y
-        );
         
         draw_set_valign(fa_top);
         draw_set_halign(fa_left);
         
-        put_text(
-            self.card_data.name, self, 
-            fa_center, fa_top, self.x, text_y,
-            x_padding, x_padding, y_padding, y_padding,
-            c_black, 1, fnt_default_large
-        );
+        scribble($"[b]{self.card_data.name}[/b]")
+            .scale(1.15 * self.image_xscale)
+            .wrap(self.sprite_width - 2 * x_padding)
+            .align(fa_center, fa_top)
+            .draw(self.x, text_y);
     }
     
     text_y = self.y + y_padding;
+    var scribble_text = scribble(self.desc).wrap(self.sprite_width - 2 * x_padding).scale(self.image_xscale);
+    scribble_text.draw(text_x, text_y);
+    var region = scribble_text.region_detect(text_x, text_y, device_mouse_x_to_gui(0), device_mouse_y_to_gui(0));
+    if (region == undefined) {
+        self.tooltip_text = "";
+    } else if (string_starts_with(region, "keyword-mark-")) {
+        var text = string(self.card_data.mark.describe_with_context(self.card_data.is_offensive)); 
+        self.tooltip_text = text;
+    } else if (string_starts_with(region, "keyword-status-")) {
+        var l = string_length(region) - string_length("keyword-status-")
+        var name = string_copy(region, string_length("keyword-status-") + 1, l);
+        self.tooltip_text = describe_status(name);
+    } else {
+        self.tooltip_text = "";
+    }
     
-    put_text(
-        self.desc, self, 
-        fa_left, fa_top, text_x, text_y,
-        x_padding, x_padding, y_padding, y_padding,
-        c_black, 1
-    );
+    if (self.hovered && self.reveal >= 1) {
+        obj_tooltip.tooltip_text = self.tooltip_text;
+    } 
 } 

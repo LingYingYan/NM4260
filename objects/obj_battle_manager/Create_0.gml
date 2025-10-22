@@ -1,4 +1,4 @@
-enemy = undefined;
+enemy = obj_enemy;
 player = obj_player_state;
 
 draw_pile = obj_draw_pile;
@@ -39,61 +39,25 @@ enemy_win = function() {
 }
 
 player_win = function() {
-    show_debug_message("Player win!");
     self.player.data.clear_marks_and_statuses();
     self.player.data.vision += 1;
-    self.player.data.vision = max(self.player.data.vision, self.player.max_vision);
+    self.player.data.vision = min(self.player.data.vision, self.player.max_vision);
     self.end_battle();
-    obj_loot_panel.visible = true;
-    
-    // Create the button to pick a new card
-    var card_option = instance_create_layer(0, 0, "Instances", obj_option_button);
-    card_option.button_text = "New Card!";
-    obj_loot_panel.add_item(card_option);
-    
-    // On click, collect a card and remove the button
-    // Bruh so much work just to curry one variable...
-    card_option.on_click = method({this: card_option}, function() {
-        obj_loot_panel.hide();
-        var selected = [];
-        for (var i = 0; i < 3; i += 1) {
-        	var random_card = res_loader_cards.get_random_card("Cards");
-            if (array_contains(selected, random_card.card_data.uid)) {
-                while (array_contains(selected, random_card.card_data.uid)) {
-                    instance_destroy(random_card);
-                    random_card = res_loader_cards.get_random_card("Cards");
-                } 
-            }
-            
-            var card_x = room_width / 2 + (i - 1) * 2 * random_card.sprite_width;
-            var new_card = instance_create_layer(card_x, room_height / 2, "Cards", obj_pickup_card);
-            new_card.card_data = random_card.card_data;
-            new_card.image_xscale = 1.5;
-            new_card.image_yscale = 1.5;
-            new_card.set_reveal(obj_player_state.data.max_vision);
-            new_card.on_click = method({source: this}, function() {
-                obj_loot_panel.remove_item(source);
-                obj_loot_panel.show();
-            });
-        }
-    });
-    
-    // Create the button to go back to map
-    var exit_option = instance_create_layer(0, 0, "Instances", obj_option_button);
-    exit_option.button_text = "Finish Battle";
-    obj_loot_panel.add_item(exit_option);
-    exit_option.on_click = function() {
-        show_debug_message($"HP: {self.player.data.hp}");
-        obj_room_manager.goto_map();
-    }
-    
-    
-    global.pause = true;
+
+    obj_backdrop.visible = true;
+    // Create new cards to pick
+    instance_create_layer(room_width / 2, room_height / 2, "Instances", obj_card_loot);
 }
 
 start_battle = function() {
+    // Close UI
     obj_loot_panel.visible = false;
+    
+    // Initialise player
     obj_player_state.data.clear_marks_and_statuses();
+    obj_player_state.initialise();
+    
+    // Set up card slots
     var n = instance_number(obj_card_drop_area);
     for (var i = 0; i < n; i += 1) {
         var drop_area = instance_find(obj_card_drop_area, i);
@@ -107,10 +71,18 @@ start_battle = function() {
         }
     }
     
+    // Set up player draw pile
     transfer_between_piles(self.deck, self.draw_pile, 0, false);
     self.draw_pile.shuffle();
-    self.enemy = res_loader_enemies.get_random_enemy("Characters", room_width / 2, 0);
+    
+    // Load enemy
+    var enemy = res_loader_enemies.get_random_enemy("Characters", room_width / 2, 0);
+    self.enemy.data = enemy.data;
     self.enemy.data.clear_marks_and_statuses();
+    instance_destroy(enemy);
+    self.enemy.initialise();
+    
+    // START!
     self.start_player_turn();
 }
 
@@ -191,7 +163,7 @@ draw = function() {
     
     var card = self.draw_pile.draw();
     if (instance_exists(card)) {
-        card.set_reveal(self.player.max_vision);
+        card.set_reveal(self.player.max_vision, self.player.data, self.enemy.data);
         card.grabbable = true;  
         card.scale = self.player_card_slots[0].image_xscale;
     }
@@ -216,41 +188,27 @@ flip_cards = function(player_card, enemy_card) {
     time_source_destroy(self.turn_timer);
     self.turn_timer = time_source_create(
         time_source_game, 2, time_source_units_seconds, 
-        execute_cards, [player_card, enemy_card]
+        execute_player_card, [player_card, enemy_card]
     );
     
     time_source_start(self.turn_timer);
 }
 
-/**
- * @desc 
- * @param {id.instance} player_card description
- * @param {id.instance} enemy_card description    
- */
-execute_cards = function(player_card, enemy_card) {
-    var player_card_data = player_card == noone ? noone : player_card.card_data;
-    var enemy_card_data = enemy_card == noone ? noone : enemy_card.card_data;
-    apply_special_effects(self.player.data, player_card_data, self.enemy.data, enemy_card_data);
-    
+execute_player_card = function(player_card, enemy_card) {
     if (player_card != noone) {
         player_card.card_data.apply(self.player.data, self.enemy.data);
     }
     
-    if (enemy_card != noone) {
-        enemy_card.card_data.apply(self.enemy.data, self.player.data);
-    }
-    
     time_source_destroy(self.turn_timer);
     self.turn_timer = time_source_create(
-        time_source_game, 1, time_source_units_seconds, 
-        recycle_cards, [player_card, enemy_card]
+        time_source_game, 0.25, time_source_units_seconds, 
+        recycle_player_card, [player_card, enemy_card]
     );
-    
+        
     time_source_start(self.turn_timer);
 }
 
-recycle_cards = function(player_card, enemy_card) {
-    time_source_destroy(self.turn_timer);
+recycle_player_card = function(player_card, enemy_card) {
     if (instance_exists(player_card)) {
         player_card.card_data.is_nullified = false;
         self.discard_pile.add(player_card);
@@ -260,11 +218,43 @@ recycle_cards = function(player_card, enemy_card) {
         player_card.set_reveal(0);
     }
     
+    self.player_cards[self.turn_pointer] = noone;
+    if (self.enemy.data.hp <= 0 || self.player.data.hp <= 0) {
+        self.resolve_turn();
+        return;
+    }
+    
+    time_source_destroy(self.turn_timer);
+    self.turn_timer = time_source_create(
+        time_source_game, 0.5, time_source_units_seconds, 
+        execute_enemy_card, [enemy_card]
+    );
+        
+    time_source_start(self.turn_timer);
+}
+
+execute_enemy_card = function(enemy_card) {
+    if (enemy_card != noone) {
+        enemy_card.card_data.apply(self.enemy.data, self.player.data);
+    }
+    
+    time_source_destroy(self.turn_timer);
+    self.turn_timer = time_source_create(
+        time_source_game, 0.25, time_source_units_seconds, 
+        recycle_enemy_card, [enemy_card]
+    );
+        
+    time_source_start(self.turn_timer);
+}
+
+recycle_enemy_card = function(enemy_card) {
+    time_source_destroy(self.turn_timer);
     if (instance_exists(enemy_card)) { 
         enemy_card.card_data.is_nullified = false;
         place_card(enemy_card, self.enemy.x, -500);
     }
     
+    self.enemy_cards[self.turn_pointer] = noone;
     if (self.enemy.data.hp <= 0 || self.player.data.hp <= 0) {
         self.resolve_turn();
         return;
@@ -300,6 +290,13 @@ end_player_turn = function() {
 }
 
 end_battle = function() {
+    array_foreach(self.player_cards, function(card) {
+        if (card != noone) {
+            instance_destroy(card.id);
+        }    
+    })
+    
+    instance_destroy(obj_enemy_card);
     self.player_card_slots = [];
     self.enemy_card_slots = [];
     self.can_resolve_card = false;

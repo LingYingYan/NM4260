@@ -13,14 +13,15 @@ dropped_area = noone;
 
 reveal = 0;
 desc = "";
+tooltip_text = "";
 
 ac_timestamp = 0;
 anim = ac_card_flip;
 
-set_reveal = function(value) {
+set_reveal = function(value, instigator, target) {
     self.reveal = value;
     if (self.card_data != undefined) {
-        self.desc = self.card_data.describe(self.reveal);
+        self.desc = self.card_data.describe(self.reveal, instigator, target);
     }
 }
 
