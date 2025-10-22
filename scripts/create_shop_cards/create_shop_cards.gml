@@ -10,7 +10,7 @@ function create_shop_cards(rows, cards_in_row, spacing_x, spacing_y, scale)
     var card_h = sprite_get_height(spr_card_demo) * scale;
 
     var total_height = (card_h * rows) + spacing_y;
-    var start_y = (surf_h - total_height) / 2 + card_h / 2;
+    var start_y = (surf_h - total_height) / 2 + card_h / 2 + surf_h/4;
 
     var result_cards = [];
 
@@ -19,7 +19,7 @@ function create_shop_cards(rows, cards_in_row, spacing_x, spacing_y, scale)
 
         // Total width for this row
         var total_w = num_cards * card_w + (num_cards - 1) * spacing_x;
-        var start_x = (surf_w - total_w) / 2 + card_w / 2;
+        var start_x = (surf_w - total_w) / 2 + card_w / 2 + surf_w /3;
         var pos_y = start_y + row * (card_h + spacing_y);
 
         for (var i = 0; i < num_cards; i++) {
@@ -59,9 +59,9 @@ function create_shop_cards(rows, cards_in_row, spacing_x, spacing_y, scale)
 function handle_shop_cards(rm) {
 	var rows = 2;
 	var cards_in_row = [4, 4];
-	var spacing_x = 40;
-	var spacing_y = 120;
-	var scale = 0.6;
+	var spacing_x = 100;
+	var spacing_y = 100;
+	var scale = 0.8;
 	var rm_name = string(rm.room_name);
 
 	// Ensure global.shop_card exists
