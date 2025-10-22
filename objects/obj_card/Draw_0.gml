@@ -48,8 +48,4 @@ if (self.card_data != undefined) {
     } else {
         self.tooltip_text = "";
     }
-    
-    if (self.hovered && self.reveal >= 1) {
-        obj_tooltip.tooltip_text = self.tooltip_text;
-    } 
 } 

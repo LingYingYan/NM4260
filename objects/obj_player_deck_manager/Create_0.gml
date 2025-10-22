@@ -30,9 +30,8 @@ add = function(card_id) {
 }
 
 /// @desc Function Description
-/// @param {id.instance} card_id Description
-remove = function(card_id) {
-    var card_data = card_id.card_data;
+/// @param {Struct.CardData} card_data Description
+remove_first = function(card_data) {
     self.__private.card_names_to_count[? card_data.name] -= 1;
     if (self.__private.card_names_to_count[? card_data.name] == 0) {
         ds_map_delete(self.__private.card_names_to_data, card_data.name);
@@ -47,6 +46,13 @@ remove = function(card_id) {
     }
     
     size -= 1;
+}
+
+/// @desc Function Description
+/// @param {id.instance} card_id Description
+remove = function(card_id) {
+    var card_data = card_id.card_data;
+    self.remove_first(card_data);
 }
 
 /// @desc Denumerate the deck in ascending order of card rarity, and use alphabetical order of card names to break the tie

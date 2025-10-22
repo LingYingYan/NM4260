@@ -26,6 +26,7 @@ function Trait(_id, _name, _rarity, _desc) constructor {
  * @param {Struct.Trait} trait Description
  */
 function gain_trait(player_data, trait) {
+    array_push(player_data.traits, trait);
     for (var i = 0; i < array_length(trait.modifiers); i += 1) {
         var modifier_name = trait.modifiers[i].name;
         if (variable_struct_exists(player_data.modifiers, modifier_name)) {
