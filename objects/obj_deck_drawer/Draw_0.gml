@@ -8,7 +8,7 @@
 
 
 //gpu_set_scissor(prev);
-draw_text(room_width - drawer_width, room_height/2, "Press 'I' to open your deck.");
+//draw_text(room_width - drawer_width, room_height/2, "Press 'I' to open your deck.");
 
 if (drawer_x < room_width) { // only clip when drawer visible
     var prev = gpu_get_scissor();
