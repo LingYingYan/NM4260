@@ -26,11 +26,11 @@ with (obj_deck_drawer_card) {
 			instance_destroy();
 		}
 		// - 0.5 vision
-		???
+		obj_player_state.data.vision -= 0.5;
 		// loop through player deck and remove the card instance
-		var card_id = card_data.uid;
-		obj_player_deck_manager.remove(card_id);
-		show_debug_message($"Removed the card {card_id}");
+		//var card_id = card_data.uid;
+		obj_player_deck_manager.remove_first(card_data);
+		show_debug_message($"Removed the card");
 		
 	}
 }

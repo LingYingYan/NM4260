@@ -36,6 +36,7 @@ global.encounter_cases = [
 					var card_int = instance_create_layer(room_width/2, room_height/2, "Instances", obj_treasure_card);
 					card_int.card_data = new_card.card_data;
 					obj_player_deck_manager.add(new_card);
+					obj_player_state.data.vision -= 2;
 					show_debug_message($"now the player deck length is {array_length(obj_player_deck_manager.denumerate())}")
 				}
 			),
@@ -69,6 +70,7 @@ global.encounter_cases = [
 						}
 						if (count <= 0) break;
 					}
+					obj_player_state.data.vision -= 2;
 					show_debug_message("revealed 3 rooms on the map")
 				}	
 			),
