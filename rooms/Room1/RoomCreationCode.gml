@@ -7,3 +7,4 @@ for (var i = 0; i < array_length(deck); i += 1) {
 }
 
 obj_room_manager.goto_map();
+obj_player_state.initialise();
