@@ -16,7 +16,7 @@ with (obj_deck_drawer_card) {
     x = other.drawer_x + other.drawer_width / 2;
 	y = 50 + idx * (other.card_height + other.card_spacing) - other.scroll_y;
 	
-	if (selected) {
+	if (selected && !removed) {
 		// remove the card from the deck
 		if (count > 1) {
 			// count - 1
@@ -30,6 +30,7 @@ with (obj_deck_drawer_card) {
 		// loop through player deck and remove the card instance
 		//var card_id = card_data.uid;
 		obj_player_deck_manager.remove_first(card_data);
+		removed = true;
 		show_debug_message($"Removed the card");
 		
 	}
