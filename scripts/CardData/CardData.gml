@@ -514,19 +514,13 @@ function EnchantmentCardData(
      */
     describe = function(visibility) {
         if (visibility >= 4) {
-            var str = $"Adds {self.status.name} × {self.status.level} to caster"; 
-            if (self.mark.type != "Non-elemental") {
-                str += $"\nApplies {self.mark.type} Mark × {self.mark_multiplicity} to caster";
-            } else {
-                str = "A Non-elemental card\n" + str;
-            }
-            
-            return str;
+            return $"{self.mark.get_label()} [b]{self.type}[/b]\n[bi]Caster:[/bi]" + 
+                   $"  {self.status.get_label()} + {self.status.level}";
         }
         
         if (visibility >= 3) {
-            return $"A {self.mark.type} {self.type} card\n" + 
-                   $"Adds {self.status.name} to caster";
+            return $"{self.mark.get_label()} [b]{self.type}[/b]\n[bi]Caster:[/bi]" + 
+                   $"  {self.status.get_label()} + ?";
         }
         
         if (visibility >= 2) {

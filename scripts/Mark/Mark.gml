@@ -34,7 +34,7 @@ function Mark(mark_id, mark_name, mark_sprite) constructor {
 
 function Empty(mark_id) : Mark(mark_id, "Non-elemental", spr_none) constructor {
     describe = function() { 
-        return "Non-elemental";
+        return "Does not receive any Mark";
     }
 }
 

@@ -36,9 +36,15 @@ if (self.card_data != undefined) {
     var scribble_text = scribble(self.desc).wrap(self.sprite_width - 2 * x_padding).scale(self.image_xscale);
     scribble_text.draw(text_x, text_y);
     var region = scribble_text.region_detect(text_x, text_y, device_mouse_x_to_gui(0), device_mouse_y_to_gui(0));
-    if (region != undefined && string_starts_with(region, "keyword-mark-")) {
+    if (region == undefined) {
+        self.tooltip_text = "";
+    } else if (string_starts_with(region, "keyword-mark-")) {
         var text = string(self.card_data.mark.describe_with_context(self.card_data.is_offensive)); 
         self.tooltip_text = text;
+    } else if (string_starts_with(region, "keyword-status-")) {
+        var l = string_length(region) - string_length("keyword-status-")
+        var name = string_copy(region, string_length("keyword-status-") + 1, l);
+        self.tooltip_text = describe_status(name);
     } else {
         self.tooltip_text = "";
     }
