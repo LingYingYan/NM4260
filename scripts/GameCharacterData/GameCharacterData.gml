@@ -61,6 +61,7 @@ function GameCharacterData(curr_hp, total_hp) constructor {
 function PlayerData(curr_hp, total_hp, curr_vision, total_vision) : GameCharacterData(curr_hp, total_hp) constructor {
     vision = curr_vision; 
     max_vision = total_vision;
+    traits = [];
     
     /// @desc description
     /// @param {Struct.Status} status description description

@@ -1,4 +1,3 @@
-show_debug_message(self.tooltip_text);
 if (tooltip_text == "") {
     exit;
 }

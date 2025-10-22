@@ -1,0 +1,25 @@
+function draw_tooltip(tooltip_text) {
+    if (tooltip_text == "") {
+        exit;
+    }
+    
+    var mouse_x_gui = device_mouse_x_to_gui(0);
+    var mouse_y_gui = device_mouse_y_to_gui(0);
+    var x_gui = mouse_x_gui;
+    var y_gui = mouse_y_gui;
+    var scribble_text = scribble($"{tooltip_text}").wrap(500);
+    if (mouse_x_gui <= display_get_gui_width() / 2) {
+        //x_gui += panel_w / 2;
+    } else {
+        x_gui -= (scribble_text.get_width() + 50);
+    }
+        
+    if (mouse_y_gui <= display_get_gui_height() / 2) {
+        //y_gui += panel_h / 2;
+    } else {
+        y_gui -= (scribble_text.get_height() + 50);
+    }
+        
+    draw_sprite_stretched(spr_panel, 0, x_gui, y_gui, scribble_text.get_width() + 50, scribble_text.get_height() + 50);
+    scribble_text.draw(x_gui + 25, y_gui + 25);
+}
