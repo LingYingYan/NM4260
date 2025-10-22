@@ -1,0 +1,1 @@
+scribble($"[b]{self.text}[/b]").scale(self.image_xscale).blend(c_white, self.image_alpha).align(fa_center, fa_middle).draw(self.x, self.y);
