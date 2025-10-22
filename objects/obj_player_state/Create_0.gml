@@ -7,7 +7,11 @@ traits = [];
 initialise = function() { 
     var health_bar = instance_create_depth(self.x, self.bbox_top, self.depth - 1, obj_ui_health_bar);
     health_bar.source = data;
+    health_bar.max_value = data.max_hp;
+    health_bar.current = data.hp;
     var vision_indicator = instance_create_depth(health_bar.bbox_left, health_bar.bbox_top - health_bar.sprite_height, self.depth - 1, obj_vision_indicator);
+    vision_indicator.max_value = data.max_vision;
+    vision_indicator.current = data.vision;
     array_foreach(self.data.traits, function(trait) {
         self.add_trait(trait);
     });

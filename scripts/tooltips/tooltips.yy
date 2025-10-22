@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"Script156",
+  "%Name":"tooltips",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"Script156",
+  "name":"tooltips",
   "parent":{
     "name":"Utils",
     "path":"folders/Scripts/Utils.yy",
