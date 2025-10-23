@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"trigger_room_transition",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"trigger_room_transition",
+  "parent":{
+    "name":"NM4260",
+    "path":"NM4260.yyp",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -8,11 +8,13 @@ global.GRID_H = 5;
 global.ROOM_SIZE = 64;
 
 global.room_grid = []; // will be filled by generate_map()
-
-global.shop_used = false; // set to true of all cards in the shop is sold out, apply a cross
+ 
 global.bonfire_used = false; // deactivate bonfire after used once
 global.generate_new = true;
 global.player_current_room = noone;
+
+global.used_shops = [];
+
 
 global.just_exited_bonfire = false;
 

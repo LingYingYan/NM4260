@@ -28,7 +28,7 @@ if (point_in_rectangle(mx, my,
 	empty_shop_card();
 	
 	global.map_needs_reset = true;  // flag that next room must regenerate
-	room_goto(Room1);
+	obj_room_manager.goto_map();
 }
 
 // Button 2 clicked
@@ -39,5 +39,5 @@ if (point_in_rectangle(mx, my,
     show_message("You chose not to rest");
 	global.just_exited_bonfire = true;
 	global.bonfire_used = false;
-	room_goto(Room1);
+	obj_room_manager.goto_map();
 }

@@ -6,6 +6,7 @@ with (obj_shop_card) {
 		selected = false;
 		sold = true;
 		obj_player_deck_manager.add(id);
+		other.alarm[0] = 1;
 	}
 	
 	if (sold) {
@@ -31,6 +32,12 @@ with (obj_shop_card) {
 		}
 		show_debug_message("instance destroyed");
 		instance_destroy();
+		
+		// once player made purchases in the shop, mark it as used --> cannot return
+		var curr = global.player_current_room;
+		var used_coor = [curr.x, curr.y];
+		array_push(global.used_shops, used_coor);
+		show_debug_message($"The shop at {curr.x}, {curr.y} is marked as used")
 	}
 }
 
@@ -39,13 +46,12 @@ var my = device_mouse_y_to_gui(0);
 
 if (mouse_check_button_pressed(mb_left)) {
     if (point_in_rectangle(mx, my, 40, 40, 160, 90)) {
-        show_debug_message("");
 		
         obj_room_manager.goto_map();
     }
 }
 
-if (!instance_exists(obj_shop_card)) {
-	// if all cards are bought
-	global.shop_used = true;
-}
+//if (!instance_exists(obj_shop_card)) {
+//	// if all cards are bought
+//	global.shop_used = true;
+//}

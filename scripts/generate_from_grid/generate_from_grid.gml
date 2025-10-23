@@ -7,8 +7,19 @@ function generate_from_grid(){
 				if (rm.room_type == "bonfire" && !global.bonfire_used) {
 					rm.used = false;
 				}
-				if (rm.room_type == "shop" && !global.shop_used) {
-					rm.used = false;
+				if (rm.room_type == "shop") {
+					var used_bool = false;
+					for (i = 0; i < array_length(global.used_shops); i ++) {
+						var coor = global.used_shops[i];
+						var used_x = coor[0];
+						var used_y = coor[1];
+						if (rm.x == used_x && rm.y == used_y) {
+							// the shop is used, mark it with cross
+							used_bool = true;
+						}
+					}
+					rm.used = used_bool;
+					
 				}
                 var vis = instance_create_layer(rm.x + global.map_offset_x, rm.y + global.map_offset_y, "Instances", DungeonRoom);
                 vis.data = rm;
@@ -25,6 +36,7 @@ function generate_from_grid(){
 	if (is_struct(global.player_current_room)) {
 	    // Player was in a specific room before exiting
 	    target_room = global.player_current_room;
+		
 	    show_debug_message("Restoring player to previous room...");
 	} else {
 	    // Fallback to start room if no record found

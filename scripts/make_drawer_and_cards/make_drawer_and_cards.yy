@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"make_drawer_and_cards",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"make_drawer_and_cards",
+  "parent":{
+    "name":"NM4260",
+    "path":"NM4260.yyp",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

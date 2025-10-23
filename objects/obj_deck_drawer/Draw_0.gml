@@ -8,7 +8,7 @@
 
 
 //gpu_set_scissor(prev);
-//draw_text(room_width - drawer_width, room_height/2, "Press 'I' to open your deck.");
+draw_text(room_width - drawer_width, room_height/2, "Press 'I' to open your deck.");
 
 if (drawer_x < room_width) { // only clip when drawer visible
     var prev = gpu_get_scissor();
@@ -24,7 +24,10 @@ if (drawer_x < room_width) { // only clip when drawer visible
 			draw_set_color(c_white)
 			draw_text(x + other.card_width/2 + 10, y, "x" + string(count));
 		}
-		draw_text(x - other.card_width/2 - 5, y + other.card_height/2 + 10, "-0.5 Vision to remove");
+		if (other.can_remove) {
+			draw_set_color(c_aqua);
+			draw_text(x - other.card_width/2 - 5, y + other.card_height/2 + 10, "-0.5 Vision to remove");
+		}
 	}
 
 	gpu_set_scissor(prev);
