@@ -5,12 +5,15 @@ function reveal_room(rm){
 	if (is_struct(rm)) {
         rm.discovered = true;      // reveal logical room
 		// if its a shop room
-		rm.visited = true;
+		rm.revealed = true;
+		//rm.visited = true;
 		rm.used = true;
 		
 		if (rm.room_type == "shop") {
 			handle_shop_cards(rm);
 		}
+		//reveal neighboring rooms as well
+		reveal_neighbors(rm);
 
         trigger_room_event(rm);    // trigger event using the struct
     } else {

@@ -2,30 +2,6 @@ function choose_array(arr) {
     return arr[irandom(array_length(arr) - 1)];
 }
 
-//function room_neighbors_init(rm) {
-//    rm.neighbors = [];
-//    rm.degree_cap = 3; 
-//    rm.visited = false;
-//}
-
-//function add_edge(a, b) {
-//    if (a == noone || b == noone || a == b) return false;
-    
-//    if (!variable_instance_exists(a, "neighbors")) room_neighbors_init(a);
-//    if (!variable_instance_exists(b, "neighbors")) room_neighbors_init(b);
-
-//    if (array_length(a.neighbors) >= a.degree_cap) return false;
-//    if (array_length(b.neighbors) >= b.degree_cap) return false;
-
-//    // prevent duplicates
-//    for (var i = 0; i < array_length(a.neighbors); i++)
-//        if (a.neighbors[i] == b) return false;
-
-//    array_push(a.neighbors, b);
-//    array_push(b.neighbors, a);
-//    return true;
-//}
-
 function add_edge(a, b) {
     if (!is_struct(a) || !is_struct(b) || a == b) return false;
 
@@ -138,7 +114,7 @@ function connect_start_end_and_spawn_player(spawn_at_bonfire) {
     global.start_room = noone;
     if (array_length(bottom_rooms) > 0) {
         var base = choose_array(bottom_rooms);
-		var start = new RoomData(true, true, false, "start", base.x/S, base.y/S+1);
+		var start = new RoomData(true, true, true, false, "start", base.x/S, base.y/S+1);
 		array_push(base.neighbors, start);
 		array_push(start.neighbors, base);
         global.start_room = start
@@ -216,7 +192,7 @@ function connect_start_end_and_spawn_player(spawn_at_bonfire) {
         } else {
             var avatar = instance_create_layer(spawn_target.x + global.map_offset_x, spawn_target.y + global.map_offset_y, "Instances", Player);
             avatar.current_room = spawn_target;
-			show_debug_message($"user is newly spawned at {spawn_target}");
+			//show_debug_message($"user is newly spawned at {spawn_target}");
         }
     }
 
@@ -224,4 +200,75 @@ function connect_start_end_and_spawn_player(spawn_at_bonfire) {
         //instance_create_layer(0, 0, "FogLayer", FogOfWar);
 		show_debug_message("Creating Fog of War")
     }
+}
+
+
+/// @desc discover direct neighboring rooms when a new room is entered; discover rooms n vision away at a chance of 0.5; reveal discovered rooms at a chance of 0.1
+function reveal_neighbors(rm) {
+	var nb_lst = rm.neighbors;
+	
+	var discover_prob = 0.5;
+	var reveal_prob = 0.1;
+	
+	for (i = 0; i < array_length(nb_lst); i++) {
+		var nb = nb_lst[i];
+		for (var row = 0; row < array_length(global.room_grid); row++) {
+			for (var col = 0; col < array_length(global.room_grid[row]); col++) {
+				var grid_rm = global.room_grid[row][col];
+				
+				if (grid_rm != noone && grid_rm.grid_x == nb.grid_x && grid_rm.grid_y == nb.grid_y) {
+					// for each neighbor, mark it as discovered
+					nb.discovered = true;
+					grid_rm.discovered = true;
+				}
+			}
+		}
+	}
+	show_debug_message("The room's neighbors are discovered")
+	
+	// 50% chance reveal rooms n visions away
+	var n_vision = obj_player_state.data.vision;
+	discover_distance_n_nb(rm, n_vision);
+	show_debug_message("The further neighbours are discovered");
+	
+		
+}
+
+function discover_distance_n_nb(curr_room, n) {
+	var nbs = curr_room.neighbors;
+	
+	// stop recursion
+    if (n <= 0) return [];
+
+    array_push(global.checked_room, curr_room);
+
+	for (var i = 0; i < array_length(nbs); i++) {
+        var nb = nbs[i];
+
+        // skip if already checked
+        if (array_index_of(global.checked_room, nb) != -1) continue;
+        // record as checked
+        array_push(global.checked_room, nb);
+
+        // 50% chance to mark as discovered
+        if (random(1) < 0.5) {
+            nb.discovered = true;
+			global.room_grid[nb.grid_x][nb.grid_y].discovered = true;
+
+            // recursively explore this neighbor
+            discover_distance_n_nb(nb, n - 1);
+        }
+    }
+}
+
+function reveal_distance_n_neighbours(n) {
+	for (i = 0; i < array_length(global.checked_room); i ++) {
+		var rm = global.checked_room[i];
+		var prob = 10 * (n+1) /100 //probability of revealing
+		if (random(1) < prob) {
+			//reveal the room
+			rm.revealed = true;
+			global.room_grid[rm.grid_x][rm.grid_y].revealed = true;
+		}
+	}
 }

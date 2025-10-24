@@ -25,9 +25,7 @@ if (player.current_room != noone) {
         player.target_y = y;
         player.current_room = self.data;
 		global.player_current_room = self.data;
-		
-		//self.data.visited = true;
-		//self.data.discovered = true;
+
     } else {
         show_debug_message("Cannot move — not connected!");
 		show_message("Not Connected! Find another path.")

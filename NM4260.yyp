@@ -415,6 +415,7 @@
     {"id":{"name":"spr_coalesence","path":"sprites/spr_coalesence/spr_coalesence.yy",},},
     {"id":{"name":"spr_cross_overlay","path":"sprites/spr_cross_overlay/spr_cross_overlay.yy",},},
     {"id":{"name":"spr_deck_drawer_button","path":"sprites/spr_deck_drawer_button/spr_deck_drawer_button.yy",},},
+    {"id":{"name":"spr_dungeonRoom_unrevealed","path":"sprites/spr_dungeonRoom_unrevealed/spr_dungeonRoom_unrevealed.yy",},},
     {"id":{"name":"spr_dungeonRoom","path":"sprites/spr_dungeonRoom/spr_dungeonRoom.yy",},},
     {"id":{"name":"spr_enc_visionPool","path":"sprites/spr_enc_visionPool/spr_enc_visionPool.yy",},},
     {"id":{"name":"spr_enc_whisperingWall","path":"sprites/spr_enc_whisperingWall/spr_enc_whisperingWall.yy",},},

@@ -28,7 +28,7 @@ function generate_map(generate_new) {
     for (var row = 0; row < H; row++) {
         for (var col = 0; col < W; col++) {
             if (random(1) < ROOM_DENSITY) {
-				var rm = new RoomData(false,false,false,"default",col, row);
+				var rm = new RoomData(false, false, false, false,"default",col, row);
                 //var rm = instance_create_layer(col * S, row * S + S, "Instances", DungeonRoom);
                 //room_neighbors_init(rm);
                 global.room_grid[row][col] = rm;
@@ -47,7 +47,7 @@ function generate_map(generate_new) {
         for (var c = 0; c < global.GRID_W; c++) if (global.room_grid[r][c] != noone) { found = true; break; }
         if (!found) {
             var pick = irandom(global.GRID_W - 1);
-			var rm = new RoomData(false,false, false, "default",pick, r+1);
+			var rm = new RoomData(false, false, false, false, "default",pick, r+1);
             //var rm = instance_create_layer(pick * global.ROOM_SIZE, r * global.ROOM_SIZE + global.ROOM_SIZE, "Instances", DungeonRoom);
             //rm.grid_x = pick;
             //rm.grid_y = r;
@@ -105,7 +105,7 @@ function generate_map(generate_new) {
         var stack = [[sx, sy]];
         while (array_length(stack) > 0) {
             var pos = stack[array_length(stack)-1];
-			show_debug_message($"pos is {pos}")
+			//show_debug_message($"pos is {pos}")
             array_delete(stack, array_length(stack)-1, 1);
             var cx = pos[0], cy = pos[1];
             var rm = global.room_grid[cy][cx];

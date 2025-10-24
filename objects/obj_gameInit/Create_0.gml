@@ -6,6 +6,7 @@ global.map_inited      = false;
 global.GRID_W = 6;
 global.GRID_H = 5;
 global.ROOM_SIZE = 64;
+global.ROOM_SPACING = 14; // very likely need to adjust later, this is based on the sprite i draw
 
 global.room_grid = []; // will be filled by generate_map()
  
@@ -15,6 +16,7 @@ global.player_current_room = noone;
 
 global.used_shops = [];
 
+global.checked_room = [];
 
 global.just_exited_bonfire = false;
 
