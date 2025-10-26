@@ -18,6 +18,26 @@ function GameCharacterData(curr_hp, total_hp) constructor {
         bleeding: false
     };
     
+    /// @desc 
+    /// @param {string} name description
+    static get_attribute = function(name) {
+        return self.modifiers[$ name] ?? 0;
+    }
+    
+    /// @desc 
+    /// @param {string} name description
+    /// @param {real,bool} value description
+    static set_attribute = function(name, value) {
+        self.modifiers[$ name] = value;
+    }
+    
+    /// @desc 
+    /// @param {string} name description
+    /// @param {real} modifier_value description
+    static add_modifier = function(name, modifier_value) {
+        self.set_attribute(name, self.get_attribute(name) + modifier_value);
+    }
+    
     /// @desc description
     /// @param {Struct.Status} status description description
     /// @param {bool} [success]=true description

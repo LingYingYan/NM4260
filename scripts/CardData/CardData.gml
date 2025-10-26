@@ -351,10 +351,7 @@ function RestorationCardData(
         
         if (visibility >= 3) {
             var desc = $"{self.mark.get_label()} [b]{self.type}[/b]\n[bi]Caster:[/bi]";
-            if (self.amount > 0) {
-                desc += $"Heals {self.amount} for caster";
-            }
-            
+
             if (self.amount > 0) {
                 desc += $"\n  Restores {heal_text} HP";
             }
