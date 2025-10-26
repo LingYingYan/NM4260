@@ -26,3 +26,4 @@ if (!res_loader_traits.is_loaded) {
 }
 
 obj_room_manager.goto_deck_selection();
+global.timestamp = 0;

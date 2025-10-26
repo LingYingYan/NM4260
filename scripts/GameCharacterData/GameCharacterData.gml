@@ -42,11 +42,12 @@ function GameCharacterData(curr_hp, total_hp) constructor {
             return;
         }
         
-        if (!ds_map_exists(self.timed_effects, global.timestamp)) {
-            ds_map_add(self.timed_effects, global.timestamp, []);
+        var expiry_time = global.timestamp + duration;
+        if (!ds_map_exists(self.timed_effects, expiry_time)) {
+            ds_map_add(self.timed_effects, expiry_time, []);
         }
         
-        array_push(self.timed_effects[? global.timestamp], runnable);
+        array_push(self.timed_effects[? expiry_time], runnable);
     }
     
     /// @desc 
