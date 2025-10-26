@@ -13,6 +13,7 @@ function reveal_room(rm){
 			handle_shop_cards(rm);
 		}
 		//reveal neighboring rooms as well
+		show_debug_message($"inside reveal_room function, the room is {rm.room_type}")
 		reveal_neighbors(rm);
 
         trigger_room_event(rm);    // trigger event using the struct

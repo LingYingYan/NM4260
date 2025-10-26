@@ -21,8 +21,6 @@ with (obj_shop_card) {
 				var shop_map = ds_map_create();
 				shop_map[? "cards"] = global.curr_shop_cards;
 				ds_map_set(global.shop_card, rm_name, shop_map);
-				//(global.shop_card[? rm_name])[? "cards"] = global.curr_shop_cards;
-				//global.shop_card.rm_name.cards = global.curr_shop_cards; //replace the global map with new cards
 				
 				var debug_map = global.shop_card[? rm_name];
 				var card_arr = debug_map[? "cards"];

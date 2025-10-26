@@ -38,3 +38,17 @@ if (is_struct(self.data)) {
     }
 	
 }
+
+if (is_pressing && !long_press_done) {
+    var pct = press_time / long_press_threshold;
+	draw_set_alpha(0.8);
+	draw_set_color(c_blue);
+	var half_w = sprite_width/2;
+	var half_h = sprite_height/2;
+	draw_rectangle(x - half_w * pct,
+					y - half_w * pct,
+					x + half_w * pct,
+					y + half_h * pct,
+					false);
+	draw_set_alpha(1);
+}

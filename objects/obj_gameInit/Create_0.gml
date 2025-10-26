@@ -18,6 +18,8 @@ global.used_shops = [];
 
 global.checked_room = [];
 
+global.perm_revealed_rooms = [];
+
 global.just_exited_bonfire = false;
 
 // shop-cards

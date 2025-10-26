@@ -220,17 +220,33 @@ function reveal_neighbors(rm) {
 					// for each neighbor, mark it as discovered
 					nb.discovered = true;
 					grid_rm.discovered = true;
+					// if it is boss fight, reveal it
+					if (grid_rm.room_type == "end") {
+						nb.revealed = true;
+						grid_rm.revealed = true;
+					}
 				}
 			}
 		}
 	}
 	show_debug_message("The room's neighbors are discovered")
 	
-	// 50% chance reveal rooms n visions away
-	var n_vision = obj_player_state.data.vision;
-	discover_distance_n_nb(rm, n_vision);
-	show_debug_message("The further neighbours are discovered");
+	// only reveal more if not start room
 	
+	if (rm.room_type == "start") {
+		show_debug_message($"Current room is start room");
+	} else {
+		show_debug_message("Checking and discovering neighbor");
+		// 50% chance discover rooms n visions away
+		var n_vision = obj_player_state.data.vision;
+		discover_distance_n_nb(rm, n_vision);
+		show_debug_message("The further neighbours are DISCOVERED");
+	
+		// 10*(n+1) % chance reveal rooms n visions away
+		reveal_distance_n_neighbours(n_vision);
+		show_debug_message("The further neighbours are REVEALED");
+	}
+
 		
 }
 
@@ -246,29 +262,48 @@ function discover_distance_n_nb(curr_room, n) {
         var nb = nbs[i];
 
         // skip if already checked
-        if (array_index_of(global.checked_room, nb) != -1) continue;
+        if (array_get_index(global.checked_room, nb) != -1) continue;
         // record as checked
         array_push(global.checked_room, nb);
+		show_debug_message($"Running discover further neighbours, room coor is grid_x (col){nb.grid_x}, grid_y (row) {nb.grid_y}");
+		
+		if (random(1) < 0.5) {
+			// 50% chance mark it as discovered
+			if (nb.grid_x >= 0 && nb.grid_x < array_length(global.room_grid[0]) &&
+			nb.grid_y >= 0 && nb.grid_y < array_length(global.room_grid)) {
 
-        // 50% chance to mark as discovered
-        if (random(1) < 0.5) {
-            nb.discovered = true;
-			global.room_grid[nb.grid_x][nb.grid_y].discovered = true;
-
-            // recursively explore this neighbor
-            discover_distance_n_nb(nb, n - 1);
-        }
+			var grid_rm = global.room_grid[nb.grid_y][nb.grid_x];
+				if (grid_rm != noone && grid_rm.grid_x == nb.grid_x && grid_rm.grid_y == nb.grid_y) {
+					show_debug_message("Discovering further neighbours")
+					nb.discovered = true;
+					grid_rm.discovered = true;
+					global.room_grid[nb.grid_y][nb.grid_x] = grid_rm;
+					discover_distance_n_nb(nb, n - 1);
+				}
+			}
+		}
     }
 }
 
 function reveal_distance_n_neighbours(n) {
 	for (i = 0; i < array_length(global.checked_room); i ++) {
 		var rm = global.checked_room[i];
-		var prob = 10 * (n+1) /100 //probability of revealing
-		if (random(1) < prob) {
-			//reveal the room
-			rm.revealed = true;
-			global.room_grid[rm.grid_x][rm.grid_y].revealed = true;
+		// check whether the room is discovered but not reviewed
+		if (rm.discovered && !rm.revealed) {
+			var prob = 10 * (n+1) /100 //probability of revealing
+			if (random(1) < prob) {
+				var grid_rm = global.room_grid[rm.grid_y][rm.grid_x];
+				if (grid_rm != noone && grid_rm.grid_x == rm.grid_x && grid_rm.grid_y == rm.grid_y) {
+					show_debug_message("Revealing further neigbhors")
+					rm.revealed = true;
+					grid_rm.revealed = true;
+					global.room_grid[rm.grid_y][rm.grid_x] = grid_rm;
+				}
+			}
 		}
 	}
+}
+
+function reveal_permanent_rooms(rooms) {
+
 }
