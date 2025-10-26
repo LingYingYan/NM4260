@@ -5,13 +5,15 @@
  * @param {string} _name Description
  * @param {string} _desc Description
  * @param {real} _rarity description
+ * @param {real} _duration description
  * @param {array<Struct.Effect>} _effects description
  */
-function Relic(_id, _name, _desc, _rarity, _effects = []) constructor {
+function Relic(_id, _name, _desc, _rarity, _duration, _effects = []) constructor {
     uid = _id;
     name = _name;
     desc = _desc;
     rarity = _rarity;
+    duration = _duration;
     effects = _effects;
     
     static get_weight = function() {

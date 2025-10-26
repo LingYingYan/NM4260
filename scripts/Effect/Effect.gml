@@ -1,3 +1,25 @@
+/// @desc Function Description
+/// @param {Struct.Effect} inner_effect Description
+/// @param {Struct} application_args description
+function RunnableEffect(inner_effect, application_args) constructor {
+    effect = inner_effect;
+    args = application_args;
+    
+    /// @desc 
+    /// @param {Struct.CharacterData} target description
+    /// @param {Struct.CharacterData} instigator description
+    static apply = function(target, instigator) { 
+        self.effect.apply(target, instigator, self.args);
+    }
+    
+    /// @desc 
+    /// @param {Struct.CharacterData} target description
+    /// @param {Struct.CharacterData} instigator description
+    static revert = function(target, instigator) { 
+        self.effect.revert(target, instigator, self.args);
+    }
+}
+
 function Effect() constructor {
     /// @desc 
     /// @param {Struct.CharacterData} target description
@@ -9,8 +31,16 @@ function Effect() constructor {
     /// @param {Struct.CharacterData} target description
     /// @param {Struct.CharacterData} instigator description
     /// @param {Struct} args description
+    static revert = function(target, instigator, args = { multiplier: 100 }) {
+        show_debug_message("CANNOT REVERT THIS EFFECT!");
+    }
+    
     static to_string = function(target, instigator, args = { multiplier: 100 }) {
         return "Effect";
+    }
+    
+    static instantiate = function(args = { multiplier: 100 }) {
+        return new RunnableEffect(self, args);
     }
 }
 
@@ -27,6 +57,14 @@ function ModifierEffect(_modified_attribute, _magnitude) : Effect() constructor 
     /// @param {Struct} args description
     static apply = function(target, instigator, args = { multiplier: 100 }) {
         target.add_modifier(self.modified_attribute, self.magnitude);
+    }
+    
+    /// @desc 
+    /// @param {Struct.CharacterData} target description
+    /// @param {Struct.CharacterData} instigator description
+    /// @param {Struct} args description
+    static revert = function(target, instigator, args = { multiplier: 100 }) { 
+        target.add_modifier(self.modified_attribute, -self.magnitude)
     }
     
     /// @desc 
@@ -51,6 +89,14 @@ function FlagEffect(_target_attribute, _flag) : Effect() constructor {
     /// @param {Struct} args description
     static apply = function(target, instigator, args = { multiplier: 100 }) {
         target.set_attribute(self.target_attribute, self.flag);
+    }
+    
+    /// @desc 
+    /// @param {Struct.CharacterData} target description
+    /// @param {Struct.CharacterData} instigator description
+    /// @param {Struct} args description
+    static revert = function(target, instigator, args = { multiplier: 100 }) { 
+        target.set_attribute(self.target_attribute, !self.flag)
     }
     
     /// @desc 

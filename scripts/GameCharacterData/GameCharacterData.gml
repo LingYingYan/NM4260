@@ -6,6 +6,9 @@ function GameCharacterData(curr_hp, total_hp) constructor {
     marks = ds_map_create();
     card_effectiveness_modifier = 0;
     
+    // Map<real, array<{runnable_effect}>>
+    timed_effects = ds_map_create();
+    
     dirty_keys = [];
     
     modifiers = {
@@ -17,6 +20,34 @@ function GameCharacterData(curr_hp, total_hp) constructor {
         paralysed: false,
         bleeding: false
     };
+    
+    static process_timed_effects = function() {
+        if (!ds_map_exists(self.timed_effects, global.timestamp)) {
+            return;
+        }
+        
+        var expiring = self.timed_effects[? global.timestamp];
+        for (var i = 0; i < array_length(expiring); i += 1) {
+            expiring[i].revert(self, self);
+        }
+    }
+    
+    /// @description     
+    /// @param {Struct.GameCharacterData} instigator description
+    /// @param {Struct.Effect} effect description
+    static receive_effect = function(instigator, effect, args = { multiplier: 100 }, duration = 0) {
+        var runnable = effect.instantiate(args);
+        runnable.apply(self, instigator);
+        if (duration <= 0) {
+            return;
+        }
+        
+        if (!ds_map_exists(self.timed_effects, global.timestamp)) {
+            ds_map_add(self.timed_effects, global.timestamp, []);
+        }
+        
+        array_push(self.timed_effects[? global.timestamp], runnable);
+    }
     
     /// @desc 
     /// @param {string} name description
