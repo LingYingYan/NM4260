@@ -1,0 +1,242 @@
+{
+    "card_fireball": {
+        "effects_on_target": [
+            {
+                "type": "Damage",
+                "value": 5
+            },
+            {
+                "type": "Mark",
+                "value": 1
+            }
+        ],
+        "effects_on_caster": [],
+        "special_effects": []
+    },
+    "card_rainstorm": {
+        "effects_on_target": [
+            {
+                "type": "Damage",
+                "value": 4
+            },
+            {
+                "type": "Mark",
+                "value": 2
+            }
+        ],
+        "effects_on_caster": [],
+        "special_effects": []
+    },
+    "card_force_of_nature": {
+        "effects_on_target": [
+            {
+                "type": "Damage",
+                "value": 5
+            },
+            {
+                "type": "Mark",
+                "value": 1
+            }
+        ],
+        "effects_on_caster": [],
+        "special_effects": []
+    },
+    "card_scorch": {
+        "effects_on_target": [
+            {
+                "type": "Damage",
+                "value": 5
+            },
+            {
+                "type": "Mark",
+                "value": 1
+            }
+        ],
+        "effects_on_caster": [],
+        "special_effects": []
+    },
+    "card_curse_of_old_gods": {
+        "effects_on_target": [
+            {
+                "type": "Damage",
+                "value": 1
+            },
+            {
+                "type": "Mark",
+                "value": 2
+            }
+        ],
+        "effects_on_caster": [],
+        "special_effects": []
+    },
+    "card_healing": {
+        "effects_on_target": [],
+        "effects_on_caster": [
+            {
+                "type": "Heal",
+                "value": 10
+            }
+        ],
+        "special_effects": []
+    },
+    "card_fire_healing": {
+        "effects_on_target": [],
+        "effects_on_caster": [
+            {
+                "type": "RemoveMark",
+                "mark_id": "mark_fire",
+                "value": 3
+            }
+        ],
+        "special_effects": []
+    },
+    "card_water_healing": {
+        "effects_on_target": [],
+        "effects_on_caster": [
+            {
+                "type": "RemoveMark",
+                "mark_id": "mark_water",
+                "value": 3
+            }
+        ],
+        "special_effects": []
+    },
+    "card_grass_healing": {
+        "effects_on_target": [],
+        "effects_on_caster": [
+            {
+                "type": "RemoveMark",
+                "mark_id": "mark_grass",
+                "value": 3
+            }
+        ],
+        "special_effects": []
+    },
+    "card_flame_shield": {
+        "effects_on_target": [],
+        "effects_on_caster": [
+            {
+                "type": "AddStatus",
+                "status_name": "Shield",
+                "value": 3
+            },
+            {
+                "type": "Mark",
+                "value": 1,
+                "mark_id": "mark_fire"
+            }
+        ],
+        "special_effects": [
+            {
+                "type": "Ward"
+            }
+        ]
+    },
+    "card_water_shield": {
+        "effects_on_target": [],
+        "effects_on_caster": [
+            {
+                "type": "AddStatus",
+                "status_name": "Shield",
+                "value": 3
+            },
+            {
+                "type": "Mark",
+                "value": 1,
+                "mark_id": "mark_water"
+            }
+        ],
+        "special_effects": [
+            {
+                "type": "Ward"
+            }
+        ]
+    },
+    "card_forest_shield": {
+        "effects_on_target": [],
+        "effects_on_caster": [
+            {
+                "type": "AddStatus",
+                "status_name": "Shield",
+                "value": 3
+            },
+            {
+                "type": "Mark",
+                "value": 1,
+                "mark_id": "mark_grass"
+            }
+        ],
+        "special_effects": [
+            {
+                "type": "Ward"
+            }
+        ]
+    },
+    "card_ward": {
+        "effects_on_target": [
+            {
+                "type": "AddStatus",
+                "status_name": "Shield",
+                "value": 5
+            }
+        ],
+        "effects_on_caster": [],
+        "special_effects": []
+    },
+    "card_fire_storm": {
+        "effects_on_target": [
+            {
+                "type": "Damage",
+                "value": 6
+            },
+            {
+                "type": "Mark",
+                "value": 2
+            }
+        ],
+        "effects_on_caster": [],
+        "special_effects": []
+    },
+    "card_icycles": {
+        "effects_on_target": [
+            {
+                "type": "Damage",
+                "value": 6
+            },
+            {
+                "type": "Mark",
+                "value": 1
+            }
+        ],
+        "effects_on_caster": [],
+        "special_effects": []
+    },
+    "card_earthquake": {
+        "effects_on_target": [
+            {
+                "type": "Damage",
+                "value": 6
+            },
+            {
+                "type": "Mark",
+                "value": 2
+            }
+        ],
+        "effects_on_caster": [],
+        "special_effects": []
+    },
+    "card_reap": {
+        "effects_on_target": [
+            {
+                "type": "Damage",
+                "value": 12
+            },
+            {
+                "type": "Mark",
+                "value": 3
+            }
+        ],
+        "effects_on_caster": [],
+        "special_effects": []
+    }
+}

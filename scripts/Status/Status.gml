@@ -5,20 +5,32 @@ function Status(_level, _name) constructor {
     level = _level;
     name = _name;
     
-    /// @desc Execute the status effect
+    /// @desc Called when the effect is added for the first time
     /// @param {Struct.GameCharacterData} target The target
-    initialise = function(target) { }
+    static initialise = function(target) { }
     
-    /// @desc Execute the status effect
+    /// @desc Called when the effect is added
     /// @param {Struct.GameCharacterData} target The target
-    execute = function(target) { }
+    static activate = function(target) { }
     
-    decay = function() { 
+    /// @desc Called when the effect ticks
+    /// @param {Struct.GameCharacterData} target The target
+    static execute = function(target) { }
+    
+    /// @desc Called when the effect is removed.
+    /// @param {Struct.GameCharacterData} target The target
+    static terminate = function(target) { }
+    
+    static decay = function() { 
         self.level -= 1;
     }
     
-    get_label = function() {
-        return $"[region,keyword-status-{self.name}][c_white][spr_{string_lower(self.name)}_small][/c][c_gold][b]{self.name}[/b][/c][/region]"
+    static get_label = function(highlight = false) {
+        if (highlight) {
+            return $"[region,keyword-status-{self.name}][c_white][spr_{string_lower(self.name)}_small][/c] [wheel][c_gold][b]{self.name}[/b][/c][/wheel][/region]";
+        }
+        
+        return $"[region,keyword-status-{self.name}][c_white][spr_{string_lower(self.name)}_small][/c] [c_gold][b]{self.name}[/b][/c][/region]";
     }
 }
 
@@ -114,7 +126,7 @@ function project_status_effect(type, level) {
 function Burn(_level) : Status(_level, nameof(Burn)) constructor {
     /// @desc Execute the status effect
     /// @param {Struct.GameCharacterData} target The target
-    execute = function(target) { 
+    static execute = function(target) { 
         target.hp -= self.level;
     }
 } 
@@ -122,7 +134,7 @@ function Burn(_level) : Status(_level, nameof(Burn)) constructor {
 function Poison(_level) : Status(_level, nameof(Poison)) constructor {
     /// @desc Execute the status effect
     /// @param {Struct.GameCharacterData} target The target
-    execute = function(target) { 
+    static execute = function(target) { 
         target.hp -= self.level;
     }
 } 
@@ -130,51 +142,75 @@ function Poison(_level) : Status(_level, nameof(Poison)) constructor {
 function Paralysed(_level) : Status(_level, nameof(Paralysed)) constructor {
     /// @desc Execute the status effect
     /// @param {Struct.GameCharacterData} target The target
-    execute = function(target) { 
+    static execute = function(target) { 
         target.modifiers.paralysed = true;
     }
 } 
 
 function Frozen(_level) : Status(_level, nameof(Frozen)) constructor {
-    /// @desc Execute the status effect
+    /// @desc Called when the effect is added for the first time
     /// @param {Struct.GameCharacterData} target The target
-    execute = function(target) { 
-        target.modifiers.frozen = true;
+    static initialise = function(target) {
+        target.set_attribute("frozen", true);
+    }
+    
+    /// @desc Called when the effect is removed.
+    /// @param {Struct.GameCharacterData} target The target
+    static terminate = function(target) { 
+        target.set_attribute("frozen", false);
     }
 } 
 
 function Shield(_level) : Status(_level, nameof(Shield)) constructor {
-    /// @desc Execute the status effect
+    /// @desc Called when the effect is added
     /// @param {Struct.GameCharacterData} target The target
-    initialise = function(target) { 
-        target.modifiers.shield += self.level;
+    static activate = function(target) { 
+        target.add_modifier("shield", self.level);
     }
     
-    decay = function() { 
+    /// @desc Called when the effect is removed.
+    /// @param {Struct.GameCharacterData} target The target
+    static terminate = function(target) { 
+        target.add_modifier("shield", -self.level);
+    }
+    
+    static decay = function() { 
         self.level = 0;
     }
 }
 
 function Strength(_level) : Status(_level, nameof(Strength)) constructor {
-    /// @desc Execute the status effect
+    /// @desc Called when the effect is added
     /// @param {Struct.GameCharacterData} target The target
-    initialise = function(target) { 
-        target.modifiers.strength += self.level;
+    static activate = function(target) { 
+        target.add_modifier("strength", self.level);
     }
 }
 
 function Coalesence(_level) : Status(_level, nameof(Coalesence)) constructor {
-    /// @desc Execute the status effect
+    /// @desc Called when the effect is added for the first time
     /// @param {Struct.GameCharacterData} target The target
-    initialise = function(target) { 
-        target.modifiers.coalesencing = true;
+    static initialise = function(target) { 
+        target.set_attribute("coalescencing", true);
     }
+    
+    /// @desc Called when the effect is added
+    /// @param {Struct.GameCharacterData} target The target
+    static activate = function(target) { }
+    
+    /// @desc Called when the effect ticks
+    /// @param {Struct.GameCharacterData} target The target
+    static execute = function(target) { }
+    
+    /// @desc Called when the effect is removed.
+    /// @param {Struct.GameCharacterData} target The target
+    static terminate = function(target) { }
 }
 
 function Bleed(_level) : Status(_level, nameof(Bleed)) constructor {
     /// @desc Execute the status effect
     /// @param {Struct.GameCharacterData} target The target
-    initialise = function(target) { 
+    static initialise = function(target) { 
         target.modifiers.bleeding = true;
     }
 }

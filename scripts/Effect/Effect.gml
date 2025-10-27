@@ -1,46 +1,28 @@
-/// @desc Function Description
-/// @param {Struct.Effect} inner_effect Description
-/// @param {Struct} application_args description
-function RunnableEffect(inner_effect, application_args) constructor {
-    effect = inner_effect;
-    args = application_args;
-    
-    /// @desc 
-    /// @param {Struct.CharacterData} target description
-    /// @param {Struct.CharacterData} instigator description
-    static apply = function(target, instigator) { 
-        self.effect.apply(target, instigator, self.args);
-    }
-    
-    /// @desc 
-    /// @param {Struct.CharacterData} target description
-    /// @param {Struct.CharacterData} instigator description
-    static revert = function(target, instigator) { 
-        self.effect.revert(target, instigator, self.args);
-    }
+/**
+ * Function Description
+ * @param {Struct.CharacterData} _instigator Description
+ * @param {Struct.CharacterData} _target Description
+ * @param {real} power_mult Description
+ */
+function EffectApplicationArgs(_instigator, _target, power_mult = 0) constructor {
+    instigator = _instigator;
+    target = _target;
+    mult = power_mult;
 }
 
+/**
+ * Function Description
+ */
 function Effect() constructor {
     /// @desc 
-    /// @param {Struct.CharacterData} target description
-    /// @param {Struct.CharacterData} instigator description
-    /// @param {Struct} args description
-    static apply = function(target, instigator, args = { multiplier: 100 }) { }
+    /// @param {Struct.EffectApplicationArgs} args description
+    static apply = function(args) { }
     
     /// @desc 
-    /// @param {Struct.CharacterData} target description
-    /// @param {Struct.CharacterData} instigator description
-    /// @param {Struct} args description
-    static revert = function(target, instigator, args = { multiplier: 100 }) {
-        show_debug_message("CANNOT REVERT THIS EFFECT!");
-    }
-    
-    static to_string = function(target, instigator, args = { multiplier: 100 }) {
+    /// @param {Struct.EffectApplicationArgs} args description
+    /// @param {bool} [vaguely]=false description
+    static to_string = function(args, vaguely = false, highlight = false) {
         return "Effect";
-    }
-    
-    static instantiate = function(args = { multiplier: 100 }) {
-        return new RunnableEffect(self, args);
     }
 }
 
@@ -52,26 +34,15 @@ function ModifierEffect(_modified_attribute, _magnitude) : Effect() constructor 
     magnitude = _magnitude;
     
     /// @desc 
-    /// @param {Struct.CharacterData} target description
-    /// @param {Struct.CharacterData} instigator description
-    /// @param {Struct} args description
-    static apply = function(target, instigator, args = { multiplier: 100 }) {
-        target.add_modifier(self.modified_attribute, self.magnitude);
+    /// @param {Struct.EffectApplicationArgs} args description
+    static apply = function(args) {
+        args.target.add_modifier(self.modified_attribute, self.magnitude);
     }
     
     /// @desc 
-    /// @param {Struct.CharacterData} target description
-    /// @param {Struct.CharacterData} instigator description
-    /// @param {Struct} args description
-    static revert = function(target, instigator, args = { multiplier: 100 }) { 
-        target.add_modifier(self.modified_attribute, -self.magnitude)
-    }
-    
-    /// @desc 
-    /// @param {Struct.CharacterData} target description
-    /// @param {Struct.CharacterData} instigator description
-    /// @param {Struct} args description
-    static to_string = function(target, instigator, args = { multiplier: 100 }) {
+    /// @param {Struct.EffectApplicationArgs} args description
+    /// @param {bool} [vaguely]=false description
+    static to_string = function(args, vaguely = false, highlight = false) {
         return "Effect";
     }
 }
@@ -84,26 +55,15 @@ function FlagEffect(_target_attribute, _flag) : Effect() constructor {
     flag = _flag;
     
     /// @desc 
-    /// @param {Struct.CharacterData} target description
-    /// @param {Struct.CharacterData} instigator description
-    /// @param {Struct} args description
-    static apply = function(target, instigator, args = { multiplier: 100 }) {
-        target.set_attribute(self.target_attribute, self.flag);
+    /// @param {Struct.EffectApplicationArgs} args description
+    static apply = function(args) {
+        args.target.set_attribute(self.target_attribute, self.flag);
     }
     
     /// @desc 
-    /// @param {Struct.CharacterData} target description
-    /// @param {Struct.CharacterData} instigator description
-    /// @param {Struct} args description
-    static revert = function(target, instigator, args = { multiplier: 100 }) { 
-        target.set_attribute(self.target_attribute, !self.flag)
-    }
-    
-    /// @desc 
-    /// @param {Struct.CharacterData} target description
-    /// @param {Struct.CharacterData} instigator description
-    /// @param {Struct} args description
-    static to_string = function(target, instigator, args = { multiplier: 100 }) {
+    /// @param {Struct.EffectApplicationArgs} args description
+    /// @param {bool} [vaguely]=false description
+    static to_string = function(args, vaguely = false, highlight = false) {
         return "Effect";
     }
 }
@@ -116,17 +76,15 @@ function DamageEffect(_base_damage) : Effect() constructor {
     damage = _base_damage;
     
     /// @desc 
-    /// @param {Struct.CharacterData} target description
-    /// @param {Struct.CharacterData} instigator description
-    /// @param {Struct} args description
+    /// @param {Struct.EffectApplicationArgs} args description
     /// @return {real} description
-    static get_actual_damage = function(target, instigator, args = { multiplier: 100 }) {
-        var mult = 100 + (args[$ "multiplier"] ?? 0);
-        if (instigator != undefined && instigator.get_attribute("paralysed")) {
+    static get_actual_damage = function(args) {
+        var mult = 100 + args.mult;
+        if (args.instigator != undefined && args.instigator.get_attribute("paralysed")) {
             mult -= 25;
         } 
         
-        if (target != undefined && target.get_attribute("bleeding")) {
+        if (args.target != undefined && args.target.get_attribute("bleeding")) {
             mult += 25;
         }
         
@@ -134,25 +92,22 @@ function DamageEffect(_base_damage) : Effect() constructor {
     }
     
     /// @desc 
-    /// @param {Struct.CharacterData} target description
-    /// @param {Struct.CharacterData} instigator description
-    /// @param {Struct} args description
-    static apply = function(target, instigator, args = { multiplier: 100 }) {
-        var dmg = self.get_actual_damage(target, instigator, args);
-        var eliminated_shields = min(target.get_attribute("shield"), dmg);
+    /// @param {Struct.EffectApplicationArgs} args description
+    static apply = function(args) {
+        var dmg = self.get_actual_damage(args);
+        var eliminated_shields = min(args.target.get_attribute("shield"), dmg);
         dmg -= eliminated_shields;
-        target.add_status(new Shield(-eliminated_shields));
+        args.target.add_status(new Shield(-eliminated_shields));
         
         // Apply damage
-        target.hp = max(target.hp - max(0, dmg), 0);
+        args.target.hp = max(args.target.hp - max(0, dmg), 0);
     }
     
     /// @desc 
-    /// @param {Struct.CharacterData} target description
-    /// @param {Struct.CharacterData} instigator description
-    /// @param {Struct} args description
-    static to_string = function(target, instigator, args = { multiplier: 100 }) {
-        var dmg_text = stylise_numeric_text(self.get_actual_damage(target, instigator, args), self.damage);
+    /// @param {Struct.EffectApplicationArgs} args description
+    /// @param {bool} [vaguely]=false description
+    static to_string = function(args, vaguely = false, highlight = false) {
+        var dmg_text = stylise_numeric_text(self.get_actual_damage(args), self.damage);
         return $"Receives {dmg_text} damage";
     }
 }
@@ -167,32 +122,35 @@ function MarkEffect(_mark, _count) : Effect() constructor {
     count = _count;
     
     /// @desc Function Description
-    /// @param {Struct.CharacterData} instigator Description
-    /// @param {Struct.CharacterData} target Description
-    /// @return {real} description 
-    static get_application_count = function(instigator, target) {
-        if (instigator == undefined || target == undefined) {
+    /// @param {Struct.EffectApplicationArgs} args description
+    static get_application_count = function(args) {
+        if (args == undefined || args.instigator == undefined || args.target == undefined) {
             return self.count;
         }
         
-        return instigator.get_attribute("paralysed") ? max(0, floor(self.count * 0.75)) : self.count;
+        var mult = 100 + args.mult;
+        if (args.instigator.get_attribute("paralysed")) {
+            mult -= 25;
+        }
+        
+        return sign(self.count) * max(0, floor(abs(self.count) * mult / 100));
     }
     
     /// @desc 
-    /// @param {Struct.CharacterData} target description
-    /// @param {Struct.CharacterData} instigator description
-    /// @param {Struct} args description
-    static apply = function(target, instigator, args = { multiplier: 100 }) {
-        self.mark.on_apply(target, self.get_application_count(instigator, target));
+    /// @param {Struct.EffectApplicationArgs} args description
+    static apply = function(args) {
+        self.mark.on_apply(args.target, self.get_application_count(args));
     }
     
     /// @desc 
-    /// @param {Struct.CharacterData} target description
-    /// @param {Struct.CharacterData} instigator description
-    /// @param {Struct} args description
-    static to_string = function(target, instigator, args = { multiplier: 100 }) {
-        var mark_application_text = stylise_numeric_text(self.get_application_count(instigator, target), self.count);
-        return $"{self.mark.get_label()} Mark + {mark_application_text}";
+    /// @param {Struct.EffectApplicationArgs} args description
+    /// @param {bool} [vaguely]=false description
+    static to_string = function(args, vaguely = false, highlight = false) {
+        var application_count = self.get_application_count(args);
+        var mark_application_text = stylise_numeric_text(application_count, self.count);
+        return vaguely 
+            ? $"{self.mark.get_label(highlight)} Mark {application_count >= 0 ? "+" : ""}?" 
+            : $"{self.mark.get_label(highlight)} Mark {application_count >= 0 ? "+" : ""}{mark_application_text}";
     }
 }
 
@@ -205,17 +163,15 @@ function HealingEffect(_base_amount) : Effect() constructor {
     
     /**
      * @desc Computes healing
-     * @param {Struct.GameCharacterData} instigator The caster
-     * @param {Struct.GameCharacterData} target The target
-     * @param {Struct} args description
+     * @param {Struct.EffectApplicationArgs} args description
      */
-    get_heal = function(instigator, target, args = { multiplier: 100 }) {
-        if (instigator == undefined || target == undefined) {
+    get_heal = function(args) {
+        if (args == undefined || args.instigator == undefined || args.target == undefined) {
             return self.amount;
         }
         
-        var mult = 100 + (args[$ "multiplier"] ?? 0);
-        if (instigator.modifiers.paralysed) {
+        var mult = 100 + args.mult;
+        if (args.instigator.get_attribute("paralysed")) {
             mult -= 25;
         }
         
@@ -225,18 +181,17 @@ function HealingEffect(_base_amount) : Effect() constructor {
     /// @desc 
     /// @param {Struct.CharacterData} target description
     /// @param {Struct.CharacterData} instigator description
-    /// @param {Struct} args description
-    static apply = function(target, instigator, args = { multiplier: 100 }) {
-        var heal = self.get_heal(instigator, target, args);
+    /// @param {Struct.EffectApplicationArgs} args description
+    static apply = function(args) {
+        var heal = self.get_heal(args);
         target.hp = min(target.max_hp, target.hp + max(0, heal));
     }
     
     /// @desc 
-    /// @param {Struct.CharacterData} target description
-    /// @param {Struct.CharacterData} instigator description
-    /// @param {Struct} args description
-    static to_string = function(target, instigator, args = { multiplier: 100 }) {
-        var heal_text = stylise_numeric_text(self.get_heal(instigator, target, args), self.amount);
+    /// @param {Struct.EffectApplicationArgs} args description
+    /// @param {bool} [vaguely]=false description
+    static to_string = function(args, vaguely = false, highlight = false) {
+        var heal_text = stylise_numeric_text(self.get_heal(args), self.amount);
         return $"Restores {heal_text} HP";
     }
 }
@@ -249,68 +204,56 @@ function AddStatusEffect(_status, _level) : Effect() constructor {
     status_name = _status;
     level = _level;
     
-    static get_actual_level = function(instigator, target, args = { multiplier: 100 }) {
-        var mult = 100 + (args[$ "multiplier"] ?? 0);
-        if (instigator.get_attribute("paralysed")) {
+    static get_actual_level = function(args) {
+        var mult = 100 + args.mult;
+        if (args.instigator.get_attribute("paralysed")) {
             mult -= 25;
         }
         
-        return max(1, floor(self.level * mult / 100));
+        return sign(self.level) * max(0, floor(abs(self.level) * mult / 100));
     }
     
     /// @desc 
     /// @param {Struct.CharacterData} target description
     /// @param {Struct.CharacterData} instigator description
-    /// @param {Struct} args description
-    static apply = function(target, instigator, args = { multiplier: 100 }) {
-        var lvl = self.get_actual_level(instigator, target, args);
+    /// @param {Struct.EffectApplicationArgs} args description
+    static apply = function(args) {
+        var lvl = self.get_actual_level(args);
         var status = make_status(self.status_name, lvl);
         target.add_status(status);
     }
     
     /// @desc 
-    /// @param {Struct.CharacterData} target description
-    /// @param {Struct.CharacterData} instigator description
-    /// @param {Struct} args description
-    static to_string = function(target, instigator, args = { multiplier: 100 }) {
-        var status = make_status(self.status_name, self.get_actual_level(instigator, target, args));
-        return $"{status.get_label()} + {status.level}";
+    /// @param {Struct.EffectApplicationArgs} args description
+    /// @param {bool} [vaguely]=false description
+    static to_string = function(args, vaguely = false, highlight = false) {
+        var status = make_status(self.status_name, self.get_actual_level(args));
+        return vaguely 
+            ? $"{status.get_label(highlight)} {status.level >= 0 ? "+" : ""}?" 
+            : $"{status.get_label(highlight)} {status.level >= 0 ? "+" : ""}{status.level}";
     }
 }
 
+
 /**
  * Function Description
- * @param {string} _status Description
+ * @param {Struct} data Description
+ * @param {Struct.CardData} card description
+ * @return {Struct.Effect,undefined} description
  */
-function RemoveStatusEffect(_status, _level) : Effect() constructor {
-    status_name = _status;
-    level = _level;
-    
-    static get_actual_level = function(instigator, target, args = { multiplier: 100 }) {
-        var mult = 100 + (args[$ "multiplier"] ?? 0);
-        if (instigator.get_attribute("paralysed")) {
-            mult -= 25;
-        }
-        
-        return -max(1, floor(self.level * mult / 100));
-    }
-    
-    /// @desc 
-    /// @param {Struct.CharacterData} target description
-    /// @param {Struct.CharacterData} instigator description
-    /// @param {Struct} args description
-    static apply = function(target, instigator, args = { multiplier: 100 }) {
-        var lvl = self.get_actual_level(instigator, target, args);
-        var status = make_status(self.status_name, lvl);
-        target.add_status(status);
-    }
-    
-    /// @desc 
-    /// @param {Struct.CharacterData} target description
-    /// @param {Struct.CharacterData} instigator description
-    /// @param {Struct} args description
-    static to_string = function(target, instigator, args = { multiplier: 100 }) {
-        var status = make_status(self.status_name, self.get_actual_level(instigator, target, args));
-        return $"{status.get_label()} - {-status.level}";
+function make_effect(data, card) {
+    switch (data.type) {
+        case "Damage":
+            return new DamageEffect(data.value);
+        case "Heal":
+            return new HealingEffect(data.value);
+        case "AddStatus":
+            return new AddStatusEffect(data.status_name, data.value);
+        case "Mark":
+            return new MarkEffect(card.mark, data.value);
+        case "RemoveMark":
+            return new MarkEffect(make_mark(data.mark_id), -data.value);
+        default:
+            return undefined;
     }
 }

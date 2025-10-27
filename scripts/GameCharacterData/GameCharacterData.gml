@@ -1,54 +1,10 @@
 function GameCharacterData(curr_hp, total_hp) constructor {
     hp = curr_hp;
     max_hp = total_hp;
-    shields = 0
-    status_effects = ds_map_create();
-    marks = ds_map_create();
-    card_effectiveness_modifier = 0;
+    status_effects = [];
+    marks = { };
     
-    // Map<real, array<{runnable_effect}>>
-    timed_effects = ds_map_create();
-    
-    dirty_keys = [];
-    
-    modifiers = {
-        card_effectiveness: 0,
-        strength: 0,
-        shield: 0,
-        frozen_slots: 0,
-        frozen: false,
-        paralysed: false,
-        bleeding: false
-    };
-    
-    static process_timed_effects = function() {
-        if (!ds_map_exists(self.timed_effects, global.timestamp)) {
-            return;
-        }
-        
-        var expiring = self.timed_effects[? global.timestamp];
-        for (var i = 0; i < array_length(expiring); i += 1) {
-            expiring[i].revert(self, self);
-        }
-    }
-    
-    /// @description     
-    /// @param {Struct.GameCharacterData} instigator description
-    /// @param {Struct.Effect} effect description
-    static receive_effect = function(instigator, effect, args = { multiplier: 100 }, duration = 0) {
-        var runnable = effect.instantiate(args);
-        runnable.apply(self, instigator);
-        if (duration <= 0) {
-            return;
-        }
-        
-        var expiry_time = global.timestamp + duration;
-        if (!ds_map_exists(self.timed_effects, expiry_time)) {
-            ds_map_add(self.timed_effects, expiry_time, []);
-        }
-        
-        array_push(self.timed_effects[? expiry_time], runnable);
-    }
+    modifiers = { };
     
     /// @desc 
     /// @param {string} name description
@@ -73,40 +29,107 @@ function GameCharacterData(curr_hp, total_hp) constructor {
     /// @desc description
     /// @param {Struct.Status} status description description
     /// @param {bool} [success]=true description
-    add_status = function(status, success = true) { }
-    
-    reset_modifiers = function() {
-        self.dirty_keys = [];
-        self.modifiers = {
-            card_effectiveness: 0,
-            strength: 0,
-            shield: 0,
-            frozen_slots: 0,
-            frozen: false,
-            paralysed: false,
-            bleeding: false
-        };
+    /// @return {bool} description
+    static add_status = function(status, success = true) { 
+        if (status.level == 0) {
+            return false;
+        }
+        
+        if (success) {
+            var curr_status = undefined;
+            var idx = -1;
+            for (var i = 0; i < array_length(self.status_effects); i += 1) {
+                if (self.status_effects[i].name == status.name) {
+                    curr_status = self.status_effects[i];
+                    idx = i;
+                    break;    
+                }                
+            }
+            
+            if (curr_status == undefined) {
+                array_push(status);
+                array_sort(self.status_effects, function(left, right) {
+                    if (left.name < right.name) {
+                        return -1;    
+                    }    
+                    
+                    if (left.name > right.name) {
+                        return 1;
+                    }
+                    
+                    return 0;
+                })
+                
+                // Added for the first time
+                status.initialise(self);
+            } else {
+                curr_status.level += status.level;
+                if (curr_status.level <= 0) {
+                    array_delete(self.status_effects, idx, 1);
+                } 
+            }
+            
+            // Activate no matter what
+            status.activate(self);
+        }
+        
+        return true;
     }
     
-    execute_status_effects = function() {
-        var key = ds_map_find_first(self.status_effects);
-        while (key != undefined) {
-            self.status_effects[? key].execute(self);
-            key = ds_map_find_next(self.status_effects, key);
+    static execute_status_effects = function() {
+        var timer = undefined;
+        for (var i = 0; i < array_length(self.status_effects); i += 1) {
+            if (timer != undefined) {
+                time_source_destroy(timer);    
+            }
+            
+        	self.status_effects[i].execute(self);
+            
         }
     }
     
-    update_status_effects = function() { }
+    static tick_status_effects = function() { 
+        var to_remove = [];
+        for (var i = 0; i < array_length(self.status_effects); i += 1) {
+            self.status_effects[i].decay();
+            if (self.status_effects[i].level <= 0) {
+                array_push(to_remove, i);
+            }
+        }
+        
+        for (var i = 0; i < array_length(to_remove); i += 1) {
+            array_delete(self.status_effects, to_remove[i], 1);
+        }
+    }
     
-    add_marks = function(mark_id, multiplicity) { }
+    static add_marks = function(mark_id, multiplicity) { 
+        if (mark_id == "none" || multiplicity == 0) {
+            return false;
+        }
+        
+        if (!struct_exists(self.marks, mark_id)) {
+            if (multiplicity <= 0) {
+                return false;
+            }
+            
+            self.marks[$ mark_id] = multiplicity;
+        } else {
+            self.marks[$ mark_id] += multiplicity;
+            if (self.marks[$ mark_id] <= 0) {
+                struct_remove(self.marks, mark_id);
+            }
+        }
+        
+        return true;
+    }
     
-    count_mark = function(mark_id) {
+    static count_mark = function(mark_id) {
         return ds_map_exists(self.marks, mark_id) ? self.marks[? mark_id] : 0;
     }
     
-    clear_marks_and_statuses = function() {
-        ds_map_clear(self.marks);
-        ds_map_clear(self.status_effects);
+    static clear_marks_and_statuses = function() {
+        self.marks = {};
+        self.status_effects = [];
     }
 }
 
@@ -115,67 +138,28 @@ function PlayerData(curr_hp, total_hp, curr_vision, total_vision) : GameCharacte
     max_vision = total_vision;
     traits = [];
     
+    parent_add_status = self.add_status;
+    parent_add_marks = self.add_marks;
+    
     /// @desc description
     /// @param {Struct.Status} status description description
-    add_status = function(status, success = true) {
-        if (status.level == 0) {
-            return;
+    /// @return {bool} description
+    static add_status = function(status, success = true) {
+        if (!self.parent_add_status(status, success)) {
+            return false;
         }
         
         obj_player_state.add_status(status.name, status.level, success);
-        if (!success) {
-            return;
-        }
-        
-        if (!ds_map_exists(self.status_effects, status.name)) {
-            ds_map_add(self.status_effects, status.name, status);
-        } else {
-            self.status_effects[? status.name].level += status.level;
-        }
-        
-        status.initialise(self);
-        if (self.status_effects[? status.name].level <= 0) {
-            ds_map_delete(self.status_effects, status.name);
-        } 
+        return true;
     }
     
-    update_status_effects = function() {
-        var to_remove = [];
-        var key = ds_map_find_first(self.status_effects);
-        while (key != undefined) {
-            var old_level = self.status_effects[? key].level;
-            self.status_effects[? key].decay();
-            var change = self.status_effects[? key].level - old_level;
-            obj_player_state.add_status(key, change);
-            if (self.status_effects[? key].level <= 0) {
-                array_push(to_remove, key);
-            }
-            
-            key = ds_map_find_next(self.status_effects, key);
-        }
-        
-        for (var i = 0; i < array_length(to_remove); i += 1) {
-        	ds_map_delete(self.status_effects, to_remove[i]);
-        }
-    }
-    
-    add_marks = function(mark_id, multiplicity) {
-        if (mark_id == "none" || multiplicity == 0) {
-            return;
-        }
-        
-        if (!ds_map_exists(self.marks, mark_id)) {
-            if (multiplicity > 0) {
-                ds_map_add(self.marks, mark_id, multiplicity);
-            }
-        } else {
-            self.marks[? mark_id] += multiplicity;
-            if (self.marks[? mark_id] <= 0) {
-                ds_map_delete(self.marks, mark_id);
-            }
+    static add_marks = function(mark_id, multiplicity) {
+        if (!self.parent_add_marks(mark_id, multiplicity)) {
+            return false;
         }
         
         obj_player_state.add_marks(mark_id, multiplicity);
+        return true;
     }
 }
 
@@ -187,86 +171,33 @@ function EnemyData(enemy_id, enemy_name, enemy_weight, enemy_hp) : GameCharacter
     uid = enemy_id;
     name = enemy_name;
     weight = enemy_weight;
-    card_uids = [];
     cards = [];
     
-    add_cards = function(card_uid, count) {
-        repeat (count) {
-            var size = array_length(self.card_uids);
-        	self.card_uids[size] = card_uid;
-        }
-    }
+    parent_add_status = self.add_status;
+    parent_add_marks = self.add_marks;
     
-    clone = function() {
+    static clone = function() {
         var enemy = new EnemyData(self.uid, self.name, self.weight, self.max_hp);   
-        for (var i = 0; i < array_length(self.card_uids); i += 1) {
-            enemy.card_uids[i] = self.card_uids[i];
-            enemy.cards[i] = res_loader_cards.loaded_map[? self.card_uids[i]].clone();
-        }
-        
         return enemy;
     } 
     
     /// @desc description
     /// @param {Struct.Status} status description description
-    add_status = function(status, success = true) {
-        if (status.level == 0) {
-            return;
+    static add_status = function(status, success = true) {
+        if (!self.parent_add_status(status, success)) {
+            return false;
         }
         
         obj_enemy.add_status(status.name, status.level, success);
-        if (!success) {
-            return;
-        }
-        
-        if (!ds_map_exists(self.status_effects, status.name)) {
-            ds_map_add(self.status_effects, status.name, status);
-        } else {
-            self.status_effects[? status.name].level += status.level;
-        }
-        
-        status.initialise(self);
-        if (self.status_effects[? status.name].level <= 0) {
-            ds_map_delete(self.status_effects, status.name);
-        } 
+        return true;
     }
     
-    update_status_effects = function() {
-        var to_remove = [];
-        var key = ds_map_find_first(self.status_effects);
-        while (key != undefined) {
-            var old_level = self.status_effects[? key].level;
-            self.status_effects[? key].decay();
-            var change = self.status_effects[? key].level - old_level;
-            obj_enemy.add_status(key, change);
-            if (self.status_effects[? key].level <= 0) {
-                array_push(to_remove, key);
-            }
-            
-            key = ds_map_find_next(self.status_effects, key);
-        }
-        
-        for (var i = 0; i < array_length(to_remove); i += 1) {
-        	ds_map_delete(self.status_effects, to_remove[i]);
-        }
-    }
-    
-    add_marks = function(mark_id, multiplicity) {
-        if (mark_id == "none") {
-            return;
-        }
-        
-        if (!ds_map_exists(self.marks, mark_id)) {
-            if (multiplicity > 0) {
-                ds_map_add(self.marks, mark_id, multiplicity);
-            }
-        } else {
-            self.marks[? mark_id] += multiplicity;
-            if (self.marks[? mark_id] <= 0) {
-                ds_map_delete(self.marks, mark_id);
-            }
+    static add_marks = function(mark_id, multiplicity) {
+        if (!self.parent_add_marks(mark_id, multiplicity)) {
+            return false;
         }
         
         obj_enemy.add_marks(mark_id, multiplicity);
+        return true;
     }
 }

@@ -78,6 +78,8 @@
   ],
   "ForcedPrefabProjectReferences":[],
   "IncludedFiles":[
+    {"$GMIncludedFile":"","%Name":"cards.json","CopyToMask":-1,"filePath":"datafiles","name":"cards.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
+    {"$GMIncludedFile":"","%Name":"enemies.json","CopyToMask":-1,"filePath":"datafiles","name":"enemies.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"scribble_license.txt","CopyToMask":-1,"filePath":"datafiles","name":"scribble_license.txt","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
   ],
   "isEcma":false,
@@ -343,6 +345,7 @@
     {"id":{"name":"string_width_scribble_ext","path":"scripts/string_width_scribble_ext/string_width_scribble_ext.yy",},},
     {"id":{"name":"string_width_scribble","path":"scripts/string_width_scribble/string_width_scribble.yy",},},
     {"id":{"name":"text_styles","path":"scripts/text_styles/text_styles.yy",},},
+    {"id":{"name":"timer","path":"scripts/timer/timer.yy",},},
     {"id":{"name":"tooltips","path":"scripts/tooltips/tooltips.yy",},},
     {"id":{"name":"Trait","path":"scripts/Trait/Trait.yy",},},
     {"id":{"name":"transfer_between_piles","path":"scripts/transfer_between_piles/transfer_between_piles.yy",},},

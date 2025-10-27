@@ -54,7 +54,6 @@ start_battle = function() {
     obj_loot_panel.visible = false;
     
     // Initialise player
-    obj_player_state.data.clear_marks_and_statuses();
     obj_player_state.initialise();
     
     // Set up card slots
@@ -76,10 +75,7 @@ start_battle = function() {
     self.draw_pile.shuffle();
     
     // Load enemy
-    var enemy = res_loader_enemies.get_random_enemy("Characters", room_width / 2, 0);
-    self.enemy.data = enemy.data;
-    self.enemy.data.clear_marks_and_statuses();
-    instance_destroy(enemy);
+    self.enemy.data = res_loader_enemies.get_random_enemy();
     self.enemy.initialise();
     
     // START!
@@ -90,7 +86,6 @@ start_player_turn = function() {
     obj_end_turn_button.is_disabled = false;
     
     // Update modifiers and status effects
-    self.enemy.data.reset_modifiers();
     self.enemy.data.execute_status_effects();
     self.player.data.reset_modifiers();
     self.player.data.execute_status_effects();
@@ -290,6 +285,8 @@ end_player_turn = function() {
 }
 
 end_battle = function() {
+    self.player.data.clear_marks_and_statuses();
+    
     array_foreach(self.player_cards, function(card) {
         if (card != noone) {
             instance_destroy(card.id);

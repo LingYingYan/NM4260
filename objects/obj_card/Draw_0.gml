@@ -33,13 +33,15 @@ if (self.card_data != undefined) {
     }
     
     text_y = self.y + y_padding;
-    var scribble_text = scribble(self.desc).wrap(self.sprite_width - 2 * x_padding).scale(self.image_xscale);
+    var scribble_text = scribble(self.card_data.describe(self.reveal, self.owner, self.opponent, self.hovered))
+        .wrap(self.sprite_width - 2 * x_padding)
+        .scale(self.image_xscale);
     scribble_text.draw(text_x, text_y);
     var region = scribble_text.region_detect(text_x, text_y, device_mouse_x_to_gui(0), device_mouse_y_to_gui(0));
     if (region == undefined) {
         self.tooltip_text = "";
     } else if (string_starts_with(region, "keyword-mark-")) {
-        var text = string(self.card_data.mark.describe_with_context(self.card_data.is_offensive)); 
+        var text = string(self.card_data.mark.describe_with_context()); 
         self.tooltip_text = text;
     } else if (string_starts_with(region, "keyword-status-")) {
         var l = string_length(region) - string_length("keyword-status-")

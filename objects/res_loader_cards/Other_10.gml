@@ -1,4 +1,4 @@
-var json_file = file_text_open_read("enemies.json");
+var json_file = file_text_open_read("cards.json");
 var json_str = "";
 while (!file_text_eof(json_file)) {
     json_str += file_text_read_string(json_file);
@@ -6,7 +6,7 @@ while (!file_text_eof(json_file)) {
 }
 
 file_text_close(json_file);
-self.enemy_configs = json_parse(json_str);
+self.card_effects = json_parse(json_str);
 
 // Inherit the parent event
 event_inherited();

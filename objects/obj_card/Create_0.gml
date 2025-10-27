@@ -8,22 +8,15 @@ goal_y = self.y;
 normal_depth = self.depth;
 current_depth = self.depth;
 
+owner = new GameCharacterData(100, 100);
+opponent = new GameCharacterData(100, 100);
 card_data = undefined;
 dropped_area = noone;
 
-reveal = 0;
-desc = "";
 tooltip_text = "";
 
 ac_timestamp = 0;
 anim = ac_card_flip;
-
-set_reveal = function(value, instigator, target) {
-    self.reveal = value;
-    if (self.card_data != undefined) {
-        self.desc = self.card_data.describe(self.reveal, instigator, target);
-    }
-}
 
 state_normal = function() {
 	if (obj_mouse_manager.grabbed_card != self) {
@@ -50,7 +43,7 @@ state_flip = function() {
     self.image_yscale = self.scale * animcurve_channel_evaluate(animation_y, self.ac_timestamp);
     if (self.ac_timestamp >= 0.5 && self.reveal < obj_player_state.data.max_vision) {
         self.normal_depth -= 10000;
-        self.set_reveal(obj_player_state.data.max_vision);
+        self.reveal = obj_player_state.data.max_vision;
     }
     
     if (self.ac_timestamp >= 1) {
