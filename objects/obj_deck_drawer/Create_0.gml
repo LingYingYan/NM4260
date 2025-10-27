@@ -59,7 +59,7 @@ for (var i = 0; i < array_length(keys); i++) {
     card_inst.idx = idx;
 	card_inst.image_xscale = scale;
 	card_inst.image_yscale = scale;
-	card_inst.set_reveal(obj_player_state.data.max_vision);
+	card_inst.reveal = obj_player_state.data.max_vision;
     show_debug_message("Unique card is created");
 }
 

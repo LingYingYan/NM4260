@@ -18,6 +18,11 @@ tooltip_text = "";
 ac_timestamp = 0;
 anim = ac_card_flip;
 
+effect_pointer = 0;
+effect_anim = ac_text_enlarge;
+effect_scale = 1;
+has_executed_current_effect = false;
+
 state_normal = function() {
 	if (obj_mouse_manager.grabbed_card != self) {
 		if (!self.picked_up) {
@@ -49,6 +54,27 @@ state_flip = function() {
     if (self.ac_timestamp >= 1) {
         self.ac_timestamp = 0;
         self.state_update = self.state_normal;
+    } 
+}
+
+state_execute = function() {
+    self.ac_timestamp += delta_time / 1000000;
+    var animation_channel = animcurve_get_channel(self.effect_anim, "scale");
+    self.effect_scale = animcurve_channel_evaluate(animation_channel, self.ac_timestamp);
+    if (self.ac_timestamp >= 0.25 && !self.has_executed_current_effect) {
+        self.has_executed_current_effect = true;
+        self.card_data.apply_effect(self.owner, self.opponent, self.effect_pointer);        
+    }
+    
+    if (self.ac_timestamp >= 1) {
+        self.ac_timestamp = 0;
+        self.effect_pointer += 1;
+        self.has_executed_current_effect = false;
+        var n_effects = self.card_data.get_number_of_effects();
+        if (self.effect_pointer >= n_effects) {
+            self.effect_pointer = 0;
+            self.state_update = self.state_normal;
+        }
     } 
 }
 

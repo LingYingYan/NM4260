@@ -184,7 +184,7 @@ function HealingEffect(_base_amount) : Effect() constructor {
     /// @param {Struct.EffectApplicationArgs} args description
     static apply = function(args) {
         var heal = self.get_heal(args);
-        target.hp = min(target.max_hp, target.hp + max(0, heal));
+        args.target.hp = min(args.target.max_hp, args.target.hp + max(0, heal));
     }
     
     /// @desc 
@@ -220,7 +220,7 @@ function AddStatusEffect(_status, _level) : Effect() constructor {
     static apply = function(args) {
         var lvl = self.get_actual_level(args);
         var status = make_status(self.status_name, lvl);
-        target.add_status(status);
+        args.target.add_status(status);
     }
     
     /// @desc 

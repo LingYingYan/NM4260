@@ -13,7 +13,7 @@ for (var i = 0; i < 3; i += 1) {
     var new_card = instance_create_layer(card_x, room_height / 2, "Instances", obj_pickup_card);
     new_card.depth = self.depth - 1;
     new_card.card_data = random_card.card_data;
-    new_card.set_reveal(obj_player_state.data.max_vision, undefined, undefined);
+    new_card.reveal = obj_player_state.data.max_vision;
 
     new_card.on_click = function() {
         var roll = irandom_range(1, 100);

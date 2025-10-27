@@ -1,3 +1,5 @@
+normal_scale_x = self.image_xscale;
+normal_scale_y = self.image_yscale;
 is_updating = true;
 displayed_value = self.mark_level;
 self.sprite_index = asset_get_index($"spr_{self.mark_id}");

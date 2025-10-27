@@ -18,6 +18,10 @@ function CardData(card_id, card_type, card_name, card_sprite, card_rarity, mark_
     effects_on_target = [];
     effects_on_caster = [];
     
+    static get_number_of_effects = function() {
+        return array_length(self.effects_on_caster) + array_length(self.effects_on_target);
+    }
+    
     static get_power_multiplier_from_instigator = function(instigator) {
         return instigator.get_attribute($"{string_lower(self.mark.type)}_power_mult") +
                instigator.get_attribute($"{string_lower(self.type)}_power_mult");
@@ -39,16 +43,16 @@ function CardData(card_id, card_type, card_name, card_sprite, card_rarity, mark_
     
     /**
      * @desc Applies the card effects
-     * @param {Struct.GameCharacterData} instigator The caster
-     * @param {Struct.GameCharacterData} target The target
+     * @param {Struct.GameCharacterData} owner The caster
+     * @param {Struct.GameCharacterData} opponent The target
+     * @param {read} index The index of the effect to execute
      */
-    static apply = function(instigator, target) { 
-        if (self.is_offensive) {
-            for (var i = 0; i < array_length(self.effects); i += 1) {
-                target.receive_effect(instigator, self.effects[i], {
-                   mult: self.get_multiplier_by_mark(0, instigator, target)    
-                });
-            }
+    static apply_effect = function(owner, opponent, index) { 
+        if (index < array_length(self.effects_on_caster)) {
+            self.effects_on_caster[index].apply(new EffectApplicationArgs(owner, owner, self.get_power_multiplier(owner, owner)))
+        } else {
+            index -= array_length(self.effects_on_caster);
+            self.effects_on_target[index].apply(new EffectApplicationArgs(owner, opponent, self.get_power_multiplier(owner, opponent)));
         }
     }
     
@@ -58,9 +62,10 @@ function CardData(card_id, card_type, card_name, card_sprite, card_rarity, mark_
      * @param {Struct.GameCharacterData} instigator The caster
      * @param {Struct.GameCharacterData} target The target
      * @param {bool} highlight description
+     * @param {Struct} focus description
      * @return {string} The card description
      */
-    static describe = function(visibility, instigator, target, highlight = false) {
+    static describe = function(visibility, instigator, target, highlight = false, focus = undefined) {
         if (visibility < 1) {
             return "";
         }
@@ -76,11 +81,18 @@ function CardData(card_id, card_type, card_name, card_sprite, card_rarity, mark_
         var texts = [];
         var mult = self.get_power_multiplier(instigator, target);
         var vague = visibility < 4;
+        var curr = 0;
         if (array_length(self.effects_on_caster) > 0) {
             var text = $"[bi]Caster[/bi]:"
             for (var i = 0; i < array_length(self.effects_on_caster); i += 1) {
             	var effect = self.effects_on_caster[i];
-                text += $"\n  {effect.to_string(new EffectApplicationArgs(instigator, target, mult), vague, highlight)}";
+                var curr_text = $"\n  {effect.to_string(new EffectApplicationArgs(instigator, target, mult), vague, highlight)}";
+                if (focus != undefined && curr == focus.index) {
+                    curr_text = $"[scale,{focus.scale}]{curr_text}[/s]";
+                }
+                
+                curr += 1;
+                text += curr_text;
             }
             
             array_push(texts, text);
@@ -90,7 +102,13 @@ function CardData(card_id, card_type, card_name, card_sprite, card_rarity, mark_
             var text = $"[bi]Target[/bi]:"
             for (var i = 0; i < array_length(self.effects_on_target); i += 1) {
             	var effect = self.effects_on_target[i];
-                text += $"\n  {effect.to_string(new EffectApplicationArgs(instigator, target, mult), vague, highlight)}";
+                var curr_text = $"\n  {effect.to_string(new EffectApplicationArgs(instigator, target, mult), vague, highlight)}";
+                if (focus != undefined && curr == focus.index) {
+                    curr_text = $"[scale,{focus.scale}]{curr_text}[/s]";
+                }
+                
+                curr += 1;
+                text += curr_text;
             }
             
             array_push(texts, text);

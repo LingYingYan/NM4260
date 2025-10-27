@@ -33,9 +33,10 @@ if (self.card_data != undefined) {
     }
     
     text_y = self.y + y_padding;
-    var scribble_text = scribble(self.card_data.describe(self.reveal, self.owner, self.opponent, self.hovered))
-        .wrap(self.sprite_width - 2 * x_padding)
-        .scale(self.image_xscale);
+    var scribble_text = scribble(self.card_data.describe(self.reveal, self.owner, self.opponent, self.hovered, {
+        index: self.effect_pointer,
+        scale: self.effect_scale    
+    })).wrap(self.sprite_width - 2 * x_padding).scale(self.image_xscale);
     scribble_text.draw(text_x, text_y);
     var region = scribble_text.region_detect(text_x, text_y, device_mouse_x_to_gui(0), device_mouse_y_to_gui(0));
     if (region == undefined) {

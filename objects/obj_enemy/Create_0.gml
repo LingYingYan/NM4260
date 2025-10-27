@@ -23,7 +23,9 @@ play_card = function() {
     card.card_data = card_data;
     
     // Randomly reveal the card
-    card.set_reveal(random_range(0, obj_battle_manager.player.data.vision), self.data, obj_battle_manager.player.data);
+    card.owner = self.data;
+    card.opponent = obj_player_state.data;
+    card.reveal = random_range(0, obj_battle_manager.player.data.vision);
     card.can_reveal = true;
     
     return card;

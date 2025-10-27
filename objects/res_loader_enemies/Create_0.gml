@@ -40,12 +40,12 @@ get_random_enemy = function() {
     enemy ??= array_last(self.loaded).clone();
     
     // Load cards
-    var cards = self.enemy_configs[$ enemy.data.uid].cards;
+    var cards = self.enemy_configs[$ enemy.uid].cards;
     var card_ids = struct_get_names(cards);
     for (var i = 0; i < array_length(card_ids); i += 1) {
         var card = res_loader_cards.loaded_map[$ card_ids[i]];
         repeat(cards[$ card_ids[i]]) {
-            array_push(enemy.data.cards, card);
+            array_push(enemy.cards, card);
         }
     }
     

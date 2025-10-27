@@ -47,7 +47,7 @@ function GameCharacterData(curr_hp, total_hp) constructor {
             }
             
             if (curr_status == undefined) {
-                array_push(status);
+                array_push(self.status_effects, status);
                 array_sort(self.status_effects, function(left, right) {
                     if (left.name < right.name) {
                         return -1;    
@@ -77,21 +77,9 @@ function GameCharacterData(curr_hp, total_hp) constructor {
     }
     
     static execute_status_effects = function() {
-        var timer = undefined;
-        for (var i = 0; i < array_length(self.status_effects); i += 1) {
-            if (timer != undefined) {
-                time_source_destroy(timer);    
-            }
-            
-        	self.status_effects[i].execute(self);
-            
-        }
-    }
-    
-    static tick_status_effects = function() { 
+        // TODO
         var to_remove = [];
         for (var i = 0; i < array_length(self.status_effects); i += 1) {
-            self.status_effects[i].decay();
             if (self.status_effects[i].level <= 0) {
                 array_push(to_remove, i);
             }
@@ -100,6 +88,10 @@ function GameCharacterData(curr_hp, total_hp) constructor {
         for (var i = 0; i < array_length(to_remove); i += 1) {
             array_delete(self.status_effects, to_remove[i], 1);
         }
+    }
+    
+    static tick_status_effects = function() { 
+        
     }
     
     static add_marks = function(mark_id, multiplicity) { 
@@ -124,7 +116,7 @@ function GameCharacterData(curr_hp, total_hp) constructor {
     }
     
     static count_mark = function(mark_id) {
-        return ds_map_exists(self.marks, mark_id) ? self.marks[? mark_id] : 0;
+        return self.marks[$ mark_id] ?? 0;
     }
     
     static clear_marks_and_statuses = function() {
@@ -138,8 +130,8 @@ function PlayerData(curr_hp, total_hp, curr_vision, total_vision) : GameCharacte
     max_vision = total_vision;
     traits = [];
     
-    parent_add_status = self.add_status;
-    parent_add_marks = self.add_marks;
+    static parent_add_status = self.add_status;
+    static parent_add_marks = self.add_marks;
     
     /// @desc description
     /// @param {Struct.Status} status description description
@@ -173,8 +165,8 @@ function EnemyData(enemy_id, enemy_name, enemy_weight, enemy_hp) : GameCharacter
     weight = enemy_weight;
     cards = [];
     
-    parent_add_status = self.add_status;
-    parent_add_marks = self.add_marks;
+    static parent_add_status = self.add_status;
+    static parent_add_marks = self.add_marks;
     
     static clone = function() {
         var enemy = new EnemyData(self.uid, self.name, self.weight, self.max_hp);   
