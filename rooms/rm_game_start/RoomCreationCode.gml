@@ -1,4 +1,5 @@
 global.number_of_completed_combat = 0;
+obj_player_state.reset();
 draw_set_font(fnt_default);
 var n = instance_number(res_loader_spreadsheet);
 //for (var i = 0; i < n; i += 1) {

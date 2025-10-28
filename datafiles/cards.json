@@ -83,9 +83,9 @@
         "effects_on_target": [],
         "effects_on_caster": [
             {
-                "type": "RemoveMark",
-                "mark_id": "mark_fire",
-                "value": 3
+                "type": "AddStatus",
+                "status_name": "Poison",
+                "value": -3
             }
         ],
         "special_effects": []
@@ -94,9 +94,9 @@
         "effects_on_target": [],
         "effects_on_caster": [
             {
-                "type": "RemoveMark",
-                "mark_id": "mark_water",
-                "value": 3
+                "type": "AddStatus",
+                "status_name": "Burn",
+                "value": -3
             }
         ],
         "special_effects": []
@@ -237,6 +237,17 @@
             }
         ],
         "effects_on_caster": [],
+        "special_effects": []
+    },
+    "card_strength": {
+        "effects_on_target": [],
+        "effects_on_caster": [
+            {
+                "type": "AddStatus",
+                "status_name": "Strength",
+                "value": 2
+            }
+        ],
         "special_effects": []
     }
 }

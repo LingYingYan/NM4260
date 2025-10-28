@@ -1,6 +1,7 @@
 // Inherit the parent event
 event_inherited();
 
+relic_effects = { };
 loaded = [];
 total_weight = 0;
 
@@ -13,6 +14,13 @@ read_row = function(r) {
     var duration = read_cell(r, 5);
     
     var relic = new Relic(uid, name, desc, rarity, duration);
+    if (struct_exists(self.relic_effects, uid)) {
+        var effects = self.relic_effects[$ uid];
+        for (var i = 0; i < array_length(effects); i += 1) {
+            relic.add_effect(make_effect(effects[i], undefined));    
+        }    
+    }
+    
     array_push(self.loaded, relic);
     self.total_weight += relic.get_weight();
 }

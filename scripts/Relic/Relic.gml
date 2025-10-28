@@ -27,17 +27,17 @@ function Relic(_id, _name, _desc, _rarity, _duration, _effects = []) constructor
     /// @desc Function Description
     /// @param {Struct.PlayerData} target Description
     static activate = function(target) {
-        array_foreach(self.effects, method({user: target}, function(effect) {
-            effect.apply(target, target);
-        }));
+        for (var i = 0; i < array_length(self.effects); i += 1) {
+            self.effects[i].apply(new EffectApplicationArgs(target, target, "", ""));
+        }
     }
     
     /// @desc Function Description
     /// @param {Struct.PlayerData} target Description
     static revoke = function(target) {
-        array_foreach(self.effects, method({user: target}, function(effect) {
-            effect.remove(target);
-        }));
+        for (var i = 0; i < array_length(self.effects); i += 1) {
+            self.effects[i].remove(target);
+        }
     }
     
     static to_string = function() {

@@ -49,10 +49,10 @@ function CardData(card_id, card_type, card_name, card_sprite, card_rarity, mark_
      */
     static apply_effect = function(owner, opponent, index) { 
         if (index < array_length(self.effects_on_caster)) {
-            self.effects_on_caster[index].apply(new EffectApplicationArgs(owner, owner, self.get_power_multiplier(owner, owner)));
+            self.effects_on_caster[index].apply(new EffectApplicationArgs(owner, owner, string_lower(self.mark.type), string_lower(self.type)));
         } else {
             index -= array_length(self.effects_on_caster);
-            self.effects_on_target[index].apply(new EffectApplicationArgs(owner, opponent, self.get_power_multiplier(owner, opponent)));
+            self.effects_on_target[index].apply(new EffectApplicationArgs(owner, opponent, string_lower(self.mark.type), string_lower(self.type)));
         }
     }
     
@@ -63,11 +63,11 @@ function CardData(card_id, card_type, card_name, card_sprite, card_rarity, mark_
      */
     static simulate_effects = function(owner, opponent) {
         for (var i = 0; i < array_length(self.effects_on_caster); i += 1) {
-            self.effects_on_caster[i].apply(new EffectApplicationArgs(owner, owner, self.get_power_multiplier(owner, owner)));
+            self.effects_on_caster[i].apply(new EffectApplicationArgs(owner, owner, string_lower(self.mark.type), string_lower(self.type)));
         }
         
         for (var i = 0; i < array_length(self.effects_on_target); i += 1) {
-            self.effects_on_target[i].apply(new EffectApplicationArgs(owner, opponent, self.get_power_multiplier(owner, opponent)));
+            self.effects_on_target[i].apply(new EffectApplicationArgs(owner, opponent, string_lower(self.mark.type), string_lower(self.type)));
         }
     }
     
@@ -94,14 +94,13 @@ function CardData(card_id, card_type, card_name, card_sprite, card_rarity, mark_
         }
         
         var texts = [];
-        var mult = self.get_power_multiplier(instigator, target);
         var vague = visibility < 4;
         var curr = 0;
         if (array_length(self.effects_on_caster) > 0) {
             var text = $"[bi]Caster[/bi]:"
             for (var i = 0; i < array_length(self.effects_on_caster); i += 1) {
             	var effect = self.effects_on_caster[i];
-                var curr_text = $"\n  {effect.to_string(new EffectApplicationArgs(instigator, target, mult), vague, highlight)}";
+                var curr_text = $"\n  {effect.to_string(new EffectApplicationArgs(instigator, target, string_lower(self.mark.type), string_lower(self.type)), vague, highlight)}";
                 if (focus != undefined && curr == focus.index) {
                     curr_text = $"[scale,{focus.scale}]{curr_text}[/s]";
                 }
@@ -117,7 +116,7 @@ function CardData(card_id, card_type, card_name, card_sprite, card_rarity, mark_
             var text = $"[bi]Target[/bi]:"
             for (var i = 0; i < array_length(self.effects_on_target); i += 1) {
             	var effect = self.effects_on_target[i];
-                var curr_text = $"\n  {effect.to_string(new EffectApplicationArgs(instigator, target, mult), vague, highlight)}";
+                var curr_text = $"\n  {effect.to_string(new EffectApplicationArgs(instigator, target, string_lower(self.mark.type), string_lower(self.type)), vague, highlight)}";
                 if (focus != undefined && curr == focus.index) {
                     curr_text = $"[scale,{focus.scale}]{curr_text}[/s]";
                 }

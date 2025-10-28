@@ -2,12 +2,21 @@
  * Function Description
  * @param {Struct.CharacterData} _instigator Description
  * @param {Struct.CharacterData} _target Description
- * @param {real} power_mult Description
+ * @param {string} _mark description
+ * @param {string} _card_type
  */
-function EffectApplicationArgs(_instigator, _target, power_mult = 0) constructor {
+function EffectApplicationArgs(_instigator, _target, _mark, _card_type) constructor {
     instigator = _instigator;
     target = _target;
-    mult = power_mult;
+    mark = _mark;
+    card_type = _card_type;
+    
+    var a = _instigator.get_attribute($"{_mark}_power_mult");
+    var b = _instigator.get_attribute($"{_card_type}_power_mult");
+    var c = _target.get_attribute($"{_mark}_weakness");
+    mult = _instigator.get_attribute($"{_mark}_power_mult") +
+           _instigator.get_attribute($"{_card_type}_power_mult") + 
+           _target.get_attribute($"{_mark}_weakness")
 }
 
 /**
@@ -45,7 +54,7 @@ function ModifierEffect(_modified_attribute, _magnitude) : Effect() constructor 
     /// @param {Struct.EffectApplicationArgs} args description
     /// @param {bool} [vaguely]=false description
     static to_string = function(args, vaguely = false, highlight = false) {
-        return $"[b]{get_modifier_display_name(self.modified_attribute)}[/b] {self.magnitude >= 0 ? "+" : ""}{self.magnitude}";
+        return $"[b]{get_modifier_display_name(self.modified_attribute, self.magnitude)}[/b]";
     }
     
     static remove = function(source) { 
@@ -89,7 +98,7 @@ function DamageEffect(_base_damage) : Effect() constructor {
     /// @param {Struct.EffectApplicationArgs} args description
     /// @return {real} description
     static get_actual_damage = function(args) {
-        var mult = 100 + args.mult;
+        var mult = 100 + args.mult - args.target.get_attribute("spell_resistance");
         if (args.instigator != undefined && args.instigator.get_attribute("paralysed")) {
             mult -= 25;
         } 
@@ -244,11 +253,28 @@ function AddStatusEffect(_status, _level) : Effect() constructor {
     }
 }
 
+function AddVisionEffect(_value) : Effect() constructor {
+    value = _value;
+    
+    static apply = function(args) {
+        if (struct_exists(args.target.data, "vision")) {
+            args.target.data.vision = min(args.target.data.vision + self.value, args.target.data.max_vision);
+        }
+    }
+    
+    /// @desc 
+    /// @param {Struct.EffectApplicationArgs} args description
+    /// @param {bool} [vaguely]=false description
+    static to_string = function(args, vaguely = false, highlight = false) {
+        return $"[b]Vision[/b] +{self.value}";
+    }
+}
+
 
 /**
  * Function Description
  * @param {Struct} data Description
- * @param {Struct.CardData} card description
+ * @param {Struct.CardData,undefined} card description
  * @return {Struct.Effect,undefined} description
  */
 function make_effect(data, card) {
@@ -263,6 +289,10 @@ function make_effect(data, card) {
             return new MarkEffect(card.mark, data.value);
         case "RemoveMark":
             return new MarkEffect(make_mark(data.mark_id), -data.value);
+        case "Modifier":
+            return new ModifierEffect(data.attribute, data.value);
+        case "AddVision":
+            return new AddVisionEffect(data.value);
         default:
             return undefined;
     }

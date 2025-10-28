@@ -314,11 +314,17 @@ end_player_turn = function() {
     for (var i = 0; i < array_length(self.player_card_slots); i += 1) {
         var card = self.player_card_slots[i].card;
         self.player_cards[i] = card;
+        if (instance_exists(card)) {
+            card.grabbable = false;
+        }
     }
     
     for (var i = 0; i < array_length(self.enemy_card_slots); i += 1) {
         var card = self.enemy_card_slots[i].card;
         self.enemy_cards[i] = card;
+        if (instance_exists(card)) {
+            card.can_reveal = false;
+        }
     }
     
     self.turn_pointer = 0;

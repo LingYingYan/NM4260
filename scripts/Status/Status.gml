@@ -84,9 +84,9 @@ function make_status(type, level) {
 function describe_status(type) {
     switch (type) {
     	case "Burn":
-            return "Each layer of Burn causes [b]-1 HP per turn[/b].\nDecays by [b]1[/b] layer after every turn.";
+            return "Each layer of Burn: [b]-1 HP per turn[/b].\nDecays by [b]1[/b] layer after every turn.";
         case "Poison":
-            return "Each layer of Poison causes [b]-1 HP per turn[/b].\nDecays by [b]1[/b] layer after every turn.";
+            return "Each layer of Poison: [b]-1 HP per turn[/b].\nDecays by [b]1[/b] layer after every turn.";
         case "Paralysed":
             return "[b]-25% card power[/b] until the status wears off.\nDecays by [b]1[/b] layer after every turn.";
         case "Frozen":
@@ -94,28 +94,28 @@ function describe_status(type) {
         case "Shield":
             return "Each layer of Shield cancels with [b]1[/b] damage.\nShields [b]do not carry forward[/b] to the next turn.";
         case "Strength":
-            return "Each layer of Strength increases direct damage dealt with [b]Destruction[/b] cards by [b]1[/b].\nDecays by [b]1[/b] layer after every turn.";
+            return "Each layer of Strength: [b]Destruction[/b] card damage [b]+1[/b].\nDecays by [b]1[/b] layer after every turn.";
         case "Coalesence":
             return "[b]+5[/b] HP per turn until the status wears off.\nDecays by [b]1[/b] layer after every turn.";
         case "Bleed":
-            return "Suffers [b]25% more damage[/b] from [b]Destruction[/b] cards.\nDecays by [b]1[/b] layer after every turn.";
+            return "Suffers [b]25% more damage[/b] from [b]Destruction[/b] cards until the status wears off.\nDecays by [b]1[/b] layer after every turn.";
     }
 }
 
 function project_status_effect(type, level) {
     switch (type) {
     	case "Burn":
-            return $"Deals [b]{calculate_immediate_damage(type)}[/b] damage in the next turn";
+            return $"[b]-{calculate_immediate_damage(type)}[/b] HP in the next turn";
         case "Poison":
-            return $"Deals [b]{calculate_immediate_damage(type)}[/b] damage in the next turn";
+            return $"[b]-{calculate_immediate_damage(type)}[/b] HP in the next turn";
         case "Paralysed":
             return $"[b]-25% card power[/b] for [b]{level}[/b] turns";
         case "Frozen":
-            return $"Only able to play [b]1[/b] card for [b]{level}[/b] turns";
+            return $"For the next [b]{level}[/b] turns, only able to play [b]1[/b] card per turn";
         case "Shield":
             return $"Cancels up to [b]{level}[/b] damage dealt by [b]Destruction[/b] cards";
         case "Strength":
-            return $"Increases direct damage dealt with [b]Destruction[/b] cards by [b]{level}[/b]";
+            return $"[b]Destruction[/b] card damage [b]+{level}[/b]";
         case "Coalesence":
             return $"[b]+5[/b] HP per turn, for [b]{level}[/b] turns";
         case "Bleed":
