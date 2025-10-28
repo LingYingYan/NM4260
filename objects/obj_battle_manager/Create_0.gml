@@ -35,11 +35,7 @@ resolve_turn = function() {
     self.enemy_cards = [];
     self.player_cards = [];
     transfer_between_piles(self.hand, self.discard_pile, 0, false);
-    if (self.player.data.hp <= 0) {
-        self.enemy_win();
-    } else if (self.enemy.data.hp <= 0) {
-        self.player_win();
-    } else {
+    if (!self.attempt_to_end_battle()) {
         self.start_player_turn();
     }
 }
@@ -93,6 +89,28 @@ start_battle = function() {
     self.start_player_turn();
 }
 
+attempt_to_end_battle = function() {
+    if (self.player.data.hp <= 0) {
+        if (!is_undefined(self.turn_timer) && time_source_exists(self.turn_timer)) {
+            time_source_destroy(self.turn_timer);
+        }
+        
+        self.enemy_win();
+        return true;
+    }
+        
+    if (self.enemy.data.hp <= 0) {
+        if (!is_undefined(self.turn_timer) && time_source_exists(self.turn_timer)) {
+            time_source_destroy(self.turn_timer);
+        }
+        
+        self.player_win();
+        return true;
+    }
+    
+    return false;
+}
+
 start_player_turn = function() {
     // Set up deck and card slots
     for (var i = 0; i < array_length(self.player_card_slots); i += 1) {
@@ -111,18 +129,9 @@ start_player_turn = function() {
         
         self.enemy_card_slots[i].card = noone;
     }
-    
-    self.enemy.data.execute_status_effects();
-    self.player.data.execute_status_effects();
 
     // If anyone dies, end the battle here
-    if (self.player.data.hp <= 0) {
-        self.resolve_turn();
-        return;
-    }
-        
-    if (self.enemy.data.hp <= 0) {
-        self.resolve_turn();
+    if (self.attempt_to_end_battle()) {
         return;
     }
     
@@ -210,8 +219,12 @@ flip_cards = function() {
         enemy_card.state_update = enemy_card.state_flip;
     }
     
+    if (!is_undefined(self.turn_timer) && time_source_exists(self.turn_timer)) {
+        time_source_destroy(self.turn_timer);
+    }
+    
     self.turn_timer = time_source_create(
-        time_source_game, 2, time_source_units_seconds, 
+        time_source_game, 1, time_source_units_seconds, 
         execute_player_card
     );
     
@@ -242,12 +255,14 @@ recycle_player_card = function() {
         self.player_cards[self.turn_pointer] = noone;
     }
     
-    if (self.enemy.data.hp <= 0 || self.player.data.hp <= 0) {
-        self.resolve_turn();
+    if (self.attempt_to_end_battle()) {
         return;
     }
     
-    time_source_destroy(self.turn_timer);
+    if (!is_undefined(self.turn_timer) && time_source_exists(self.turn_timer)) {
+        time_source_destroy(self.turn_timer);
+    }
+    
     self.turn_timer = time_source_create(
         time_source_game, 0.5, time_source_units_seconds, 
         execute_enemy_card
@@ -266,7 +281,10 @@ execute_enemy_card = function() {
 }
 
 recycle_enemy_card = function() {
-    time_source_destroy(self.turn_timer);
+    if (!is_undefined(self.turn_timer) && time_source_exists(self.turn_timer)) {
+        time_source_destroy(self.turn_timer);
+    }
+    
     var enemy_card = self.get_enemy_card();
     if (instance_exists(enemy_card)) { 
         enemy_card.card_data.is_nullified = false;
@@ -274,8 +292,7 @@ recycle_enemy_card = function() {
     }
     
     self.enemy_cards[self.turn_pointer] = noone;
-    if (self.enemy.data.hp <= 0 || self.player.data.hp <= 0) {
-        self.resolve_turn();
+    if (self.attempt_to_end_battle()) {
         return;
     }
     
@@ -289,6 +306,7 @@ recycle_enemy_card = function() {
 
 end_player_turn = function() {
     obj_end_turn_button.is_disabled = true;
+    
     // Collect both sides' cards
     for (var i = 0; i < array_length(self.player_card_slots); i += 1) {
         var card = self.player_card_slots[i].card;
@@ -302,7 +320,17 @@ end_player_turn = function() {
     
     self.turn_pointer = 0;
     self.max_turn_pointer = max(array_length(self.player_cards), array_length(self.enemy_cards));
-    self.flip_cards();
+    self.start_enemy_status();
+}
+
+start_enemy_status = function() {
+    self.enemy.execute_next_status();
+    self.state_update = self.state_execute_enemy_status;
+}
+
+start_player_status = function() {
+    self.player.execute_next_status();
+    self.state_update = self.state_execute_player_status;
 }
 
 end_battle = function() {
@@ -315,7 +343,10 @@ state_execute_player_card = function() {
     var player_card = self.get_player_card();
     if (player_card == noone || player_card.state_update != player_card.state_execute) {
         self.state_update = function() { }
-        time_source_destroy(self.turn_timer);
+        if (!is_undefined(self.turn_timer) && time_source_exists(self.turn_timer)) {
+            time_source_destroy(self.turn_timer);
+        }
+        
         self.turn_timer = time_source_create(
             time_source_game, 0.5, time_source_units_seconds, 
             recycle_player_card
@@ -329,7 +360,10 @@ state_execute_enemy_card = function() {
     var enemy_card = self.get_enemy_card();
     if (enemy_card == noone || enemy_card.state_update != enemy_card.state_execute) {
         self.state_update = function() { }
-        time_source_destroy(self.turn_timer);
+        if (!is_undefined(self.turn_timer) && time_source_exists(self.turn_timer)) {
+            time_source_destroy(self.turn_timer);
+        }
+        
         self.turn_timer = time_source_create(
             time_source_game, 0.5, time_source_units_seconds, 
             recycle_enemy_card
@@ -337,6 +371,51 @@ state_execute_enemy_card = function() {
             
         time_source_start(self.turn_timer);
     }
+}
+
+state_execute_enemy_status = function() {
+    if (self.enemy.is_ticking_status) {
+        return;
+    }
+    
+    self.state_update = function() { };
+    if (self.attempt_to_end_battle()) {
+        return;
+    }
+    
+    if (!is_undefined(self.turn_timer) && time_source_exists(self.turn_timer)) {
+        time_source_destroy(self.turn_timer);
+    }
+    
+    self.turn_timer = time_source_create(
+        time_source_game, 0.5, time_source_units_seconds, 
+        self.start_player_status
+    );
+    
+    time_source_start(self.turn_timer);
+}
+
+
+state_execute_player_status = function() {
+    if (self.player.is_ticking_status) {
+        return;
+    }
+    
+    self.state_update = function() { };
+    if (self.attempt_to_end_battle()) {
+        return;
+    }
+    
+    if (!is_undefined(self.turn_timer) && time_source_exists(self.turn_timer)) {
+        time_source_destroy(self.turn_timer);
+    }
+    
+    self.turn_timer = time_source_create(
+        time_source_game, 0.5, time_source_units_seconds, 
+        self.flip_cards
+    );
+    
+    time_source_start(self.turn_timer);
 }
 
 state_update = function() { }

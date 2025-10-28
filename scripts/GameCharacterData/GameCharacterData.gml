@@ -2,6 +2,7 @@ function GameCharacterData(curr_hp, total_hp) constructor {
     hp = curr_hp;
     max_hp = total_hp;
     status_effects = [];
+    expired_statuses = [];
     marks = { };
     
     modifiers = { };
@@ -26,6 +27,20 @@ function GameCharacterData(curr_hp, total_hp) constructor {
         self.set_attribute(name, self.get_attribute(name) + modifier_value);
     }
     
+    static sort_status = function() {
+        array_sort(self.status_effects, function(left, right) {
+            if (left.name < right.name) {
+                return -1;    
+            }    
+                    
+            if (left.name > right.name) {
+                return 1;
+            }
+                    
+            return 0;
+        });
+    }
+    
     /// @desc description
     /// @param {Struct.Status} status description description
     /// @param {bool} [success]=true description
@@ -48,18 +63,6 @@ function GameCharacterData(curr_hp, total_hp) constructor {
             
             if (curr_status == undefined) {
                 array_push(self.status_effects, status);
-                array_sort(self.status_effects, function(left, right) {
-                    if (left.name < right.name) {
-                        return -1;    
-                    }    
-                    
-                    if (left.name > right.name) {
-                        return 1;
-                    }
-                    
-                    return 0;
-                })
-                
                 // Added for the first time
                 status.initialise(self);
             } else {
@@ -71,13 +74,13 @@ function GameCharacterData(curr_hp, total_hp) constructor {
             
             // Activate no matter what
             status.activate(self);
+            self.sort_status();
         }
         
         return true;
     }
     
-    static execute_status_effects = function() {
-        // TODO
+    static tick_status_effects = function() { 
         var to_remove = [];
         for (var i = 0; i < array_length(self.status_effects); i += 1) {
             if (self.status_effects[i].level <= 0) {
@@ -88,10 +91,8 @@ function GameCharacterData(curr_hp, total_hp) constructor {
         for (var i = 0; i < array_length(to_remove); i += 1) {
             array_delete(self.status_effects, to_remove[i], 1);
         }
-    }
-    
-    static tick_status_effects = function() { 
         
+        self.sort_status();
     }
     
     static add_marks = function(mark_id, multiplicity) { 
@@ -151,7 +152,7 @@ function PlayerData(curr_hp, total_hp, curr_vision, total_vision) : GameCharacte
             return false;
         }
         
-        obj_player_state.add_status(status.name, status.level, success);
+        obj_player_state.add_status(status, success);
         return true;
     }
     

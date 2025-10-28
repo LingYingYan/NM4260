@@ -146,7 +146,7 @@ function Burn(_level) : Status(_level, nameof(Burn)) constructor {
     /// @desc Execute the status effect
     /// @param {Struct.GameCharacterData} target The target
     static execute = function(target) { 
-        target.hp -= self.level;
+        target.hp -= 3;
     }
 } 
 
@@ -154,7 +154,7 @@ function Poison(_level) : Status(_level, nameof(Poison)) constructor {
     /// @desc Execute the status effect
     /// @param {Struct.GameCharacterData} target The target
     static execute = function(target) { 
-        target.hp -= self.level;
+        target.hp -= 3;
     }
 } 
 

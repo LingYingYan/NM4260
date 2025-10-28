@@ -20,7 +20,7 @@ if (self.card_data != undefined) {
         draw_set_halign(fa_center);
         draw_set_valign(fa_middle);
         
-        draw_sprite(self.card_data.sprite, self.image_index, self.x, self.y - self.sprite_height / 4 + y_padding);
+        draw_sprite_ext(self.card_data.sprite, self.image_index, self.x, self.y - self.sprite_height / 4 + y_padding, self.image_xscale, self.image_yscale, 0, -1, 1);
         
         draw_set_valign(fa_top);
         draw_set_halign(fa_left);
