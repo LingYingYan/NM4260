@@ -29,32 +29,59 @@ function assign_room_types_and_icons() {
     }
 
     rooms = array_shuffle(rooms);
+	
+	var shop_count = 1;
+	
+	for (var i = 0; i < array_length(rooms); i++) {
+	    var rm = rooms[i];
+    
+	    // 50% chance = enemy
+	    if (random(1) < 0.5) {
+	        rm.room_type = "enemy";
+	    } 
+	    else {
+	        // for the remaining 50%, Treasure : Shop : Encounter = 2 : 2 : 3
+	        var r_val = random(7); // 0–7 (exclusive)
+	        if (r_val < 2) {
+				rm.room_type = "treasure";
+			} else if (r_val < 4) {
+				rm.room_type = "shop";
+				rm.room_name = "shop" + string(shop_count); //naming shops shop1 and shop2
+				shop_count += 1;
+			} else {
+				rm.room_type = "encounter";
+			}
+	    }
+    
+	    with (rm) update_room_icon();
+	}
 
-    for (var i = 0; i < array_length(rooms); i++) {
-        var rm = rooms[i];
 
-        if (i == 0) {
-            rm.room_type = "bonfire";
-			rm.is_bonfire_used = false;
-            with (rm) update_room_icon();
-        } else if (i < 3) { //
-            rm.room_type = "treasure";
-            with (rm) update_room_icon();
-        } else if (i < 5) {
-			rm.room_type = "shop";
-			rm.room_name = "shop" + string(i-2); //naming shops shop1 and shop2
-			with (rm) update_room_icon();
-		} else if (i < 15) {
-			rm.room_type = "enemy";
-	        with (rm) update_room_icon();
-		} else if (i < 18) {
-			rm.room_type = "encounter";
-			with(rm) update_room_icon();
-		} else {
-            rm.room_type = "default";
-            with (rm) update_room_icon();
-        }
-    }
+    //for (var i = 0; i < array_length(rooms); i++) {
+    //    var rm = rooms[i];
+
+    //    if (i == 0) {
+    //        rm.room_type = "bonfire";
+	//		rm.is_bonfire_used = false;
+    //        with (rm) update_room_icon();
+    //    } else if (i < 3) { //
+    //        rm.room_type = "treasure";
+    //        with (rm) update_room_icon();
+    //    } else if (i < 5) {
+	//		rm.room_type = "shop";
+	//		rm.room_name = "shop" + string(i-2); //naming shops shop1 and shop2
+	//		with (rm) update_room_icon();
+	//	} else if (i < 15) {
+	//		rm.room_type = "enemy";
+	//        with (rm) update_room_icon();
+	//	} else if (i < 18) {
+	//		rm.room_type = "encounter";
+	//		with(rm) update_room_icon();
+	//	} else {
+    //        rm.room_type = "default";
+    //        with (rm) update_room_icon();
+    //    }
+    //}
 
     return rooms; // return ordered list (rooms[0] is bonfire)
 }
@@ -122,30 +149,9 @@ function connect_start_end_and_spawn_player(spawn_at_bonfire) {
 		var vis = instance_create_layer(base.x + global.map_offset_x, base.y + S + global.map_offset_y, "Instances", DungeonRoom);
 				vis.data = start;
 				vis.discovered = true;
-        //room_neighbors_init(global.start_room);
-        //global.start_room.room_type = "start";
-        //global.start_room.grid_x = base.grid_x;
-        //global.start_room.grid_y = global.GRID_H;
         add_edge(global.start_room, base);
     }
 
-    // Top candidates for End connection
-    //var top_rooms = [];
-    //for (var c = 0; c < global.GRID_W; c++) {
-    //    var rm2 = global.room_grid[0][c];
-    //    if (rm2 != noone) array_push(top_rooms, rm2);
-    //}
-
-    //global.end_room = noone;
-    //if (array_length(top_rooms) > 0) {
-    //    var base2 = choose_array(top_rooms);
-    //    global.end_room = instance_create_layer(base2.x, base2.y - S, "Instances", DungeonRoom);
-    //    room_neighbors_init(global.end_room);
-    //    global.end_room.room_type = "end";
-    //    global.end_room.grid_x = base2.grid_x;
-    //    global.end_room.grid_y = -1;
-    //    add_edge(global.end_room, base2);
-    //}
 	
 	// find the end room
 	global.end_room = find_furthest_room(global.start_room);
@@ -154,19 +160,31 @@ function connect_start_end_and_spawn_player(spawn_at_bonfire) {
 	if (is_struct(global.end_room)) {
 	    global.end_room.room_type = "end";
 	}
+	
+	// decide the bonfire room
+	
 
     // Find bonfire room
-    global.bonfire_room = noone;
+    global.bonfire_room = decide_bonfire_room();
+	
+	if (is_struct(global.bonfire_room)) {
+	    global.bonfire_room.room_type = "bonfire";
+		global.bonfire_room.is_bonfire_used = false;
+		
+	}
+	
+	//show_debug_message($"the bonfire room is spawned at {global.bonfire_room.grid_x}, {global.bonfire_room.grid_y}")
+	
     //with (DungeonRoom) if (room_type == "bonfire") global.bonfire_room = self.data;
-	for (var r = 0; r < global.GRID_H; r++) {
-	    for (var c = 0; c < global.GRID_W; c++) {
-	        var rm = global.room_grid[r][c];
-	        if (is_struct(rm) && rm.room_type == "bonfire") {
-	            global.bonfire_room = rm;
-	            break;
-	        }
-	    }
-	}	
+	//for (var r = 0; r < global.GRID_H; r++) {
+	//    for (var c = 0; c < global.GRID_W; c++) {
+	//        var rm = global.room_grid[r][c];
+	//        if (is_struct(rm) && rm.room_type == "bonfire") {
+	//            global.bonfire_room = rm;
+	//            break;
+	//        }
+	//    }
+	//}	
 	// debug chunk
 	//show_debug_message(">>> DEBUG: spawn_at_bonfire=" + string(spawn_at_bonfire));
 	//show_debug_message(">>> DEBUG: start_room=" + string(global.start_room));

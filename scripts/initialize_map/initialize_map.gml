@@ -19,7 +19,6 @@ function initialize_map(min_rooms_required, spawn_at_bonfire) {
     // Create start/end rooms but choose where to spawn
     connect_start_end_and_spawn_player(spawn_at_bonfire);
 	
-	
 
     global.map_inited = true;
 

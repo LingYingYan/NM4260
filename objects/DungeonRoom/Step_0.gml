@@ -8,12 +8,14 @@ if (is_pressing) {
 		
 		perm_revealed = true;
 
-        if (is_struct(self.data) && self.data.revealed == true) {
+        if (is_struct(self.data) && self.data.revealed == true && obj_player_state.data.vision > 0) {
 			//save to permanently reviewed rooms, only room types
 			array_push(global.perm_revealed_rooms, self.data.room_type);
 			// spend 1 vision to remember the room
 			obj_player_state.data.vision -= 1;
             show_debug_message($"{self.data.room_type} Room  marked as revealed!");
-        }
+        } else {
+			show_message("Cannot permanent reveal this room.")
+		}
     }
 }

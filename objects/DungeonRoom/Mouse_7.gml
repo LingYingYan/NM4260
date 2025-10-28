@@ -1,3 +1,11 @@
+// Prevent move if long press was done
+if (long_press_done) {
+    long_press_done = false; // reset for next click
+    is_pressing = false;
+    press_time = 0;
+    exit; 
+}
+
 if (!instance_exists(Player)) exit;
 var player = instance_find(Player, 0);
 //show_debug_message($"current room {player.current_room}")

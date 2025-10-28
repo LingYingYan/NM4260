@@ -239,6 +239,7 @@
     {"id":{"name":"CardState","path":"scripts/CardState/CardState.yy",},},
     {"id":{"name":"CollectionUtils","path":"scripts/CollectionUtils/CollectionUtils.yy",},},
     {"id":{"name":"create_shop_cards","path":"scripts/create_shop_cards/create_shop_cards.yy",},},
+    {"id":{"name":"decide_bonfire_room","path":"scripts/decide_bonfire_room/decide_bonfire_room.yy",},},
     {"id":{"name":"Deck","path":"scripts/Deck/Deck.yy",},},
     {"id":{"name":"draw_text_scribble_ext","path":"scripts/draw_text_scribble_ext/draw_text_scribble_ext.yy",},},
     {"id":{"name":"draw_text_scribble","path":"scripts/draw_text_scribble/draw_text_scribble.yy",},},
