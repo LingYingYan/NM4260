@@ -105,9 +105,9 @@ function describe_status(type) {
 function project_status_effect(type, level) {
     switch (type) {
     	case "Burn":
-            return $"Deals [b]{level}[/b] damage in the next turn";
+            return $"Deals [b]{calculate_immediate_damage(type)}[/b] damage in the next turn";
         case "Poison":
-            return $"Deals [b]{level}[/b] damage in the next turn";
+            return $"Deals [b]{calculate_immediate_damage(type)}[/b] damage in the next turn";
         case "Paralysed":
             return $"[b]-25% card power[/b] for [b]{level}[/b] turns";
         case "Frozen":
@@ -121,6 +121,25 @@ function project_status_effect(type, level) {
         case "Bleed":
             return $"Suffers [b]25% more damage[/b] from [b]Destruction[/b] cards for [b]{level}[/b] turns";
     }
+}
+
+function calculate_immediate_damage(type) {
+    switch (type) {
+    	case "Burn": 
+        case "Poison":
+            return 3;
+        default:
+            return 0;
+    }
+}
+
+function calculate_projected_damage(type, level) {
+    var dmg = calculate_immediate_damage(type);
+    if (dmg == 0) {
+        return 0
+    }
+    
+    return dmg * (1 - power(0.5, level)) / (1 - 0.5);
 }
 
 function Burn(_level) : Status(_level, nameof(Burn)) constructor {

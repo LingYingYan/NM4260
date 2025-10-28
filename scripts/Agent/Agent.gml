@@ -1,8 +1,11 @@
-function UtilityAgent() {
+function UtilityAgent() constructor {
     actions = [];
     
-    static propose_action = function(callback) {
-        var action = new Action(callback)
+    static refresh = function() {
+        self.actions = [];
+    }
+    
+    static propose_action = function(action) {
         array_push(self.actions, action);
         return action;
     } 
@@ -32,11 +35,10 @@ function UtilityAgent() {
         for (var i = 0; i < array_length(available_actions); i += 1) {
             cumulative += action_weights[i];
             if (cumulative >= select) {
-                available_actions[i].perform();
-                return;
+                return available_actions[i];
             }
         }
         
-        best_action.perform();
+        return best_action;
     }
 }

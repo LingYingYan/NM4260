@@ -119,6 +119,16 @@ function GameCharacterData(curr_hp, total_hp) constructor {
         return self.marks[$ mark_id] ?? 0;
     }
     
+    static count_status = function(status_name) {
+        for (var i = 0; i < array_length(self.status_effects); i += 1) {
+            if (self.status_effects[i].name == status_name) {
+                return self.status_effects[i].level;
+            }
+        }
+        
+        return 0;
+    }
+    
     static clear_marks_and_statuses = function() {
         self.marks = {};
         self.status_effects = [];
@@ -194,7 +204,9 @@ function EnemyData(enemy_id, enemy_name, enemy_weight, enemy_hp) : GameCharacter
     }
 }
 
-function Dummy(character) : GameCharacterData(character.curr_hp, character.total_hp) constructor {
+function Dummy(character) : GameCharacterData(0, 0) constructor {
+    hp = character.hp;
+    max_hp = character.max_hp;
     source = character;
     
     static reset_data = function() {
@@ -205,7 +217,7 @@ function Dummy(character) : GameCharacterData(character.curr_hp, character.total
         
         var mark_ids = struct_get_names(self.source.marks);
         for (var i = 0; i < array_length(mark_ids); i += 1) {
-            self.add_marks(mark_ids[i], self.source.count_marks(mark_ids[i]));
+            self.add_marks(mark_ids[i], self.source.count_mark(mark_ids[i]));
         }
         
         for (var i = 0; i < array_length(self.source.status_effects); i += 1) {

@@ -95,7 +95,6 @@ start_battle = function() {
 
 start_player_turn = function() {
     // Set up deck and card slots
-    self.enemy.reset_deck();
     for (var i = 0; i < array_length(self.player_card_slots); i += 1) {
         if (instance_exists(self.player_card_slots[i].card)) {
             self.player_card_slots[i].card.dropped_area = noone;
@@ -115,8 +114,6 @@ start_player_turn = function() {
     
     self.enemy.data.execute_status_effects();
     self.player.data.execute_status_effects();
-    
-    // Update modifiers and status effects
 
     // If anyone dies, end the battle here
     if (self.player.data.hp <= 0) {
@@ -141,19 +138,29 @@ start_player_turn = function() {
             self.enemy_card_slots[i].is_disabled = i == 0 || i == array_length(self.enemy_card_slots) - 1;
         }
     }
+    
+    var k = 0;
+    for (var i = 0; i < array_length(self.enemy_card_slots); i += 1) {
+        if (!self.enemy_card_slots[i].is_disabled) {
+            k += 1;
+        }
+    }
         
     // Enemy plays
+    self.enemy.draw(5);
+    var cards = self.enemy.plan_and_decide(k);
     for (var i = 0; i < array_length(self.enemy_card_slots); i += 1) {
         if (self.enemy_card_slots[i].is_disabled) {
             continue;
         }
             
-        var card = self.enemy.play_card();
+        var card = cards[array_length(cards) - k];
         card.image_xscale = self.enemy_card_slots[i].image_xscale;
         card.image_yscale = self.enemy_card_slots[i].image_yscale;
         card.scale = self.enemy_card_slots[i].image_xscale;
         place_card(card, self.enemy_card_slots[i].x, self.enemy_card_slots[i].y);
         enemy_card_slots[i].card = card;
+        k -= 1;
     }
         
     // Player draws

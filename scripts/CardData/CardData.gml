@@ -45,14 +45,29 @@ function CardData(card_id, card_type, card_name, card_sprite, card_rarity, mark_
      * @desc Applies the card effects
      * @param {Struct.GameCharacterData} owner The caster
      * @param {Struct.GameCharacterData} opponent The target
-     * @param {read} index The index of the effect to execute
+     * @param {real} index The index of the effect to execute
      */
     static apply_effect = function(owner, opponent, index) { 
         if (index < array_length(self.effects_on_caster)) {
-            self.effects_on_caster[index].apply(new EffectApplicationArgs(owner, owner, self.get_power_multiplier(owner, owner)))
+            self.effects_on_caster[index].apply(new EffectApplicationArgs(owner, owner, self.get_power_multiplier(owner, owner)));
         } else {
             index -= array_length(self.effects_on_caster);
             self.effects_on_target[index].apply(new EffectApplicationArgs(owner, opponent, self.get_power_multiplier(owner, opponent)));
+        }
+    }
+    
+    /**
+     * @desc Applies the card effects
+     * @param {Struct.Dummy} owner The caster
+     * @param {Struct.Dummy} opponent The target
+     */
+    static simulate_effects = function(owner, opponent) {
+        for (var i = 0; i < array_length(self.effects_on_caster); i += 1) {
+            self.effects_on_caster[i].apply(new EffectApplicationArgs(owner, owner, self.get_power_multiplier(owner, owner)));
+        }
+        
+        for (var i = 0; i < array_length(self.effects_on_target); i += 1) {
+            self.effects_on_target[i].apply(new EffectApplicationArgs(owner, opponent, self.get_power_multiplier(owner, opponent)));
         }
     }
     

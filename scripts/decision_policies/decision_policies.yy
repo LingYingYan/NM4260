@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"decision_policies",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"decision_policies",
+  "parent":{
+    "name":"AI",
+    "path":"folders/Scripts/AI.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

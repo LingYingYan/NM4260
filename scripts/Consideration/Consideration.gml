@@ -12,12 +12,17 @@ function ConstantUtilityConsideration(value) : Consideration() constructor {
     }
 }
 
-function CurveUtilityConsideration(anim_curve, channel_name, variable_key) : Consideration() constructor {
+function CurveUtilityConsideration(anim_curve, channel_name, raw_value_producer) : Consideration() constructor {
     curve = animcurve_get_channel(anim_curve, channel_name);
-    evaluate_at = variable_key;
+    raw_value = raw_value_producer;
     
     static evaluate = function(context) {
-        return animcurve_channel_evaluate(self.curve, context[$ self.evaluate_at] ?? 0);
+        if (!struct_exists(context, self.raw_value)) {
+            return animcurve_channel_evaluate(self.curve, context[$ self.raw_value]);
+        }
+        var value = struct_exists(context, self.raw_value);
+        
+        return animcurve_channel_evaluate(self.curve, context[$ self.raw_value] ?? 0);
     }
 }
 
