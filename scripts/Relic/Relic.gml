@@ -25,10 +25,29 @@ function Relic(_id, _name, _desc, _rarity, _duration, _effects = []) constructor
     }
     
     /// @desc Function Description
-    /// @param {Struct.GameCharacterData} target Description
+    /// @param {Struct.PlayerData} target Description
     static activate = function(target) {
         array_foreach(self.effects, method({user: target}, function(effect) {
             effect.apply(target, target);
         }));
+    }
+    
+    /// @desc Function Description
+    /// @param {Struct.PlayerData} target Description
+    static revoke = function(target) {
+        array_foreach(self.effects, method({user: target}, function(effect) {
+            effect.remove(target);
+        }));
+    }
+    
+    static to_string = function() {
+        var str = self.duration > 0 
+            ? $"[b]When used, for the next {self.duration} battle{self.duration > 1 ? "s" : ""}:[/b]"
+            : "[b]When used:[/b]";
+        for (var i = 0; i < array_length(self.effects); i += 1) {
+            str += $"\n  {self.effects[i].to_string(new EffectApplicationArgs(obj_player_state.data, obj_player_state.data))}";
+        }
+        
+        return str;
     }
 }

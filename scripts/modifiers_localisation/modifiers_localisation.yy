@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"modifiers_localisation",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"modifiers_localisation",
+  "parent":{
+    "name":"Effects",
+    "path":"folders/Scripts/Effects.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

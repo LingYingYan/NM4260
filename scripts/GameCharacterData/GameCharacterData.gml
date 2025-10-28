@@ -140,6 +140,7 @@ function PlayerData(curr_hp, total_hp, curr_vision, total_vision) : GameCharacte
     vision = curr_vision; 
     max_vision = total_vision;
     traits = [];
+    timed_relics = [];
     
     static parent_add_status = self.add_status;
     static parent_add_marks = self.add_marks;
@@ -163,6 +164,26 @@ function PlayerData(curr_hp, total_hp, curr_vision, total_vision) : GameCharacte
         
         obj_player_state.add_marks(mark_id, multiplicity);
         return true;
+    }
+    
+    static use_relic = function(relic) {
+        if (relic.duration > 0) {
+            array_push(self.timed_relics, { item: relic, expire_time: global.number_of_completed_combat + relic.duration});
+        }
+    }
+    
+    static remove_expired_relics = function() {
+        var to_remove = [];
+        for (var i = 0; i < array_length(self.timed_relics); i += 1) {
+            if (self.timed_relics[i].expire_time >= global.number_of_completed_combat) {
+                self.timed_relics[i].item.revoke(self);
+                array_push(to_remove, i);
+            }
+        }
+        
+        for (var i = 0; i < array_length(to_remove); i += 1) {
+            array_delete(self.timed_relics, to_remove[i], 1);
+        }
     }
 }
 

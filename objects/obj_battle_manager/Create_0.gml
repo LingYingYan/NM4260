@@ -54,6 +54,9 @@ player_win = function() {
     obj_backdrop.visible = true;
     // Create new cards to pick
     instance_create_layer(room_width / 2, room_height / 2, "Instances", obj_card_loot);
+    
+    global.number_of_completed_combat += 1;
+    self.player.data.remove_expired_relics();
 }
 
 start_battle = function() {

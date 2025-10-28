@@ -1,6 +1,7 @@
 trait = obj_traits_manager.get_random();
 if (trait == undefined) {
     instance_destroy(self);
+    obj_room_manager.goto_map();
     exit;    
 }
 

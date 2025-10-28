@@ -24,6 +24,8 @@ function Effect() constructor {
     static to_string = function(args, vaguely = false, highlight = false) {
         return "Effect";
     }
+    
+    static remove = function(source) { }
 }
 
 /// @desc Function Description
@@ -43,7 +45,11 @@ function ModifierEffect(_modified_attribute, _magnitude) : Effect() constructor 
     /// @param {Struct.EffectApplicationArgs} args description
     /// @param {bool} [vaguely]=false description
     static to_string = function(args, vaguely = false, highlight = false) {
-        return "Effect";
+        return $"[b]{get_modifier_display_name(self.modified_attribute)}[/b] {self.magnitude >= 0 ? "+" : ""}{self.magnitude}";
+    }
+    
+    static remove = function(source) { 
+        source.add_modifier(self.modified_attribute, -self.magnitude);
     }
 }
 
@@ -65,6 +71,10 @@ function FlagEffect(_target_attribute, _flag) : Effect() constructor {
     /// @param {bool} [vaguely]=false description
     static to_string = function(args, vaguely = false, highlight = false) {
         return "Effect";
+    }
+    
+    static remove = function(source) { 
+        source.set_attribute(self.target_attribute, !self.flag);
     }
 }
 

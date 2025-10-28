@@ -2,10 +2,37 @@ __private = {
     card_rarities: [],
     card_rarity_to_name: ds_map_create(),
     card_names_to_count: ds_map_create(),
-    card_names_to_data: ds_map_create()
+    card_names_to_data: ds_map_create(),
+    relics: []
 };
 
 size = 0;
+
+/// @desc 
+/// @param {Struct.Relic} relic description
+add_relic = function(relic) {
+    array_push(self.__private.relics, relic);
+}
+
+/// @desc 
+/// @param {Struct.Relic} relic description
+remove_relic = function(relic) {
+    var idx = array_get_index(self.__private.relics, relic);
+    if (idx >= 0) {
+        array_delete(self.__private.relics, idx, 1);
+    }
+}
+
+get_all_relic_cards = function() {
+    var cards = [];
+    for (var i = 0; i < array_length(self.__private.relics); i += 1) {
+        var card = instance_create_depth(-500, -500, obj_hand.depth - 1, obj_relic_card);
+        card.card_data = self.__private.relics[i];
+        array_push(cards, card);
+    }
+    
+    return cards;
+}
 
 /// @desc Function Description
 /// @param {id.instance} card_id Description
