@@ -193,3 +193,23 @@ function EnemyData(enemy_id, enemy_name, enemy_weight, enemy_hp) : GameCharacter
         return true;
     }
 }
+
+function Dummy(character) : GameCharacterData(character.curr_hp, character.total_hp) constructor {
+    source = character;
+    
+    static reset_data = function() {
+        var attribute_names = struct_get_names(self.source.modifiers);
+        for (var i = 0; i < array_length(attribute_names); i += 1) {
+            self.set_attribute(attribute_names[i], self.source.get_attribute(attribute_names[i]));
+        }
+        
+        var mark_ids = struct_get_names(self.source.marks);
+        for (var i = 0; i < array_length(mark_ids); i += 1) {
+            self.add_marks(mark_ids[i], self.source.count_marks(mark_ids[i]));
+        }
+        
+        for (var i = 0; i < array_length(self.source.status_effects); i += 1) {
+            self.add_status(make_status(self.source.status_effects[i].name, self.source.status_effects[i].level));
+        }
+    }
+}
