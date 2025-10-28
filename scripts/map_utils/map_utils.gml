@@ -63,17 +63,16 @@ function assign_room_types_and_icons(assign_existing_room_types) {
 		}
 	} else {
 		// assign rooms based on the existing room types
-		var keys = ds_map_keys_to_array(global.room_types);
-		for (var k = 0; k < array_length(rooms); k++) {
-		
-		}
-	    for (var i = 0; i < array_length(keys); i++) {
-	        var key = keys[i];
-	        var count = global.room_types[? key];
-        
-	        // Push that key 'count' times
-	        for (var j = 0; j < count; j++) {
-		        var rm = rooms[assign_index];
+		var type_keys = ds_map_keys_to_array(global.room_types);
+		var idx = 0;
+	    for (var i = 0; i < array_length(type_keys); i++) {
+		    var type = type_keys[i];
+		    var count = global.room_types[? type];
+
+		    for (var j = 0; j < count; j++) {
+		        if (idx >= array_length(rooms)) break;
+
+		        var rm = rooms[idx];
 		        rm.room_type = type;
 
 		        if (type == "shop") {
@@ -82,9 +81,15 @@ function assign_room_types_and_icons(assign_existing_room_types) {
 		        }
 
 		        with (rm) update_room_icon();
-		        assign_index++;
+		        idx++;
 		    }
-	    }
+		}
+		// all remaining rooms will be enemy
+		for (var k = idx; k < array_length(rooms); k++) {
+		    var rm = rooms[k];
+		    rm.room_type = "enemy";
+		    with (rm) update_room_icon();
+		}
 	}
 
 
@@ -122,6 +127,14 @@ function update_room_types_num(room_type) {
         global.room_types[? room_type] += 1;
     } else {
         ds_map_add(global.room_types, room_type, 1);
+    }
+}
+
+function update_perm_revealed_room(room_type) {
+	if (ds_map_exists(global.perm_revealed_rooms, room_type)) {
+        global.perm_revealed_rooms[? room_type] += 1;
+    } else {
+        ds_map_add(global.perm_revealed_rooms, room_type, 1);
     }
 }
 
@@ -180,7 +193,7 @@ function connect_start_end_and_spawn_player(spawn_at_bonfire) {
     global.start_room = noone;
     if (array_length(bottom_rooms) > 0) {
         var base = choose_array(bottom_rooms);
-		var start = new RoomData(true, true, true, false, "start", base.x/S, base.y/S+1);
+		var start = new RoomData(true, true, false, true, false, "start", base.x/S, base.y/S+1);
 		array_push(base.neighbors, start);
 		array_push(start.neighbors, base);
         global.start_room = start
@@ -292,7 +305,10 @@ function reveal_neighbors(rm) {
 	
 	if (rm.room_type == "start") {
 		show_debug_message($"Current room is start room");
-	} else {
+	} else if (rm.room_type == "bonfire" && global.bonfire_used) {
+		show_debug_message($"Current room is bonfire room");
+	}
+	else {
 		show_debug_message("Checking and discovering neighbor");
 		// 50% chance discover rooms n visions away
 		var n_vision = obj_player_state.data.vision;

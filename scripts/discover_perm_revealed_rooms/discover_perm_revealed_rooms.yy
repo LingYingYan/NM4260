@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"discover_perm_revealed_rooms",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"discover_perm_revealed_rooms",
+  "parent":{
+    "name":"NM4260",
+    "path":"NM4260.yyp",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -16,5 +16,3 @@ is_pressing = false;
 press_time = 0;
 long_press_threshold = 60;
 long_press_done = false;
-
-perm_revealed = false;

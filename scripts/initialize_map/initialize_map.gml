@@ -36,6 +36,8 @@ function initialize_map(min_rooms_required, spawn_at_bonfire) {
     // Create start/end rooms but choose where to spawn
     connect_start_end_and_spawn_player(spawn_at_bonfire);
 	
+	// filter and find permanently revealed rooms
+	discover_perm_revealed_rooms();
 
     global.map_inited = true;
 

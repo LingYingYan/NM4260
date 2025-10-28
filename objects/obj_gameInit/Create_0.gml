@@ -21,7 +21,7 @@ global.used_shops = [];
 
 global.checked_room = [];
 
-global.perm_revealed_rooms = [];
+global.perm_revealed_rooms = ds_map_create();
 
 global.just_exited_bonfire = false;
 

@@ -1,5 +1,14 @@
 if (is_struct(self.data)) {
 	
+	if (self.data.perm_revealed) {
+		draw_set_color(#87CEEB);
+		draw_rectangle(x - sprite_width/2 - global.ROOM_SPACING/4,
+						y - sprite_height/2 - global.ROOM_SPACING/4,
+						x + sprite_width/2 + global.ROOM_SPACING/4,
+						y + sprite_height/2 + global.ROOM_SPACING/4,
+						false);
+	}
+	
 	var spr = noone;
     switch (self.data.room_type) {
         case "enemy": spr = spr_enemyRoom; break;
@@ -42,7 +51,7 @@ if (is_struct(self.data)) {
 if (is_pressing && !long_press_done) {
     var pct = press_time / long_press_threshold;
 	draw_set_alpha(0.8);
-	draw_set_color(c_blue);
+	draw_set_color(#87CEEB);
 	var half_w = sprite_width/2;
 	var half_h = sprite_height/2;
 	draw_rectangle(x - half_w * pct,

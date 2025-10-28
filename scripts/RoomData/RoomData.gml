@@ -1,4 +1,4 @@
-function RoomData(discovered, revealed, visited, used, room_type, grid_x, grid_y) constructor{
+function RoomData(discovered, revealed, perm_revealed, visited, used, room_type, grid_x, grid_y) constructor{
 	
 	self.room_type = room_type;
 	self.grid_x = grid_x;
@@ -7,6 +7,7 @@ function RoomData(discovered, revealed, visited, used, room_type, grid_x, grid_y
 	self.x = grid_x * global.ROOM_SIZE;
 	self.y = grid_y * global.ROOM_SIZE;
 	self.revealed = revealed;
+	self.perm_revealed = perm_revealed;
     self.visited = visited;
     self.discovered = discovered;
 	self.used = used;
