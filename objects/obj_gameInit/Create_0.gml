@@ -8,6 +8,9 @@ global.GRID_H = 5;
 global.ROOM_SIZE = 64;
 global.ROOM_SPACING = 14; // very likely need to adjust later, this is based on the sprite i draw
 
+global.TOTAL_ROOM_NUM = 0;
+global.room_types = ds_map_create();
+
 global.room_grid = []; // will be filled by generate_map()
  
 global.bonfire_used = false; // deactivate bonfire after used once

@@ -18,7 +18,7 @@ function add_edge(a, b) {
     return true;
 }
 
-function assign_room_types_and_icons() {
+function assign_room_types_and_icons(assign_existing_room_types) {
     var rooms = [];
 
     for (var r = 0; r < global.GRID_H; r++) {
@@ -32,28 +32,59 @@ function assign_room_types_and_icons() {
 	
 	var shop_count = 1;
 	
-	for (var i = 0; i < array_length(rooms); i++) {
-	    var rm = rooms[i];
+	if (!assign_existing_room_types) {
+		// assigning new room types
+		for (var i = 0; i < array_length(rooms); i++) {
+		    var rm = rooms[i];
     
-	    // 50% chance = enemy
-	    if (random(1) < 0.5) {
-	        rm.room_type = "enemy";
-	    } 
-	    else {
-	        // for the remaining 50%, Treasure : Shop : Encounter = 2 : 2 : 3
-	        var r_val = random(7); // 0–7 (exclusive)
-	        if (r_val < 2) {
-				rm.room_type = "treasure";
-			} else if (r_val < 4) {
-				rm.room_type = "shop";
-				rm.room_name = "shop" + string(shop_count); //naming shops shop1 and shop2
-				shop_count += 1;
-			} else {
-				rm.room_type = "encounter";
-			}
+		    // 50% chance = enemy
+		    if (random(1) < 0.5) {
+		        rm.room_type = "enemy";
+		    } 
+		    else {
+		        // for the remaining 50%, Treasure : Shop : Encounter = 2 : 2 : 3
+		        var r_val = random(7); // 0–7 (exclusive)
+		        if (r_val < 2) {
+					rm.room_type = "treasure";
+					//update room_types global variable
+					update_room_types_num("treasure");
+				} else if (r_val < 4) {
+					rm.room_type = "shop";
+					rm.room_name = "shop" + string(shop_count); //naming shops shop1 and shop2
+					shop_count += 1;
+					update_room_types_num("shop");
+				} else {
+					rm.room_type = "encounter";
+					update_room_types_num("encounter");
+				}
+		    }
+    
+		    with (rm) update_room_icon();
+		}
+	} else {
+		// assign rooms based on the existing room types
+		var keys = ds_map_keys_to_array(global.room_types);
+		for (var k = 0; k < array_length(rooms); k++) {
+		
+		}
+	    for (var i = 0; i < array_length(keys); i++) {
+	        var key = keys[i];
+	        var count = global.room_types[? key];
+        
+	        // Push that key 'count' times
+	        for (var j = 0; j < count; j++) {
+		        var rm = rooms[assign_index];
+		        rm.room_type = type;
+
+		        if (type == "shop") {
+		            rm.room_name = "shop" + string(shop_count);
+		            shop_count += 1;
+		        }
+
+		        with (rm) update_room_icon();
+		        assign_index++;
+		    }
 	    }
-    
-	    with (rm) update_room_icon();
 	}
 
 
@@ -84,6 +115,14 @@ function assign_room_types_and_icons() {
     //}
 
     return rooms; // return ordered list (rooms[0] is bonfire)
+}
+
+function update_room_types_num(room_type) {
+	if (ds_map_exists(global.room_types, room_type)) {
+        global.room_types[? room_type] += 1;
+    } else {
+        ds_map_add(global.room_types, room_type, 1);
+    }
 }
 
 function find_furthest_room(start_room) {
