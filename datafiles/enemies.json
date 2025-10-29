@@ -1,15 +1,45 @@
 {
     "enemy_cultist": {
         "cards": {
-            "card_scorch": 4,
-            "card_curse_of_old_gods": 2
+            "card_scorch": 5,
+            "card_curse_of_old_gods": 2,
+            "card_wind_blade": 3,
+            "card_weakening_chant": 1,
+            "card_dark_ritual": 2
         }
     },
     "enemy_corrupted_alchemist": {
         "cards": {
-            "card_scorch": 4,
-            "card_curse_of_old_gods": 3,
-            "card_healing": 2
+            "card_scorch": 3,
+            "card_curse_of_old_gods": 2,
+            "card_healing": 2,
+            "card_inferno_fire": 3
+        }
+    },
+    "enemy_wraith": {
+        "cards": {
+            "card_deadly_touch": 5,
+            "card_icy_breath": 1,
+            "card_inferno_fire": 3,
+            "card_weakening_chant": 3
+        }
+    },
+    "enemy_necromancer_apprentice": {
+        "cards": {
+            "card_deadly_touch": 5,
+            "card_healing": 1,
+            "card_curse_of_old_gods": 2,
+            "card_weakening_chant": 2,
+            "card_dark_ritual": 3
+        }
+    },
+    "enemy_undead_mage": {
+        "cards": {
+            "card_deadly_touch": 5,
+            "card_inferno_fire": 1,
+            "card_curse_of_old_gods": 5,
+            "card_weakening_chant": 2,
+            "card_lightning_judgement": 2
         }
     }
 }

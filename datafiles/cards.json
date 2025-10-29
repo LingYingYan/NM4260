@@ -249,5 +249,97 @@
             }
         ],
         "special_effects": []
+    },
+    "card_weakening_chant": {
+        "effects_on_target": [
+            {
+                "type": "AddStatus",
+                "status_name": "Paralysed",
+                "value": 2
+            }
+        ],
+        "effects_on_caster": [],
+        "special_effects": []
+    },
+    "card_icy_breath": {
+        "effects_on_target": [
+            {
+                "type": "AddStatus",
+                "status_name": "Frozen",
+                "value": 1
+            }
+        ],
+        "effects_on_caster": [],
+        "special_effects": []
+    },
+    "card_inferno_fire": {
+        "effects_on_target": [
+            {
+                "type": "AddStatus",
+                "status_name": "Burn",
+                "value": 2
+            },
+            {
+                "type": "Damage",
+                "value": 2
+            }
+        ],
+        "effects_on_caster": [
+            {
+                "type": "Mark",
+                "value": 3
+            }
+        ],
+        "special_effects": []
+    },
+    "card_deadly_touch": {
+        "effects_on_target": [
+            {
+                "type": "Damage",
+                "value": 5
+            }
+        ],
+        "effects_on_caster": [],
+        "special_effects": []
+    },
+    "card_wind_blade": {
+        "effects_on_target": [
+            {
+                "type": "Damage",
+                "value": 2
+            },
+            {
+                "type": "AddStatus",
+                "status_name": "Bleed",
+                "value": 2
+            }
+        ],
+        "effects_on_caster": [],
+        "special_effects": []
+    },
+    "card_dark_ritual": {
+        "effects_on_target": [],
+        "effects_on_caster": [
+            {
+                "type": "AddStatus",
+                "status_name": "Strength",
+                "value": 3
+            }
+        ],
+        "special_effects": []
+    },
+    "card_lightning_judgement": {
+        "effects_on_target": [
+            {
+                "type": "Damage",
+                "value": 8
+            },
+            {
+                "type": "Mark",
+                "value": 1
+            }
+        ],
+        "effects_on_caster": [],
+        "special_effects": []
     }
 }
