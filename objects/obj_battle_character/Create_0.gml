@@ -110,6 +110,8 @@ rearrange_statuses = function() {
     for (var i = 0; i < array_length(self.status_indicators); i += 1) {
         if (!instance_exists(self.status_indicators[i])) {
             array_push(to_remove, self.status_indicators[i]);
+        } else if (self.status_indicators[i].status.level <= 0) {
+            self.status_indicators[i].status.terminate(self.data);
         }
     }
     
@@ -117,6 +119,9 @@ rearrange_statuses = function() {
         var elem = array_pop(to_remove);
         var idx = array_get_index(self.status_indicators, elem);
         array_delete(self.status_indicators, idx, 1);
+        if (instance_exists(elem)) {
+            instance_destroy(elem.id);
+        }
     }
     
     array_sort(self.status_indicators, function(left, right) {
@@ -151,7 +156,7 @@ execute_next_status = function() {
 }
 
 state_tick_status = function() {
-    if (self.status_indicators[self.status_index].is_updating) {
+    if (instance_exists(self.status_indicators[self.status_index]) && self.status_indicators[self.status_index].is_updating) {
         return;
     }
     

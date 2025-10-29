@@ -232,7 +232,7 @@ flip_cards = function() {
     }
     
     self.turn_timer = time_source_create(
-        time_source_game, 1, time_source_units_seconds, 
+        time_source_game, 0.6, time_source_units_seconds, 
         execute_player_card
     );
     
@@ -281,7 +281,7 @@ recycle_player_card = function() {
 
 execute_enemy_card = function() {
     var enemy_card = self.get_enemy_card();
-    if (enemy_card != noone) {
+    if (instance_exists(enemy_card)) {
         enemy_card.state_update = enemy_card.state_execute;
     }
     
@@ -348,6 +348,8 @@ start_player_status = function() {
 }
 
 end_battle = function() {
+    self.state_update = function() {};
+    instance_destroy(obj_status);
     self.player.data.clear_marks_and_statuses();
     instance_destroy(obj_enemy_card);
     transfer_between_piles(self.hand, self.discard_pile, 0, false);

@@ -108,7 +108,7 @@ function DamageEffect(_base_damage) : Effect() constructor {
             mult += 25;
         }
         
-        return max(0, floor(self.damage * mult / 100));
+        return max(0, floor(self.damage * mult / 100) + args.instigator.get_attribute("strength"));
     }
     
     /// @desc 

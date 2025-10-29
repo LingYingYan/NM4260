@@ -24,6 +24,7 @@ if (self.card_data != undefined) {
     draw_set_valign(fa_top);
     draw_set_halign(fa_left);
         
+    struct_exists(card_data, "name")
     scribble($"[b]{self.card_data.name}[/b]")
         .scale(1.15 * self.image_xscale)
         .wrap(self.sprite_width - 2 * x_padding)

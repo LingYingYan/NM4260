@@ -41,7 +41,7 @@ state_normal = function() {
 }
 
 state_flip = function() {
-    self.ac_timestamp += delta_time / 1000000;
+    self.ac_timestamp += delta_time / 500000;
     var animation_x = animcurve_get_channel(self.anim, "xScale");
     var animation_y = animcurve_get_channel(self.anim, "yScale");
     self.image_xscale = self.scale * animcurve_channel_evaluate(animation_x, self.ac_timestamp);

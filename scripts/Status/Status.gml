@@ -161,8 +161,14 @@ function Poison(_level) : Status(_level, nameof(Poison)) constructor {
 function Paralysed(_level) : Status(_level, nameof(Paralysed)) constructor {
     /// @desc Execute the status effect
     /// @param {Struct.GameCharacterData} target The target
-    static execute = function(target) { 
-        target.modifiers.paralysed = true;
+    static initialise = function(target) { 
+        target.set_attribute("paralysed", true);
+    }
+    
+    /// @desc Called when the effect is removed.
+    /// @param {Struct.GameCharacterData} target The target
+    static terminate = function(target) { 
+        target.set_attribute("paralysed", false);
     }
 } 
 
@@ -223,14 +229,22 @@ function Coalesence(_level) : Status(_level, nameof(Coalesence)) constructor {
     
     /// @desc Called when the effect is removed.
     /// @param {Struct.GameCharacterData} target The target
-    static terminate = function(target) { }
+    static terminate = function(target) { 
+        target.set_attribute("coalescencing", false);
+    }
 }
 
 function Bleed(_level) : Status(_level, nameof(Bleed)) constructor {
     /// @desc Execute the status effect
     /// @param {Struct.GameCharacterData} target The target
     static initialise = function(target) { 
-        target.modifiers.bleeding = true;
+        target.set_attribute("bleeding", false);
+    }
+    
+    /// @desc Called when the effect is removed.
+    /// @param {Struct.GameCharacterData} target The target
+    static terminate = function(target) { 
+        target.set_attribute("bleeding", false);
     }
 }
 
