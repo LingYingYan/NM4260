@@ -2,9 +2,17 @@
 
 if (self.hovered) {
 	// Draw a stroke around the card.
-	draw_sprite_ext(spr_card_stroke_with_blur, 0, self.x + 1, self.y + 2, self.image_xscale, self.image_xscale, image_angle, hover_color, 0.5);
-    self.current_depth -= 10000;
-    window_set_cursor(cr_handpoint);
+	with (obj_deck_drawer) {
+		if (can_remove) {
+			draw_sprite_ext(spr_card_stroke_with_blur, 0, other.x + 1, other.y + 2, other.image_xscale, other.image_xscale, image_angle, other.hover_color, 0.5);
+			other.current_depth -= 10000;
+			
+		}
+	}
+	window_set_cursor(cr_handpoint);
+	//draw_sprite_ext(spr_card_stroke_with_blur, 0, self.x + 1, self.y + 2, self.image_xscale, self.image_xscale, image_angle, hover_color, 0.5);
+    //self.current_depth -= 10000;
+    //window_set_cursor(cr_handpoint);
 } else {
     self.current_depth = normal_depth;
     window_set_cursor(cr_default);

@@ -6,7 +6,7 @@ if (is_pressing) {
         long_press_done = true;
         is_pressing = false;
 
-        if (is_struct(self.data) && self.data.revealed == true && obj_player_state.data.vision > 0) {
+        if (is_struct(self.data) && self.data.revealed == true && obj_player_state.data.vision >= 1) {
 			//save to permanently reviewed rooms, only room types
 			update_perm_revealed_room(self.data.room_type);
 			// spend 1 vision to remember the room

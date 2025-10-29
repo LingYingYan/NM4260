@@ -10,3 +10,5 @@ function initialize_encounter_button(data) {
 hovered = false;
 
 depth = -20000;
+
+alarm_setted = false;

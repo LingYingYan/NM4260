@@ -13,7 +13,7 @@ draw_text(room_width/2 - header_width/2, room_height/8, name);
 draw_set_font(fnt_default);
 draw_set_color(c_black);
 var desc_width = string_width(description);
-draw_text_ext(room_width/2 - desc_width/2, room_height/2, description, 20, room_width*3/4);
+draw_text_ext(room_width/2 - desc_width/2, room_height/2, description, 20, room_width/2);
 
 //if (is_array(options) && array_length(options) > 0) {
 //	for (var i = 0; i < array_length(options); i++) {

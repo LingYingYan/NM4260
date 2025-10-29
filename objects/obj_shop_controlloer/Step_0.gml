@@ -2,7 +2,8 @@ with (obj_shop_card) {
 	if (selected) {
 		var price = cost;
 		show_debug_message($"Spent {price} to buy the card");
-		obj_player_state.data.vision -= price;
+		if (obj_player_state.data.vision >= price) obj_player_state.data.vision -= price;
+		else obj_player_state.data.vision = 0;
 		selected = false;
 		sold = true;
 		obj_player_deck_manager.add(id);
