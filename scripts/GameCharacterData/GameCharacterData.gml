@@ -212,7 +212,7 @@ function EnemyData(enemy_id, enemy_name, enemy_weight, enemy_hp) : GameCharacter
             return false;
         }
         
-        obj_enemy.add_status(status.name, status.level, success);
+        obj_enemy.add_status(status, success);
         return true;
     }
     
