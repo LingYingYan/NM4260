@@ -85,7 +85,7 @@
             {
                 "type": "AddStatus",
                 "status_name": "Poison",
-                "value": -3
+                "value": -5
             }
         ],
         "special_effects": []
@@ -96,7 +96,7 @@
             {
                 "type": "AddStatus",
                 "status_name": "Burn",
-                "value": -3
+                "value": -5
             }
         ],
         "special_effects": []

@@ -17,7 +17,7 @@ function UtilityAgent() constructor {
         var best_action = undefined;
         var total = 0;
         for (var i = 0; i < array_length(self.actions); i += 1)  {
-            var util = self.actions[i].evaluate(context);
+            var util = self.actions[i].evaluate(context) * random_range(0.9, 1.1);
             if (util > 0) {
                 array_push(action_weights, util);
                 array_push(available_actions, self.actions[i]);

@@ -41,8 +41,12 @@ resolve_turn = function() {
 }
 
 enemy_win = function() {
+    self.end_battle();
     obj_player_deck_manager.clear();
-    obj_room_manager.goto_deck_selection();
+    obj_backdrop.visible = true;
+    // Pick traits
+    instance_create_layer(room_width / 2, room_height / 2, "Instances", obj_death_panel);
+    // obj_room_manager.goto_deck_selection();
 }
 
 player_win = function() {
@@ -62,6 +66,7 @@ player_win = function() {
 start_battle = function() {
     // Close UI
     obj_loot_panel.visible = false;
+    obj_backdrop.depth = obj_player_state.depth - 100;
     
     // Initialise player
     obj_player_state.initialise();
