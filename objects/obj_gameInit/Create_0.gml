@@ -28,6 +28,7 @@ global.just_exited_bonfire = false;
 // shop-cards
 global.shop_card = ds_map_create();
 global.curr_shop_cards = [];
+global.curr_shop_relics = [];
 global.curr_shop_name = "";
 
 // encounters
