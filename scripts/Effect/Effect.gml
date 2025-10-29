@@ -16,7 +16,8 @@ function EffectApplicationArgs(_instigator, _target, _mark, _card_type) construc
     var c = _target.get_attribute($"{_mark}_weakness");
     mult = _instigator.get_attribute($"{_mark}_power_mult") +
            _instigator.get_attribute($"{_card_type}_power_mult") + 
-           _target.get_attribute($"{_mark}_weakness")
+           _target.get_attribute($"{_mark}_weakness") +
+           _instigator.get_attribute("spell_power_mult");
 }
 
 /**
@@ -257,8 +258,8 @@ function AddVisionEffect(_value) : Effect() constructor {
     value = _value;
     
     static apply = function(args) {
-        if (struct_exists(args.target.data, "vision")) {
-            args.target.data.vision = min(args.target.data.vision + self.value, args.target.data.max_vision);
+        if (struct_exists(args.target, "vision")) {
+            args.target.vision = min(args.target.vision + self.value, args.target.max_vision);
         }
     }
     

@@ -120,9 +120,9 @@ rearrange_statuses = function() {
     }
     
     array_sort(self.status_indicators, function(left, right) {
-        if (left.status_type < right.status_type) {
+        if (left.status.name < right.status.name) {
             return -1;
-        } else if (left.status_type > right.status_type) {
+        } else if (left.status.name > right.status.name) {
             return 1;
         } else {
             return 0;

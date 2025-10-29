@@ -3,6 +3,21 @@ depth = obj_backdrop.depth - 1;
 new_persistent = undefined;
 to_discard = undefined;
 
+can_choose_persistent = function() {
+    var to_persist = array_length(global.persistent_traits);
+    for (var i = 0; i < array_length(global.persistent_traits); i += 1) {
+        if (!is_undefined(self.to_discard) && self.to_discard.uid == global.persistent_traits[i].uid) {
+            to_persist -= 1;
+        }
+    }
+    
+    if (!is_undefined(self.new_persistent)) {
+        to_persist += 1;
+    }
+    
+    return to_persist < 3 && is_undefined(self.new_persistent);
+}
+
 game_summary_text = $"[b]You died.[/b]\nNumber of enemies defeated: {global.number_of_completed_combat}" +
                     $"You can choose {self.can_choose_persistent() && self.new_persistent == undefined ? "1" : "0"} more trait to carry into your new life\n" +
                     $"You can choose {self.to_discard == undefined ? "1" : "0"} trait to stop carrying it to your new life";
@@ -37,19 +52,4 @@ for (var i = 0; i < n_traits; i += 1) {
         : instance_create_depth(self.x - 0.25 * self.sprite_width, curr_y, self.depth - 1, obj_nonpersistent_trait)
     trait.set_data(trait_data);
     curr_y += trait.scribble_text.get_height() + 25;
-}
-
-can_choose_persistent = function() {
-    var to_persist = array_length(global.persistent_traits);
-    for (var i = 0; i < array_length(global.persistent_traits); i += 1) {
-        if (!is_undefined(self.to_discard) && self.to_discard.uid == global.persistent_traits[i].uid) {
-            to_persist -= 1;
-        }
-    }
-    
-    if (!is_undefined(self.new_persistent)) {
-        to_persist += 1;
-    }
-    
-    return to_persist < 3 && is_undefined(self.new_persistent);
 }
