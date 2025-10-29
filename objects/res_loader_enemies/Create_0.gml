@@ -1,6 +1,8 @@
 // Inherit the parent event
 event_inherited();
 
+enemy_configs = undefined;
+
 loaded = [];
 total_weight = 0;
 
@@ -10,17 +12,8 @@ read_row = function(r) {
     var weight = real(self.read_cell(r, 2));
     var hp = real(self.read_cell(r, 3))
     var enemy = new EnemyData(enemy_id, enemy_name, weight, hp);
-    for (var c = 4; c < ds_grid_width(self.__private.grid); c += 2) {
-        var card_id = self.read_cell(r, c);
-        var trimmed = string_trim(card_id);
-        if (trimmed == "") {
-            break;
-        }
-        
-        var card_count = real(self.read_cell(r, c + 1));
-        enemy.add_cards(card_id, card_count);
-    }
     
+    // Load the enemy
     self.loaded[array_length(self.loaded)] = enemy;    
     total_weight += weight;  
     
@@ -29,23 +22,32 @@ read_row = function(r) {
 
 /**
  * @desc Create a random enemy instance based on weighted probability.
- * @param {String|id.layer} instance_layer The instance layer's name or ID.
- * @param {real} pos_x The x-coordinate of the card's initial position. Default to -999.
- * @param {real} pos_y The y-coordinate of the card's initial position. Default to -999.
+ * @return {Struct.EnemyData} description
  **/
-get_random_enemy = function(instance_layer, pos_x = -999, pos_y = -999) {
+get_random_enemy = function() {
     var select = irandom_range(1, self.total_weight);
     var cumulative = 0;
+    var enemy = undefined;
     for (var i = 0; i < array_length(self.loaded); i += 1) {
         cumulative += self.loaded[i].weight;
         if (cumulative >= select) {
-            var enemy = instance_create_layer(pos_x, pos_y, instance_layer, obj_enemy);
-            enemy.data = self.loaded[i].clone();
-            return enemy;
+            enemy = self.loaded[i].clone();
+            break;
         }
     }
     
-    var enemy = instance_create_layer(pos_x, pos_y, instance_layer, obj_enemy);
-    enemy.data = array_last(self.loaded).clone();
+    // Use the last enemy if not found
+    enemy ??= array_last(self.loaded).clone();
+    
+    // Load cards
+    var cards = self.enemy_configs[$ enemy.uid].cards;
+    var card_ids = struct_get_names(cards);
+    for (var i = 0; i < array_length(card_ids); i += 1) {
+        var card = res_loader_cards.loaded_map[$ card_ids[i]];
+        repeat(cards[$ card_ids[i]]) {
+            array_push(enemy.cards, card);
+        }
+    }
+    
     return enemy;
 }

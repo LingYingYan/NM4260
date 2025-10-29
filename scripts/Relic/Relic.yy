@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"Relic",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"Relic",
+  "parent":{
+    "name":"Relics",
+    "path":"folders/Scripts/Relics.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

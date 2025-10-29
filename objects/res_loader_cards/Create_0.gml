@@ -1,7 +1,30 @@
+event_inherited();
+
 is_loaded = false;
-loaded_map = ds_map_create();
+loaded_map = { } 
 loaded = [];
 total_weight = 0;
+
+card_effects = undefined;
+
+read_row = function(r) {
+    var card_type = self.read_cell(r, 0);
+    var card_id = self.read_cell(r, 1);
+    var card_name = self.read_cell(r, 2);
+    var card_rarity = real(self.read_cell(r, 3));
+    var card_mark_id = self.read_cell(r, 4);
+    var is_obtainable = bool(self.read_cell(r, 5));
+    
+    var sprite = asset_get_index($"spr_{card_id}");
+    var data = self.card_effects[$ card_id];
+    
+    var card_data = create_card_data(card_id, card_type, card_name, sprite, card_rarity, card_mark_id, data);
+    self.loaded_map[$ card_id] = card_data;
+    if (is_obtainable) {
+        array_push(self.loaded, card_data);
+        self.total_weight += card_data.get_weight();
+    }
+}
 
 /**
  * @desc Create a random card instance based on weighted probability.
@@ -61,12 +84,4 @@ make_card = function(card_data, instance_layer, pos_x = -999, pos_y = -999) {
     var card = instance_create_layer(pos_x, pos_y, instance_layer, obj_card);
     card.card_data = card_data;
     return card;
-}
-
-add_card = function(map) {
-    var cards = ds_map_values_to_array(map);
-    for (var i = 0; i < array_length(cards); i += 1) {
-        var card = cards[i];
-        ds_map_add(self.loaded_map, card.uid, card);
-    }
 }

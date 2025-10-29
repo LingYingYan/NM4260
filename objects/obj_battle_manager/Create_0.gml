@@ -11,31 +11,42 @@ player_card_slots = [];
 
 max_turn_pointer = 0;
 turn_pointer = 0; 
-can_resolve_card = false;
 enemy_cards = []; 
 player_cards = [];
 
 turn_timer = undefined;
 
+get_player_card = function() {
+    return self.turn_pointer < array_length(self.player_cards) 
+        ? self.player_cards[self.turn_pointer]
+        : noone;
+}
+
+get_enemy_card = function() {
+    return self.turn_pointer < array_length(self.enemy_cards) 
+        ? self.enemy_cards[self.turn_pointer]
+        : noone;
+}
+
 resolve_turn = function() { 
-    self.can_resolve_card = false;
+    time_source_destroy(self.turn_timer);
     self.turn_pointer = 0;
     self.max_turn_pointer = 0;
     self.enemy_cards = [];
     self.player_cards = [];
     transfer_between_piles(self.hand, self.discard_pile, 0, false);
-    if (self.player.data.hp <= 0) {
-        self.enemy_win();
-    } else if (self.enemy.data.hp <= 0) {
-        self.player_win();
-    } else {
+    if (!self.attempt_to_end_battle()) {
         self.start_player_turn();
     }
 }
 
 enemy_win = function() {
+    self.end_battle();
     obj_player_deck_manager.clear();
-    obj_room_manager.goto_deck_selection();
+    obj_backdrop.visible = true;
+    // Pick traits
+    instance_create_layer(room_width / 2, room_height / 2, "Instances", obj_death_panel);
+    // obj_room_manager.goto_deck_selection();
 }
 
 player_win = function() {
@@ -47,14 +58,17 @@ player_win = function() {
     obj_backdrop.visible = true;
     // Create new cards to pick
     instance_create_layer(room_width / 2, room_height / 2, "Instances", obj_card_loot);
+    
+    global.number_of_completed_combat += 1;
+    self.player.data.remove_expired_relics();
 }
 
 start_battle = function() {
     // Close UI
     obj_loot_panel.visible = false;
+    obj_backdrop.depth = obj_player_state.depth - 100;
     
     // Initialise player
-    obj_player_state.data.clear_marks_and_statuses();
     obj_player_state.initialise();
     
     // Set up card slots
@@ -76,38 +90,37 @@ start_battle = function() {
     self.draw_pile.shuffle();
     
     // Load enemy
-    var enemy = res_loader_enemies.get_random_enemy("Characters", room_width / 2, 0);
-    self.enemy.data = enemy.data;
-    self.enemy.data.clear_marks_and_statuses();
-    instance_destroy(enemy);
+    self.enemy.data = res_loader_enemies.get_random_enemy();
     self.enemy.initialise();
     
     // START!
     self.start_player_turn();
 }
 
-start_player_turn = function() {
-    obj_end_turn_button.is_disabled = false;
-    
-    // Update modifiers and status effects
-    self.enemy.data.reset_modifiers();
-    self.enemy.data.execute_status_effects();
-    self.player.data.reset_modifiers();
-    self.player.data.execute_status_effects();
-    
-    // If anyone dies, end the battle here
+attempt_to_end_battle = function() {
     if (self.player.data.hp <= 0) {
-        self.resolve_turn();
-        return;
+        if (!is_undefined(self.turn_timer) && time_source_exists(self.turn_timer)) {
+            time_source_destroy(self.turn_timer);
+        }
+        
+        self.enemy_win();
+        return true;
     }
-    
+        
     if (self.enemy.data.hp <= 0) {
-        self.resolve_turn();
-        return;
+        if (!is_undefined(self.turn_timer) && time_source_exists(self.turn_timer)) {
+            time_source_destroy(self.turn_timer);
+        }
+        
+        self.player_win();
+        return true;
     }
     
+    return false;
+}
+
+start_player_turn = function() {
     // Set up deck and card slots
-    self.enemy.reset_deck();
     for (var i = 0; i < array_length(self.player_card_slots); i += 1) {
         if (instance_exists(self.player_card_slots[i].card)) {
             self.player_card_slots[i].card.dropped_area = noone;
@@ -124,35 +137,60 @@ start_player_turn = function() {
         
         self.enemy_card_slots[i].card = noone;
     }
+
+    // If anyone dies, end the battle here
+    if (self.attempt_to_end_battle()) {
+        return;
+    }
     
     // Freeze card slots
-    for (var i = 0; i < array_length(self.player_card_slots); i += 1) {
-        self.player_card_slots[i].is_disabled = i >= array_length(self.player_card_slots) - self.player.data.modifiers.frozen_slots;
+    if (self.player.data.get_attribute("frozen")) {
+        for (var i = 0; i < array_length(self.player_card_slots); i += 1) {
+            self.player_card_slots[i].is_disabled = i == 0 || i == array_length(self.player_card_slots) - 1;
+        }
+    }
+        
+    if (self.enemy.data.get_attribute("frozen")) {
+        for (var i = 0; i < array_length(self.enemy_card_slots); i += 1) {
+            self.enemy_card_slots[i].is_disabled = i == 0 || i == array_length(self.enemy_card_slots) - 1;
+        }
     }
     
+    var k = 0;
     for (var i = 0; i < array_length(self.enemy_card_slots); i += 1) {
-        self.enemy_card_slots[i].is_disabled = i >= array_length(self.enemy_card_slots) - self.enemy.data.modifiers.frozen_slots;
+        if (!self.enemy_card_slots[i].is_disabled) {
+            k += 1;
+        }
     }
-    
+        
     // Enemy plays
-    for (var i = 0; i < array_length(self.enemy_card_slots) - self.enemy.data.modifiers.frozen_slots; i += 1) {
-        var card = self.enemy.play_card();
+    self.enemy.draw(5);
+    var cards = self.enemy.plan_and_decide(k);
+    for (var i = 0; i < array_length(self.enemy_card_slots); i += 1) {
+        if (self.enemy_card_slots[i].is_disabled) {
+            continue;
+        }
+            
+        var card = cards[array_length(cards) - k];
         card.image_xscale = self.enemy_card_slots[i].image_xscale;
         card.image_yscale = self.enemy_card_slots[i].image_yscale;
         card.scale = self.enemy_card_slots[i].image_xscale;
         place_card(card, self.enemy_card_slots[i].x, self.enemy_card_slots[i].y);
         enemy_card_slots[i].card = card;
+        k -= 1;
     }
-    
+        
     // Player draws
     repeat(5) {
         var card = self.draw();
         if (card == noone) {
             break;
         }
-        
+            
         self.hand.add(card.id);
     }
+    
+    obj_end_turn_button.is_disabled = false;
 }
 
 draw = function() {
@@ -163,7 +201,9 @@ draw = function() {
     
     var card = self.draw_pile.draw();
     if (instance_exists(card)) {
-        card.set_reveal(self.player.max_vision, self.player.data, self.enemy.data);
+        card.owner = self.player.data;
+        card.opponent = self.enemy.data;
+        card.reveal = self.player.max_vision;
         card.grabbable = true;  
         card.scale = self.player_card_slots[0].image_xscale;
     }
@@ -176,7 +216,9 @@ draw = function() {
  * @param {id.instance} player_card description
  * @param {id.instance} enemy_card description    
  */
-flip_cards = function(player_card, enemy_card) {
+flip_cards = function() {
+    var player_card = self.get_player_card();
+    var enemy_card = self.get_enemy_card();
     if (player_card != noone) {
         player_card.state_update = player_card.state_flip;
     }
@@ -185,78 +227,80 @@ flip_cards = function(player_card, enemy_card) {
         enemy_card.state_update = enemy_card.state_flip;
     }
     
-    time_source_destroy(self.turn_timer);
-    self.turn_timer = time_source_create(
-        time_source_game, 2, time_source_units_seconds, 
-        execute_player_card, [player_card, enemy_card]
-    );
-    
-    time_source_start(self.turn_timer);
-}
-
-execute_player_card = function(player_card, enemy_card) {
-    if (player_card != noone) {
-        player_card.card_data.apply(self.player.data, self.enemy.data);
+    if (!is_undefined(self.turn_timer) && time_source_exists(self.turn_timer)) {
+        time_source_destroy(self.turn_timer);
     }
     
-    time_source_destroy(self.turn_timer);
     self.turn_timer = time_source_create(
-        time_source_game, 0.25, time_source_units_seconds, 
-        recycle_player_card, [player_card, enemy_card]
+        time_source_game, 1, time_source_units_seconds, 
+        execute_player_card
     );
-        
+    
     time_source_start(self.turn_timer);
 }
 
-recycle_player_card = function(player_card, enemy_card) {
+execute_player_card = function() {
+    var player_card = self.get_player_card();
+    if (player_card != noone) {
+        player_card.state_update = player_card.state_execute;
+    }
+    
+    self.state_update = self.state_execute_player_card;
+}
+
+recycle_player_card = function() {
+    var player_card = self.get_player_card();
     if (instance_exists(player_card)) {
         player_card.card_data.is_nullified = false;
         self.discard_pile.add(player_card);
         player_card.image_xscale = player_card.scale;
         player_card.image_yscale = player_card.scale;
         player_card.grabbable = false; 
-        player_card.set_reveal(0);
+        player_card.reveal = 0;
     }
     
-    self.player_cards[self.turn_pointer] = noone;
-    if (self.enemy.data.hp <= 0 || self.player.data.hp <= 0) {
-        self.resolve_turn();
+    if (self.turn_pointer < array_length(self.player_cards)) {
+        self.player_cards[self.turn_pointer] = noone;
+    }
+    
+    if (self.attempt_to_end_battle()) {
         return;
     }
     
-    time_source_destroy(self.turn_timer);
-    self.turn_timer = time_source_create(
-        time_source_game, 0.5, time_source_units_seconds, 
-        execute_enemy_card, [enemy_card]
-    );
-        
-    time_source_start(self.turn_timer);
-}
-
-execute_enemy_card = function(enemy_card) {
-    if (enemy_card != noone) {
-        enemy_card.card_data.apply(self.enemy.data, self.player.data);
+    if (!is_undefined(self.turn_timer) && time_source_exists(self.turn_timer)) {
+        time_source_destroy(self.turn_timer);
     }
     
-    time_source_destroy(self.turn_timer);
     self.turn_timer = time_source_create(
-        time_source_game, 0.25, time_source_units_seconds, 
-        recycle_enemy_card, [enemy_card]
+        time_source_game, 0.5, time_source_units_seconds, 
+        execute_enemy_card
     );
         
     time_source_start(self.turn_timer);
 }
 
-recycle_enemy_card = function(enemy_card) {
-    time_source_destroy(self.turn_timer);
+execute_enemy_card = function() {
+    var enemy_card = self.get_enemy_card();
+    if (enemy_card != noone) {
+        enemy_card.state_update = enemy_card.state_execute;
+    }
+    
+    self.state_update = self.state_execute_enemy_card;
+}
+
+recycle_enemy_card = function() {
+    if (!is_undefined(self.turn_timer) && time_source_exists(self.turn_timer)) {
+        time_source_destroy(self.turn_timer);
+    }
+    
+    var enemy_card = self.get_enemy_card();
     if (instance_exists(enemy_card)) { 
         enemy_card.card_data.is_nullified = false;
         place_card(enemy_card, self.enemy.x, -500);
     }
     
     self.enemy_cards[self.turn_pointer] = noone;
-    if (self.enemy.data.hp <= 0 || self.player.data.hp <= 0) {
-        self.resolve_turn();
+    if (self.attempt_to_end_battle()) {
         return;
     }
     
@@ -264,54 +308,128 @@ recycle_enemy_card = function(enemy_card) {
     if (self.turn_pointer == self.max_turn_pointer) {
         self.resolve_turn();
     } else {
-        self.can_resolve_card = true;
+        self.flip_cards();
     }
 }
 
 end_player_turn = function() {
     obj_end_turn_button.is_disabled = true;
     
-    self.enemy.data.update_status_effects();
-    self.player.data.update_status_effects();
-    
-    self.turn_pointer = 0;
-    
     // Collect both sides' cards
     for (var i = 0; i < array_length(self.player_card_slots); i += 1) {
-        self.player_cards[i] = self.player_card_slots[i].card;
+        var card = self.player_card_slots[i].card;
+        self.player_cards[i] = card;
+        if (instance_exists(card)) {
+            card.grabbable = false;
+        }
     }
     
     for (var i = 0; i < array_length(self.enemy_card_slots); i += 1) {
-        self.enemy_cards[i] = self.enemy_card_slots[i].card;
+        var card = self.enemy_card_slots[i].card;
+        self.enemy_cards[i] = card;
+        if (instance_exists(card)) {
+            card.can_reveal = false;
+        }
     }
     
+    self.turn_pointer = 0;
     self.max_turn_pointer = max(array_length(self.player_cards), array_length(self.enemy_cards));
-    self.can_resolve_card = true;
+    self.start_enemy_status();
+}
+
+start_enemy_status = function() {
+    self.enemy.execute_next_status();
+    self.state_update = self.state_execute_enemy_status;
+}
+
+start_player_status = function() {
+    self.player.execute_next_status();
+    self.state_update = self.state_execute_player_status;
 }
 
 end_battle = function() {
-    array_foreach(self.player_cards, function(card) {
-        if (card != noone) {
-            instance_destroy(card.id);
-        }    
-    })
-    
+    self.player.data.clear_marks_and_statuses();
     instance_destroy(obj_enemy_card);
-    self.player_card_slots = [];
-    self.enemy_card_slots = [];
-    self.can_resolve_card = false;
-    self.turn_pointer = 0;
-    self.max_turn_pointer = 0;
-    self.enemy_cards = [];
-    self.player_cards = [];
     transfer_between_piles(self.hand, self.discard_pile, 0, false);
 }
 
-// Placeholder functions for card animations
-reveal_cards = function() {
-    if (self.turn_pointer >= array_length(self.enemy_cards)) {
+state_execute_player_card = function() {
+    var player_card = self.get_player_card();
+    if (player_card == noone || player_card.state_update != player_card.state_execute) {
+        self.state_update = function() { }
+        if (!is_undefined(self.turn_timer) && time_source_exists(self.turn_timer)) {
+            time_source_destroy(self.turn_timer);
+        }
+        
+        self.turn_timer = time_source_create(
+            time_source_game, 0.5, time_source_units_seconds, 
+            recycle_player_card
+        );
+            
+        time_source_start(self.turn_timer);
+    }
+}
+
+state_execute_enemy_card = function() {
+    var enemy_card = self.get_enemy_card();
+    if (enemy_card == noone || enemy_card.state_update != enemy_card.state_execute) {
+        self.state_update = function() { }
+        if (!is_undefined(self.turn_timer) && time_source_exists(self.turn_timer)) {
+            time_source_destroy(self.turn_timer);
+        }
+        
+        self.turn_timer = time_source_create(
+            time_source_game, 0.5, time_source_units_seconds, 
+            recycle_enemy_card
+        );
+            
+        time_source_start(self.turn_timer);
+    }
+}
+
+state_execute_enemy_status = function() {
+    if (self.enemy.is_ticking_status) {
         return;
     }
+    
+    self.state_update = function() { };
+    if (self.attempt_to_end_battle()) {
+        return;
+    }
+    
+    if (!is_undefined(self.turn_timer) && time_source_exists(self.turn_timer)) {
+        time_source_destroy(self.turn_timer);
+    }
+    
+    self.turn_timer = time_source_create(
+        time_source_game, 0.5, time_source_units_seconds, 
+        self.start_player_status
+    );
+    
+    time_source_start(self.turn_timer);
+}
+
+
+state_execute_player_status = function() {
+    if (self.player.is_ticking_status) {
+        return;
+    }
+    
+    self.state_update = function() { };
+    if (self.attempt_to_end_battle()) {
+        return;
+    }
+    
+    if (!is_undefined(self.turn_timer) && time_source_exists(self.turn_timer)) {
+        time_source_destroy(self.turn_timer);
+    }
+    
+    self.turn_timer = time_source_create(
+        time_source_game, 0.5, time_source_units_seconds, 
+        self.flip_cards
+    );
+    
+    time_source_start(self.turn_timer);
 }
 
 state_update = function() { }

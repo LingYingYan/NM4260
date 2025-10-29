@@ -1,2 +1,2 @@
-self.rearrange_marks();
 self.rearrange_statuses();
+self.status_update();

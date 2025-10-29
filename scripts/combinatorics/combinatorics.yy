@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"combinatorics",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"combinatorics",
+  "parent":{
+    "name":"Utils",
+    "path":"folders/Scripts/Utils.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

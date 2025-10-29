@@ -1,6 +1,7 @@
 trait = obj_traits_manager.get_random();
-if (trait == undefined) {
+if (trait == undefined || array_length(obj_player_state.data.traits) >= 5) {
     instance_destroy(self);
+    obj_room_manager.goto_map();
     exit;    
 }
 

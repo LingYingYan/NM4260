@@ -21,7 +21,7 @@ card_spacing = 80;
 
 make_drawer_and_cards();
 
-//make_drawer = function() {
+make_drawer = function() {
 //	instance_destroy(obj_deck_drawer_card);
 	
 //	player_deck = obj_player_deck_manager.denumerate();
@@ -60,6 +60,16 @@ make_drawer_and_cards();
 //		var card_y = 500 + idx * (card_height + card_spacing);
 //		var card_x = drawer_x + drawer_width / 2;
     
+    // one instance per unique card
+    var card_inst = instance_create_layer(card_x, card_y, "Instances", obj_deck_drawer_card);
+    card_inst.card_data = card_data;
+    card_inst.count = count;
+    card_inst.idx = idx;
+	card_inst.image_xscale = scale;
+	card_inst.image_yscale = scale;
+	card_inst.reveal = obj_player_state.data.max_vision;
+    show_debug_message("Unique card is created");
+}
 //		// one instance per unique card
 //		var card_inst = instance_create_layer(card_x, card_y, "Instances", obj_deck_drawer_card);
 //		card_inst.card_data = card_data;

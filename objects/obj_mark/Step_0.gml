@@ -18,5 +18,5 @@ if (self.ac_timestamp >= 0.1) {
 
 var channel = animcurve_get_channel(ac_icon_scaling, "scale");
 var factor = animcurve_channel_evaluate(channel, self.ac_timestamp);
-self.image_xscale = factor;
-self.image_yscale = factor;
+self.image_xscale = factor * self.normal_scale_x;
+self.image_yscale = factor * self.normal_scale_y;

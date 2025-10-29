@@ -1,0 +1,94 @@
+{
+    "elixir_of_life": [
+        {
+            "type": "Heal",
+            "value": 50
+        }
+    ],
+    "old_amulate": [
+        {
+            "type": "Modifier",
+            "attribute": "spell_resistance",
+            "value": 25
+        }
+    ],
+    "ruby_ring": [
+        {
+            "type": "Modifier",
+            "attribute": "fire_power_mult",
+            "value": 50
+        }
+    ],
+    "sapphire_ring": [
+        {
+            "type": "Modifier",
+            "attribute": "water_power_mult",
+            "value": 50
+        }
+    ],
+    "emerald_ring": [
+        {
+            "type": "Modifier",
+            "attribute": "grass_power_mult",
+            "value": 50
+        }
+    ],
+    "amethyst_ring": [
+        {
+            "type": "Modifier",
+            "attribute": "lightning_power_mult",
+            "value": 50
+        }
+    ],
+    "pearl_ring": [
+        {
+            "type": "Modifier",
+            "attribute": "ice_power_mult",
+            "value": 50
+        }
+    ],
+    "staff_of_archmage": [
+        {
+            "type": "Modifier",
+            "attribute": "spell_power_mult",
+            "value": 50
+        }
+    ],
+    "amulet_of_life": [
+        {
+            "type": "Modifier",
+            "attribute": "restoration_power_mult",
+            "value": 50
+        }
+    ],
+    "mage_circlet": [
+        {
+            "type": "Modifier",
+            "attribute": "enchantment_power_mult",
+            "value": 33
+        },
+        {
+            "type": "Modifier",
+            "attribute": "destruction_power_mult",
+            "value": 33
+        }
+    ],
+    "potion_of_omniscience": [
+        {
+            "type": "AddVision",
+            "value": 1
+        }
+    ],
+    "healer_amulet": [
+        {
+            "type": "Modifier",
+            "attribute": "restoration_power_mult",
+            "value": 15
+        },
+        {
+            "type": "Modifier",
+            "attribute": "poison_resistance",
+            "value": 33
+        }
+    ]
+}

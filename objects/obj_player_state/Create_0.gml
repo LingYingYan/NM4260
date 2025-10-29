@@ -22,6 +22,24 @@ reset = function() {
     array_foreach(self.traits, function(trait) {
         instance_destroy(trait);    
     });
+    
+    show_debug_message("Loading traits");
+    if (!struct_exists(global, "persistent_traits")) {
+        global.persistent_traits = [];
+    }
+    
+    obj_traits_manager.remaining_traits = [];
+    initialise_traits();
+    obj_traits_manager.owned_traits = [];
+    
+    for (var i = 0; i < array_length(global.persistent_traits); i += 1) {
+        show_debug_message($"{global.persistent_traits[i].name}");
+        obj_player_state.add_trait(global.persistent_traits[i]);
+        gain_trait(self.data, global.persistent_traits[i]);
+        var idx = array_get_index(obj_traits_manager.remaining_traits, global.persistent_traits[i]);
+        array_delete(obj_traits_manager.remaining_traits, idx, 1);
+        array_push(obj_traits_manager.owned_traits, global.persistent_traits[i]);
+    }
 }
 
 /// @desc 

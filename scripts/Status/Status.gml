@@ -5,20 +5,32 @@ function Status(_level, _name) constructor {
     level = _level;
     name = _name;
     
-    /// @desc Execute the status effect
+    /// @desc Called when the effect is added for the first time
     /// @param {Struct.GameCharacterData} target The target
-    initialise = function(target) { }
+    static initialise = function(target) { }
     
-    /// @desc Execute the status effect
+    /// @desc Called when the effect is added
     /// @param {Struct.GameCharacterData} target The target
-    execute = function(target) { }
+    static activate = function(target) { }
     
-    decay = function() { 
+    /// @desc Called when the effect ticks
+    /// @param {Struct.GameCharacterData} target The target
+    static execute = function(target) { }
+    
+    /// @desc Called when the effect is removed.
+    /// @param {Struct.GameCharacterData} target The target
+    static terminate = function(target) { }
+    
+    static decay = function() { 
         self.level -= 1;
     }
     
-    get_label = function() {
-        return $"[region,keyword-status-{self.name}][c_white][spr_{string_lower(self.name)}_small][/c][c_gold][b]{self.name}[/b][/c][/region]"
+    static get_label = function(highlight = false) {
+        if (highlight) {
+            return $"[region,keyword-status-{self.name}][c_white][spr_{string_lower(self.name)}_small][/c] [wheel][c_gold][b]{self.name}[/b][/c][/wheel][/region]";
+        }
+        
+        return $"[region,keyword-status-{self.name}][c_white][spr_{string_lower(self.name)}_small][/c] [c_gold][b]{self.name}[/b][/c][/region]";
     }
 }
 
@@ -72,9 +84,9 @@ function make_status(type, level) {
 function describe_status(type) {
     switch (type) {
     	case "Burn":
-            return "Each layer of Burn causes [b]-1 HP per turn[/b].\nDecays by [b]1[/b] layer after every turn.";
+            return "Each layer of Burn: [b]-1 HP per turn[/b].\nDecays by [b]1[/b] layer after every turn.";
         case "Poison":
-            return "Each layer of Poison causes [b]-1 HP per turn[/b].\nDecays by [b]1[/b] layer after every turn.";
+            return "Each layer of Poison: [b]-1 HP per turn[/b].\nDecays by [b]1[/b] layer after every turn.";
         case "Paralysed":
             return "[b]-25% card power[/b] until the status wears off.\nDecays by [b]1[/b] layer after every turn.";
         case "Frozen":
@@ -82,28 +94,28 @@ function describe_status(type) {
         case "Shield":
             return "Each layer of Shield cancels with [b]1[/b] damage.\nShields [b]do not carry forward[/b] to the next turn.";
         case "Strength":
-            return "Each layer of Strength increases direct damage dealt with [b]Destruction[/b] cards by [b]1[/b].\nDecays by [b]1[/b] layer after every turn.";
+            return "Each layer of Strength: [b]Destruction[/b] card damage [b]+1[/b].\nDecays by [b]1[/b] layer after every turn.";
         case "Coalesence":
             return "[b]+5[/b] HP per turn until the status wears off.\nDecays by [b]1[/b] layer after every turn.";
         case "Bleed":
-            return "Suffers [b]25% more damage[/b] from [b]Destruction[/b] cards.\nDecays by [b]1[/b] layer after every turn.";
+            return "Suffers [b]25% more damage[/b] from [b]Destruction[/b] cards until the status wears off.\nDecays by [b]1[/b] layer after every turn.";
     }
 }
 
 function project_status_effect(type, level) {
     switch (type) {
     	case "Burn":
-            return $"Deals [b]{level}[/b] damage in the next turn";
+            return $"[b]-{calculate_immediate_damage(type)}[/b] HP in the next turn";
         case "Poison":
-            return $"Deals [b]{level}[/b] damage in the next turn";
+            return $"[b]-{calculate_immediate_damage(type)}[/b] HP in the next turn";
         case "Paralysed":
             return $"[b]-25% card power[/b] for [b]{level}[/b] turns";
         case "Frozen":
-            return $"Only able to play [b]1[/b] card for [b]{level}[/b] turns";
+            return $"For the next [b]{level}[/b] turns, only able to play [b]1[/b] card per turn";
         case "Shield":
             return $"Cancels up to [b]{level}[/b] damage dealt by [b]Destruction[/b] cards";
         case "Strength":
-            return $"Increases direct damage dealt with [b]Destruction[/b] cards by [b]{level}[/b]";
+            return $"[b]Destruction[/b] card damage [b]+{level}[/b]";
         case "Coalesence":
             return $"[b]+5[/b] HP per turn, for [b]{level}[/b] turns";
         case "Bleed":
@@ -111,70 +123,113 @@ function project_status_effect(type, level) {
     }
 }
 
+function calculate_immediate_damage(type) {
+    switch (type) {
+    	case "Burn": 
+        case "Poison":
+            return 3;
+        default:
+            return 0;
+    }
+}
+
+function calculate_projected_damage(type, level) {
+    var dmg = calculate_immediate_damage(type);
+    if (dmg == 0) {
+        return 0
+    }
+    
+    return dmg * (1 - power(0.5, level)) / (1 - 0.5);
+}
+
 function Burn(_level) : Status(_level, nameof(Burn)) constructor {
     /// @desc Execute the status effect
     /// @param {Struct.GameCharacterData} target The target
-    execute = function(target) { 
-        target.hp -= self.level;
+    static execute = function(target) { 
+        target.hp -= 3;
     }
 } 
 
 function Poison(_level) : Status(_level, nameof(Poison)) constructor {
     /// @desc Execute the status effect
     /// @param {Struct.GameCharacterData} target The target
-    execute = function(target) { 
-        target.hp -= self.level;
+    static execute = function(target) { 
+        target.hp -= 3;
     }
 } 
 
 function Paralysed(_level) : Status(_level, nameof(Paralysed)) constructor {
     /// @desc Execute the status effect
     /// @param {Struct.GameCharacterData} target The target
-    execute = function(target) { 
+    static execute = function(target) { 
         target.modifiers.paralysed = true;
     }
 } 
 
 function Frozen(_level) : Status(_level, nameof(Frozen)) constructor {
-    /// @desc Execute the status effect
+    /// @desc Called when the effect is added for the first time
     /// @param {Struct.GameCharacterData} target The target
-    execute = function(target) { 
-        target.modifiers.frozen = true;
+    static initialise = function(target) {
+        target.set_attribute("frozen", true);
+    }
+    
+    /// @desc Called when the effect is removed.
+    /// @param {Struct.GameCharacterData} target The target
+    static terminate = function(target) { 
+        target.set_attribute("frozen", false);
     }
 } 
 
 function Shield(_level) : Status(_level, nameof(Shield)) constructor {
-    /// @desc Execute the status effect
+    /// @desc Called when the effect is added
     /// @param {Struct.GameCharacterData} target The target
-    initialise = function(target) { 
-        target.modifiers.shield += self.level;
+    static activate = function(target) { 
+        target.add_modifier("shield", self.level);
     }
     
-    decay = function() { 
+    /// @desc Called when the effect is removed.
+    /// @param {Struct.GameCharacterData} target The target
+    static terminate = function(target) { 
+        target.add_modifier("shield", -self.level);
+    }
+    
+    static decay = function() { 
         self.level = 0;
     }
 }
 
 function Strength(_level) : Status(_level, nameof(Strength)) constructor {
-    /// @desc Execute the status effect
+    /// @desc Called when the effect is added
     /// @param {Struct.GameCharacterData} target The target
-    initialise = function(target) { 
-        target.modifiers.strength += self.level;
+    static activate = function(target) { 
+        target.add_modifier("strength", self.level);
     }
 }
 
 function Coalesence(_level) : Status(_level, nameof(Coalesence)) constructor {
-    /// @desc Execute the status effect
+    /// @desc Called when the effect is added for the first time
     /// @param {Struct.GameCharacterData} target The target
-    initialise = function(target) { 
-        target.modifiers.coalesencing = true;
+    static initialise = function(target) { 
+        target.set_attribute("coalescencing", true);
     }
+    
+    /// @desc Called when the effect is added
+    /// @param {Struct.GameCharacterData} target The target
+    static activate = function(target) { }
+    
+    /// @desc Called when the effect ticks
+    /// @param {Struct.GameCharacterData} target The target
+    static execute = function(target) { }
+    
+    /// @desc Called when the effect is removed.
+    /// @param {Struct.GameCharacterData} target The target
+    static terminate = function(target) { }
 }
 
 function Bleed(_level) : Status(_level, nameof(Bleed)) constructor {
     /// @desc Execute the status effect
     /// @param {Struct.GameCharacterData} target The target
-    initialise = function(target) { 
+    static initialise = function(target) { 
         target.modifiers.bleeding = true;
     }
 }
