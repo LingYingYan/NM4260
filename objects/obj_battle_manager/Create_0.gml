@@ -232,7 +232,7 @@ flip_cards = function() {
     }
     
     self.turn_timer = time_source_create(
-        time_source_game, 1, time_source_units_seconds, 
+        time_source_game, 0.6, time_source_units_seconds, 
         execute_player_card
     );
     
