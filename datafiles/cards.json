@@ -173,14 +173,14 @@
         ]
     },
     "card_ward": {
-        "effects_on_target": [
+        "effects_on_target": [],
+        "effects_on_caster": [
             {
                 "type": "AddStatus",
                 "status_name": "Shield",
                 "value": 5
             }
         ],
-        "effects_on_caster": [],
         "special_effects": []
     },
     "card_fire_storm": {
