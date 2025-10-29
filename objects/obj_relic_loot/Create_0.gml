@@ -24,6 +24,7 @@ obj_confirm_button.on_click = function() {
     if (irandom_range(1, 100) <= 15) {
         instance_create_depth(self.x, self.y, self.depth, obj_trait_loot);
         instance_destroy(obj_relic_loot);
+        instance_destroy(obj_relic_card);
     } else {
         obj_room_manager.goto_map();
     }
