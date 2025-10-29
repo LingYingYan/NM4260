@@ -1,0 +1,15 @@
+{
+    "enemy_cultist": {
+        "cards": {
+            "card_scorch": 4,
+            "card_curse_of_old_gods": 2
+        }
+    },
+    "enemy_corrupted_alchemist": {
+        "cards": {
+            "card_scorch": 4,
+            "card_curse_of_old_gods": 3,
+            "card_healing": 2
+        }
+    }
+}

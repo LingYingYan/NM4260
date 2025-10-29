@@ -15,16 +15,20 @@ function Mark(mark_id, mark_name, mark_sprite) constructor {
      */
     on_apply = function(target, multiplicity = 1) { }
     
-    describe_with_context = function(is_offensive = true) { 
-        return is_offensive ? "[bi]Target:[/bi]\n" + self.describe() : "[bi]Caster:[/bi]\n" + self.describe();
+    describe_with_context = function() { 
+        return "[bi]When receiving this Mark:[/bi]\n" + self.describe();
     }
     
     describe = function() {
         return "";
     }
     
-    get_label = function() {
-        return $"[region,keyword-mark-{self.type}][c_white][spr_{self.uid}_small][/c][c_gold][b]{self.type}[/b][/c][/region]";
+    get_label = function(highlight = false) {
+        if (highlight) {
+            return $"[region,keyword-mark-{self.type}][c_white][spr_{self.uid}_small][/c] [wheel][c_gold][b]{self.type}[/b][/wheel][/c][/region]";
+        }
+        
+        return $"[region,keyword-mark-{self.type}][c_white][spr_{self.uid}_small][/c] [c_gold][b]{self.type}[/b][/c][/region]";
     }
     
     describe_alt = function(level) {

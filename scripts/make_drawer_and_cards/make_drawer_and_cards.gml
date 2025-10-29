@@ -55,7 +55,7 @@ function make_drawer_and_cards(){
 		card_inst.idx = idx;
 		card_inst.image_xscale = scale;
 		card_inst.image_yscale = scale;
-		card_inst.set_reveal(obj_player_state.data.max_vision);
+		card_inst.reveal = obj_player_state.data.max_vision;
 		show_debug_message($"Unique card is created with name {card_inst.card_data.name} and type {card_inst.card_data.type}");
 		show_debug_message($"Now the length of map is: {ds_map_size(player_deck_map)}");
 	}

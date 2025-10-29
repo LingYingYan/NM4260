@@ -46,7 +46,7 @@ for (var i = 0; i < 3; i++) {
     // create instance with unique card data
     var new_card = instance_create_layer(pos_x, pos_y, "Instances", obj_treasure_card);
     new_card.card_data = unique_card.card_data;
-    new_card.set_reveal(obj_player_state.data.max_vision);
+    new_card.reveal = obj_player_state.data.max_vision;
 
     show_debug_message($"Created unique card: {new_card.card_data.name}");
 }

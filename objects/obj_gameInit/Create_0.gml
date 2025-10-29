@@ -48,7 +48,7 @@ global.encounter_cases = [
 					card_inst.image_xscale = 0.7;
 					card_inst.image_yscale = 0.7;
 					card_inst.depth = -30000;
-					card_inst.set_reveal(obj_player_state.data.max_vision);
+					card_inst.reveal = obj_player_state.data.max_vision;
 					
 					obj_player_deck_manager.add(new_card);
 					if (obj_player_state.data.vision >= 1) obj_player_state.data.vision -= 1;
