@@ -1,6 +1,8 @@
 function reset_map(min_rooms_required) {
     show_debug_message("reset_map() called");
     with (DungeonRoom) instance_destroy();
+	
+	// remove the grid
 	if (variable_global_exists("room_grid") && is_array(global.room_grid)) {
         for (var row = 0; row < array_length(global.room_grid); row++) {
             for (var col = 0; col < array_length(global.room_grid[row]); col++) {
@@ -13,6 +15,9 @@ function reset_map(min_rooms_required) {
         global.room_grid = undefined;  // clear the old grid
 		show_debug_message($"after removal, room_grid is {array_length(global.room_grid)}");
     }
+	
+	show_debug_message($"Current checked_room is {array_length(global.checked_room)}, shop_card is {array_length(global.shop_card)}");
+	
 
     // true = spawn at bonfire
     var rooms = initialize_map(18, true);

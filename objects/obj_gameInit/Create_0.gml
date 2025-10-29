@@ -5,14 +5,23 @@ global.map_inited      = false;
 
 global.GRID_W = 6;
 global.GRID_H = 5;
-global.ROOM_SIZE = 64;
+global.ROOM_SIZE = 128;
+global.ROOM_SPACING = 14; // very likely need to adjust later, this is based on the sprite i draw
+
+global.TOTAL_ROOM_NUM = 0;
+global.room_types = ds_map_create();
 
 global.room_grid = []; // will be filled by generate_map()
-
-global.shop_used = false; // set to true of all cards in the shop is sold out, apply a cross
+ 
 global.bonfire_used = false; // deactivate bonfire after used once
 global.generate_new = true;
 global.player_current_room = noone;
+
+global.used_shops = [];
+
+global.checked_room = [];
+
+global.perm_revealed_rooms = ds_map_create();
 
 global.just_exited_bonfire = false;
 
@@ -29,16 +38,25 @@ global.encounter_cases = [
 		[
 			make_option(
 				"Listen Closely", 
-				"The voices reveal a hidden rune sequence. (-1 Vision)",
+				"The voices reveal a hidden rune sequence. (-1 Vision, +1 Card)",
+				
 				function() {
 					var new_card = res_loader_cards.get_random_card("Instances");
 					show_debug_message($"card data of the acquired card: {new_card.card_data}")
-					var card_int = instance_create_layer(room_width/2, room_height/2, "Instances", obj_treasure_card);
-					card_int.card_data = new_card.card_data;
+					var card_inst = instance_create_layer(room_width/2, room_height/2, "Instances", obj_deck_drawer_card);
+					card_inst.card_data = new_card.card_data;
+					card_inst.image_xscale = 0.7;
+					card_inst.image_yscale = 0.7;
+					card_inst.depth = -30000;
+					card_inst.set_reveal(obj_player_state.data.max_vision);
+					
 					obj_player_deck_manager.add(new_card);
-					obj_player_state.data.vision -= 2;
+					if (obj_player_state.data.vision >= 1) obj_player_state.data.vision -= 1;
+					else obj_player_state.data.vision = 0;
+					
 					show_debug_message($"now the player deck length is {array_length(obj_player_deck_manager.denumerate())}")
 				}
+				
 			),
 			make_option(
 				"Ignore the whispers.",
@@ -70,7 +88,8 @@ global.encounter_cases = [
 						}
 						if (count <= 0) break;
 					}
-					obj_player_state.data.vision -= 2;
+					if (obj_player_state.data.vision >= 1) obj_player_state.data.vision -= 1;
+					else obj_player_state.data.vision = 0;
 					show_debug_message("revealed 3 rooms on the map")
 				}	
 			),
@@ -78,7 +97,8 @@ global.encounter_cases = [
 				"Touch the water.",
 				"You absorb fragments of power, but they sting. (+1 Vision, -10 HP)",
 				function() {
-					obj_player_state.data.hp -= 10;
+					if (obj_player_state.data.hp >= 10) obj_player_state.data.hp -= 10;
+					else obj_player_state.data.hp = 0;
 					obj_player_state.data.vision += 1;
 				}
 			)

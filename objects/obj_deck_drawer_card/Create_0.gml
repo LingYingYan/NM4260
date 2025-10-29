@@ -14,3 +14,7 @@ hovered = false;
 hover_scale = 1;
 
 selected = false;
+removed = false;
+count = 1;
+
+hover_color = c_aqua;

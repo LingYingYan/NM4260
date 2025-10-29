@@ -16,21 +16,35 @@ with (obj_deck_drawer_card) {
     x = other.drawer_x + other.drawer_width / 2;
 	y = 50 + idx * (other.card_height + other.card_spacing) - other.scroll_y;
 	
-	if (selected) {
-		// remove the card from the deck
-		if (count > 1) {
-			// count - 1
-			count -= 1;
+	if (selected && !removed && other.can_remove) {
+		if (obj_player_state.data.vision >= 0.5) {
+			removed = true;
+			other.card_to_remove = card_data;
+			other.can_remove = false;
+			hover_color = c_white;
+			// remove the card from the deck
+			if (count > 1) {
+				// count - 1
+				count -= 1;
+			} else {
+				instance_destroy();
+			}
+			obj_player_state.data.vision -= 0.5;
+			obj_player_deck_manager.remove_first(card_data);
+			other.alarm[0] = 1;
+			// - 0.5 vision
+		
+			show_debug_message($"Curent count is {count}");
+			show_debug_message($"Removed the card successfully!");
+			
+			// mark the shop as used when a card is removed from the deck
+			var curr = global.player_current_room;
+			var used_coor = [curr.x, curr.y];
+			array_push(global.used_shops, used_coor);
+			show_debug_message($"The shop at {curr.x}, {curr.y} is marked as used")
 		} else {
-			// remove the instance
-			instance_destroy();
+			show_message("You do not have enough vision!")
 		}
-		// - 0.5 vision
-		obj_player_state.data.vision -= 0.5;
-		// loop through player deck and remove the card instance
-		//var card_id = card_data.uid;
-		obj_player_deck_manager.remove_first(card_data);
-		show_debug_message($"Removed the card");
 		
 	}
 }
