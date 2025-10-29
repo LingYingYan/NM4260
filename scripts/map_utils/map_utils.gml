@@ -377,6 +377,26 @@ function reveal_distance_n_neighbours(n) {
 	}
 }
 
-function reveal_permanent_rooms(rooms) {
-
+function check_all_room_types_appear() {
+	var type_list = ["shop", "treasure", "encounter", "bonfire", "enemy"];
+	var existing_type = [];
+	
+	for (var row = 0; row < array_length(global.room_grid); row++) {
+		for (var col = 0; col < array_length(global.room_grid[row]); col++) {
+			var rm = global.room_grid[row][col];
+			// record down all room types
+			if (rm != noone) {
+				array_push(existing_type, rm.room_type);
+			}
+		}
+	}
+		
+	for (i = 0; i < array_length(type_list); i++) {
+		var type = type_list[i];
+		if (!array_contains(existing_type, type)) {
+			// some room type didnt appear
+			return false;
+		}
+	}
+	return true;
 }
