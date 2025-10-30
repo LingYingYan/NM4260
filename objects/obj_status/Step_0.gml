@@ -1,8 +1,7 @@
+self.displayed_value = self.status == undefined || self.status == noone ? 0 : self.status.level;
 if (!self.is_updating) {
     exit;
 }
-
-self.displayed_value = self.status.level;
 
 if (self.ac_timestamp >= 0.1 && self.is_executing) {
     self.is_executing = false;
@@ -13,9 +12,6 @@ if (self.ac_timestamp >= 0.1 && self.is_executing) {
 if (self.ac_timestamp >= 1) {
     self.is_updating = false;
     self.ac_timestamp = 0;
-    if (self.status.level <= 0) {
-        instance_destroy(self.id);
-    }
 }
 
 self.ac_timestamp += delta_time / 1000000;

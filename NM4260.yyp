@@ -477,6 +477,7 @@
     {"id":{"name":"spr_mark_ice_small","path":"sprites/spr_mark_ice_small/spr_mark_ice_small.yy",},},
     {"id":{"name":"spr_mark_ice","path":"sprites/spr_mark_ice/spr_mark_ice.yy",},},
     {"id":{"name":"spr_mark_lightning_small","path":"sprites/spr_mark_lightning_small/spr_mark_lightning_small.yy",},},
+    {"id":{"name":"spr_mark_lightning","path":"sprites/spr_mark_lightning/spr_mark_lightning.yy",},},
     {"id":{"name":"spr_mark_water_small","path":"sprites/spr_mark_water_small/spr_mark_water_small.yy",},},
     {"id":{"name":"spr_mark_water","path":"sprites/spr_mark_water/spr_mark_water.yy",},},
     {"id":{"name":"spr_modal_backdrop","path":"sprites/spr_modal_backdrop/spr_modal_backdrop.yy",},},
