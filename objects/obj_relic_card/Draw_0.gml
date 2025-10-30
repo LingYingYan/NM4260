@@ -24,13 +24,14 @@ if (self.card_data != undefined) {
     draw_set_valign(fa_top);
     draw_set_halign(fa_left);
         
-    scribble($"[b]{self.card_data.name}[/b]")
+	
+    scribble($"[b]{struct_exists(self.card_data, "name") ? self.card_data.name : ""}[/b]")
         .scale(1.15 * self.image_xscale)
         .wrap(self.sprite_width - 2 * x_padding)
         .align(fa_center, fa_top)
         .draw(self.x, text_y);
     
     text_y = self.y + y_padding;
-    var scribble_text = scribble(self.card_data.desc).wrap(self.sprite_width - 2 * x_padding).scale(self.image_xscale);
+    var scribble_text = scribble(struct_exists(self.card_data, "desc") ? self.card_data.desc : "").wrap(self.sprite_width - 2 * x_padding).scale(self.image_xscale);
     scribble_text.draw(text_x, text_y);
 } 

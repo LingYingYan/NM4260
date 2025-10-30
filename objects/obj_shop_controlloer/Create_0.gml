@@ -15,8 +15,9 @@ for (i = 0; i < array_length(global.curr_shop_cards); i ++) {
 }
 for (j = 0; j < array_length(global.curr_shop_relics); j ++) {
 	var relic = global.curr_shop_relics[j];
+	show_debug_message($"DEBUG:: relic is {relic}")
 	var new_relic = instance_create_layer(relic.pos_x, relic.pos_y, "Instances", obj_relic_card);
-	new_relic.card_data = relic;
+	new_relic.card_data = relic.card_data;
 	new_relic.selectable = false;
 	new_relic.grabbable = false;
 	new_relic.image_xscale = scale;

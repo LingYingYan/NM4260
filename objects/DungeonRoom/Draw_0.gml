@@ -14,7 +14,7 @@ if (is_struct(self.data)) {
 	draw_sprite(spr, 0, x, y)
 	
 	if (self.data.used && self.data.room_type != "start") {
-	    draw_set_alpha(1);
+	    draw_set_alpha(0.7);
 	    draw_sprite(spr_cross_overlay, 0, x, y);
 	    draw_set_alpha(1);
 	}
@@ -22,7 +22,7 @@ if (is_struct(self.data)) {
 	//show_debug_message($"DEBUG: the room is visited: {self.data.visited}")
 	if (!self.data.revealed) {
 		//room not revealed
-		draw_set_alpha(1);
+		draw_set_alpha(0.7);
         draw_sprite(spr_dungeonRoom_unrevealed, 0, x, y);
         draw_set_alpha(1);
 	}

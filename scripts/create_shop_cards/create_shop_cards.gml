@@ -31,6 +31,7 @@ function create_shop_cards(row_num, cards_in_row, spacing_x, spacing_y, scale)
             while (duplicate) {
                 duplicate = false;
                 var card = res_loader_cards.get_random_card("Instances");
+				show_debug_message($"DEBUG: card card_data: {card.card_data}")
 
                 for (var j = 0; j < array_length(result_cards); j++) {
                     if (card.card_data.type == result_cards[j].card_data.type &&
@@ -68,6 +69,7 @@ function create_shop_cards(row_num, cards_in_row, spacing_x, spacing_y, scale)
                 duplicate = false;
                 //var card = res_loader_cards.get_random_card("Instances");
 				var relic = res_loader_relics.get_random();
+				show_debug_message($"DEBUG: relic card_data: {relic}")
 
                 for (var j = 0; j < array_length(result_cards); j++) {
                     //if (relic.card_data.type == result_cards[j].card_data.type &&
@@ -75,7 +77,7 @@ function create_shop_cards(row_num, cards_in_row, spacing_x, spacing_y, scale)
                     //    duplicate = true;
                     //    break;
                     //}
-					if (relic.id == result_cards[j].id) {
+					if (relic.uid == result_cards[j].card_data.uid) {
 						duplicate = true;
 						break;
 					}
@@ -121,10 +123,10 @@ function handle_shop_cards(rm) {
 		shop_map[? "relics"] = relic_lst;
 		shop_map[? "refresh"] = false;
 
-		//ds_map_set(global.shop_card, rm_name, shop_map);
-		//show_debug_message("TYPE"+ string(ds_exists(global.shop_card, ds_type_map))); // should be true
-		//var inner = global.shop_card[? rm_name];
-		//show_debug_message(ds_exists(inner, ds_type_map));
+		ds_map_set(global.shop_card, rm_name, shop_map);
+		show_debug_message("TYPE"+ string(ds_exists(global.shop_card, ds_type_map))); // should be true
+		var inner = global.shop_card[? rm_name];
+		show_debug_message(ds_exists(inner, ds_type_map));
 
 	} else {
 		
@@ -145,6 +147,8 @@ function handle_shop_cards(rm) {
 			ds_map_set(global.shop_card, rm_name, new_shop_map);
 		 }
 	}
+	
+	
 	// Update current active shop reference
 	updated_shop_map = global.shop_card[? rm_name];
 	global.curr_shop_cards = updated_shop_map[? "cards"];
