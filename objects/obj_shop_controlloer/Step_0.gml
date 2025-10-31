@@ -1,3 +1,4 @@
+// for normal shop cards
 with (obj_shop_card) {
 	if (selected) {
 		var price = cost;
@@ -35,12 +36,58 @@ with (obj_shop_card) {
 		// once player made purchases in the shop, mark it as used --> cannot return
 		var curr = global.player_current_room;
 		var used_coor = [curr.x, curr.y];
-		array_push(global.used_shops, used_coor);
-		show_debug_message($"The shop at {curr.x}, {curr.y} is marked as used")
+		if (!contain_array(global.used_shops, used_coor)) {
+			array_push(global.used_shops, used_coor);
+			show_debug_message($"The shop at {curr.x}, {curr.y} is marked as used")
+		}
 	}
 }
 
-
+// for relics card
+with (obj_relic_card) {
+	if (selected) {
+		var price = cost;
+		show_debug_message($"Spent {price} to buy the relic");
+		if (obj_player_state.data.vision >= price) obj_player_state.data.vision -= price;
+		else obj_player_state.data.vision = 0;
+		selected = false;
+		sold = true;
+		//obj_player_deck_manager.add(id);
+		obj_player_deck_manager.add_relic(card_data);
+		other.alarm[0] = 1;
+	}
+	
+	if (sold) {
+		//remove from the global shop cards;
+		var rm_name = global.curr_shop_name;
+		var rm_reliclst = global.curr_shop_relics;
+		for (var i = 0; i < array_length(rm_reliclst); i++) {
+		    var relic = rm_reliclst[i];
+		    if (relic.card_data.uid == card_data.uid) {
+		        array_delete(global.curr_shop_relics, i, 1); //remove the temp global card list
+				show_debug_message($"LENGTH of curr_shop_relics: {array_length(global.curr_shop_relics)}");
+				var shop_map = ds_map_create();
+				shop_map[? "relics"] = global.curr_shop_relics;
+				ds_map_set(global.shop_card, rm_name, shop_map);
+				
+				//var debug_map = global.shop_card[? rm_name];
+				//var card_arr = debug_map[? "cards"];
+				//show_debug_message($"LENGTH of the card_arr: {array_length(card_arr)}");
+		        break; // stop after removing one
+		    }
+		}
+		show_debug_message("relic instance destroyed");
+		instance_destroy();
+		
+		// once player made purchases in the shop, mark it as used --> cannot return
+		var curr = global.player_current_room;
+		var used_coor = [curr.pos_x, curr.pos_y];
+		if (!contain_array(global.used_shops, used_coor)) {
+			array_push(global.used_shops, used_coor);
+			show_debug_message($"The shop at {curr.pos_x}, {curr.pos_y} is marked as used")
+		}
+	}
+}
 
 
 

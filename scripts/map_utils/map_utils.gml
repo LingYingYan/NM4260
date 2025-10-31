@@ -2,6 +2,16 @@ function choose_array(arr) {
     return arr[irandom(array_length(arr) - 1)];
 }
 
+function contain_array(arr, ele) {
+	for (var i = 0; i < array_length(arr); i++) {
+        var sub = arr[i];
+        if (arr[0] == ele[0] && arr[1] == ele[1]) {
+            return true;
+        }
+    }
+    return false;
+}
+
 function add_edge(a, b) {
     if (!is_struct(a) || !is_struct(b) || a == b) return false;
 
