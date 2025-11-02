@@ -29,14 +29,14 @@
   "physicsShapePoints":[],
   "physicsStartAwake":true,
   "properties":[
-    {"$GMObjectProperty":"v1","%Name":"google_sheet_id","filters":[],"listItems":[],"multiselect":false,"name":"google_sheet_id","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"","varType":2,},
-    {"$GMObjectProperty":"v1","%Name":"save_file_name","filters":[],"listItems":[],"multiselect":false,"name":"save_file_name","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"data.csv","varType":2,},
-    {"$GMObjectProperty":"v1","%Name":"local_file","filters":[],"listItems":[],"multiselect":false,"name":"local_file","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"","varType":2,},
-    {"$GMObjectProperty":"v1","%Name":"load_from","filters":[],"listItems":[
+    {"$GMObjectProperty":"v2","%Name":"google_sheet_id","filters":[],"listItems":[],"multiselect":false,"name":"google_sheet_id","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"","varType":2,},
+    {"$GMObjectProperty":"v2","%Name":"save_file_name","filters":[],"listItems":[],"multiselect":false,"name":"save_file_name","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"data.csv","varType":2,},
+    {"$GMObjectProperty":"v2","%Name":"local_file","filters":[],"listItems":[],"multiselect":false,"name":"local_file","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"","varType":2,},
+    {"$GMObjectProperty":"v2","%Name":"load_from","filters":[],"listItems":[
         "\"Google Sheet\"",
         "\"Included Files\"",
       ],"multiselect":false,"name":"load_from","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"\"Google Sheet\"","varType":6,},
-    {"$GMObjectProperty":"v1","%Name":"data_group","filters":[],"listItems":[
+    {"$GMObjectProperty":"v2","%Name":"data_group","filters":[],"listItems":[
         "\"By Row\"",
         "\"By Column\"",
       ],"multiselect":false,"name":"data_group","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"\"By Row\"","varType":6,},

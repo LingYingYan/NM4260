@@ -156,6 +156,10 @@ execute_next_status = function() {
 }
 
 state_tick_status = function() {
+    if (self.status_index > array_length(self.status_indicators)) {
+        return;
+    }
+    
     if (instance_exists(self.status_indicators[self.status_index]) && self.status_indicators[self.status_index].is_updating) {
         return;
     }

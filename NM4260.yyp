@@ -2,7 +2,7 @@
   "$GMProject":"v1",
   "%Name":"NM4260",
   "AudioGroups":[
-    {"$GMAudioGroup":"","%Name":"audiogroup_default","name":"audiogroup_default","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
+    {"$GMAudioGroup":"v1","%Name":"audiogroup_default","exportDir":"","name":"audiogroup_default","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
   ],
   "configs":{
     "children":[],
@@ -92,7 +92,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.13.1.193",
+    "IDEVersion":"2024.14.0.207",
   },
   "name":"NM4260",
   "resources":[
@@ -150,6 +150,7 @@
     {"id":{"name":"obj_floating_text","path":"objects/obj_floating_text/obj_floating_text.yy",},},
     {"id":{"name":"obj_gameInit","path":"objects/obj_gameInit/obj_gameInit.yy",},},
     {"id":{"name":"obj_hand","path":"objects/obj_hand/obj_hand.yy",},},
+    {"id":{"name":"obj_hint_textbox","path":"objects/obj_hint_textbox/obj_hint_textbox.yy",},},
     {"id":{"name":"obj_initial_card_pile","path":"objects/obj_initial_card_pile/obj_initial_card_pile.yy",},},
     {"id":{"name":"obj_loot_panel","path":"objects/obj_loot_panel/obj_loot_panel.yy",},},
     {"id":{"name":"obj_mark","path":"objects/obj_mark/obj_mark.yy",},},

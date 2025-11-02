@@ -23,3 +23,15 @@ function draw_tooltip(tooltip_text) {
     draw_sprite_stretched(spr_panel, 0, x_gui, y_gui, scribble_text.get_width() + 50, scribble_text.get_height() + 50);
     scribble_text.draw(x_gui + 25, y_gui + 25);
 }
+
+function draw_tooltip_at(tooltip_text, halign, valign, x_gui, y_gui, wrap = 1000) {
+    if (tooltip_text == "") {
+        exit;
+    }
+    
+    var scribble_text = scribble($"{tooltip_text}").wrap(wrap).align(halign, valign);
+    x_gui -= (scribble_text.get_width() / 2 + 50);
+    y_gui -= (scribble_text.get_height() / 2 + 50);
+    draw_sprite_stretched(spr_panel, 0, x_gui, y_gui, scribble_text.get_width() + 50, scribble_text.get_height() + 50);
+    scribble_text.draw(x_gui + 25, y_gui + 25);
+}
