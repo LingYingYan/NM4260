@@ -43,7 +43,9 @@ with (obj_deck_drawer_card) {
 			array_push(global.used_shops, used_coor);
 			show_debug_message($"The shop at {curr.x}, {curr.y} is marked as used")
 		} else {
+			selected = false;
 			show_message("You do not have enough vision!")
+			exit;
 		}
 		
 	}

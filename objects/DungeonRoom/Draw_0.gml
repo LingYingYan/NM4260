@@ -28,12 +28,12 @@ if (is_struct(self.data)) {
 	}
 	
 	if (!self.data.discovered) {
-        draw_set_alpha(1);
+        draw_set_alpha(0.7);
         draw_set_color(#CC9766); //#CC9766
-        draw_rectangle(x - sprite_width/2 - global.ROOM_SPACING - 2, 
-						y - sprite_height/2 - global.ROOM_SPACING - 2, 
-						x + sprite_width/2 + global.ROOM_SPACING + 2, 
-						y + sprite_height/2 + global.ROOM_SPACING + 2, 
+        draw_rectangle(x - sprite_width/2 - global.ROOM_SPACING, 
+						y - sprite_height/2 - global.ROOM_SPACING, 
+						x + sprite_width/2 + global.ROOM_SPACING, 
+						y + sprite_height/2 + global.ROOM_SPACING, 
 						false);
         draw_set_alpha(1);
     }

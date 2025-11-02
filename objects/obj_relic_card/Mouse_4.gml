@@ -1,3 +1,12 @@
+if (room == rm_shop) {
+	// inside shop
+	if (!selected && !sold) {
+		selected = true;
+		
+	}
+	show_debug_message("Relics marked selected")
+} 
+
 if (room != Room1) {
     exit;
 }

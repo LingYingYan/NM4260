@@ -3,12 +3,25 @@ with (obj_shop_card) {
 	if (selected) {
 		var price = cost;
 		show_debug_message($"Spent {price} to buy the card");
-		if (obj_player_state.data.vision >= price) obj_player_state.data.vision -= price;
-		else obj_player_state.data.vision = 0;
-		selected = false;
-		sold = true;
-		obj_player_deck_manager.add(id);
-		other.alarm[0] = 1;
+		//if (obj_player_state.data.vision >= price) obj_player_state.data.vision -= price;
+		//else obj_player_state.data.vision = 0;
+		//selected = false;
+		//sold = true;
+		//obj_player_deck_manager.add(id);
+		//other.alarm[0] = 1;
+		if (obj_player_state.data.vision >= price) {
+			obj_player_state.data.vision -= price;
+			selected = false;
+			sold = true;
+			obj_player_deck_manager.add(id);
+			other.alarm[0] = 1;
+		}
+		else {
+			show_message("Your Vision is not enough.")
+			//replace with customised pop-up window
+			selected = false;
+			sold = false;
+		}
 	}
 	
 	if (sold) {
@@ -48,13 +61,19 @@ with (obj_relic_card) {
 	if (selected) {
 		var price = cost;
 		show_debug_message($"Spent {price} to buy the relic");
-		if (obj_player_state.data.vision >= price) obj_player_state.data.vision -= price;
-		else obj_player_state.data.vision = 0;
-		selected = false;
-		sold = true;
-		//obj_player_deck_manager.add(id);
-		obj_player_deck_manager.add_relic(card_data);
-		other.alarm[0] = 1;
+		if (obj_player_state.data.vision >= price) {
+			obj_player_state.data.vision -= price;
+			selected = false;
+			sold = true;
+			obj_player_deck_manager.add_relic(card_data);
+			other.alarm[0] = 1;
+		}
+		else {
+			show_message("Your Vision is not enough.")
+			//replace with customised pop-up window
+			selected = false;
+			sold = false;
+		}
 	}
 	
 	if (sold) {
@@ -81,10 +100,10 @@ with (obj_relic_card) {
 		
 		// once player made purchases in the shop, mark it as used --> cannot return
 		var curr = global.player_current_room;
-		var used_coor = [curr.pos_x, curr.pos_y];
+		var used_coor = [curr.x, curr.y];
 		if (!contain_array(global.used_shops, used_coor)) {
 			array_push(global.used_shops, used_coor);
-			show_debug_message($"The shop at {curr.pos_x}, {curr.pos_y} is marked as used")
+			show_debug_message($"The shop at {curr.x}, {curr.y} is marked as used")
 		}
 	}
 }
