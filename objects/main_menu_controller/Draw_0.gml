@@ -4,9 +4,15 @@ draw_roundrect(panel_x, panel_y, panel_x + panel_w, panel_y + panel_h, false);
 // Eye icon (optional)
 draw_sprite(spr_logo, 0, room_width/2, panel_y);
 
-draw_set_font(fnt_title);
-draw_set_color(make_color_rgb(130, 80, 40));
-draw_text(room_width/2 - string_width(title)/2, panel_y + 60, title);
+draw_set_color(make_color_rgb(130, 80, 40))
+var scribble_header = scribble($"[wave]{title}[/wave]")
+		.starting_format("fnt_main_header", make_color_rgb(130, 80, 40))
+		.scale(2)
+		.align(fa_center, fa_middle)
+
+scribble_anim_wave(5, 20, 0.02);		
+scribble_header.draw(room_width/2, panel_y + 200)
+
 //scribble(title)         
 //    .wrap(500)
 //	.draw(room_width/2 - string_width(title)/2, panel_y + 60);

@@ -303,6 +303,7 @@
     {"id":{"name":"CoroutineBroadcast","path":"scripts/CoroutineBroadcast/CoroutineBroadcast.yy",},},
     {"id":{"name":"CoroutineEventHook","path":"scripts/CoroutineEventHook/CoroutineEventHook.yy",},},
     {"id":{"name":"create_shop_cards","path":"scripts/create_shop_cards/create_shop_cards.yy",},},
+    {"id":{"name":"create_tutorial_map","path":"scripts/create_tutorial_map/create_tutorial_map.yy",},},
     {"id":{"name":"decide_bonfire_room","path":"scripts/decide_bonfire_room/decide_bonfire_room.yy",},},
     {"id":{"name":"decision_policies","path":"scripts/decision_policies/decision_policies.yy",},},
     {"id":{"name":"Deck","path":"scripts/Deck/Deck.yy",},},
