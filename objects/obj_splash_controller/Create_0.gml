@@ -1,4 +1,4 @@
-//title_text = scribble("[c_brown][b]Prophet[/b][/c]")
+//title_text = scribble("[colour, #825028][font, fnt_main_header]Prophet[/font][/colour]")
 //    .align(fa_center, fa_middle)
 //    .scale(3);
 

@@ -10,7 +10,7 @@ for (var i = 0; i < array_length(buttons); i++) {
             var action = buttons[i].action;
             switch (action) {
                 case "new_game":
-                    room_goto(rm_game_start);
+                    instance_create_layer(room_width/2, room_height/2, "Instances", obj_tutorial_popup);
                     break;
                 case "credits":
                     // go to credits?
