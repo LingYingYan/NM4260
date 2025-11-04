@@ -3,6 +3,15 @@ function create_tutorial_map(){
     var H = global.GRID_H;
     var S = global.ROOM_SIZE;
 	
+	var map_w = W * S;
+	var map_h = H * S;
+	var offset_x = (room_width - map_w) / 2;
+	var offset_y = (obj_player_state.bbox_top - map_h) / 2;
+	show_debug_message($"The bbox_top is at {obj_player_state.bbox_top}");
+	
+	global.map_offset_x = offset_x;
+	global.map_offset_y = offset_y;
+	
 	//fill up with all noone
 	for (var row = 0; row < H; row++) {
         for (var col = 0; col < W; col++) {
@@ -52,4 +61,38 @@ function create_tutorial_map(){
 	add_edge(enemy_1, treasure_room);
 	add_edge(enc_room, enemy_2);
 	add_edge(enemy_2, start_room);
+	
+	global.map_inited = true;
+	global.start_room = start_room;
+}
+
+function create_tutorial_player() {
+	var curr_room = global.start_room;
+	var px = curr_room.x;
+	var py = curr_room.y;
+	var player = instance_create_layer(px + global.map_offset_x, py + global.map_offset_y, "Instances", Player);
+	
+	player.current_room = curr_room;
+	player.prev_room = curr_room;
+	global.player_current_room = curr_room;
+}
+
+function reveal_room_in_tut(rm) {
+	if (rm.room_type == "encounter") {
+	//encounter room --> reveal exit room and treasure room
+		for (var row = 0; row < array_length(global.room_grid); row++) {
+			for (var col = 0; col < array_length(global.room_grid[row]); col++) {
+				var grid_rm = global.room_grid[row][col];
+				if (grid_rm == noone) continue;
+				if (grid_rm.room_type == "default" | grid_rm.room_type == "treasure") {
+					//reveal theese rooms "default room is the end room"
+					grid_rm.discovered = true;
+					grid_rm.revealed = true;
+				} else if (grid_rm.room_type == "shop" | grid_rm.room_type == "enemy") {
+					// discover all rooms
+					grid_rm.discovered = true;
+				}
+			}
+		}
+	}
 }

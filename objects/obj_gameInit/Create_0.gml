@@ -1,7 +1,9 @@
 randomize();
 show_debug_message("GameInit SCript is running")
 global.map_needs_reset = false;
-global.map_inited      = false;
+global.map_inited = false;
+
+global.in_tut = false; // if in tutorial, change the reveal_room etc.
 
 global.GRID_W = 6;
 global.GRID_H = 5;

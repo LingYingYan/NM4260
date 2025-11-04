@@ -15,6 +15,3 @@ for (var r = 0; r < global.GRID_H; r++) {
         }
     }
 }
-
-draw_set_color(c_white);
-
