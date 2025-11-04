@@ -1,6 +1,6 @@
 var n_orbs = ceil(self.current);
 var n_solid_orbs = floor(self.current);
-var scribble_text = scribble($"{string_format(self.current, 0, 2)}/{self.max_value}").starting_format("font_game_text", c_white).align(fa_left, fa_middle);
+var scribble_text = scribble($"{string_format(self.current, 0, 2)}/{self.max_value}").starting_format("font_game_text_outlined", c_white).align(fa_left, fa_middle);
 var pos_x = self.x + self.orb_radius;
 repeat(n_solid_orbs) {
     pos_x += 3 * self.orb_radius;

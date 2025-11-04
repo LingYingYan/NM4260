@@ -13,8 +13,6 @@ function __scribble_config_colours()
         c_aqua:    c_aqua,
         c_black:   c_black,
         c_blue:    c_blue,
-        c_dkgray:  c_dkgray,
-        c_dkgrey:  c_dkgrey,
         c_fuchsia: c_fuchsia,
         c_gray:    c_gray,
         c_green:   c_green,
@@ -39,6 +37,7 @@ function __scribble_config_colours()
         c_smaragdine: scribble_rgb_to_bgr(0x50c875),
         c_xanadu:     scribble_rgb_to_bgr(0x738678),
         c_amaranth:   scribble_rgb_to_bgr(0xe52b50),
+        c_gold:       scribble_rgb_to_bgr(0xaa6c39)
     };
     
     return _colours;
