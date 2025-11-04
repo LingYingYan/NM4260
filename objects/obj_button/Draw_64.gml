@@ -1,15 +1,42 @@
+var mouse_x_gui = device_mouse_x_to_gui(0);
+var mouse_y_gui = device_mouse_y_to_gui(0);
+var rect_left = self.gui_x - self.width / 2;
+var rect_top = self.gui_y - self.height / 2;
+
+if (point_in_rectangle(mouse_x_gui, mouse_y_gui, rect_left, rect_top, rect_left + self.width, rect_top + self.height)) {
+    self.hovered = true;
+} else {
+    self.hovered = false;
+}
+
+var scribble_text = scribble(self.button_text)
+    .starting_format("font_game_text_outlined", c_white)
+    .scale(1.5)
+    .align(fa_center, fa_middle);
+
+var w = max(scribble_text.get_width() * 1.5, self.width);
+var h = scribble_text.get_height() * 1.5;
+
+self.gui_w = w;
+self.gui_h = h;
+
 draw_sprite_stretched_ext(
     self.sprite_index, self.image_index, 
-    self.gui_x - self.width / 2, self.gui_y - self.height / 2, 
-    self.width, self.height, self.image_blend, self.image_alpha
+    self.gui_x - w / 2, self.gui_y - h / 2, 
+    w, h, self.image_blend, self.image_alpha
 );
 
 if (self.hovered && !self.is_disabled) {
     window_set_cursor(cr_handpoint);
+    self.image_blend = c_gray;
+    if (mouse_check_button_pressed(mb_left)) {
+        self.on_click();
+        window_set_cursor(cr_default);
+        self.image_blend = c_dkgray
+    }
+} else {
+    self.image_blend = -1;
+    window_set_cursor(cr_default);
 }
 
-draw_set_halign(fa_center);
-draw_set_valign(fa_middle);
-draw_text_color(self.gui_x, self.gui_y, self.button_text, c_white, c_white, c_white, c_white, 1);
-draw_set_halign(fa_left);
-draw_set_valign(fa_top);
+scribble_text.draw(self.gui_x, self.gui_y);
