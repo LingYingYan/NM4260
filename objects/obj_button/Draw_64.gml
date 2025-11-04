@@ -3,11 +3,16 @@ var mouse_y_gui = device_mouse_y_to_gui(0);
 var rect_left = self.gui_x - self.width / 2;
 var rect_top = self.gui_y - self.height / 2;
 
-if (point_in_rectangle(mouse_x_gui, mouse_y_gui, rect_left, rect_top, rect_left + self.width, rect_top + self.height)) {
-    self.hovered = true;
-} else {
-    self.hovered = false;
+var hovered = point_in_rectangle(mouse_x_gui, mouse_y_gui, rect_left, rect_top, rect_left + self.width, rect_top + self.height);
+if (!self.hovered && hovered && !self.is_disabled) {
+    window_set_cursor(cr_handpoint);
+    self.image_blend = c_gray;
+} else if (self.hovered && !hovered) {
+    window_set_cursor(cr_default);
+    self.image_blend = -1;
 }
+
+self.hovered = !self.is_disabled && hovered;
 
 var scribble_text = scribble(self.button_text)
     .starting_format("font_game_text_outlined", c_white)
@@ -26,17 +31,10 @@ draw_sprite_stretched_ext(
     w, h, self.image_blend, self.image_alpha
 );
 
-if (self.hovered && !self.is_disabled) {
-    window_set_cursor(cr_handpoint);
-    self.image_blend = c_gray;
-    if (mouse_check_button_pressed(mb_left)) {
-        self.on_click();
-        window_set_cursor(cr_default);
-        self.image_blend = c_dkgray
-    }
-} else {
-    self.image_blend = -1;
+if (self.hovered && !self.is_disabled && mouse_check_button_pressed(mb_left)) {
+    self.on_click();
     window_set_cursor(cr_default);
+    self.image_blend = c_dkgray
 }
 
 scribble_text.draw(self.gui_x, self.gui_y);

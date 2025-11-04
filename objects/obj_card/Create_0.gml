@@ -47,7 +47,7 @@ state_flip = function() {
     self.image_xscale = self.scale * animcurve_channel_evaluate(animation_x, self.ac_timestamp);
     self.image_yscale = self.scale * animcurve_channel_evaluate(animation_y, self.ac_timestamp);
     if (self.ac_timestamp >= 0.5 && self.reveal < obj_player_state.data.max_vision) {
-        self.normal_depth -= 10000;
+        self.current_depth -= 10000;
         self.reveal = obj_player_state.data.max_vision;
     }
     

@@ -2,10 +2,8 @@ if (self.hovered) {
 	// Draw a stroke around the card.
 	draw_sprite_ext(spr_card_stroke_with_blur, 0, self.x + 1, self.y + 2, self.image_xscale, self.image_xscale, image_angle, c_white, 0.5);
     self.current_depth -= 10000;
-    window_set_cursor(cr_handpoint);
 } else {
-    self.current_depth = normal_depth;
-    window_set_cursor(cr_default);
+    self.current_depth = self.normal_depth;
 }
 
 self.depth = self.current_depth;

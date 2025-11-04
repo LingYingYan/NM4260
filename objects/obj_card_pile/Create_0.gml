@@ -1,29 +1,39 @@
-cards = ds_list_create();
+cards = [];
 
 size = function() {
-    return ds_list_size(self.cards);
+    return array_length(self.cards);
 }
 
 add = function(card) {
-    ds_list_add(self.cards, card);
     place_card(card, self.x, self.y);
-    if (ds_list_size(self.cards) == 1) {
-        card.depth = -1000;
+    if (self.size() == 0) {
+        set_card_depth(card, self.depth + 99);
+        show_debug_message($"Card {card} depth: {card.normal_depth}");
     } else {
-        card.depth = self.cards[| ds_list_size(self.cards) - 1].depth - 1;
+        set_card_depth(card, array_last(self.cards).normal_depth - 1);
+        show_debug_message($"last card {array_last(self.cards)} depth: {array_last(self.cards).normal_depth}")
+        show_debug_message($"Card {card} depth: {card.normal_depth}");
     }
+    
+    array_push(self.cards, card);
 }
 
 shuffle = function() {
-    ds_list_shuffle(self.cards);
+    array_shuffle(self.cards);
 }
 
 is_empty = function() {
-    return ds_list_size(self.cards) == 0;
+    return self.size() == 0;
 }
 
 remove = function(card) {
-    ds_list_delete(self.cards, ds_list_find_index(self.cards, card));
+    var idx = array_get_index(self.cards, card);
+    if (idx < 0) {
+        show_error($"Card {card} not found in {self}", true);
+        return;    
+    }
+    
+    array_delete(self.cards, idx, 1);
 }
 
 /**
@@ -35,17 +45,12 @@ draw = function() {
         return noone;
     }
     
-    var card = self.cards[| self.size() - 1];
-    self.remove(card);
-    return card;
+    return array_pop(self.cards);
 }
 
 clear = function() {
-    a = [];
-    for (var i = 0; i < ds_list_size(self.cards); i += 1) {
-        a[i] = self.cards[| i];
-    }
-    
-    ds_list_clear(self.cards);
-    return a;
+    var copy = [];
+    array_copy(copy, 0, self.cards, 0, self.size());
+    self.cards = [];
+    return copy;
 }

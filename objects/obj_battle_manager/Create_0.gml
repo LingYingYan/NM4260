@@ -72,18 +72,7 @@ start_battle = function() {
     obj_player_state.initialise();
     
     // Set up card slots
-    var n = instance_number(obj_card_drop_area);
-    for (var i = 0; i < n; i += 1) {
-        var drop_area = instance_find(obj_card_drop_area, i);
-        switch (drop_area.owner) {
-        	case "Player":
-                self.player_card_slots[array_length(self.player_card_slots)] = drop_area;
-                break;
-            case "Enemy":
-                self.enemy_card_slots[array_length(self.enemy_card_slots)] = drop_area;
-                break;
-        }
-    }
+    find_card_slots(self.player_card_slots, self.enemy_card_slots);
     
     // Set up player draw pile
     transfer_between_piles(self.deck, self.draw_pile, 0, false);
@@ -121,22 +110,7 @@ attempt_to_end_battle = function() {
 
 start_player_turn = function() {
     // Set up deck and card slots
-    for (var i = 0; i < array_length(self.player_card_slots); i += 1) {
-        if (instance_exists(self.player_card_slots[i].card)) {
-            self.player_card_slots[i].card.dropped_area = noone;
-        }
-        
-        self.player_card_slots[i].card = noone;
-    }
-    
-    for (var i = 0; i < array_length(self.enemy_card_slots); i += 1) {
-        if (instance_exists(self.enemy_card_slots[i].card)) {
-            self.enemy_card_slots[i].card.dropped_area = noone;
-            instance_destroy(self.enemy_card_slots[i].card);
-        }
-        
-        self.enemy_card_slots[i].card = noone;
-    }
+    reset_card_slots(self.player_card_slots, self.enemy_card_slots);
 
     // If anyone dies, end the battle here
     if (self.attempt_to_end_battle()) {
@@ -144,24 +118,17 @@ start_player_turn = function() {
     }
     
     // Freeze card slots
-    if (self.player.data.get_attribute("frozen")) {
-        for (var i = 0; i < array_length(self.player_card_slots); i += 1) {
-            self.player_card_slots[i].is_disabled = i == 0 || i == array_length(self.player_card_slots) - 1;
-        }
+    for (var i = 0; i < array_length(self.player_card_slots); i += 1) {
+        self.player_card_slots[i].is_disabled = self.player.data.get_attribute("frozen") && 
+                                                (i == 0 || i == array_length(self.player_card_slots) - 1);
     }
-        
-    if (self.enemy.data.get_attribute("frozen")) {
-        for (var i = 0; i < array_length(self.enemy_card_slots); i += 1) {
-            self.enemy_card_slots[i].is_disabled = i == 0 || i == array_length(self.enemy_card_slots) - 1;
-        }
+
+    for (var i = 0; i < array_length(self.enemy_card_slots); i += 1) {
+        self.enemy_card_slots[i].is_disabled = self.enemy.data.get_attribute("frozen") &&
+                                               (i == 0 || i == array_length(self.enemy_card_slots) - 1);
     }
     
-    var k = 0;
-    for (var i = 0; i < array_length(self.enemy_card_slots); i += 1) {
-        if (!self.enemy_card_slots[i].is_disabled) {
-            k += 1;
-        }
-    }
+    var k = count_enabled_card_slots(self.enemy_card_slots);
         
     // Enemy plays
     self.enemy.draw(5);
@@ -171,13 +138,7 @@ start_player_turn = function() {
             continue;
         }
             
-        var card = cards[array_length(cards) - k];
-        card.image_xscale = self.enemy_card_slots[i].image_xscale;
-        card.image_yscale = self.enemy_card_slots[i].image_yscale;
-        card.scale = self.enemy_card_slots[i].image_xscale;
-        place_card(card, self.enemy_card_slots[i].x, self.enemy_card_slots[i].y);
-        enemy_card_slots[i].card = card;
-        k -= 1;
+        put_card_to_slot(array_pop(cards), self.enemy_card_slots[i]);
     }
         
     // Player draws
@@ -314,22 +275,23 @@ recycle_enemy_card = function() {
 
 end_player_turn = function() {
     obj_end_turn_button.is_disabled = true;
+    with (obj_player_card) {
+        grabbable = false;
+    }
+    
+    with (obj_enemy_card) {
+        can_reveal = false;
+    }
     
     // Collect both sides' cards
     for (var i = 0; i < array_length(self.player_card_slots); i += 1) {
         var card = self.player_card_slots[i].card;
         self.player_cards[i] = card;
-        if (instance_exists(card)) {
-            card.grabbable = false;
-        }
     }
     
     for (var i = 0; i < array_length(self.enemy_card_slots); i += 1) {
         var card = self.enemy_card_slots[i].card;
         self.enemy_cards[i] = card;
-        if (instance_exists(card)) {
-            card.can_reveal = false;
-        }
     }
     
     self.turn_pointer = 0;
@@ -348,6 +310,7 @@ start_player_status = function() {
 }
 
 end_battle = function() {
+    instance_destroy(obj_end_turn_button);
     self.state_update = function() {};
     instance_destroy(obj_status);
     self.player.data.clear_marks_and_statuses();

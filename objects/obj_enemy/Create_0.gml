@@ -8,6 +8,8 @@ available_cards = [];
 brain = new UtilityAgent();
 
 initialise = function() { 
+    self.status_indicators = [];
+    self.mark_indicators = [];
     var health_bar = instance_create_depth(self.x, self.bbox_bottom, self.depth - 1, obj_ui_health_bar);
     health_bar.label_below_bar = true;
     health_bar.source = data;

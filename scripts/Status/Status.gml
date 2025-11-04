@@ -21,7 +21,7 @@ function Status(_level, _name) constructor {
     /// @param {Struct.GameCharacterData} target The target
     static terminate = function(target) { }
     
-    static decay = function() { 
+    static decay = function(target) { 
         self.level -= 1;
     }
     
@@ -96,7 +96,7 @@ function describe_status(type) {
         case "Strength":
             return "Each layer of Strength: [b]Destruction[/b] card damage [b]+1[/b].\nDecays by [b]1[/b] layer after every turn.";
         case "Coalesence":
-            return "[b]+5[/b] HP per turn until the status wears off.\nDecays by [b]1[/b] layer after every turn.";
+            return "[b]+3[/b] HP per turn until the status wears off.\nDecays by [b]1[/b] layer after every turn.";
         case "Bleed":
             return "Suffers [b]25% more damage[/b] from [b]Destruction[/b] cards until the status wears off.\nDecays by [b]1[/b] layer after every turn.";
     }
@@ -199,7 +199,7 @@ function Shield(_level) : Status(_level, nameof(Shield)) constructor {
         target.add_modifier("shield", -self.level);
     }
     
-    static decay = function() { 
+    static decay = function(target) { 
         self.level = 0;
     }
 }
@@ -209,6 +209,11 @@ function Strength(_level) : Status(_level, nameof(Strength)) constructor {
     /// @param {Struct.GameCharacterData} target The target
     static activate = function(target) { 
         target.add_modifier("strength", self.level);
+    }
+    
+    static decay = function(target) { 
+        self.level -= 1;
+        target.add_modifier("strength", -1);
     }
 }
 
@@ -225,7 +230,9 @@ function Coalesence(_level) : Status(_level, nameof(Coalesence)) constructor {
     
     /// @desc Called when the effect ticks
     /// @param {Struct.GameCharacterData} target The target
-    static execute = function(target) { }
+    static execute = function(target) { 
+        target.hp += 3;
+    }
     
     /// @desc Called when the effect is removed.
     /// @param {Struct.GameCharacterData} target The target
