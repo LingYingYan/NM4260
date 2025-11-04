@@ -21,7 +21,7 @@ obj_confirm_button.visible = true;
 obj_confirm_button.on_click = function() {
     obj_player_deck_manager.add_relic(self.relic);
     obj_confirm_button.visible = false;
-    if (irandom_range(1, 100) <= 15) {
+    if (irandom_range(1, 100) <= 100) {
         instance_create_depth(self.x, self.y, self.depth, obj_trait_loot);
         instance_destroy(obj_relic_loot);
         instance_destroy(obj_relic_card);

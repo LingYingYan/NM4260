@@ -3,6 +3,7 @@ event_inherited();
 data = new PlayerData(self.max_health, self.max_health, 3, self.max_vision);
 
 traits = [];
+relics = [];
 
 initialise = function() { 
     self.status_indicators = [];
@@ -24,6 +25,13 @@ reset = function() {
     array_foreach(self.traits, function(trait) {
         instance_destroy(trait);    
     });
+    
+    for (var i = 0; i < array_length(self.relics); i += 1) {
+        self.relics[i].data.revoke(self.data);
+        instance_destroy(self.relics[i]);
+    }
+    
+    self.relics = [];
     
     show_debug_message("Loading traits");
     if (!struct_exists(global, "persistent_traits")) {
@@ -56,7 +64,7 @@ add_trait = function(trait) {
     array_push(self.traits, trait_obj);
 }
 
-rearrange_traits = function() {
+rearrange_traits_and_relics = function() {
     var to_remove = [];
     for (var i = 0; i < array_length(self.traits); i += 1) {
         if (!instance_exists(self.traits[i])) {
@@ -70,7 +78,22 @@ rearrange_traits = function() {
         array_delete(self.traits, idx, 1);
     }
     
-    array_sort(self.traits, function(left, right) {
+    to_remove = [];
+    for (var i = 0; i < array_length(self.relics); i += 1) {
+        if (global.number_of_completed_combat >= self.relics[i].expire) {
+            array_push(to_remove, self.relics[i]);
+        }
+    }
+    
+    while (array_length(to_remove) > 0) {
+        var elem = array_pop(to_remove);
+        var idx = array_get_index(self.relics, elem);
+        array_delete(self.relics, idx, 1);
+        elem.data.revoke(self.data);
+        instance_destroy(elem);
+    }
+    
+    array_sort(self.relics, function(left, right) {
         if (left.name < right.name) {
             return -1;
         } else if (left.name > right.name) {
@@ -81,8 +104,30 @@ rearrange_traits = function() {
     });
     
     var pos_y = self.bbox_top - 100;
+    for (var i = 0; i < array_length(self.relics); i += 1) {
+        self.relics[i].y = pos_y;
+        pos_y -= (self.relics[i].get_height() + 25);
+    }
+    
+    pos_y -= 25;
     for (var i = 0; i < array_length(self.traits); i += 1) {
         self.traits[i].y = pos_y;
         pos_y -= (self.traits[i].get_height() + 25);
     }
+}
+
+use_relic = function(relic) {
+    if (relic.duration <= 0) {
+        return;
+    }
+    
+    var relic_obj = instance_create_depth(self.bbox_left - 200, self.bbox_top, self.depth - 1, obj_relic, {
+        icon: spr_trait_default,
+        name: relic.name,
+        desc: relic.to_string(),
+        expire: relic.duration + global.number_of_completed_combat
+    });
+    
+    relic_obj.data = relic;
+    array_push(self.relics, relic_obj);
 }

@@ -169,6 +169,7 @@
     {"id":{"name":"obj_popup_message","path":"objects/obj_popup_message/obj_popup_message.yy",},},
     {"id":{"name":"obj_relic_card","path":"objects/obj_relic_card/obj_relic_card.yy",},},
     {"id":{"name":"obj_relic_loot","path":"objects/obj_relic_loot/obj_relic_loot.yy",},},
+    {"id":{"name":"obj_relic","path":"objects/obj_relic/obj_relic.yy",},},
     {"id":{"name":"obj_room_manager","path":"objects/obj_room_manager/obj_room_manager.yy",},},
     {"id":{"name":"obj_shop_card","path":"objects/obj_shop_card/obj_shop_card.yy",},},
     {"id":{"name":"obj_shop_controlloer","path":"objects/obj_shop_controlloer/obj_shop_controlloer.yy",},},
