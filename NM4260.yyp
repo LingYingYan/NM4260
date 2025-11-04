@@ -332,6 +332,7 @@
     {"id":{"name":"place_card","path":"scripts/place_card/place_card.yy",},},
     {"id":{"name":"rearrange_hand","path":"scripts/rearrange_hand/rearrange_hand.yy",},},
     {"id":{"name":"Relic","path":"scripts/Relic/Relic.yy",},},
+    {"id":{"name":"reset_all_global","path":"scripts/reset_all_global/reset_all_global.yy",},},
     {"id":{"name":"reset_map","path":"scripts/reset_map/reset_map.yy",},},
     {"id":{"name":"reveal_room","path":"scripts/reveal_room/reveal_room.yy",},},
     {"id":{"name":"room_to_gui","path":"scripts/room_to_gui/room_to_gui.yy",},},

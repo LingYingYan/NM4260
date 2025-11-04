@@ -21,6 +21,20 @@ function reveal_room(rm){
 		} else {
 			// in the tutorial map
 			reveal_room_in_tut(rm);
+			rm.discovered = true;      // reveal logical room
+			// if its a shop room
+			rm.revealed = true;
+			//rm.visited = true;
+			rm.used = true;
+		
+			if (rm.room_type == "shop") {
+				handle_shop_cards(rm);
+			}
+			
+			if (rm.room_type == "default") {
+				//reaching the end room
+				handle_end_room();
+			}
 			
 			trigger_room_event(rm);
 		}

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"reset_all_global",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"reset_all_global",
+  "parent":{
+    "name":"NM4260",
+    "path":"NM4260.yyp",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

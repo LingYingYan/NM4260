@@ -13,6 +13,8 @@ function __scribble_config_colours()
         c_aqua:    c_aqua,
         c_black:   c_black,
         c_blue:    c_blue,
+        c_dkgray:  c_dkgray,
+        c_dkgrey:  c_dkgrey,
         c_fuchsia: c_fuchsia,
         c_gray:    c_gray,
         c_green:   c_green,

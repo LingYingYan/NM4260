@@ -84,15 +84,24 @@ function reveal_room_in_tut(rm) {
 			for (var col = 0; col < array_length(global.room_grid[row]); col++) {
 				var grid_rm = global.room_grid[row][col];
 				if (grid_rm == noone) continue;
-				if (grid_rm.room_type == "default" | grid_rm.room_type == "treasure") {
+				show_debug_message($"DEBUG ROOM TYPE: {grid_rm.room_type}");
+				if (grid_rm.room_type == "default" || grid_rm.room_type == "treasure") {
 					//reveal theese rooms "default room is the end room"
 					grid_rm.discovered = true;
 					grid_rm.revealed = true;
-				} else if (grid_rm.room_type == "shop" | grid_rm.room_type == "enemy") {
+				} else if (grid_rm.room_type == "shop" || grid_rm.room_type == "enemy") {
 					// discover all rooms
 					grid_rm.discovered = true;
 				}
 			}
 		}
 	}
+}
+
+function handle_end_room() {
+	// create the loading page
+	var loading = instance_create_layer(room_width/2, room_height/2,"Instances", obj_loading_page);
+	loading.text_msg = "Congratulations! Are you ready for the real challenge?...";
+	loading.next_room = rm_game_start;
+	reset_all_global();
 }
