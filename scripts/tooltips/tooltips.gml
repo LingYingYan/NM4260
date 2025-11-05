@@ -20,7 +20,7 @@ function draw_tooltip(tooltip_text) {
         y_gui -= (scribble_text.get_height() + 50);
     }
         
-    draw_sprite_stretched(spr_panel, 0, x_gui, y_gui, scribble_text.get_width() + 50, scribble_text.get_height() + 50);
+    draw_sprite_stretched(spr_panel, -1, x_gui, y_gui, scribble_text.get_width() + 50, scribble_text.get_height() + 50);
     scribble_text.draw(x_gui + 25, y_gui + 25);
 }
 
