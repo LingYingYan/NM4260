@@ -18,7 +18,6 @@ initialise = function() {
 
 draw = function(k) {
     array_shuffle_ext(self.data.cards);
-    k = min(k, array_length(self.data.cards));
     self.available_cards = [];
     repeat (k) {
         var card = self.data.draw();
