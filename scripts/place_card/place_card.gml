@@ -3,9 +3,6 @@
 /// @param {real} pos_x The x position
 /// @param {real} pos_y The y position
 function place_card(card, pos_x, pos_y) {
-    if (!instance_exists(card)) {
-        return;
-    }
     card.goal_x = pos_x;
     card.goal_y = pos_y;
 }

@@ -6,6 +6,7 @@ enemy_configs = undefined;
 loaded = [[], [], []];
 total_weight = [0, 0, 0];
 loaded_boss = [[], [], []];
+enemies = {}
 
 read_row = function(r) {
     var enemy_id = self.read_cell(r, 0);
@@ -24,6 +25,8 @@ read_row = function(r) {
         array_push(self.loaded[level - 1], enemy);
     }
     
+    self.enemies[$ enemy_id] = enemy;
+    
     self.total_weight[level - 1] += weight;
     show_debug_message($"Loaded {enemy_id}: {enemy}");
 }
@@ -32,6 +35,24 @@ get_random_boss = function(level = 1) {
     var len = array_length(self.loaded_boss[level - 1]);
     var idx = irandom_range(0, len - 1);
     return self.loaded_boss[level - 1][idx];
+}
+
+get_enemy_by_id = function(enemy_id) {
+    var enemy = self.enemies[$ enemy_id];
+    var cards = self.enemy_configs[$ enemy_id].cards;
+    var card_ids = struct_get_names(cards);
+    for (var i = 0; i < array_length(card_ids); i += 1) {
+        var card = res_loader_cards.loaded_map[$ card_ids[i]];
+        repeat(cards[$ card_ids[i]][$ "count"] ?? 1) {
+            array_push(enemy.cards, {
+                data: card,
+                weight: cards[$ card_ids[i]][$ "weight"],
+                cooldown: cards[$ card_ids[i]][$ "cooldown"] 
+            });
+        }
+    }
+    
+    return enemy;
 }
 
 /**
