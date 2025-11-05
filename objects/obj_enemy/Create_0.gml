@@ -5,6 +5,7 @@ indicators_y = self.bbox_bottom;
 
 played_cards = [];
 available_cards = [];
+cooldown_cards = [];
 brain = new UtilityAgent();
 
 initialise = function() { 
@@ -19,8 +20,10 @@ draw = function(k) {
     array_shuffle_ext(self.data.cards);
     k = min(k, array_length(self.data.cards));
     self.available_cards = [];
-    for (var i = 0; i < k; i += 1) {
-        array_push(self.available_cards, self.data.cards[i]);
+    repeat (k) {
+        var card = self.data.draw();
+        show_debug_message($"Draw {card.name}, {array_length(self.data.cards)} remaining");
+    	array_push(self.available_cards, card);
     }
 }
 
@@ -30,7 +33,6 @@ plan_and_decide = function(k) {
     show_debug_message($"{array_length(options)} permutations are generated");
     for (var i = 0; i < array_length(options); i += 1) {
         var cards = options[i];
-        show_debug_message($"{array_length(cards)} cards in option {i}");
         make_action_balanced(self, cards, self.brain, obj_player_state.data);
     }
     

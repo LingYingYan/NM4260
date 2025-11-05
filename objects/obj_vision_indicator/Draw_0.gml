@@ -13,7 +13,7 @@ repeat(n_solid_orbs) {
 
 if (n_orbs > n_solid_orbs) {
     pos_x += 3 * self.orb_radius;
-    draw_set_alpha(self.current - n_orbs);
+    draw_set_alpha(self.current - n_solid_orbs);
     draw_circle_color(pos_x, self.y, self.orb_radius, c_aqua, c_black, false);
     draw_set_alpha(1);
 }

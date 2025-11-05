@@ -15,10 +15,10 @@ for (var i = 0; i < 3; i += 1) {
     new_card.reveal = obj_player_state.data.max_vision;
 
     new_card.on_click = function() {
-        if (irandom_range(1, 100) <= 100) {
+        if (global.has_relic) {
             instance_create_depth(self.x, self.y, self.depth, obj_relic_loot);
             instance_destroy(obj_card_loot);
-        } else if (irandom_range(1, 100) <= 15) {
+        } else if (global.has_trait) {
             instance_create_depth(self.x, self.y, self.depth, obj_trait_loot);
             instance_destroy(obj_card_loot);
         } else {

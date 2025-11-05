@@ -1,8 +1,12 @@
 if (self.hovered) {
 	// Draw a stroke around the card.
 	draw_sprite_ext(spr_card_stroke_with_blur, 0, self.x + 1, self.y + 2, self.image_xscale, self.image_xscale, image_angle, c_white, 0.5);
-    self.current_depth -= 10000;
-} else {
+    if (self.dropped_area != noone) {
+        self.current_depth = self.dropped_area.depth - 1;    
+    } else {
+        self.current_depth = -10000;
+    }
+} else if (self.state_update == self.state_normal) {
     self.current_depth = self.normal_depth;
 }
 
@@ -25,11 +29,16 @@ if (self.card_data != undefined) {
         draw_set_valign(fa_top);
         draw_set_halign(fa_left);
         
+        scribble($"[b][c_white][scale,{0.01 * self.image_xscale}][spr_{self.card_data.mark.uid}][/s][/c]{self.card_data.type}[/b]")
+            .align(fa_left, fa_top)
+            .scale(self.image_xscale)
+            .draw(self.x - self.sprite_width / 2 + 20 * self.image_xscale, self.y - self.sprite_height / 2 + 20 * self.image_xscale);
+        
         scribble($"[b]{self.card_data.name}[/b]")
             .scale(1.15 * self.image_xscale)
             .wrap(self.sprite_width - 2 * x_padding)
-            .align(fa_center, fa_top)
-            .draw(self.x, text_y);
+            .align(fa_center, fa_bottom)
+            .draw(self.x, self.y);
     }
     
     text_y = self.y + y_padding;
