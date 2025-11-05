@@ -1,3 +1,5 @@
+
+///@desc Create or refresh the drawer and the cards in it
 function make_drawer_and_cards(){
 
 	var scale = 0.5

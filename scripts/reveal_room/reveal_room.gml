@@ -3,20 +3,41 @@ function reveal_room(rm){
     //rm.discovered = true;  // reveal this room
     //trigger_room_event(rm);
 	if (is_struct(rm)) {
-        rm.discovered = true;      // reveal logical room
-		// if its a shop room
-		rm.revealed = true;
-		//rm.visited = true;
-		rm.used = true;
+		if (global.is_tut == false) { // in the actual map not tutorial
+	        rm.discovered = true;      // reveal logical room
+			// if its a shop room
+			rm.revealed = true;
+			//rm.visited = true;
+			rm.used = true;
 		
-		if (rm.room_type == "shop") {
-			handle_shop_cards(rm);
-		}
-		//reveal neighboring rooms as well
-		show_debug_message($"inside reveal_room function, the room is {rm.room_type}")
-		reveal_neighbors(rm);
+			if (rm.room_type == "shop") {
+				handle_shop_cards(rm);
+			}
+			//reveal neighboring rooms as well
+			show_debug_message($"inside reveal_room function, the room is {rm.room_type}")
+			reveal_neighbors(rm);
 
-        trigger_room_event(rm);    // trigger event using the struct
+	        trigger_room_event(rm);    // trigger event using the struct
+		} else {
+			// in the tutorial map
+			reveal_room_in_tut(rm);
+			rm.discovered = true;      // reveal logical room
+			// if its a shop room
+			rm.revealed = true;
+			//rm.visited = true;
+			rm.used = true;
+		
+			if (rm.room_type == "shop") {
+				handle_shop_cards(rm);
+			}
+			
+			if (rm.room_type == "default") {
+				//reaching the end room
+				handle_end_room();
+			}
+			
+			trigger_room_event(rm);
+		}
     } else {
         show_debug_message("ERROR: no valid data struct!");
     }

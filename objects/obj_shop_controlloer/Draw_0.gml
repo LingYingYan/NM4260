@@ -2,7 +2,7 @@ var text = "Shop";
 var txt_w = string_width(text);
 draw_set_font(fnt_header);
 draw_set_color(c_white);
-draw_text(room_width/2 - txt_w , 5, text);
+draw_text(room_width/2 - txt_w , room_height/8, text);
 
 // price text
 draw_set_font(fnt_default);

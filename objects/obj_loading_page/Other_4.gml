@@ -1,0 +1,1 @@
+if (loading_done) instance_destroy();

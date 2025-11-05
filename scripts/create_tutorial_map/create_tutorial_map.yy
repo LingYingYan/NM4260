@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"create_tutorial_map",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"create_tutorial_map",
+  "parent":{
+    "name":"NM4260",
+    "path":"NM4260.yyp",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

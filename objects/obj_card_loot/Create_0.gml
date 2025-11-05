@@ -22,7 +22,11 @@ for (var i = 0; i < 3; i += 1) {
             instance_create_depth(self.x, self.y, self.depth, obj_trait_loot);
             instance_destroy(obj_card_loot);
         } else {
-            obj_room_manager.goto_map();
+            if (!global.in_tut) {
+				obj_room_manager.goto_map();
+			} else {
+				obj_room_manager.goto_tut_map();
+			}
         }
     }
 }
