@@ -85,7 +85,9 @@ start_battle = function() {
     self.draw_pile.shuffle();
     
     // Load enemy
-    self.enemy.data = global.boss_fight ? res_loader_enemies.get_random_boss() : res_loader_enemies.get_random_enemy();
+    self.enemy.data = global.is_tut
+        ? res_loader_enemies.get_enemy_by_id("enemy_cultist")
+        : (global.boss_fight ? res_loader_enemies.get_random_boss() : res_loader_enemies.get_random_enemy());
     self.enemy.initialise();
     
     // START!
@@ -221,6 +223,7 @@ recycle_player_card = function() {
     if (instance_exists(player_card)) {
         player_card.card_data.is_nullified = false;
         self.discard_pile.add(player_card);
+        player_card.state_update = player_card.state_normal;
         player_card.image_xscale = player_card.scale;
         player_card.image_yscale = player_card.scale;
         player_card.grabbable = false; 
@@ -265,6 +268,7 @@ recycle_enemy_card = function() {
     if (instance_exists(enemy_card)) { 
         enemy_card.card_data.is_nullified = false;
         place_card(enemy_card, self.enemy.x, -500);
+        enemy_card.state_update = enemy_card.state_normal;
     }
     
     self.enemy_cards[self.turn_pointer] = noone;

@@ -1,4 +1,4 @@
-if (room == rm_game_start) {
+if (room == rm_game_start || room == rm_main_menu || room == rm_tutorial_start) {
     exit;
 }
 
