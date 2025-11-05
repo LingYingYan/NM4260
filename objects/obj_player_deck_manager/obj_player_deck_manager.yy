@@ -26,7 +26,7 @@
   "physicsShapePoints":[],
   "physicsStartAwake":true,
   "properties":[
-    {"$GMObjectProperty":"v1","%Name":"battle_room","filters":[
+    {"$GMObjectProperty":"v2","%Name":"battle_room","filters":[
         "GMRoom",
       ],"listItems":[],"multiselect":false,"name":"battle_room","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resource":{"name":"rm_battle","path":"rooms/rm_battle/rm_battle.yy",},"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"rm_battle","varType":5,},
   ],

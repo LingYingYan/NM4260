@@ -40,24 +40,38 @@ state_normal = function() {
     }
 }
 
+state_flipped = function() { }
+
 state_flip = function() {
+    if (self.dropped_area != noone) {
+        self.current_depth = self.dropped_area.depth - 1;    
+    } else {
+        self.current_depth = -10000;
+    }
+    
     self.ac_timestamp += delta_time / 500000;
     var animation_x = animcurve_get_channel(self.anim, "xScale");
     var animation_y = animcurve_get_channel(self.anim, "yScale");
     self.image_xscale = self.scale * animcurve_channel_evaluate(animation_x, self.ac_timestamp);
     self.image_yscale = self.scale * animcurve_channel_evaluate(animation_y, self.ac_timestamp);
     if (self.ac_timestamp >= 0.5 && self.reveal < obj_player_state.data.max_vision) {
-        self.normal_depth -= 10000;
+        self.current_depth -= 10000;
         self.reveal = obj_player_state.data.max_vision;
     }
     
     if (self.ac_timestamp >= 1) {
         self.ac_timestamp = 0;
-        self.state_update = self.state_normal;
+        self.state_update = self.state_flipped;
     } 
 }
 
 state_execute = function() {
+    if (self.dropped_area != noone) {
+        self.current_depth = self.dropped_area.depth - 1;    
+    } else {
+        self.current_depth = -10000;
+    }
+    
     self.ac_timestamp += delta_time / 1000000;
     var animation_channel = animcurve_get_channel(self.effect_anim, "scale");
     self.effect_scale = animcurve_channel_evaluate(animation_channel, self.ac_timestamp);
@@ -73,7 +87,7 @@ state_execute = function() {
         var n_effects = self.card_data.get_number_of_effects();
         if (self.effect_pointer >= n_effects) {
             self.effect_pointer = 0;
-            self.state_update = self.state_normal;
+            self.state_update = self.state_flipped;
         }
     } 
 }

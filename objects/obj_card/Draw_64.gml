@@ -1,3 +1,3 @@
-if (self.hovered && self.reveal >= 1) {
+if (self.hovered) {
     draw_tooltip(self.tooltip_text);
 } 

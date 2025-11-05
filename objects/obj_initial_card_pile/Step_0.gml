@@ -8,7 +8,7 @@ repeat (self.count) {
     var card = instance_create_layer(self.x, self.y, "Instances", obj_player_card);
     card.card_data = card_data;
     card.grabbable = false;
-    card.selectable = true;
+    card.selectable = false;
     card.reveal = obj_player_state.data.max_vision
     card.owner = obj_player_state.data;
     self.add(card.id);

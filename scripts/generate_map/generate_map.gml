@@ -76,8 +76,8 @@ function generate_map(generate_new) {
                     if (global.room_grid[ny][nx] != noone) { hasNeighbor = true; break; }
                 }
             }
-            if (!hasNeighbor) {
-                instance_destroy(rm);
+            if (!hasNeighbor) { 
+                // instance_destroy(rm);
 				
                 global.room_grid[r][c] = noone;
             }
@@ -131,7 +131,7 @@ function generate_map(generate_new) {
         for (var c = 0; c < W; c++) {
             var rm = global.room_grid[r][c];
             if (rm != noone && !rm.visited) {
-                instance_destroy(rm);
+                // instance_destroy(rm);
                 global.room_grid[r][c] = noone;
             }
         }

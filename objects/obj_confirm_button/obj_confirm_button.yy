@@ -1,9 +1,7 @@
 {
   "$GMObject":"",
   "%Name":"obj_confirm_button",
-  "eventList":[
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":64,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-  ],
+  "eventList":[],
   "managed":true,
   "name":"obj_confirm_button",
   "overriddenProperties":[

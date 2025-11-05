@@ -196,9 +196,60 @@ function EnemyData(enemy_id, enemy_name, enemy_weight, enemy_hp) : GameCharacter
     name = enemy_name;
     weight = enemy_weight;
     cards = [];
+    cooldown = [];
     
     static parent_add_status = self.add_status;
     static parent_add_marks = self.add_marks;
+    
+    static new_turn = function() {
+        var to_remove = [];
+        for (var i = 0; i < array_length(self.cooldown); i += 1) {
+            self.cooldown[i].time_remaining -= 1;
+            if (self.cooldown[i].time_remaining <= 0) {
+                array_push(self.cards, self.cooldown[i].card_struct);
+                array_push(to_remove, i);
+            }
+        }
+        
+        for (var i = 0; i < array_length(to_remove); i += 1) {
+            array_delete(self.cooldown, to_remove[i], 1);
+        }
+    }
+    
+    static draw = function() {
+        var total_weight = 0;
+        for (var i = 0; i < array_length(self.cards); i += 1) {
+            total_weight += self.cards[i].weight;
+        }
+        
+        var card = undefined;
+        var idx = -1;
+        var select = irandom_range(1, total_weight);
+        var cumulative = 0;
+        for (var i = 0; i < array_length(self.cards); i += 1) {
+            cumulative += self.cards[i].weight;
+            if (cumulative >= select) {
+                card = self.cards[i];
+                idx = i;
+                break;
+            }
+        }
+         
+        if (card == undefined) {
+            card = array_last(self.cards);
+            idx = array_length(self.cards) - 1;
+        }
+        
+        if (card.cooldown > 0) {
+            array_delete(self.cards, idx, 1);
+            array_push(self.cooldown, {
+                card_struct: card,
+                time_remaining: card.cooldown
+            });
+        }
+        
+        return card.data;
+    }
     
     static clone = function() {
         var enemy = new EnemyData(self.uid, self.name, self.weight, self.max_hp);   

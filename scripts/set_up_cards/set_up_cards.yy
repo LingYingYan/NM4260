@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"set_up_cards",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"set_up_cards",
+  "parent":{
+    "name":"Combat",
+    "path":"folders/Scripts/Combat.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -1,3 +1,4 @@
+// Inherit the parent event
 event_inherited();
 
 normal_depth = -20000;

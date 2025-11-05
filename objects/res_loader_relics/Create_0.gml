@@ -11,7 +11,7 @@ read_row = function(r) {
     var rarity = real(read_cell(r, 2));
     var price = real(read_cell(r, 3));
     var desc = read_cell(r, 4);
-    var duration = read_cell(r, 5);
+    var duration = real(read_cell(r, 5));
     
     var relic = new Relic(uid, name, desc, rarity, duration);
     if (struct_exists(self.relic_effects, uid)) {

@@ -1,3 +1,4 @@
+self.image_alpha = 0;
 data = undefined;
 mark_indicators = [];
 status_indicators = [];
@@ -7,7 +8,7 @@ status_indicators_start_x = self.bbox_right - 100;
 indicators_y = self.bbox_top;
 
 is_ticking_status = false;
-status_index = 0;
+status_index = -1;
 status_timer = undefined;
 
 initialise = function() { }
@@ -62,7 +63,7 @@ add_status = function(status, success = true) {
     }));
     
     if (idx >= 0) {
-        self.status_indicators[idx].change_by(status.level);
+        self.status_indicators[idx].is_updating = true;
     } else if (status.level > 0) {
         var inst = instance_create_depth(0, self.indicators_y, self.depth - 1, obj_status);
         inst.initialise(status);
@@ -108,11 +109,9 @@ rearrange_marks = function() {
 rearrange_statuses = function() {
     var to_remove = [];
     for (var i = 0; i < array_length(self.status_indicators); i += 1) {
-        if (!instance_exists(self.status_indicators[i])) {
+        if (!instance_exists(self.status_indicators[i]) || self.status_indicators[i].status.level <= 0) {
             array_push(to_remove, self.status_indicators[i]);
-        } else if (self.status_indicators[i].status.level <= 0) {
-            self.status_indicators[i].status.terminate(self.data);
-        }
+        } 
     }
     
     while (array_length(to_remove) > 0) {
@@ -146,6 +145,8 @@ execute_next_status = function() {
         return;
     }
     
+    self.status_index += 1;
+    show_debug_message($"Execute status {self.status_index}");
     self.is_ticking_status = true;
     self.status_indicators[self.status_index].is_executing = true;
     self.status_indicators[self.status_index].is_updating = true;
@@ -156,14 +157,24 @@ execute_next_status = function() {
 }
 
 state_tick_status = function() {
-    if (instance_exists(self.status_indicators[self.status_index]) && self.status_indicators[self.status_index].is_updating) {
+    if (self.status_index > array_length(self.status_indicators)) {
         return;
     }
     
-    self.status_index += 1;
-    if (self.status_index >= array_length(self.status_indicators)) {
-        self.status_index = 0;
-        if (self.status_timer != undefined) {
+    if (!instance_exists(self.status_indicators[self.status_index])) {
+        return;
+    }
+    
+    if (self.status_indicators[self.status_index].is_updating) {
+        return;
+    }
+    
+    var n_status = array_length(self.status_indicators);
+    show_debug_message($"{n_status} in total!");
+    if (self.status_index >= n_status - 1) {
+        show_debug_message($"All done!");
+        self.status_index = -1;
+        if (!is_undefined(self.status_timer) && time_source_exists(self.status_timer)) {
             time_source_destroy(self.status_timer);
         }
         
@@ -173,8 +184,13 @@ state_tick_status = function() {
         return;
     }
     
-    self.status_timer = time_source_create(time_source_game, 0.5, time_source_units_seconds, self.execute_next_status);
+    self.status_timer = time_source_create(
+        time_source_game, 0.5, time_source_units_seconds, 
+        self.execute_next_status
+    );
+    
     time_source_start(self.status_timer);
+    self.status_update = function() { };
 }
 
 status_update = function() { }

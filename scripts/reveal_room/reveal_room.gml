@@ -51,6 +51,7 @@ function trigger_room_event(room) {
     switch (room.room_type) {
     	case "enemy":
             show_debug_message("Enemy room!");
+			global.boss_fight = false;
             obj_room_manager.goto_battle();
             break;
         case "bonfire":
@@ -73,6 +74,7 @@ function trigger_room_event(room) {
 			break;
 		case "end":
 			show_debug_message("Boss Fight!");
+			global.boss_fight = true;
 			obj_room_manager.goto_battle();
 			break;
     }
