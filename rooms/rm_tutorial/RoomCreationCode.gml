@@ -1,28 +1,17 @@
-global.number_of_completed_combat = 0;
-obj_player_state.reset();
+// layer_set_visible("DeckSelectionScreen", false);
 
-draw_set_font(fnt_default);
-var n = instance_number(res_loader_spreadsheet);
-//for (var i = 0; i < n; i += 1) {
-//    var loader = instance_find(res_loader_spreadsheet, i);
-//    loader.load();
-//}
-
-if (!res_loader_cards.is_loaded) {
-    res_loader_cards.load();
+var deck = obj_player_deck_manager.denumerate();
+for (var i = 0; i < array_length(deck); i += 1) {
+    show_debug_message(deck[i].name);
+	show_debug_message($"Length of player deck {array_length(deck)}");
 }
 
-if (!res_loader_enemies.is_loaded) {
-    res_loader_enemies.load();
+obj_room_manager.goto_tut_map();
+obj_player_state.initialise();
+var relic_cards = obj_player_deck_manager.get_all_relic_cards();
+for (var i = 0; i < array_length(relic_cards); i += 1) {
+    relic_cards[i].scale = 0.66;
+    relic_cards[i].image_xscale = 0.66;
+    relic_cards[i].image_yscale = 0.66;
+    obj_hand.add(relic_cards[i].id);
 }
-
-if (!res_loader_relics.is_loaded) {
-    res_loader_relics.load();
-}
-
-if (!res_loader_traits.is_loaded) {
-    res_loader_traits.load();
-}
-
-//obj_room_manager.goto_deck_selection();
-//global.timestamp = 0;

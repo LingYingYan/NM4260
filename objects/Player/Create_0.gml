@@ -1,7 +1,10 @@
 target_x = x;
 target_y = y;
-speed = 0;
 move_speed = 6;
+
+path_rooms = [];
+current_target_index = -1;
+moving = false;
 
 current_room = noone;
 prev_room = noone;

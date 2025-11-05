@@ -13,6 +13,12 @@ goto_map = function() {
     }
 }
 
+goto_tut_map = function() {
+	if (room != rm_tutorial) {
+		trigger_room_transition(rm_tutorial, c_white);
+	}
+}
+
 goto_deck_selection = function() {
     if (room != rm_game_start) {
 		//trigger_room_transition(rm_game_start);

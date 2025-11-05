@@ -3,7 +3,7 @@ if (mouse_check_button_pressed(mb_left)) {
         // yes option --> go to tutorial
 		var loading_tut = instance_create_layer(room_width/2, room_height/2,"Instances", obj_loading_page);
 		loading_tut.text_msg = "Starting Tutorial...";
-		loading_tut.next_room = rm_tutorial;
+		loading_tut.next_room = rm_tutorial_start;
 		global.is_tut = true;
 		instance_destroy();
     } else if (point_in_rectangle(mouse_x, mouse_y, no_button_x1, no_button_y1, no_button_x2, no_button_y2)) {

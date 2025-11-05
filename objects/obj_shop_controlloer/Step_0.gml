@@ -115,8 +115,11 @@ var my = device_mouse_y_to_gui(0);
 
 if (mouse_check_button_pressed(mb_left)) {
     if (point_in_rectangle(mx, my, 40, 40, 160, 90)) {
-		
-        obj_room_manager.goto_map();
+		if (!global.in_tut) {
+			obj_room_manager.goto_map();
+		} else {
+			obj_room_manager.goto_tut_map();
+		}
     }
 }
 

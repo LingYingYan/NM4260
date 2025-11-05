@@ -41,7 +41,7 @@ function create_tutorial_map(){
 			
             global.room_grid[row][col] = rm;
 			if (rm != noone) {
-				var vis = instance_create_layer(col * S + global.map_offset_x, row * S + global.map_offset_y, "Instances", DungeonRoom);
+				var vis = instance_create_layer(col * S + offset_x, row * S + offset_y, "Instances", DungeonRoom);
 				vis.data = rm; // link the visual to the data struct
 			}
 		}
@@ -64,6 +64,7 @@ function create_tutorial_map(){
 	
 	global.map_inited = true;
 	global.start_room = start_room;
+	global.in_tut = true;
 }
 
 function create_tutorial_player() {
@@ -103,5 +104,7 @@ function handle_end_room() {
 	var loading = instance_create_layer(room_width/2, room_height/2,"Instances", obj_loading_page);
 	loading.text_msg = "Congratulations! Are you ready for the real challenge?...";
 	loading.next_room = rm_game_start;
-	reset_all_global();
+	global.is_tut = false;
+	//reset_all_global();
+	show_debug_message("resetting all global variables");
 }

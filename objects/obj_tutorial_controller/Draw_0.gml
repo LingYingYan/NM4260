@@ -4,6 +4,7 @@ for (var r = 0; r < global.GRID_H; r++) {
     for (var c = 0; c < global.GRID_W; c++) {
         var rm = global.room_grid[r][c];
         if (rm == noone) continue;
+		if (rm.room_type == "encounter" && rm.used) encounter_used = true;
 
 
         for (var i = 0; i < array_length(rm.neighbors); i++) {
@@ -14,4 +15,27 @@ for (var r = 0; r < global.GRID_H; r++) {
 							nb.y + global.map_offset_y, 10);
         }
     }
+}
+
+var enemy_x = 3 * global.ROOM_SIZE + global.map_offset_x;
+var enemy_y = 3 * global.ROOM_SIZE + global.map_offset_y;
+
+var encounter_x = 3 * global.ROOM_SIZE + global.map_offset_x;
+var encounter_y = 2 * global.ROOM_SIZE + global.map_offset_y;
+
+var enemy_hidden_x = 4 * global.ROOM_SIZE + global.map_offset_x;
+var enemy_hidden_y = 2 * global.ROOM_SIZE + global.map_offset_y;
+
+var shop_x = 3 * global.ROOM_SIZE + global.map_offset_x;
+var shop_y = 1 * global.ROOM_SIZE + global.map_offset_y;
+
+draw_set_color(c_black);
+draw_arrow(room_width/3 * 2 - 40, room_height/2 - 40, encounter_x + 40, encounter_y + 40, 40);
+
+draw_arrow(room_width/3 + 40,  room_height/3 * 2 + 40, enemy_x - 40, enemy_y, 40);
+
+if (encounter_used) {
+	label_discover.visible = true;
+	//draw_arrow(room_width/3 + 40, room_height/3, enemy_hidden_x - 40, enemy_hidden_y - 40, 40);
+	//draw_arrow(room_width/3 + 40, room_height/3, shop_x - 40, shop_x, 40);
 }

@@ -26,6 +26,10 @@ obj_confirm_button.on_click = function() {
         instance_destroy(obj_relic_loot);
         instance_destroy(obj_relic_card);
     } else {
-        obj_room_manager.goto_map();
+        if (!global.in_tut) {
+			obj_room_manager.goto_map();
+		} else {
+			obj_room_manager.goto_tut_map();
+		}
     }
 }
