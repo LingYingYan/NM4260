@@ -25,16 +25,28 @@ if (self.card_data != undefined) {
         draw_set_valign(fa_top);
         draw_set_halign(fa_left);
         
-        scribble($"[b]{self.card_data.name}[/b]")
-            .scale(1.15 * self.image_xscale)
+        var scribble_text = scribble($"[b]{self.card_data.name}[/b]")
             .wrap(self.sprite_width - 2 * x_padding)
-            .align(fa_center, fa_top)
-            .draw(self.x, text_y);
+            .align(fa_center, fa_bottom);
+        var text_scale = min(
+            self.sprite_width / scribble_text.get_width(), 
+            1.15 * self.image_xscale,
+            self.sprite_height / scribble_text.get_height()
+        );
+        
+        scribble_text.scale(text_scale).draw(self.x, self.y);
     }
     
     text_y = self.y + y_padding;
-    var scribble_text = scribble($"{self.card_data.desc}\n(Click to activate the relic)").wrap(self.sprite_width - 2 * x_padding).scale(self.image_xscale);
-    scribble_text.draw(text_x, text_y);
+    
+    var scribble_text = scribble($"{self.card_data.desc}\n({room == rm_shop ? "Click to purchase" : "Click to activate"})")
+        .wrap(self.sprite_width - 2 * x_padding);
+    var text_scale = min(
+        self.sprite_width / scribble_text.get_width(), 
+        self.image_xscale,
+        self.sprite_height / scribble_text.get_height()
+    );
+    scribble_text.scale(text_scale).draw(text_x, text_y);
     
     var region = scribble_text.region_detect(text_x, text_y, device_mouse_x_to_gui(0), device_mouse_y_to_gui(0));
     if (region == undefined) {

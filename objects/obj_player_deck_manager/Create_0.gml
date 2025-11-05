@@ -123,5 +123,6 @@ clear = function() {
     ds_map_clear(self.__private.card_names_to_count);
     ds_map_clear(self.__private.card_names_to_data);
     ds_map_clear(self.__private.card_rarity_to_name);
+    self.__private.relics = [];
     size = 0;
 }
