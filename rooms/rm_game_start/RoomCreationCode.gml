@@ -1,1 +1,1 @@
-
+obj_player_state.reset();

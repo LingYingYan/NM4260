@@ -7,7 +7,7 @@ if (room == rm_shop) {
 	show_debug_message("Relics marked selected")
 } 
 
-if (room != Room1) {
+if (room != Room1 && room != rm_tutorial) {
     exit;
 }
 
