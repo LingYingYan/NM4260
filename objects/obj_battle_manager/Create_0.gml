@@ -67,6 +67,11 @@ player_win = function() {
     
     global.number_of_completed_combat += 1;
     self.player.data.remove_expired_relics();
+	
+	// if the current room is boss-fight --> create the player success panel
+	if (global.boss_fight) {
+		
+	}
 }
 
 start_battle = function() {

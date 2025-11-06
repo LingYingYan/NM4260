@@ -14,7 +14,9 @@ function reveal_room(rm){
 				handle_shop_cards(rm);
 			}
 			//reveal neighboring rooms as well
-			show_debug_message($"inside reveal_room function, the room is {rm.room_type}")
+			show_debug_message($"DEBUGG: inside reveal_room function, the room is {rm.room_type}")
+			show_debug_message($"and distance between the room and start room is {find_distance_from_start(rm, global.start_room)}");
+			
 			reveal_neighbors(rm);
 
 	        trigger_room_event(rm);    // trigger event using the struct
@@ -53,6 +55,7 @@ function trigger_room_event(room) {
             show_debug_message("Enemy room!");
 			global.boss_fight = false;
             obj_room_manager.goto_battle();
+			show_debug_message($"DEBUGG: The furthest differece from start room is {global.dist_start_end}");
             break;
         case "bonfire":
             show_debug_message("Bonfire room!");

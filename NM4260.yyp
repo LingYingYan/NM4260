@@ -182,6 +182,7 @@
     {"id":{"name":"obj_start_game_run_button","path":"objects/obj_start_game_run_button/obj_start_game_run_button.yy",},},
     {"id":{"name":"obj_status_indicator","path":"objects/obj_status_indicator/obj_status_indicator.yy",},},
     {"id":{"name":"obj_status","path":"objects/obj_status/obj_status.yy",},},
+    {"id":{"name":"obj_success_panel","path":"objects/obj_success_panel/obj_success_panel.yy",},},
     {"id":{"name":"obj_tooltip","path":"objects/obj_tooltip/obj_tooltip.yy",},},
     {"id":{"name":"obj_trait_loot","path":"objects/obj_trait_loot/obj_trait_loot.yy",},},
     {"id":{"name":"obj_trait","path":"objects/obj_trait/obj_trait.yy",},},

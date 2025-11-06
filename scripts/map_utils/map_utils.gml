@@ -103,32 +103,6 @@ function assign_room_types_and_icons(assign_existing_room_types) {
 	}
 
 
-    //for (var i = 0; i < array_length(rooms); i++) {
-    //    var rm = rooms[i];
-
-    //    if (i == 0) {
-    //        rm.room_type = "bonfire";
-	//		rm.is_bonfire_used = false;
-    //        with (rm) update_room_icon();
-    //    } else if (i < 3) { //
-    //        rm.room_type = "treasure";
-    //        with (rm) update_room_icon();
-    //    } else if (i < 5) {
-	//		rm.room_type = "shop";
-	//		rm.room_name = "shop" + string(i-2); //naming shops shop1 and shop2
-	//		with (rm) update_room_icon();
-	//	} else if (i < 15) {
-	//		rm.room_type = "enemy";
-	//        with (rm) update_room_icon();
-	//	} else if (i < 18) {
-	//		rm.room_type = "encounter";
-	//		with(rm) update_room_icon();
-	//	} else {
-    //        rm.room_type = "default";
-    //        with (rm) update_room_icon();
-    //    }
-    //}
-
     return rooms; // return ordered list (rooms[0] is bonfire)
 }
 
@@ -184,7 +158,45 @@ function find_furthest_room(start_room) {
     ds_map_destroy(dist_map);
     ds_queue_destroy(queue);
 
-    return furthest_room;
+    return [furthest_room, max_dist];
+}
+
+/// @desc Find the distance between the target room and the start room
+function find_distance_from_start(target_room, start_room) {
+	if (!is_struct(start_room) || !is_struct(target_room)) return -1;
+
+    var dist_map = ds_map_create();
+    var queue = ds_queue_create();
+
+    ds_queue_enqueue(queue, start_room);
+    ds_map_add(dist_map, start_room, 0);
+
+    var found_distance = -1; // default return -1
+
+    while (!ds_queue_empty(queue)) {
+        var current = ds_queue_dequeue(queue);
+        var curr_dist = dist_map[? current];
+
+        // Stop if reached the target
+        if (current.grid_x == target_room.grid_x && current.grid_y == target_room.grid_y) {
+            found_distance = curr_dist;
+            break;
+        }
+
+        // Explore neighbors
+        for (var i = 0; i < array_length(current.neighbors); i++) {
+            var nb = current.neighbors[i];
+            if (!ds_map_exists(dist_map, nb)) {
+                ds_map_add(dist_map, nb, curr_dist + 1);
+                ds_queue_enqueue(queue, nb);
+            }
+        }
+    }
+	
+    ds_map_destroy(dist_map);
+    ds_queue_destroy(queue);
+
+    return found_distance;
 }
 
 function connect_start_end_and_spawn_player(spawn_at_bonfire) {
@@ -216,7 +228,9 @@ function connect_start_end_and_spawn_player(spawn_at_bonfire) {
 
 	
 	// find the end room
-	global.end_room = find_furthest_room(global.start_room);
+	res = find_furthest_room(global.start_room);
+	global.end_room = res[0];
+	global.dist_start_end = res[1];
 
 	// Mark it as end
 	if (is_struct(global.end_room)) {
