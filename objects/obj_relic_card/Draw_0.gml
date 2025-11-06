@@ -1,13 +1,15 @@
 if (self.hovered) {
 	// Draw a stroke around the card.
-	draw_sprite_ext(spr_card_stroke_with_blur, 0, self.x + 1, self.y + 2, self.image_xscale, self.image_xscale, image_angle, c_white, 0.5);
+	draw_sprite_ext(spr_card_stroke_with_blur, 0, self.x + 1, self.y + 2 + self.hover_yoffset, self.image_xscale, self.image_xscale, image_angle, c_white, 0.5);
     self.current_depth -= 10000;
 } else {
     self.current_depth = self.normal_depth;
 }
 
 self.depth = self.current_depth;
-draw_self();
+//draw_self(); 
+// replace the draw_self()
+draw_sprite_ext(spr_card_demo, 0, self.x, self.y + self.hover_yoffset, self.image_xscale, self.image_xscale, 0, -1, 1);
 if (self.card_data != undefined) {
     var x_padding = 25 * self.image_xscale;
     var y_padding = 25 * self.image_yscale;
@@ -19,7 +21,7 @@ if (self.card_data != undefined) {
         draw_set_valign(fa_middle);
         
         if (sprite_exists(self.card_data.sprite)) {
-            draw_sprite_ext(self.card_data.sprite, self.image_index, self.x, self.y - self.sprite_height / 4 + y_padding, self.image_xscale, self.image_yscale, 0, -1, 1);
+            draw_sprite_ext(self.card_data.sprite, self.image_index, self.x, self.y - self.sprite_height / 4 + y_padding + self.hover_yoffset, self.image_xscale, self.image_yscale, 0, -1, 1);
         }
         
         draw_set_valign(fa_top);
@@ -37,7 +39,7 @@ if (self.card_data != undefined) {
         scribble_text.scale(text_scale).draw(self.x, self.y);
     }
     
-    text_y = self.y + y_padding;
+    text_y = self.y + y_padding + self.hover_yoffset; 
     
     var scribble_text = scribble($"{self.card_data.desc}\n({room == rm_shop ? "Click to purchase" : "Click to activate"})")
         .wrap(self.sprite_width - 2 * x_padding);
