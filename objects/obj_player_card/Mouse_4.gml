@@ -8,10 +8,14 @@ if (self.grabbable) {
 } else if (self.selectable) {
     obj_mouse_manager.update_looking_at();
     if (obj_mouse_manager.looking_at == self.id) {
+        show_debug_message($"Clicking on card with depth {self.depth}");
+        global.pause = true;
         if (obj_hand.contains(self.id)) {
             obj_card_selector.put_back(self.id);
         } else {
 		    obj_card_selector.pick(self.id);
         }
 	}
+    
+    global.pause = false;
 }

@@ -11,6 +11,7 @@
   "defaultScriptType":1,
   "Folders":[
     {"$GMFolder":"","%Name":"Animation Curves","folderPath":"folders/Animation Curves.yy","name":"Animation Curves","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"Weight Curves","folderPath":"folders/Animation Curves/Weight Curves.yy","name":"Weight Curves","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Utility Curves","folderPath":"folders/Animation Curves/Utility Curves.yy","name":"Utility Curves","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Coroutines","folderPath":"folders/Coroutines.yy","name":"Coroutines","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"(System)","folderPath":"folders/Coroutines/(System).yy","name":"(System)","resourceType":"GMFolder","resourceVersion":"2.0",},
@@ -102,6 +103,8 @@
     {"id":{"name":"ac_enemy_weight_distance_coefficient","path":"animcurves/ac_enemy_weight_distance_coefficient/ac_enemy_weight_distance_coefficient.yy",},},
     {"id":{"name":"ac_icon_scaling","path":"animcurves/ac_icon_scaling/ac_icon_scaling.yy",},},
     {"id":{"name":"ac_text_enlarge","path":"animcurves/ac_text_enlarge/ac_text_enlarge.yy",},},
+    {"id":{"name":"enemy_distance_weight","path":"animcurves/enemy_distance_weight/enemy_distance_weight.yy",},},
+    {"id":{"name":"enemy_win_count_weight","path":"animcurves/enemy_win_count_weight/enemy_win_count_weight.yy",},},
     {"id":{"name":"utility_attack","path":"animcurves/utility_attack/utility_attack.yy",},},
     {"id":{"name":"utility_buff_statuses_on_player","path":"animcurves/utility_buff_statuses_on_player/utility_buff_statuses_on_player.yy",},},
     {"id":{"name":"utility_buff_statuses_on_self","path":"animcurves/utility_buff_statuses_on_self/utility_buff_statuses_on_self.yy",},},

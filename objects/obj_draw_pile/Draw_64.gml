@@ -4,3 +4,6 @@ if (position_meeting(mouse_x, mouse_y, self.id)) {
                       $"You currently have [b]{self.size()}[/b] cards remaining in the Draw Pile.";
     draw_tooltip(tooltip_text);
 } 
+
+draw_circle_color(self.bbox_right, self.bbox_top, 25, c_teal, c_teal, false);
+scribble($"[b][c_white]{self.size()}[/c][/b]").align(fa_center, fa_middle).draw(self.bbox_right, self.bbox_top);
