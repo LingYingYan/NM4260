@@ -1,13 +1,18 @@
 if (self.hovered) {
 	// Draw a stroke around the card.
-	draw_sprite_ext(spr_card_stroke_with_blur, 0, self.x + 1, self.y + 2, self.image_xscale, self.image_xscale, image_angle, c_white, 0.5);
+	// draw_sprite_ext(spr_card_stroke_with_blur, 0, self.x + 1, self.y + 2, self.image_xscale, self.image_xscale, image_angle, c_white, 0.5);
     if (self.dropped_area != noone) {
         self.current_depth = self.dropped_area.depth - 1;    
     } else {
         self.current_depth = -10000;
     }
-} else if (self.state_update == self.state_normal) {
-    self.current_depth = self.normal_depth;
+    
+    self.image_blend = -1;
+} else {
+    self.image_blend = c_ltgray;
+    if (self.state_update == self.state_normal) {
+        self.current_depth = self.normal_depth;
+    }
 }
 
 self.depth = self.current_depth;

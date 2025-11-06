@@ -1,0 +1,35 @@
+{
+  "$GMAnimCurve":"",
+  "%Name":"enemy_win_count_weight",
+  "channels":[
+    {"$GMAnimCurveChannel":"","%Name":"enemy_wraith","colour":4290799884,"name":"enemy_wraith","points":[
+        {"th0":-0.1,"th1":0.050393857,"tv0":0.0,"tv1":-0.24624842,"x":0.0,"y":1.0,},
+        {"th0":-0.13443792,"th1":0.2225801,"tv0":0.16083439,"tv1":-0.266283,"x":0.33,"y":0.25,},
+        {"th0":-0.06381458,"th1":0.1,"tv0":0.0,"tv1":0.0,"x":1.0,"y":0.0,},
+      ],"resourceType":"GMAnimCurveChannel","resourceVersion":"2.0","visible":true,},
+    {"$GMAnimCurveChannel":"","%Name":"enemy_cultist","colour":4281083598,"name":"enemy_cultist","points":[
+        {"th0":-0.1,"th1":0.060431574,"tv0":0.0,"tv1":-0.1661129,"x":0.0,"y":1.0,},
+        {"th0":-0.13964204,"th1":0.23161367,"tv0":0.14652517,"tv1":-0.24303018,"x":0.33,"y":0.33,},
+        {"th0":-0.06628597,"th1":0.1,"tv0":0.0,"tv1":0.0,"x":1.0,"y":0.0,},
+      ],"resourceType":"GMAnimCurveChannel","resourceVersion":"2.0","visible":true,},
+    {"$GMAnimCurveChannel":"","%Name":"enemy_necromancer_apprentice","colour":4279025727,"name":"enemy_necromancer_apprentice","points":[
+        {"th0":-0.1,"th1":0.17114672,"tv0":0.0,"tv1":0.0,"x":0.0,"y":0.25,},
+        {"th0":-0.11775617,"th1":0.23691894,"tv0":-0.27565348,"tv1":0.55459964,"x":0.33,"y":1.0,},
+        {"th0":-0.0509907,"th1":0.1,"tv0":0.0,"tv1":0.0,"x":1.0,"y":1.5,},
+      ],"resourceType":"GMAnimCurveChannel","resourceVersion":"2.0","visible":true,},
+    {"$GMAnimCurveChannel":"","%Name":"enemy_corrupted_alchemist","colour":4279234797,"name":"enemy_corrupted_alchemist","points":[
+        {"th0":-0.1,"th1":0.050566103,"tv0":0.0,"tv1":0.0,"x":0.0,"y":0.0,},
+        {"th0":-0.13472034,"th1":0.04019311,"tv0":-0.53470004,"tv1":0.15952498,"x":0.33,"y":0.5,},
+        {"th0":-0.098579586,"th1":0.13517524,"tv0":-0.2333852,"tv1":0.3200247,"x":0.66,"y":1.5,},
+        {"th0":-0.059369326,"th1":0.1,"tv0":0.0015547276,"tv1":0.0,"x":1.0,"y":2.0,},
+      ],"resourceType":"GMAnimCurveChannel","resourceVersion":"2.0","visible":true,},
+  ],
+  "function":2,
+  "name":"enemy_win_count_weight",
+  "parent":{
+    "name":"Weight Curves",
+    "path":"folders/Animation Curves/Weight Curves.yy",
+  },
+  "resourceType":"GMAnimCurve",
+  "resourceVersion":"2.0",
+}

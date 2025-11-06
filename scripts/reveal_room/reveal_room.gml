@@ -50,6 +50,8 @@ function reveal_room(rm){
  * Triggers the room event based on room type
  */
 function trigger_room_event(room) {
+	var dist = find_distance_from_start(room, global.start_room);
+    global.normalised_dist = dist / global.dist_start_end;
     switch (room.room_type) {
     	case "enemy":
             show_debug_message("Enemy room!");
