@@ -472,6 +472,7 @@
     {"id":{"name":"spr_burn","path":"sprites/spr_burn/spr_burn.yy",},},
     {"id":{"name":"spr_button","path":"sprites/spr_button/spr_button.yy",},},
     {"id":{"name":"spr_card_demo","path":"sprites/spr_card_demo/spr_card_demo.yy",},},
+    {"id":{"name":"spr_card_fireball","path":"sprites/spr_card_fireball/spr_card_fireball.yy",},},
     {"id":{"name":"spr_card_stroke_blur","path":"sprites/spr_card_stroke_blur/spr_card_stroke_blur.yy",},},
     {"id":{"name":"spr_card_stroke_with_blur","path":"sprites/spr_card_stroke_with_blur/spr_card_stroke_with_blur.yy",},},
     {"id":{"name":"spr_card_stroke","path":"sprites/spr_card_stroke/spr_card_stroke.yy",},},
