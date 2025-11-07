@@ -156,6 +156,8 @@ start_player_turn = function() {
             
         put_card_to_slot(array_pop(cards), self.enemy_card_slots[i]);
     }
+    
+    self.draw_pile.shuffle();
         
     // Player draws
     repeat(5) {
