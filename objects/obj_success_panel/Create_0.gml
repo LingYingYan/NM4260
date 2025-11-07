@@ -22,18 +22,26 @@ game_summary_text = $"[b]You died.[/b]\nNumber of enemies defeated: {global.numb
 game_summary = scribble(self.game_summary_text)
     .align(fa_center, fa_top);
 
-obj_confirm_button.visible = true;
-obj_confirm_button.on_click = function() {
-    if (!is_undefined(self.to_discard)) {
-        var idx = array_get_index(global.persistent_traits, self.to_discard);
-        array_delete(global.persistent_traits, idx, 1);
-    }
+//var main_menu = instance_create_layer(self.x, self.y - 0.2 * room_height, "Instances", obj_main_menu_button);
+//main_menu.visible = true;
+//main_menu.depth = self.depth -1;
+
+obj_main_menu_button.visible = true;
+obj_main_menu_button.x = room_width/2;
+obj_main_menu_button.y = room_height/2;
+obj_main_menu_button.button_text = "Main Menu"
+obj_main_menu_button.on_click = function() {
+	trigger_room_transition(rm_main_menu, c_black);
+    //if (!is_undefined(self.to_discard)) {
+    //    var idx = array_get_index(global.persistent_traits, self.to_discard);
+    //    array_delete(global.persistent_traits, idx, 1);
+    //}
     
-    if (!is_undefined(self.new_persistent)) {
-        array_push(global.persistent_traits, self.new_persistent);
-    }
+    //if (!is_undefined(self.new_persistent)) {
+    //    array_push(global.persistent_traits, self.new_persistent);
+    //}
     
-    obj_room_manager.goto_deck_selection();
+//    obj_room_manager.goto_deck_selection();
 }
 
 var n_traits = array_length(obj_player_state.data.traits);

@@ -11,8 +11,8 @@
   "defaultScriptType":1,
   "Folders":[
     {"$GMFolder":"","%Name":"Animation Curves","folderPath":"folders/Animation Curves.yy","name":"Animation Curves","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Weight Curves","folderPath":"folders/Animation Curves/Weight Curves.yy","name":"Weight Curves","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Utility Curves","folderPath":"folders/Animation Curves/Utility Curves.yy","name":"Utility Curves","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"Weight Curves","folderPath":"folders/Animation Curves/Weight Curves.yy","name":"Weight Curves","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Coroutines","folderPath":"folders/Coroutines.yy","name":"Coroutines","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"(System)","folderPath":"folders/Coroutines/(System).yy","name":"(System)","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Tapping your head + rubbing your tummy is two coroutines","folderPath":"folders/Coroutines/(System)/Tapping your head + rubbing your tummy is two coroutines.yy","name":"Tapping your head + rubbing your tummy is two coroutines","resourceType":"GMFolder","resourceVersion":"2.0",},
@@ -162,6 +162,7 @@
     {"id":{"name":"obj_initial_card_pile","path":"objects/obj_initial_card_pile/obj_initial_card_pile.yy",},},
     {"id":{"name":"obj_loading_page","path":"objects/obj_loading_page/obj_loading_page.yy",},},
     {"id":{"name":"obj_loot_panel","path":"objects/obj_loot_panel/obj_loot_panel.yy",},},
+    {"id":{"name":"obj_main_menu_button","path":"objects/obj_main_menu_button/obj_main_menu_button.yy",},},
     {"id":{"name":"obj_mark","path":"objects/obj_mark/obj_mark.yy",},},
     {"id":{"name":"obj_modal_backdrop","path":"objects/obj_modal_backdrop/obj_modal_backdrop.yy",},},
     {"id":{"name":"obj_mouse_debugger","path":"objects/obj_mouse_debugger/obj_mouse_debugger.yy",},},

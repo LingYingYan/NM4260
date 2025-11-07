@@ -5,6 +5,7 @@ global.map_inited = false;
 
 global.in_tut = false; // if in tutorial, change the reveal_room etc
 global.dist_start_end = -1; //default is -1
+global.num_enemy_rooms = -1;
 
 global.GRID_W = 6;
 global.GRID_H = 5;

@@ -58,20 +58,22 @@ player_win = function() {
     self.player.data.vision += 1;
     self.player.data.vision = min(self.player.data.vision, self.player.max_vision);
     self.end_battle();
-
-    obj_backdrop.visible = true;
-    // Create new cards to pick
-    global.has_relic = global.boss_fight || irandom_range(1, 100) <= 25;
-    global.has_trait = global.boss_fight || irandom_range(1, 100) <= 15;
-    instance_create_layer(room_width / 2, room_height / 2, "Instances", obj_card_loot);
-    
-    global.number_of_completed_combat += 1;
-    self.player.data.remove_expired_relics();
 	
-	// if the current room is boss-fight --> create the player success panel
 	if (global.boss_fight) {
-		
+		instance_create_layer(room_width / 2, room_height / 2, "Instances", obj_success_panel);
+		show_debug_message("INSIDE boss fight");
+	} else {
+
+	    obj_backdrop.visible = true;
+	    // Create new cards to pick
+	    global.has_relic = global.boss_fight || irandom_range(1, 100) <= 25;
+	    global.has_trait = global.boss_fight || irandom_range(1, 100) <= 15;
+	    instance_create_layer(room_width / 2, room_height / 2, "Instances", obj_card_loot);
+    
+	    global.number_of_completed_combat += 1;
+	    self.player.data.remove_expired_relics();
 	}
+	
 }
 
 start_battle = function() {

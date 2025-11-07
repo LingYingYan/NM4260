@@ -41,6 +41,7 @@ function assign_room_types_and_icons(assign_existing_room_types) {
     rooms = array_shuffle(rooms);
 	
 	var shop_count = 1;
+	var enemy_count = 0;
 	
 	if (!assign_existing_room_types) {
 		// assigning new room types
@@ -50,6 +51,7 @@ function assign_room_types_and_icons(assign_existing_room_types) {
 		    // 50% chance = enemy
 		    if (random(1) < 0.5) {
 		        rm.room_type = "enemy";
+				enemy_count ++;
 		    } 
 		    else {
 		        // for the remaining 50%, Treasure : Shop : Encounter = 2 : 2 : 3
@@ -103,6 +105,8 @@ function assign_room_types_and_icons(assign_existing_room_types) {
 	}
 
 
+	//save the global variable num_enemy_rooms
+	global.num_enemy_rooms = enemy_count;
     return rooms; // return ordered list (rooms[0] is bonfire)
 }
 

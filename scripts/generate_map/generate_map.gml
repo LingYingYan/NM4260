@@ -16,8 +16,6 @@ function generate_map(generate_new) {
 	global.map_offset_x = offset_x;
 	global.map_offset_y = offset_y;
 	
-
-	
 	global.room_grid = array_create(H);
     for (var r = 0; r < H; r++) global.room_grid[r] = array_create(W);
     
