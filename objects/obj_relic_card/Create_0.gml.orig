@@ -9,7 +9,10 @@ sold = false;
 
 hovered = false;
 hover_scale = 1;
+<<<<<<< HEAD
+=======
 hover_yoffset = 0;
 
 image_xscale = 1;
 image_yscale = 1;
+>>>>>>> f793301e027c58c3cafbf1ed2d9f5c3f30cee881

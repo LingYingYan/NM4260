@@ -17,5 +17,5 @@ function put_card_to_slot(card, slot) {
     place_card(card, slot.x, slot.y);
     slot.card = card;
     card.dropped_area = slot;
-    set_card_depth(card, slot.depth + 1);
+    set_card_depth(card, slot.depth - 1);
 }

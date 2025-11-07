@@ -1,6 +1,23 @@
 event_inherited();
 
 
+<<<<<<< HEAD
+if (room == Room1 || room == rm_tutorial) {
+	// in the maps, if hovered --> move up
+	//var target_y = self.y + 100;
+	//var original_y = self.y;
+	if (self.hovered) {
+	    self.y = lerp(self.y, self.y + 100, 1); // grow smoothly
+	} else {
+	    self.y = lerp(self.y, self.y - 100, 1); // shrink smoothly
+	}
+} else if (room == rm_shop) {
+	//inside shop
+	if (hovered) {
+	    self.hover_scale = lerp(hover_scale, 1.1, 0.15); // grow smoothly
+	} else {
+	    self.hover_scale = lerp(hover_scale, 1.0, 0.15); // shrink smoothly
+=======
 if (room == rm_shop) {
 	if (self.hovered) {
 	    self.hover_scale = lerp(self.hover_scale, 1.1, 0.15); // grow smoothly
@@ -14,6 +31,7 @@ if (room == rm_shop) {
 		self.hover_yoffset = lerp(self.hover_yoffset, -50, 0.15);
 	} else {
 		self.hover_yoffset = lerp(self.hover_yoffset, 0, 0.15);
+>>>>>>> f793301e027c58c3cafbf1ed2d9f5c3f30cee881
 	}
 }
 

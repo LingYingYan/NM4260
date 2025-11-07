@@ -1,5 +1,5 @@
 // If the cursor is over us
-if (collision_point(mouse_x, mouse_y, self, false, false) != noone) {
+if (collision_point(mouse_x, mouse_y, self, false, false) == self.id) {
 	self.moused = true;
 } else {
 	self.moused = false;

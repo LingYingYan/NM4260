@@ -1,21 +1,18 @@
 {
   "$GMObject":"",
-  "%Name":"obj_discard_pile",
+  "%Name":"obj_success_panel",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":64,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_discard_pile",
+  "name":"obj_success_panel",
   "overriddenProperties":[],
   "parent":{
-    "name":"Cards",
-    "path":"folders/Objects/Cards.yy",
+    "name":"Game Characters",
+    "path":"folders/Objects/Game Characters.yy",
   },
-  "parentObjectId":{
-    "name":"obj_card_pile",
-    "path":"objects/obj_card_pile/obj_card_pile.yy",
-  },
+  "parentObjectId":null,
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
@@ -34,8 +31,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_card_stroke",
-    "path":"sprites/spr_card_stroke/spr_card_stroke.yy",
+    "name":"spr_panel",
+    "path":"sprites/spr_panel/spr_panel.yy",
   },
   "spriteMaskId":null,
   "visible":true,

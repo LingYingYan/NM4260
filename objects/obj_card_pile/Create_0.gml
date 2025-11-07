@@ -7,7 +7,7 @@ size = function() {
 add = function(card) {
     place_card(card, self.x, self.y);
     if (self.size() == 0) {
-        set_card_depth(card, self.depth + 99);
+        set_card_depth(card, self.depth - 1);
         show_debug_message($"Card {card} depth: {card.normal_depth}");
     } else {
         set_card_depth(card, array_last(self.cards).normal_depth - 1);
