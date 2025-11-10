@@ -158,6 +158,7 @@
     {"id":{"name":"obj_floating_text","path":"objects/obj_floating_text/obj_floating_text.yy",},},
     {"id":{"name":"obj_gameInit","path":"objects/obj_gameInit/obj_gameInit.yy",},},
     {"id":{"name":"obj_hand","path":"objects/obj_hand/obj_hand.yy",},},
+    {"id":{"name":"obj_help","path":"objects/obj_help/obj_help.yy",},},
     {"id":{"name":"obj_hint_textbox","path":"objects/obj_hint_textbox/obj_hint_textbox.yy",},},
     {"id":{"name":"obj_initial_card_pile","path":"objects/obj_initial_card_pile/obj_initial_card_pile.yy",},},
     {"id":{"name":"obj_loading_page","path":"objects/obj_loading_page/obj_loading_page.yy",},},

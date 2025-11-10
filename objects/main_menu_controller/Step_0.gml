@@ -1,4 +1,5 @@
 hover_index = -1;
+hover_help_index = -1;
 
 for (var i = 0; i < array_length(buttons); i++) {
     var bx = panel_x + (panel_w - button_width) / 2;
@@ -27,6 +28,10 @@ for (var i = 0; i < array_length(buttons); i++) {
 // Help click
 var help_x = display_get_width()/2 - 20;
 var help_y = panel_y + panel_h - 50;
-if (point_distance(mouse_x, mouse_y, help_x, help_y) < 50 && mouse_check_button_pressed(mb_left)) {
+if (point_distance(mouse_x, mouse_y, help_x, help_y) < 50 ) {
    //go to instructions page?
+	hover_help_index = 1;
+	if (mouse_check_button_pressed(mb_left)) {
+		instance_create_layer(room_width/2, room_height/2, "Instances", obj_help);
+	}
 }

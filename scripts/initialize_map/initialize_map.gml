@@ -27,12 +27,12 @@ function initialize_map(min_rooms_required, spawn_at_bonfire) {
 
 	if (!spawn_at_bonfire) {
 		// start of the game
-		repeat(5) {
+		repeat(10) {
 			var rooms = assign_room_types_and_icons(false);
 			if (check_all_room_types_appear()) break;
 		}
 	} else {
-		repeat(5) {
+		repeat(10) {
 			var rooms = assign_room_types_and_icons(true);
 			if (check_all_room_types_appear()) break;
 		}
