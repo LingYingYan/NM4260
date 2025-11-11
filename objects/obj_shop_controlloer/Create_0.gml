@@ -24,6 +24,7 @@ for (j = 0; j < array_length(global.curr_shop_relics); j ++) {
 	new_relic.image_yscale = scale;
 }
 
-var drawer = instance_create_layer(room_width - 20, room_height/2, "Instances", obj_deck_drawer);
+// var drawer = instance_create_layer(room_width - 20, room_height/2, "Instances", obj_deck_drawer);
 
+var toggle_btn = instance_create_layer(room_width - 20, room_height/2, "Instances", obj_toggle_deck_button);
 
