@@ -27,3 +27,5 @@ button_height = 60;
 button_spacing = 40;
 
 hover_index = -1;
+hover_help_index = -1;
+popup_shown = false;

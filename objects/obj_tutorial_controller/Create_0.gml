@@ -6,7 +6,7 @@
 //show_debug_message("creating tutorial player");
 encounter_used = false;
 
-label_enc = instance_create_layer(room_width/3 * 2, room_height/2, "Instances", obj_tut_label);
+label_enc = instance_create_layer(room_width/5, room_height/4, "Instances", obj_tut_label);
 label_enc.label_scenario = "encounter_map";
 label_enc.visible = true;
 
@@ -17,5 +17,6 @@ label_ene.visible = true;
 label_discover = instance_create_layer(room_width/3, room_height/3, "Instances", obj_tut_label);
 label_discover.label_scenario = "discover";
 
+// Deck drawer
 
 

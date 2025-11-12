@@ -37,6 +37,8 @@ for (var i = 0; i < array_length(buttons); i++) {
 
 // Draw Help text
 draw_set_font(fnt_help);
-draw_set_color(make_color_rgb(130, 80, 40));
+//draw_set_color(make_color_rgb(130, 80, 40));
 var help_txt = "Help";
+var color = (hover_help_index == 1) ? c_white : col_button_normal;
+draw_set_colour(color);
 draw_text(room_width/2 - string_width(help_txt)/2, panel_y + panel_h - 100, help_txt);

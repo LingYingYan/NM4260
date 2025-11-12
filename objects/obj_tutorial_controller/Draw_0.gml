@@ -29,10 +29,11 @@ var enemy_hidden_y = 2 * global.ROOM_SIZE + global.map_offset_y;
 var shop_x = 3 * global.ROOM_SIZE + global.map_offset_x;
 var shop_y = 1 * global.ROOM_SIZE + global.map_offset_y;
 
-draw_set_color(c_black);
-draw_arrow(room_width/3 * 2 - 40, room_height/2 - 40, encounter_x + 40, encounter_y + 40, 40);
 
-draw_arrow(room_width/3 + 40,  room_height/3 * 2 + 40, enemy_x - 40, enemy_y, 40);
+//draw_set_color(c_black);
+//draw_arrow(room_width/3 * 2 - 40, room_height/2 - 40, encounter_x + 40, encounter_y + 40, 40);
+
+//draw_arrow(room_width/3 + 40,  room_height/3 * 2 + 40, enemy_x - 40, enemy_y, 40);
 
 if (encounter_used) {
 	label_discover.visible = true;

@@ -1,6 +1,7 @@
 function find_path_to_room(start_room, target_room) {
     if (start_room == noone || target_room == noone) return [];
     if (start_room == target_room) return [start_room];
+	// when the target room is the start room's neighbour --> 
 
     var q = ds_queue_create();
     var visited = ds_map_create();
