@@ -27,15 +27,15 @@ function Status(_level, _name) constructor {
     
     static get_label = function(highlight = false) {
         if (highlight) {
-            return $"[region,keyword-status-{self.name}][c_white][spr_{string_lower(self.name)}_small][/c] [wheel][c_gold][b]{self.name}[/b][/c][/wheel][/region]";
+            return $"[region,keyword-status-{self.name}][c_white][scale,0.0234375][spr_{string_lower(self.name)}][/s][/c] [wheel][c_gold][b]{self.name}[/b][/c][/wheel][/region]";
         }
         
-        return $"[region,keyword-status-{self.name}][c_white][spr_{string_lower(self.name)}_small][/c] [c_gold][b]{self.name}[/b][/c][/region]";
+        return $"[region,keyword-status-{self.name}][c_white][scale,0.0234375][spr_{string_lower(self.name)}][/s][/c] [c_gold][b]{self.name}[/b][/c][/region]";
     }
 }
 
 function get_coloured_label(status_name) {
-    var icon = $"[c_white][spr_{string_lower(status_name)}_small][/c]";
+    var icon = $"[c_white][scale,0.03125][spr_{string_lower(status_name)}][/s][/c]";
     switch (status_name) {
     	case "Burn":
             return icon + $"[c_orange][b]{status_name}![/b][/c]";

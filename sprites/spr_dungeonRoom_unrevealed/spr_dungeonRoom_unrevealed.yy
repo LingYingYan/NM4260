@@ -12,14 +12,14 @@
   "edgeFiltering":false,
   "For3D":false,
   "frames":[
-    {"$GMSpriteFrame":"v1","%Name":"a78f7d30-852e-464c-a755-f8fbfc46b69b","name":"a78f7d30-852e-464c-a755-f8fbfc46b69b","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"0743e731-6bb1-4519-8be4-1a1b2ae48cf8","name":"0743e731-6bb1-4519-8be4-1a1b2ae48cf8","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
   ],
   "gridX":0,
   "gridY":0,
   "height":96,
   "HTile":false,
   "layers":[
-    {"$GMImageLayer":"","%Name":"be508e2f-4e98-4b64-9cea-52ef6d680279","blendMode":0,"displayName":"default","isLocked":false,"name":"be508e2f-4e98-4b64-9cea-52ef6d680279","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
+    {"$GMImageLayer":"","%Name":"5ff67d44-b711-4641-a696-1108f0c35a57","blendMode":0,"displayName":"default","isLocked":false,"name":"5ff67d44-b711-4641-a696-1108f0c35a57","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
   ],
   "name":"spr_dungeonRoom_unrevealed",
   "nineSlice":null,
@@ -70,7 +70,9 @@
     "timeUnits":1,
     "tracks":[
       {"$GMSpriteFramesTrack":"","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"$KeyframeStore<SpriteFrameKeyframe>":"","Keyframes":[
-            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{"0":{"$SpriteFrameKeyframe":"","Id":{"name":"a78f7d30-852e-464c-a755-f8fbfc46b69b","path":"sprites/spr_dungeonRoom_unrevealed/spr_dungeonRoom_unrevealed.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},},"Disabled":false,"id":"a436eb4e-af52-4a90-9ab7-469c79de63a9","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"0743e731-6bb1-4519-8be4-1a1b2ae48cf8","path":"sprites/spr_dungeonRoom_unrevealed/spr_dungeonRoom_unrevealed.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+              },"Disabled":false,"id":"06432b1f-9fb0-49a9-89df-b7a6541be556","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
           ],"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"2.0",},"modifiers":[],"name":"frames","resourceType":"GMSpriteFramesTrack","resourceVersion":"2.0","spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange":null,

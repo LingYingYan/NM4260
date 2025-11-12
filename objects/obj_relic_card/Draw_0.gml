@@ -25,34 +25,35 @@ if (self.card_data != undefined) {
     var text_x = self.x - self.sprite_width / 2 + x_padding;
     var text_y = self.y - self.sprite_height / 2 + y_padding;
     
-    if (self.reveal >= obj_player_state.max_vision) {
-        draw_set_halign(fa_center);
-        draw_set_valign(fa_middle);
+    draw_set_halign(fa_center);
+    draw_set_valign(fa_middle);
         
-        if (sprite_exists(self.card_data.sprite)) {
-            draw_sprite_ext(self.card_data.sprite, self.image_index, self.x, self.y - self.sprite_height / 4 + y_padding + self.hover_yoffset, self.image_xscale, self.image_yscale, 0, -1, 1);
-        }
-        
-        draw_set_valign(fa_top);
-        draw_set_halign(fa_left);
-        
-        var scribble_text = scribble($"[b]{self.card_data.name}[/b]")
-            .wrap(self.sprite_width - 2 * x_padding)
-            .align(fa_center, fa_bottom);
-        var text_scale = min(
-            self.sprite_width / scribble_text.get_width(), 
-            1.15 * self.image_xscale,
-            self.sprite_height / scribble_text.get_height()
-        );
-        
-        scribble_text.scale(text_scale).draw(self.x, self.y);
+    if (sprite_exists(self.card_data.sprite)) {
+        var img_y = self.y - self.sprite_height / 4;
+        var img_x = self.x;
+        draw_sprite_ext(self.card_data.sprite, self.image_index, img_x, img_y + self.hover_yoffset, 0.125 * self.image_xscale, 0.125 * self.image_yscale, 0, -1, 1);
     }
+        
+    draw_set_valign(fa_top);
+    draw_set_halign(fa_left);
+        
+    var scribble_text = scribble($"[b]{self.card_data.name}[/b]")
+        .wrap(self.sprite_width - 2 * x_padding)
+        .align(fa_center, fa_bottom);
+    var text_scale = min(
+        self.sprite_width / scribble_text.get_width(), 
+        1.15 * self.image_xscale,
+        self.sprite_height / scribble_text.get_height()
+    );
+        
+    scribble_text.scale(text_scale).draw(self.x, self.y + self.hover_yoffset);
     
     text_y = self.y + y_padding + self.hover_yoffset; 
     
-    var scribble_text = scribble($"{self.card_data.desc}\n({room == rm_shop ? "Click to purchase" : "Click to activate"})")
+    var hint = room == rm_shop ? "\n(Click to purchase)" : (room == Room1 ? "\n(Click to activate)" : "");
+    scribble_text = scribble($"{self.card_data.desc}{hint}")
         .wrap(self.sprite_width - 2 * x_padding);
-    var text_scale = min(
+    text_scale = min( 
         self.sprite_width / scribble_text.get_width(), 
         self.image_xscale,
         self.sprite_height / scribble_text.get_height()

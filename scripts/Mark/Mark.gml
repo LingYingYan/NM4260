@@ -25,10 +25,10 @@ function Mark(mark_id, mark_name, mark_sprite) constructor {
     
     get_label = function(highlight = false) {
         if (highlight) {
-            return $"[region,keyword-mark-{self.type}][c_white][scale,0.005][spr_{self.uid}][/s][/c] [wheel][c_gold][b]{self.type}[/b][/wheel][/c][/region]";
+            return $"[region,keyword-mark-{self.type}][c_white][scale,0.0234375][spr_{self.uid}][/s][/c] [wheel][c_gold][b]{self.type}[/b][/wheel][/c][/region]";
         }
         
-        return $"[region,keyword-mark-{self.type}][c_white][scale,0.005][spr_{self.uid}][/s][/c] [c_gold][b]{self.type}[/b][/c][/region]";
+        return $"[region,keyword-mark-{self.type}][c_white][scale,0.0234375][spr_{self.uid}][/s][/c] [c_gold][b]{self.type}[/b][/c][/region]";
     }
     
     describe_alt = function(level) {

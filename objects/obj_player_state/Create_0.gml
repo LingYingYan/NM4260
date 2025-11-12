@@ -60,7 +60,7 @@ reset = function() {
 add_trait = function(trait) {
     var trait_obj = instance_create_depth(self.bbox_left - 200, self.bbox_top, self.depth - 1, obj_trait, {
         name: trait.name,
-        icon: spr_trait_default,
+        icon: asset_get_index($"spr_trait_{trait.uid}"),
         desc: trait.desc
     });
     
@@ -125,7 +125,7 @@ use_relic = function(relic) {
     }
     
     var relic_obj = instance_create_depth(self.bbox_left - 200, self.bbox_top, self.depth - 1, obj_relic, {
-        icon: spr_trait_default,
+        icon: relic.sprite,
         name: relic.name,
         desc: relic.to_string(),
         expire: relic.duration + global.number_of_completed_combat
