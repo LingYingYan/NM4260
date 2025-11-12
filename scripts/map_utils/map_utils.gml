@@ -45,6 +45,12 @@ function assign_room_types_and_icons(assign_existing_room_types) {
 	
 	if (!assign_existing_room_types) {
 		// assigning new room types
+		
+		//clear the global vairable room types
+		if (variable_global_exists("room_types")) {
+			ds_map_clear(global.room_types);
+		}
+		
 		for (var i = 0; i < array_length(rooms); i++) {
 		    var rm = rooms[i];
     
@@ -75,6 +81,7 @@ function assign_room_types_and_icons(assign_existing_room_types) {
 		}
 	} else {
 		// assign rooms based on the existing room types
+		show_debug_message($"DEBUGGG: the global room types list is {json_encode(global.room_types)}");
 		var type_keys = ds_map_keys_to_array(global.room_types);
 		var idx = 0;
 	    for (var i = 0; i < array_length(type_keys); i++) {

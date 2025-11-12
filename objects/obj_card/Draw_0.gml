@@ -9,7 +9,7 @@ if (self.hovered) {
     
     self.image_blend = -1;
 } else {
-    self.image_blend = c_ltgray;
+    //self.image_blend = c_ltgray;
     if (self.state_update == self.state_normal) {
         self.current_depth = self.normal_depth;
     }

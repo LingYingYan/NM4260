@@ -114,18 +114,20 @@ function add_predefined_cards() {
 	var attack_cards = ["card_fireball", "card_rainstorm", "card_force_of_nature"];
 	var defense_card = "card_ward";
 	
-	// create the attack cards
-	for (i = 0; i < array_length(attack_cards); i ++) {
-		var card_type = attack_cards[i];
-		repeat(2) {
-			obj_player_deck_manager.add(
-				res_loader_cards.make_card(res_loader_cards.loaded_map[$ card_type], "Instances"));
-		}
-	}
-	
-	//create the defence cards
 	repeat(4) {
 		obj_player_deck_manager.add(
 			res_loader_cards.make_card(res_loader_cards.loaded_map[$ defense_card], "Instances"));
 	}
+	
+	// create the attack cards
+	repeat(2){
+		for (i = 0; i < array_length(attack_cards); i ++) {
+			var card_type = attack_cards[i];
+				obj_player_deck_manager.add(
+					res_loader_cards.make_card(res_loader_cards.loaded_map[$ card_type], "Instances"));
+		}
+	}
+	
+	//create the defence cards
+	
 }

@@ -14,8 +14,10 @@ label_ene = instance_create_layer(room_width/3, room_height/3 * 2, "Instances", 
 label_ene.label_scenario = "enemy_map";
 label_ene.visible = true;
 
-label_discover = instance_create_layer(room_width/3, room_height/3, "Instances", obj_tut_label);
+label_discover = instance_create_layer(room_width/3 * 2, room_height/ 2 - 70, "Instances", obj_tut_label);
 label_discover.label_scenario = "discover";
+
+layer_set_visible("Assets_2", false);
 
 // Deck drawer
 

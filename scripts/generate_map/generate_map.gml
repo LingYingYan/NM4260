@@ -11,7 +11,7 @@ function generate_map(generate_new) {
 	var map_w = W * S;
 	var map_h = H * S;
 	var offset_x = (room_width - map_w) / 2;
-	var offset_y = (obj_player_state.bbox_top - map_h) / 2;
+	var offset_y = (obj_player_state.bbox_top - map_h) / 2 + 20;
 	
 	global.map_offset_x = offset_x;
 	global.map_offset_y = offset_y;

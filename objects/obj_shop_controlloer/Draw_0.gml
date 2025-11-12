@@ -19,3 +19,9 @@ with (obj_relic_card) {
     draw_text(x, text_y, cost_str);
 }
 
+if (global.is_tut) {
+	// Inside tut, show labels and arrows
+	label_drawer.visible = true;
+	label_purchase.visible = true;
+	layer_set_visible("Assets_1", true);
+}

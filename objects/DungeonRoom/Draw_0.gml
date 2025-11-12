@@ -1,5 +1,12 @@
 if (is_struct(self.data)) {
 	
+	//for (i = 0; i < array_length(self.data.neighbors); i ++) {
+	//	draw_line_width(rm.x + global.map_offset_x, 
+	//						rm.y + global.map_offset_y, 
+	//						nb.x + global.map_offset_x, 
+	//						nb.y + global.map_offset_y, 10);
+	//}
+	
 	var spr = noone;
     switch (self.data.room_type) {
         case "enemy": spr = spr_enemyRoom; break;
@@ -28,8 +35,8 @@ if (is_struct(self.data)) {
 	}
 	
 	if (!self.data.discovered) {
-        draw_set_alpha(0.8);
-        draw_set_color(#CC9766); //#CC9766
+        draw_set_alpha(1);
+        draw_set_color(#d4c4b2); //#CC9766
         draw_rectangle(x - sprite_width/2 - global.ROOM_SPACING, 
 						y - sprite_height/2 - global.ROOM_SPACING, 
 						x + sprite_width/2 + global.ROOM_SPACING, 

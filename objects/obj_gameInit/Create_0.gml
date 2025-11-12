@@ -4,12 +4,13 @@ global.map_needs_reset = false;
 global.map_inited = false;
 
 global.in_tut = false; // if in tutorial, change the reveal_room etc
+global.ele_react_tut_shown = false;
 global.dist_start_end = -1; //default is -1
 global.num_enemy_rooms = -1;
 
 global.GRID_W = 6;
 global.GRID_H = 5;
-global.ROOM_SIZE = 128;
+global.ROOM_SIZE = 114; //#128
 global.ROOM_SPACING = 42; // very likely need to adjust later, this is based on the sprite i draw
 
 global.TOTAL_ROOM_NUM = 0;

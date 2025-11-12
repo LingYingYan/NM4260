@@ -32,6 +32,7 @@ obj_main_menu_button.y = room_height/2;
 obj_main_menu_button.button_text = "Main Menu"
 obj_main_menu_button.on_click = function() {
 	trigger_room_transition(rm_main_menu, c_black);
+	instance_destroy(obj_toggle_deck_button);
     //if (!is_undefined(self.to_discard)) {
     //    var idx = array_get_index(global.persistent_traits, self.to_discard);
     //    array_delete(global.persistent_traits, idx, 1);

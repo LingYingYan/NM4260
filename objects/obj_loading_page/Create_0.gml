@@ -3,7 +3,7 @@ loading_done = false;
 fade_alpha = 0;
 alarm[0] = 180;
 
-depth = -20000
+depth = -30000
 
 text_msg = undefined;
 next_room = undefined;
