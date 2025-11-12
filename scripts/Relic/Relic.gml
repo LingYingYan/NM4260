@@ -15,6 +15,7 @@ function Relic(_id, _name, _desc, _rarity, _duration, _effects = []) constructor
     rarity = _rarity;
     duration = _duration;
     effects = _effects;
+    sprite = asset_get_index($"spr_relic_{_id}");
     
     static get_weight = function() {
         return 5 - self.rarity;

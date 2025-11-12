@@ -24,10 +24,15 @@ if (self.card_data != undefined) {
     var text_y = self.y - self.sprite_height / 2 + y_padding;
     
     if (self.reveal >= obj_player_state.max_vision) {
-        scribble($"[b][c_white][scale,{0.01 * self.image_xscale}][spr_{self.card_data.mark.uid}][/s][/c]{self.card_data.type}[/b]")
+        scribble($"[c_white][scale,{0.046875 * self.image_xscale}][spr_{self.card_data.mark.uid}][/s][/c]")
             .align(fa_left, fa_top)
             .scale(self.image_xscale)
             .draw(self.x - self.sprite_width / 2 + 20 * self.image_xscale, self.y - self.sprite_height / 2 + 20 * self.image_xscale);
+        
+        scribble($"[b]{self.card_data.type}[/b]")
+            .align(fa_left, fa_middle)
+            .scale(self.image_xscale)
+            .draw(self.x - self.sprite_width / 2 + (20 + 64) * self.image_xscale, self.y - self.sprite_height / 2 + (20 + 24) * self.image_xscale);
         
         var scribble_text = scribble($"[c_white][scale,0.04][spr_{self.card_data.uid}][/s][/c]\n[b]{self.card_data.name}[/b]")
             .wrap(self.sprite_width - 2 * x_padding)
