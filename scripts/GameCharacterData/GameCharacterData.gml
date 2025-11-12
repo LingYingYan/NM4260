@@ -132,6 +132,10 @@ function GameCharacterData(curr_hp, total_hp) constructor {
     
     static clear_marks_and_statuses = function() {
         self.marks = {};
+        for (var i = 0; i < array_length(self.status_effects); i += 1) {
+            self.status_effects[i].terminate(self);    
+        }
+        
         self.status_effects = [];
     }
 }

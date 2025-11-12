@@ -1,4 +1,4 @@
-sprite_center = spr_bonfire; // your sprite
+sprite_center = spr_bonfire_bg; // your sprite
 btn1_text = "Yes";
 btn2_text = "No";
 desc_text = "Do you want to rest beside the bonfire?";
