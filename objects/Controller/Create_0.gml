@@ -16,3 +16,10 @@ if (!variable_global_exists("map_inited"))     { global.map_inited = false; show
 //    show_debug_message("Map already inited: reusing existing layout");
 //}
 
+if (!instance_exists(obj_toggle_deck_button)) {
+	instance_create_layer(room_width - 20, room_height/2, "Instances", obj_toggle_deck_button);
+}
+
+if (!instance_exists(obj_ele_reaction_toggle)) {
+	instance_create_layer(room_width - 40, 40, "Instances", obj_ele_reaction_toggle);
+}

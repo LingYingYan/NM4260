@@ -19,6 +19,6 @@ label_discover.label_scenario = "discover";
 
 layer_set_visible("Assets_2", false);
 
-// Deck drawer
+instance_create_layer(room_width - 40, 40, "Instances", obj_ele_reaction_toggle);
 
 
