@@ -6,7 +6,7 @@
   "name":"scribble",
   "parent":{
     "name":"Scribble",
-    "path":"folders/Scribble.yy",
+    "path":"folders/Objects/Scribble.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

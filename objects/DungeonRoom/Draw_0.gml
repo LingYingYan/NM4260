@@ -35,8 +35,8 @@ if (is_struct(self.data)) {
 	}
 	
 	if (!self.data.discovered) {
-        draw_set_alpha(1);
-        draw_set_color(#d4c4b2); //#CC9766
+        draw_set_alpha(0.7);
+        draw_set_color(#fef7e5); //#CC9766
         draw_rectangle(x - sprite_width/2 - global.ROOM_SPACING, 
 						y - sprite_height/2 - global.ROOM_SPACING, 
 						x + sprite_width/2 + global.ROOM_SPACING, 

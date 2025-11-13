@@ -28,10 +28,10 @@ for (j = 0; j < array_length(global.curr_shop_relics); j ++) {
 
 var toggle_btn = instance_create_layer(room_width - 20, room_height/2, "Instances", obj_toggle_deck_button);
 
-label_purchase = instance_create_layer(room_width/ 7, room_height/3 * 2, "Instances", obj_tut_label);
+label_purchase = instance_create_layer(room_width/ 8, room_height/4 * 3, "Instances", obj_tut_label);
 label_purchase.label_scenario = "purchase";
 
-label_drawer = instance_create_layer(room_width/5 * 4, room_height/5 * 4,  "Instances", obj_tut_label);
+label_drawer = instance_create_layer(room_width/4 * 3, room_height/4 * 3,  "Instances", obj_tut_label);
 label_drawer.label_scenario = "drawer";
 
 layer_set_visible("Assets_1", false);

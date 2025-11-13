@@ -8,8 +8,8 @@
   "name":"obj_battle_controller",
   "overriddenProperties":[],
   "parent":{
-    "name":"Rooms",
-    "path":"folders/Objects/Rooms.yy",
+    "name":"NM4260",
+    "path":"NM4260.yyp",
   },
   "parentObjectId":null,
   "persistent":false,

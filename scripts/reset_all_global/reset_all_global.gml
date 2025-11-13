@@ -7,7 +7,7 @@ function reset_all_global(){
 	global.GRID_W = 6;
 	global.GRID_H = 5;
 	global.ROOM_SIZE = 128;
-	global.ROOM_SPACING = 42; // very likely need to adjust later, this is based on the sprite i draw
+	global.ROOM_SPACING = 19; // very likely need to adjust later, this is based on the sprite i draw
 
 	global.TOTAL_ROOM_NUM = 0;
 	global.room_types = ds_map_create();

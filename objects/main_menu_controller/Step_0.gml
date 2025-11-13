@@ -34,8 +34,8 @@ if (!popup_shown) {
 	}
 
 	// Help click
-	var help_x = display_get_width()/2 - 20;
-	var help_y = panel_y + panel_h - 50;
+	var help_x = room_width/2 - string_width(help_txt)/2;
+	var help_y = panel_y + panel_h - 100;
 	if (point_distance(mouse_x, mouse_y, help_x, help_y) < 50 ) {
 	   //go to instructions page?
 		hover_help_index = 1;

@@ -6,7 +6,7 @@
   "name":"scribble_markdown_set_styles",
   "parent":{
     "name":"Miscellaneous",
-    "path":"folders/Scribble/Miscellaneous.yy",
+    "path":"folders/Objects/Scribble/Miscellaneous.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

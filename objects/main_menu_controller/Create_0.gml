@@ -25,6 +25,7 @@ buttons = [
 button_width = panel_w/3 * 2;
 button_height = 60;
 button_spacing = 40;
+help_txt = "Help";
 
 hover_index = -1;
 hover_help_index = -1;
