@@ -24,7 +24,11 @@ if (drawer_x < room_width) { // only clip when drawer visible
 			}
 			if (other.can_remove) {
 				draw_set_color(c_aqua);
-				draw_text(x - other.card_width/2, y + other.card_height/2 + 10, "-0.5 Vision to remove");
+				scribble("-0.5 Vision to remove")
+					.starting_format("font_game_text", c_white)
+					.align(fa_center, fa_middle)
+					.draw(x, y);
+				//draw_text(x - other.card_width/2, y + other.card_height/2 + 10, "-0.5 Vision to remove");
 			}
 		}
 	} else {

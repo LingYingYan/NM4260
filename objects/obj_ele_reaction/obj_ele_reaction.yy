@@ -10,8 +10,8 @@
   "name":"obj_ele_reaction",
   "overriddenProperties":[],
   "parent":{
-    "name":"Game Characters",
-    "path":"folders/Objects/Game Characters.yy",
+    "name":"NM4260",
+    "path":"NM4260.yyp",
   },
   "parentObjectId":null,
   "persistent":false,

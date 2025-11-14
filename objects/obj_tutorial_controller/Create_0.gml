@@ -17,6 +17,9 @@ label_ene.visible = true;
 label_discover = instance_create_layer(room_width/3 * 2, room_height/ 2 - 70, "Instances", obj_tut_label);
 label_discover.label_scenario = "discover";
 
+label_remember = instance_create_layer(room_width/5 * 4, room_height/3, "Instances", obj_tut_label);
+label_remember.label_scenario = "remember_room";
+
 layer_set_visible("Assets_2", false);
 
 instance_create_layer(room_width - 40, 40, "Instances", obj_ele_reaction_toggle);
