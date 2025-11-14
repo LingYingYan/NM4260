@@ -52,7 +52,12 @@
                 "value": 1
             }
         ],
-        "effects_on_caster": [],
+        "effects_on_caster": [
+            {
+                "type": "Mark",
+                "value": 2
+            }
+        ],
         "special_effects": []
     },
     "card_curse_of_old_gods": {
@@ -66,7 +71,12 @@
                 "value": 2
             }
         ],
-        "effects_on_caster": [],
+        "effects_on_caster": [
+            {
+                "type": "Mark",
+                "value": 2
+            }
+        ],
         "special_effects": []
     },
     "card_healing": {
@@ -88,7 +98,12 @@
                 "value": -5
             }
         ],
-        "special_effects": []
+        "special_effects": [
+            {
+                "type": "Mark",
+                "value": 1
+            }
+        ]
     },
     "card_water_healing": {
         "effects_on_target": [],
@@ -99,7 +114,12 @@
                 "value": -5
             }
         ],
-        "special_effects": []
+        "special_effects": [
+            {
+                "type": "Mark",
+                "value": 1
+            }
+        ]
     },
     "card_grass_healing": {
         "effects_on_target": [],
@@ -118,7 +138,7 @@
             {
                 "type": "AddStatus",
                 "status_name": "Shield",
-                "value": 3
+                "value": 8
             },
             {
                 "type": "Mark",
@@ -138,7 +158,7 @@
             {
                 "type": "AddStatus",
                 "status_name": "Shield",
-                "value": 3
+                "value": 8
             },
             {
                 "type": "Mark",
@@ -158,7 +178,7 @@
             {
                 "type": "AddStatus",
                 "status_name": "Shield",
-                "value": 3
+                "value": 8
             },
             {
                 "type": "Mark",
@@ -229,7 +249,7 @@
         "effects_on_target": [
             {
                 "type": "Damage",
-                "value": 12
+                "value": 10
             },
             {
                 "type": "Mark",
@@ -248,7 +268,12 @@
                 "value": 2
             }
         ],
-        "special_effects": []
+        "special_effects": [
+            {
+                "type": "Mark",
+                "value": 1
+            }
+        ]
     },
     "card_weakening_chant": {
         "effects_on_target": [
@@ -258,7 +283,12 @@
                 "value": 2
             }
         ],
-        "effects_on_caster": [],
+        "effects_on_caster": [
+            {
+                "type": "Mark",
+                "value": 1
+            }
+        ],
         "special_effects": []
     },
     "card_icy_breath": {
@@ -324,6 +354,10 @@
                 "type": "AddStatus",
                 "status_name": "Strength",
                 "value": 3
+            },
+            {
+                "type": "Mark",
+                "value": 1
             }
         ],
         "special_effects": []
@@ -336,10 +370,15 @@
             },
             {
                 "type": "Mark",
+                "value": 2
+            }
+        ],
+        "effects_on_caster": [
+            {
+                "type": "Mark",
                 "value": 1
             }
         ],
-        "effects_on_caster": [],
         "special_effects": []
     }
 }

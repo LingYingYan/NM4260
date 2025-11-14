@@ -2,16 +2,16 @@
     "enemy_cultist": {
         "cards": {
             "card_scorch": {
-                "weight": 5,
+                "weight": 20,
                 "cooldown": 0
             },
             "card_curse_of_old_gods": {
-                "weight": 3,
+                "weight": 10,
                 "cooldown": 0
             },
             "card_weakening_chant": {
                 "weight": 1,
-                "cooldown": 3
+                "cooldown": 10
             },
             "card_dark_ritual": {
                 "weight": 5,

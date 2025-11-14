@@ -157,8 +157,9 @@ function WaterMark(mark_id, mark_name, mark_sprite) : Mark(mark_id, mark_name, m
     
     describe_alt = function(level) {
         var text = $"{self.get_label()}\n" + 
-                   $"[b]+2[/b] layer of {make_status("Poison", 0).get_label()} for each {make_mark("mark_ice").get_label()} Mark received\n" +
-                   $"[b]+1[/b] layer of {make_status("Paralysed", 0).get_label()} for each {make_mark("mark_lightning").get_label()} Mark received";
+                   $"[b]+2[/b] layer of {make_status("Poison", 0).get_label()} for each {make_mark("mark_grass").get_label()} Mark received\n" +
+                   $"[b]+1[/b] layer of {make_status("Paralysed", 0).get_label()} for each {make_mark("mark_lightning").get_label()} Mark received\n" + 
+                   $"[b]+1[/b] layer of {make_status("Frozen", 0).get_label()} for each {make_mark("mark_ice").get_label()} Mark received\n";
         if (level >= 5) {
             text += $"\n[b]+1[/b] layer of Frozen for each {make_mark("mark_ice").get_label()} Mark received";
         }
