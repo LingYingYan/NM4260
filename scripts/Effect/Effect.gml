@@ -26,7 +26,7 @@ function EffectApplicationArgs(_instigator, _target, _mark, _card_type) construc
 function Effect() constructor {
     /// @desc 
     /// @param {Struct.EffectApplicationArgs} args description
-    static apply = function(args) { }
+    static apply = function(args, is_simulated = false) { }
     
     /// @desc 
     /// @param {Struct.EffectApplicationArgs} args description
@@ -47,7 +47,11 @@ function ModifierEffect(_modified_attribute, _magnitude) : Effect() constructor 
     
     /// @desc 
     /// @param {Struct.EffectApplicationArgs} args description
-    static apply = function(args) {
+    static apply = function(args, is_simulated = false) {
+        if (!is_simulated) {
+            audio_play_sound(buff, 1, false);
+        }
+        
         args.target.add_modifier(self.modified_attribute, self.magnitude);
     }
     
@@ -72,7 +76,11 @@ function FlagEffect(_target_attribute, _flag) : Effect() constructor {
     
     /// @desc 
     /// @param {Struct.EffectApplicationArgs} args description
-    static apply = function(args) {
+    static apply = function(args, is_simulated = false) {
+        if (!is_simulated) {
+            audio_play_sound(buff, 1, false);
+        }
+        
         args.target.set_attribute(self.target_attribute, self.flag);
     }
     
@@ -113,13 +121,17 @@ function DamageEffect(_base_damage) : Effect() constructor {
     
     /// @desc 
     /// @param {Struct.EffectApplicationArgs} args description
-    static apply = function(args) {
+    static apply = function(args, is_simulated = false) {
         var dmg = self.get_actual_damage(args);
         var eliminated_shields = min(args.target.get_attribute("shield"), dmg);
         dmg -= eliminated_shields;
         args.target.add_status(new Shield(-eliminated_shields));
         
         // Apply damage
+        if (!is_simulated) {
+            audio_play_sound(damage_sfx, 1, false, 2);
+        }
+        
         args.target.hp = max(args.target.hp - max(0, dmg), 0);
     }
     
@@ -158,8 +170,31 @@ function MarkEffect(_mark, _count) : Effect() constructor {
     
     /// @desc 
     /// @param {Struct.EffectApplicationArgs} args description
-    static apply = function(args) {
-        self.mark.on_apply(args.target, self.get_application_count(args));
+    static apply = function(args, is_simulated = false) {
+        var n = self.get_application_count(args);
+        if (n > 0 && !is_simulated) {
+            switch (self.mark.type) {
+            	case "Fire":
+                    audio_play_sound(fire, 1, false, 2);   
+                    break;
+                case "Water":
+                    audio_play_sound(water, 1, false, 2);   
+                    break;
+                case "Grass":
+                    audio_play_sound(grass, 1, false, 2);   
+                    break;
+                case "Lightning":
+                    audio_play_sound(lightning, 1, false, 2);   
+                    break;
+                case "Ice":
+                    audio_play_sound(ice, 1, false, 2);   
+                    break;
+            }
+        } else if (n < 0 && !is_simulated) {
+            audio_play_sound(healing, 1, false);
+        }
+        
+        self.mark.on_apply(args.target, n);
     }
     
     /// @desc 
@@ -202,8 +237,12 @@ function HealingEffect(_base_amount) : Effect() constructor {
     /// @param {Struct.CharacterData} target description
     /// @param {Struct.CharacterData} instigator description
     /// @param {Struct.EffectApplicationArgs} args description
-    static apply = function(args) {
+    static apply = function(args, is_simulated = false) {
         var heal = self.get_heal(args);
+        if (!is_simulated) {
+            audio_play_sound(healing, 1, false);
+        }
+        
         args.target.hp = min(args.target.max_hp, args.target.hp + max(0, heal));
     }
     
@@ -237,9 +276,32 @@ function AddStatusEffect(_status, _level) : Effect() constructor {
     /// @param {Struct.CharacterData} target description
     /// @param {Struct.CharacterData} instigator description
     /// @param {Struct.EffectApplicationArgs} args description
-    static apply = function(args) {
+    static apply = function(args, is_simulated = false) {
         var lvl = self.get_actual_level(args);
         var status = make_status(self.status_name, lvl);
+        if (lvl > 0 && !is_simulated) {
+            switch (status.name) {
+            	case "Burn":
+                    audio_play_sound(burn, 1, false, 2);
+                    break;
+                case "Poison":
+                    audio_play_sound(poison, 1, false, 2);
+                    break;
+                case "Frozen":
+                    audio_play_sound(ice, 1, false, 2);
+                    break;
+                case "Strength":
+                case "Coalesence":
+                case "Shield":
+                    audio_play_sound(buff, 1, false);
+                    break;
+                default:
+                    audio_play_sound(debuff, 1, false);
+            }
+        } else if (lvl < 0 && !is_simulated) {
+            audio_play_sound(healing, 1, false);
+        }
+        
         args.target.add_status(status);
     }
     
@@ -257,7 +319,7 @@ function AddStatusEffect(_status, _level) : Effect() constructor {
 function AddVisionEffect(_value) : Effect() constructor {
     value = _value;
     
-    static apply = function(args) {
+    static apply = function(args, is_simulated = false) {
         if (struct_exists(args.target, "vision")) {
             args.target.vision = min(args.target.vision + self.value, args.target.max_vision);
         }

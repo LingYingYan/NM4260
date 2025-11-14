@@ -160,6 +160,7 @@ start_player_turn = function() {
     self.draw_pile.shuffle();
         
     // Player draws
+    audio_play_sound(draw_cards, 3, false, 3);
     repeat(5) {
         var card = self.draw();
         if (card == noone) {
@@ -170,6 +171,7 @@ start_player_turn = function() {
     }
     
     obj_end_turn_button.is_disabled = false;
+    obj_end_turn_button.image_blend = -1;
 }
 
 draw = function() {
@@ -199,10 +201,12 @@ flip_cards = function() {
     var player_card = self.get_player_card();
     var enemy_card = self.get_enemy_card();
     if (player_card != noone) {
+        audio_play_sound(flip_card, 2, false, 3);
         player_card.state_update = player_card.state_flip;
     }
     
     if (enemy_card != noone) {
+        audio_play_sound(flip_card, 2, false, 3);
         enemy_card.state_update = enemy_card.state_flip;
     }
     

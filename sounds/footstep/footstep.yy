@@ -1,6 +1,6 @@
 {
   "$GMSound":"v2",
-  "%Name":"snd_card_deck_shuffle",
+  "%Name":"footstep",
   "audioGroupId":{
     "name":"audiogroup_default",
     "path":"audiogroups/audiogroup_default",
@@ -10,9 +10,9 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":0.49433106,
+  "duration":0.41795918,
   "exportDir":"",
-  "name":"snd_card_deck_shuffle",
+  "name":"footstep",
   "parent":{
     "name":"Sounds",
     "path":"folders/Sounds.yy",
@@ -21,6 +21,6 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"snd_card_deck_shuffle.mp3",
+  "soundFile":"footstep.mp3",
   "volume":1.0,
 }

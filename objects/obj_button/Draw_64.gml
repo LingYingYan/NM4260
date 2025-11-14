@@ -7,10 +7,11 @@ var hovered = point_in_rectangle(mouse_x_gui, mouse_y_gui, rect_left, rect_top, 
 if (!self.hovered && hovered && !self.is_disabled) {
     window_set_cursor(cr_handpoint);
     self.image_blend = c_gray;
+    audio_play_sound(button_hover, 4, false, 8);
 } else if (self.hovered && !hovered) {
     window_set_cursor(cr_default);
-    self.image_blend = -1;
-}
+    self.image_blend = self.is_disabled ? c_dkgray : -1;
+} 
 
 self.hovered = !self.is_disabled && hovered;
 
@@ -33,6 +34,7 @@ draw_sprite_stretched_ext(
 
 if (self.hovered && !self.is_disabled && mouse_check_button_pressed(mb_left)) {
     self.on_click();
+    audio_play_sound(button_press, 4, false, 8);
     window_set_cursor(cr_default);
     self.image_blend = c_dkgray
 }

@@ -9,6 +9,7 @@ if (obj_player_state.data.vision < 1) {
 
 obj_player_state.data.vision -= 1;
 self.reveal = obj_player_state.data.max_vision;
+audio_play_sound(flip_card, 2, false, 3);
 
 var n = instance_number(obj_enemy_card);
 for (var i = 0; i < n; i += 1) {

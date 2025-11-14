@@ -12,7 +12,9 @@ if (!popup_shown) {
 
 	    if (point_in_rectangle(mouse_x, mouse_y, bx, by, bx + button_width, by + button_height)) {
 	        hover_index = i;
+            audio_play_sound(button_hover, 3, false, 8);
 	        if (mouse_check_button_pressed(mb_left)) {
+                audio_play_sound(button_press, 3, false, 8);
 	            var action = buttons[i].action;
 	            switch (action) {
 	                case "new_game":

@@ -63,11 +63,11 @@ function CardData(card_id, card_type, card_name, card_sprite, card_rarity, mark_
      */
     static simulate_effects = function(owner, opponent) {
         for (var i = 0; i < array_length(self.effects_on_caster); i += 1) {
-            self.effects_on_caster[i].apply(new EffectApplicationArgs(owner, owner, string_lower(self.mark.type), string_lower(self.type)));
+            self.effects_on_caster[i].apply(new EffectApplicationArgs(owner, owner, string_lower(self.mark.type), string_lower(self.type)), true);
         }
         
         for (var i = 0; i < array_length(self.effects_on_target); i += 1) {
-            self.effects_on_target[i].apply(new EffectApplicationArgs(owner, opponent, string_lower(self.mark.type), string_lower(self.type)));
+            self.effects_on_target[i].apply(new EffectApplicationArgs(owner, opponent, string_lower(self.mark.type), string_lower(self.type)), true);
         }
     }
     
