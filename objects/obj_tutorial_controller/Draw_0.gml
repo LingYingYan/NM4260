@@ -37,6 +37,7 @@ var shop_y = 1 * global.ROOM_SIZE + global.map_offset_y;
 
 if (encounter_used) {
 	label_discover.visible = true;
+	label_remember.visible = true;
 	layer_set_visible("Assets_2", true);
 	//draw_arrow(room_width/3 + 40, room_height/3, enemy_hidden_x - 40, enemy_hidden_y - 40, 40);
 	//draw_arrow(room_width/3 + 40, room_height/3, shop_x - 40, shop_x, 40);
