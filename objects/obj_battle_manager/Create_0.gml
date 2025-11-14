@@ -47,7 +47,6 @@ resolve_turn = function() {
 enemy_win = function() {
     self.end_battle();
     obj_player_deck_manager.clear();
-    obj_backdrop.visible = true;
     obj_player_state.die();
     // Pick traits
     // obj_room_manager.goto_deck_selection();

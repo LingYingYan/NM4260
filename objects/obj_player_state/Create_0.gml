@@ -6,6 +6,7 @@ traits = [];
 relics = [];
 
 die = function() {
+    obj_backdrop.visible = true;
     instance_create_layer(room_width / 2, room_height / 2, "Instances", obj_death_panel);
 }
 
