@@ -48,8 +48,8 @@ enemy_win = function() {
     self.end_battle();
     obj_player_deck_manager.clear();
     obj_backdrop.visible = true;
+    obj_player_state.die();
     // Pick traits
-    instance_create_layer(room_width / 2, room_height / 2, "Instances", obj_death_panel);
     // obj_room_manager.goto_deck_selection();
 }
 
@@ -66,8 +66,8 @@ player_win = function() {
 
 	    obj_backdrop.visible = true;
 	    // Create new cards to pick
-	    global.has_relic = global.boss_fight || irandom_range(1, 100) <= 100;
-	    global.has_trait = global.boss_fight || irandom_range(1, 100) <= 100;
+	    global.has_relic = global.boss_fight || irandom_range(1, 100) <= 25;
+	    global.has_trait = global.boss_fight || irandom_range(1, 100) <= 15;
 	    instance_create_layer(room_width / 2, room_height / 2, "Instances", obj_card_loot);
     
 	    global.number_of_completed_combat += 1;

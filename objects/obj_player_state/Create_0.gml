@@ -5,6 +5,10 @@ data = new PlayerData(self.max_health, self.max_health, 3, self.max_vision);
 traits = [];
 relics = [];
 
+die = function() {
+    instance_create_layer(room_width / 2, room_height / 2, "Instances", obj_death_panel);
+}
+
 initialise = function() { 
     self.status_indicators = [];
     self.mark_indicators = [];
