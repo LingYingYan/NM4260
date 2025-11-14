@@ -26,7 +26,6 @@ if (self.card_data != undefined) {
     if (self.reveal >= obj_player_state.max_vision) {
         scribble($"[c_white][scale,{0.046875 * self.image_xscale}][spr_{self.card_data.mark.uid}][/s][/c]")
             .align(fa_left, fa_top)
-            .scale(self.image_xscale)
             .draw(self.x - self.sprite_width / 2 + 20 * self.image_xscale, self.y - self.sprite_height / 2 + 20 * self.image_xscale);
         
         scribble($"[b]{self.card_data.type}[/b]")

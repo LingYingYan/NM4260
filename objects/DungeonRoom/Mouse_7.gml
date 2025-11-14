@@ -1,5 +1,6 @@
 // Prevent move if long press was done
 if (long_press_done) {
+    audio_play_sound(buff, 1, false);
     long_press_done = false; // reset for next click
     is_pressing = false;
     press_time = 0;
@@ -14,6 +15,7 @@ if (player.current_room == noone) exit;
 var curr = player.current_room;
 var target_room = self.data;
 var canMove = false;
+audio_play_sound(footstep, 2, false);
 
 // unrevealed but is immediate neighbor
 if (!target_room.revealed) {

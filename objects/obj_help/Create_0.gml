@@ -13,7 +13,7 @@ text_title = "Help";
 //text_producer = "Producer: Meihan";
 text_help = scribble("[i]The Prophet[/i] is a Rogue-lite deckbuilder game. You must survive the dungeon by collecting [b]spell cards[/b] and [b]relics[/b] and use them wisely to defeat the vicious enemies.\n\nWhen casting spells from your cards, [b]Elemental Marks[/b] can apply to you or your enemy. These Marks can react to one another to trigger devastating effects so be careful about it when you use a card!\n\nMany keywords and game elements in [i]The Prophet[/i] can be hovered over to show a tooltip. Try it when you need help to understand something in this game!")
 			.starting_format("font_game_text", c_white)
-			.align(fa_center, fa_middle)
+			.align(fa_left, fa_middle)
 			.scale(1.5)
 			.wrap(720);
 
