@@ -16,4 +16,4 @@ if (closed_btn_hovered) {
 draw_set_font(font_game_text);
 draw_text(close_x1, close_y1, "X");
 	
-draw_sprite_stretched(spr_ele_reaction_diag, 0, room_width/2 - panel_w/3, panel_y + panel_h / 4, panel_w /3 * 2, panel_h * 0.5);
+draw_sprite_stretched(spr_ele_reaction_diag, 0, room_width/2 - panel_w/4, panel_y + panel_h / 4, panel_w /2, panel_h * 0.5);
