@@ -2,6 +2,7 @@ if (!self.grabbable) {
     exit;
 }
 
+audio_play_sound(flip_card, 3, false, 5);
 var drop_area = instance_place(self.x, self.y, obj_card_drop_area);
 if (instance_exists(drop_area) && instance_exists(drop_area.card)) {
     var dropped_card = drop_area.card.card_data;

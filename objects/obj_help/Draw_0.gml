@@ -21,6 +21,6 @@ draw_text(popup_x + popup_w / 2 - header_w/2, popup_y + 40, text_title);
 
 
 draw_set_font(fnt_default_large);
-text_help.draw(popup_x + popup_w /2 , popup_y + 60 + popup_h / 2);
+text_help.draw(popup_x + 50 , popup_y + 60 + popup_h / 2);
 //draw_text_ext(popup_x + 40, popup_y + 140, text_help, 30, 720);
 draw_set_alpha(1);

@@ -52,7 +52,7 @@ function make_drawer_and_cards(){
     
 		var card_y = top_margin + card_height/2 + idx * (card_height + card_spacing);
 		//var card_x = drawer_x + drawer_width / 2;
-		var card_x = drawer_target + drawer_width / 2;
+		var card_x = drawer_x + drawer_width / 2;
     
 		// one instance per unique card
 		if (room == rm_shop) {
