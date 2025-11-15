@@ -1,11 +1,12 @@
 var btn_width = 100;
-var spacing = 100;
+var spacing = 300;
 
 var start_x = (room_width - (btn_width * array_length(options) + spacing * (array_length(options) -1))) / 2;
 
 if (is_array(options) && array_length(options) > 0 && button_generated == false) {
 	for (var i = 0; i < array_length(options); i++) {
-	    var pos_y = room_height / 4 * 3;
+	    //var pos_y = spr_y_padding + spr_h + 200;
+		var pos_y = room_height / 8 * 7
 		//draw_rectangle(start_x + i * (btn_width + spacing), pos_y, 
 		//				start_x + i * (btn_width + spacing) + btn_width, pos_y + 60 ,false);
 		var button = instance_create_layer(start_x + i * (btn_width + spacing), pos_y, "Instances", obj_encounter_button)

@@ -51,7 +51,7 @@ global.encounter_cases = [
 				function() {
 					var new_card = res_loader_cards.get_random_card("Instances");
 					show_debug_message($"card data of the acquired card: {new_card.card_data}")
-					var card_inst = instance_create_layer(room_width/2, room_height/2, "Instances", obj_deck_viewonly_card);
+					var card_inst = instance_create_layer(room_width/2, room_height/2, "Instances", obj_enc_viewonly_card);
 					card_inst.card_data = new_card.card_data;
 					card_inst.count = 1;
 					card_inst.image_xscale = 1;
@@ -138,7 +138,7 @@ global.encounter_cases = [
 	),
 	
 	make_encounter(
-		"The Alchemist’s Corpse",
+		"The Corpse of Alchemist",
 		"A long-dead alchemist slumps over his cauldron. The liquid inside still bubbles faintly.",
 		[
 			make_option(
@@ -193,7 +193,7 @@ global.encounter_cases = [
 				function() {
 					var new_card = res_loader_cards.get_random_card("Instances");
 					show_debug_message($"card data of the acquired card: {new_card.card_data}")
-					var card_inst = instance_create_layer(room_width/2, room_height/2, "Instances", obj_deck_viewonly_card);
+					var card_inst = instance_create_layer(room_width/2, room_height/2, "Instances", obj_enc_viewonly_card);
 					card_inst.card_data = new_card.card_data;
 					card_inst.count = 1;
 					card_inst.image_xscale = 1;

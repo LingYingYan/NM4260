@@ -11,4 +11,7 @@ hovered = false;
 
 depth = -20000;
 
+button_w = 200;
+button_h = 80;
+
 alarm_setted = false;

@@ -27,7 +27,7 @@ if (drawer_x < room_width) { // only clip when drawer visible
 				scribble("-0.5 Vision to remove")
 					.starting_format("font_game_text", c_white)
 					.align(fa_center, fa_middle)
-					.draw(x, y);
+					.draw(x, y + other.card_height/2 + 20);
 				//draw_text(x - other.card_width/2, y + other.card_height/2 + 10, "-0.5 Vision to remove");
 			}
 		}

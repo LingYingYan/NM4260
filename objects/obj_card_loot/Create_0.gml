@@ -10,7 +10,7 @@ for (var i = 0; i < 3; i += 1) {
     array_push(selected, random_card.card_data.uid);
     var card_x = room_width / 2 + (i - 1) * 2 * random_card.sprite_width;
     var new_card = instance_create_depth(card_x, room_height / 2, self.depth - 1, obj_pickup_card);
-    // new_card.depth = self.depth - 1;
+    //new_card.depth = self.depth - 1;
     new_card.card_data = random_card.card_data;
     new_card.reveal = obj_player_state.data.max_vision;
 
