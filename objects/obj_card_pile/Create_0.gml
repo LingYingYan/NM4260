@@ -19,7 +19,7 @@ add = function(card) {
 }
 
 shuffle = function() {
-    array_shuffle(self.cards);
+    array_shuffle_ext(self.cards);
 }
 
 is_empty = function() {

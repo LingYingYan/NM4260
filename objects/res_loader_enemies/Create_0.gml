@@ -51,7 +51,7 @@ get_random_boss = function(level = 1) {
 }
 
 get_enemy_by_id = function(enemy_id) {
-    var enemy = self.enemies[$ enemy_id];
+    var enemy = self.enemies[$ enemy_id].clone();
     var cards = self.enemy_configs[$ enemy_id].cards;
     var card_ids = struct_get_names(cards);
     for (var i = 0; i < array_length(card_ids); i += 1) {

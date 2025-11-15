@@ -13,3 +13,7 @@ hover_yoffset = 0;
 
 image_xscale = 1;
 image_yscale = 1;
+
+if (instance_exists(obj_backdrop) && obj_backdrop.visible) {
+    normal_depth = obj_backdrop.depth - 1;
+}

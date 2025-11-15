@@ -211,6 +211,10 @@ function Strength(_level) : Status(_level, nameof(Strength)) constructor {
         target.add_modifier("strength", self.level);
     }
     
+    static terminate = function(target) {
+        target.add_modifier("strength", -self.level);
+    }
+    
     static decay = function(target) { 
         self.level -= 1;
         target.add_modifier("strength", -1);

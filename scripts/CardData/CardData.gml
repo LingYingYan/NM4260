@@ -119,7 +119,7 @@ function CardData(card_id, card_type, card_name, card_sprite, card_rarity, mark_
                 var curr_text = $"\n  {effect.to_string(new EffectApplicationArgs(instigator, target, string_lower(self.mark.type), string_lower(self.type)), vague, highlight)}";
                 if (focus != undefined && curr == focus.index) {
                     curr_text = $"[scale,{focus.scale}]{curr_text}[/s]";
-                }
+                } 
                 
                 curr += 1;
                 text += curr_text;

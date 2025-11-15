@@ -6,7 +6,7 @@ traits = [];
 relics = [];
 
 die = function() {
-    obj_backdrop.visible = true;
+    obj_backdrop.open();
     instance_create_layer(room_width / 2, room_height / 2, "Instances", obj_death_panel);
 }
 
@@ -47,15 +47,16 @@ reset = function() {
     }
     
     obj_traits_manager.remaining_traits = [];
+    obj_traits_manager.total_weight = 0;
     initialise_traits();
     obj_traits_manager.owned_traits = [];
     
     for (var i = 0; i < array_length(global.persistent_traits); i += 1) {
         show_debug_message($"{global.persistent_traits[i].name}");
-        obj_player_state.add_trait(global.persistent_traits[i]);
         gain_trait(self.data, global.persistent_traits[i]);
         var idx = array_get_index(obj_traits_manager.remaining_traits, global.persistent_traits[i]);
         array_delete(obj_traits_manager.remaining_traits, idx, 1);
+        obj_traits_manager.total_weight -= global.persistent_traits[i].get_weight();
         array_push(obj_traits_manager.owned_traits, global.persistent_traits[i]);
     }
 }

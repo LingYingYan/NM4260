@@ -12,4 +12,6 @@ rot_speed = 0.2;
 
 depth = -25000;
 
+self.image_blend = c_maroon;
+
 instance_create_layer(room_width - 20, room_height/2, "Instances", obj_deck_drawer);

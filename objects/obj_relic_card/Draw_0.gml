@@ -39,7 +39,7 @@ if (self.card_data != undefined) {
         
     var scribble_text = scribble($"[b]{self.card_data.name}[/b]")
         .wrap(self.sprite_width - 2 * x_padding)
-        .align(fa_center, fa_bottom);
+        .align(fa_center, fa_top);
     var text_scale = min(
         self.sprite_width / scribble_text.get_width(), 
         1.15 * self.image_xscale,
@@ -48,7 +48,7 @@ if (self.card_data != undefined) {
         
     scribble_text.scale(text_scale).draw(self.x, self.y + self.hover_yoffset);
     
-    text_y = self.y + y_padding + self.hover_yoffset; 
+    text_y = self.y + scribble_text.get_height() + y_padding + self.hover_yoffset; 
     
     var hint = room == rm_shop ? "\n(Click to purchase)" : (room == Room1 ? "\n(Click to activate)" : "");
     scribble_text = scribble($"{self.card_data.desc}{hint}")

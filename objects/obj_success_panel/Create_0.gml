@@ -18,7 +18,7 @@ can_choose_persistent = function() {
     return to_persist < 3 && is_undefined(self.new_persistent);
 }
 
-game_summary_text = $"[b]You died.[/b]";
+game_summary_text = $"[b]You won![/b]\nNumber of enemies defeated: {global.number_of_completed_combat}";
 game_summary = scribble(self.game_summary_text)
     .align(fa_center, fa_top);
 game_enemy_count_text = $"Number of enemies defeated: {global.number_of_completed_combat}";
@@ -33,6 +33,7 @@ obj_main_menu_button.x = room_width/2;
 obj_main_menu_button.y = room_height/2;
 obj_main_menu_button.button_text = "Main Menu"
 obj_main_menu_button.on_click = function() {
+    obj_player_state.reset();
 	trigger_room_transition(rm_main_menu, c_black);
 	instance_destroy(obj_toggle_deck_button);
     //if (!is_undefined(self.to_discard)) {
@@ -53,12 +54,3 @@ image_xscale = room_width * 0.5 / self.sprite_width;
 image_yscale = room_height * 0.8 / self.sprite_height;
 
 var curr_y = self.y - room_height * 0.3 + game_summary.get_height();
-
-for (var i = 0; i < n_traits; i += 1) {
-    var trait_data = obj_player_state.data.traits[i];
-    var trait = array_get_index(global.persistent_traits, trait_data) >= 0
-        ? instance_create_depth(self.x - 0.25 * self.sprite_width, curr_y, self.depth - 1, obj_persistent_trait)
-        : instance_create_depth(self.x - 0.25 * self.sprite_width, curr_y, self.depth - 1, obj_nonpersistent_trait)
-    trait.set_data(trait_data);
-    curr_y += trait.scribble_text.get_height() + 25;
-}

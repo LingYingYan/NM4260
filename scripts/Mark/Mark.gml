@@ -157,8 +157,9 @@ function WaterMark(mark_id, mark_name, mark_sprite) : Mark(mark_id, mark_name, m
     
     describe_alt = function(level) {
         var text = $"{self.get_label()}\n" + 
-                   $"[b]+2[/b] layer of {make_status("Poison", 0).get_label()} for each {make_mark("mark_ice").get_label()} Mark received\n" +
-                   $"[b]+1[/b] layer of {make_status("Paralysed", 0).get_label()} for each {make_mark("mark_lightning").get_label()} Mark received";
+                   $"[b]+2[/b] layer of {make_status("Poison", 0).get_label()} for each {make_mark("mark_grass").get_label()} Mark received\n" +
+                   $"[b]+1[/b] layer of {make_status("Paralysed", 0).get_label()} for each {make_mark("mark_lightning").get_label()} Mark received\n" + 
+                   $"[b]+1[/b] layer of {make_status("Frozen", 0).get_label()} for each {make_mark("mark_ice").get_label()} Mark received\n";
         if (level >= 5) {
             text += $"\n[b]+1[/b] layer of Frozen for each {make_mark("mark_ice").get_label()} Mark received";
         }
@@ -246,17 +247,12 @@ function IceMark(mark_id, mark_name, mark_sprite) : Mark(mark_id, mark_name, mar
      * @param {real} multiplicity description
      */
     on_apply = function(target, multiplicity = 1) {
-        var dominated_count = target.count_mark("mark_water");
-        var n_eliminated = min(dominated_count, multiplicity);
-        var remaining = multiplicity - n_eliminated;
-        var n_reactant = floor(n_eliminated / 1);
-        if (n_eliminated > 0) {
-            target.add_marks("mark_water", -n_eliminated);
-        }
-        
-        if (n_reactant > 0) {
+        var remaining = multiplicity;
+        while (target.count_mark("mark_water") >= 5) {
+            target.add_marks("mark_water", -5);
             target.add_status(new Frozen(n_reactant));
             show_debug_message("Frozen +" + string(n_reactant));
+            remaining -= 1;
         }
         
         if (remaining > 0) {
