@@ -52,12 +52,7 @@
                 "value": 1
             }
         ],
-        "effects_on_caster": [
-            {
-                "type": "Mark",
-                "value": 2
-            }
-        ],
+        "effects_on_caster": [],
         "special_effects": []
     },
     "card_curse_of_old_gods": {

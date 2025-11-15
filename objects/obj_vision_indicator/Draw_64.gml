@@ -2,6 +2,7 @@ if (point_in_rectangle(mouse_x, mouse_y, self.x, self.y - self.orb_radius, self.
     var tooltip_text = "[b]Vision[/b]\n" + 
                        "Vison helps you foresee your enemy's cards. " + 
                        "The higher the Vision, the more information you are likely to foresee.\n\n" + 
-                       "[bi]Once per turn[/bi], you may consume [b]1[/b] Vision to fully reveal a card played by the enemy.";
+                       "[bi]Once per turn[/bi], you may consume [b]1[/b] Vision to fully reveal a card played by the enemy.\n\n" + 
+                       "You may consume [b]1[/b] Vision to [b]remember[/b] a revealed room to make it permanently revealed throughout the game.";
     draw_tooltip(tooltip_text);
 }

@@ -43,7 +43,7 @@ var n_traits = array_length(obj_player_state.data.traits);
 image_xscale = room_width * 0.5 / self.sprite_width;
 image_yscale = room_height * 0.8 / self.sprite_height;
 
-var curr_y = self.y - room_height * 0.3 + game_summary.get_height();
+var curr_y = self.y - room_height * 0.3 + game_summary.get_height() + 50;
 
 for (var i = 0; i < n_traits; i += 1) {
     var trait_data = obj_player_state.data.traits[i];

@@ -11,12 +11,12 @@ draw_set_valign(fa_top);
 with (obj_shop_card) {
     var text_y = y + (sprite_get_height(spr_card_demo) * image_yscale / 2) + 20; // 20px below bottom
     var cost_str = "- " + string(cost) + " Vision"; // adjust field name to your data
-    draw_text(x, text_y, cost_str);
+    draw_text_colour(x, text_y, cost_str, c_white, c_white, c_white, c_white, 1);
 }
 with (obj_relic_card) {
     var text_y = y + (sprite_get_height(spr_card_demo) * image_yscale / 2) + 20; // 20px below bottom
     var cost_str = "- " + string(cost) + " Vision"; // adjust field name to your data
-    draw_text(x, text_y, cost_str);
+    draw_text_colour(x, text_y, cost_str, c_white, c_white, c_white, c_white, 1);
 }
 
 if (global.is_tut) {

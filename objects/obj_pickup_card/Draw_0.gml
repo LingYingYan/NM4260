@@ -1,15 +1,9 @@
 if (self.hovered) {
 	// Draw a stroke around the card.
 	// draw_sprite_ext(spr_card_stroke_with_blur, 0, self.x + 1, self.y + 2, self.image_xscale, self.image_xscale, image_angle, c_white, 0.5);
-    if (self.dropped_area != noone) {
-        self.current_depth = self.dropped_area.depth - 1;    
-    } else {
-        self.current_depth = -10000;
-    }
-    
-    self.image_blend = -1;
+    self.image_blend = c_orange;
 } else {
-    //self.image_blend = c_ltgray;
+    self.image_blend = -1;
     if (self.state_update == self.state_normal) {
         self.current_depth = self.normal_depth;
     }
@@ -53,7 +47,7 @@ if (self.card_data != undefined) {
         scale: self.effect_scale    
     })).wrap(self.sprite_width - 2 * x_padding);
     var text_scale = min(
-        (self.sprite_width - 25) / scribble_text.get_width(), 
+        self.sprite_width / scribble_text.get_width(), 
         self.image_xscale,
         self.sprite_height / scribble_text.get_height()
     );

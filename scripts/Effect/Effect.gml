@@ -116,7 +116,7 @@ function DamageEffect(_base_damage) : Effect() constructor {
             mult += 25;
         }
         
-        return max(0, floor(self.damage * mult / 100) + args.instigator.get_attribute("strength"));
+        return max(1, floor(self.damage * mult / 100) + args.instigator.get_attribute("strength"));
     }
     
     /// @desc 
@@ -165,7 +165,7 @@ function MarkEffect(_mark, _count) : Effect() constructor {
             mult -= 25;
         }
         
-        return sign(self.count) * max(0, floor(abs(self.count) * mult / 100));
+        return sign(self.count) * max(1, floor(abs(self.count) * mult / 100));
     }
     
     /// @desc 
@@ -230,7 +230,7 @@ function HealingEffect(_base_amount) : Effect() constructor {
             mult -= 25;
         }
         
-        return max(0, floor(self.amount * mult / 100));
+        return max(1, floor(self.amount * mult / 100));
     }
     
     /// @desc 
@@ -269,7 +269,7 @@ function AddStatusEffect(_status, _level) : Effect() constructor {
             mult -= 25;
         }
         
-        return sign(self.level) * max(0, floor(abs(self.level) * mult / 100));
+        return sign(self.level) * max(1, floor(abs(self.level) * mult / 100));
     }
     
     /// @desc 

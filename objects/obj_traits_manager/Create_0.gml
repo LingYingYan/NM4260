@@ -10,6 +10,7 @@ get_random = function() {
         cumulative += self.remaining_traits[i].get_weight();
         if (cumulative >= select) {
             array_push(self.owned_traits, self.remaining_traits[i]);
+            self.total_weight -= self.remaining_traits[i].get_weight();
             array_delete(self.remaining_traits, i, 1);
             return array_last(self.owned_traits);
         }
