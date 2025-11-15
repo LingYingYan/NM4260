@@ -8,7 +8,7 @@ var spr = noone;
 switch (name) {
 	case "The Vision Pool": spr = spr_enc_visionPool; break;
 	case "The Whispering Wall": spr = spr_enc_whisperingWall; break;
-	case "The Alchemist’s Corpse": spr = spr_enc_alchemist;break;
+	case "The Corpse of Alchemist": spr = spr_enc_alchemist;break;
 	case "The Master's Diary Fragment": spr = spr_enc_diary; break;
 }
 draw_sprite_stretched(spr, 0, spr_x_padding, spr_y_padding, spr_w, spr_h);
@@ -16,7 +16,7 @@ draw_sprite_stretched(spr, 0, spr_x_padding, spr_y_padding, spr_w, spr_h);
 draw_set_font(fnt_default);
 draw_set_color(c_black);
 var desc_width = string_width(description);
-draw_text_ext(room_width/2 - desc_width/2, spr_y_padding + spr_h + 50, description, 20, room_width/2);
+draw_text_ext(room_width/4, spr_y_padding + spr_h + 20, description, 20, room_width/2);
 
 //if (is_array(options) && array_length(options) > 0) {
 //	for (var i = 0; i < array_length(options); i++) {

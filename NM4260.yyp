@@ -151,6 +151,7 @@
     {"id":{"name":"obj_draw_pile","path":"objects/obj_draw_pile/obj_draw_pile.yy",},},
     {"id":{"name":"obj_ele_reaction_toggle","path":"objects/obj_ele_reaction_toggle/obj_ele_reaction_toggle.yy",},},
     {"id":{"name":"obj_ele_reaction","path":"objects/obj_ele_reaction/obj_ele_reaction.yy",},},
+    {"id":{"name":"obj_enc_viewonly_card","path":"objects/obj_enc_viewonly_card/obj_enc_viewonly_card.yy",},},
     {"id":{"name":"obj_encounter_button","path":"objects/obj_encounter_button/obj_encounter_button.yy",},},
     {"id":{"name":"obj_encounter_controller","path":"objects/obj_encounter_controller/obj_encounter_controller.yy",},},
     {"id":{"name":"obj_encounter_display","path":"objects/obj_encounter_display/obj_encounter_display.yy",},},
