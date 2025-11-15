@@ -1,5 +1,5 @@
 drawer_open = false;
-buffer_size = 20;
+buffer_size = 25;
 drawer_width = 300;
 
 x_target = room_width - buffer_size;   
