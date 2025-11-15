@@ -21,7 +21,9 @@ can_choose_persistent = function() {
 game_summary_text = $"[b]You won![/b]\nNumber of enemies defeated: {global.number_of_completed_combat}";
 game_summary = scribble(self.game_summary_text)
     .align(fa_center, fa_top);
-
+game_enemy_count_text = $"Number of enemies defeated: {global.number_of_completed_combat}";
+game_enemy_count = scribble(self.game_enemy_count_text)
+	.align(fa_center, fa_middle);
 //var main_menu = instance_create_layer(self.x, self.y - 0.2 * room_height, "Instances", obj_main_menu_button);
 //main_menu.visible = true;
 //main_menu.depth = self.depth -1;

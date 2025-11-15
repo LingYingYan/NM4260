@@ -1,15 +1,15 @@
 text = scribble("Tutorial?")
 	.align(fa_center, fa_middle)
-	.starting_format("fnt_default_large", c_black)
+	.starting_format("fnt_default_large", #735129)
 	.scale(3)
 
 yes_option = scribble("Yes!")
 	.align(fa_center, fa_middle)
-	.starting_format("fnt_default_large", c_black);
+	.starting_format("fnt_default_large", #735129);
 
 no_option = scribble("No!")
 	.align(fa_center, fa_middle)
-	.starting_format("fnt_default_large", c_black);
+	.starting_format("fnt_default_large", #735129);
 
 popup_w = 800;
 popup_h = 600;
