@@ -12,10 +12,10 @@ if (drawer_x < room_width) { // only clip when drawer visible
     var scissor_y = room_height - drawer_height;
     gpu_set_scissor(drawer_x, 0, drawer_width, drawer_height);
 
-    //draw_set_color(#735129);
-	//draw_set_alpha(1);
-	draw_sprite_stretched(spr_drawer, 0, drawer_x, 0, drawer_width, drawer_height);
-	//draw_rectangle(drawer_x, 0, drawer_x + drawer_width, drawer_height, false);
+    draw_set_color(#735129);
+	draw_set_alpha(0.7);
+	//draw_sprite_stretched(spr_drawer, 0, drawer_x, 0, drawer_width, drawer_height);
+	draw_rectangle(drawer_x, 0, drawer_x + drawer_width, drawer_height, false);
 	draw_set_alpha(1);
 	if (room == rm_shop) {
 		with (obj_deck_drawer_card) {

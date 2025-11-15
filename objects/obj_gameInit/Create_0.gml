@@ -8,6 +8,8 @@ global.ele_react_tut_shown = false;
 global.dist_start_end = -1; //default is -1
 global.num_enemy_rooms = -1;
 
+global.player_moving = false;
+
 global.GRID_W = 6;
 global.GRID_H = 5;
 global.ROOM_SIZE = 114; //#128

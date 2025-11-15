@@ -15,9 +15,9 @@ desc_text = scribble("Restore your health at a cost...")
 			.starting_format("font_game_text", c_white)
 			.align(fa_center, fa_middle);
 
-btn_width = sprite_get_width(sprite_btn);
-btn_height = sprite_get_height(sprite_btn);
-btn_spacing = 20;
+btn_width = 200
+btn_height = 80
+btn_spacing = 400;
 
 sprite_y = room_height /4; 
 header_y = room_height / 2;

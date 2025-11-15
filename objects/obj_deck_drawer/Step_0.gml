@@ -56,16 +56,22 @@ if (room == rm_shop) {
 				// - 0.5 vision
 		
 				show_debug_message($"Curent count is {count}");
-				show_debug_message($"Removed the card successfully!");
+				//show_debug_message($"Removed the card successfully!");
 			
 				// mark the shop as used when a card is removed from the deck
 				var curr = global.player_current_room;
 				var used_coor = [curr.x, curr.y];
 				array_push(global.used_shops, used_coor);
-				show_debug_message($"The shop at {curr.x}, {curr.y} is marked as used")
+				//show_debug_message($"The shop at {curr.x}, {curr.y} is marked as used")
 			} else {
 				selected = false;
-				show_message("You do not have enough vision!")
+				//show_message("You do not have enough vision!")
+				
+				var msg = instance_create_layer(0, 0, "Instances", obj_popup_message);
+				msg.message_text = scribble("You do not have enough vision!")
+					.align(fa_center, fa_middle);
+				msg.function_to_run = function(){};
+				
 				exit;
 			}
 		

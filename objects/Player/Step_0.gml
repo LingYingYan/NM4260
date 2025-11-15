@@ -7,6 +7,7 @@ if (global.just_exited_bonfire) {
 if (moving) {
     if (current_target_index >= 0 && current_target_index < array_length(path_rooms)) {
         var target_room = path_rooms[current_target_index];
+		show_debug_message($"target room of player is at {target_room.grid_x}, {target_room.grid_y}")
         target_x = target_room.x + global.map_offset_x;
         target_y = target_room.y + global.map_offset_y;
 
@@ -39,12 +40,14 @@ if (moving) {
             // Stop when reached destination
             if (current_target_index >= array_length(path_rooms)) {
                 moving = false;
+				global.player_moving = false;
                 //sprite_index = spr_player_idle;
                 //image_speed = 0;
             }
         }
     } else {
         moving = false;
+		global.player_moving = false;
     }
 } else {
     //// Idle logic

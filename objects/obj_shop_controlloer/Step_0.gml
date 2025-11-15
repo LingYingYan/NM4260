@@ -17,7 +17,10 @@ with (obj_shop_card) {
 			other.alarm[0] = 1;
 		}
 		else {
-			show_message("Your Vision is not enough.")
+			var msg = instance_create_layer(0, 0, "Instances", obj_popup_message);
+			msg.message_text = scribble("You do not have enough vision!")
+					.align(fa_center, fa_middle);
+			msg.function_to_run = function(){};
 			//replace with customised pop-up window
 			selected = false;
 			sold = false;
@@ -69,7 +72,11 @@ with (obj_relic_card) {
 			other.alarm[0] = 1;
 		}
 		else {
-			show_message("Your Vision is not enough.")
+			//show_message("Your Vision is not enough.")
+			var msg = instance_create_layer(0, 0, "Instances", obj_popup_message);
+			msg.message_text = scribble("You do not have enough vision!")
+					.align(fa_center, fa_middle);
+			msg.function_to_run = function(){};
 			//replace with customised pop-up window
 			selected = false;
 			sold = false;

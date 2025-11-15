@@ -25,8 +25,10 @@ for (j = 0; j < array_length(global.curr_shop_relics); j ++) {
 }
 
 // var drawer = instance_create_layer(room_width - 20, room_height/2, "Instances", obj_deck_drawer);
-
-var toggle_btn = instance_create_layer(room_width - 20, room_height/2, "Instances", obj_toggle_deck_button);
+if (!instance_exists(obj_toggle_deck_button)) {
+	var toggle_btn = instance_create_layer(room_width - 20, room_height/2, "Instances", obj_toggle_deck_button);
+	show_debug_message($"Creating new deck toggle button, current number is{instance_number(obj_toggle_deck_button)} ")
+}
 
 label_purchase = instance_create_layer(room_width/ 8, room_height/4 * 3, "Instances", obj_tut_label);
 label_purchase.label_scenario = "purchase";

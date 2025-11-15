@@ -12,9 +12,13 @@ if (is_pressing) {
 			// spend 1 vision to remember the room
 			obj_player_state.data.vision -= 1;
 			self.data.perm_revealed = true;
-            show_debug_message($"{self.data.room_type} Room  marked as revealed!");
+            //show_debug_message($"{self.data.room_type} Room  marked as revealed!");
         } else {
-			show_message("Cannot permanent reveal this room.")
+			//show_message("Cannot permanent reveal this room.")
+			var msg = instance_create_layer(0, 0, "Instances", obj_popup_message);
+			msg.message_text = scribble("Cannot permanent reveal this room.")
+					.align(fa_center, fa_middle);
+			msg.function_to_run = function(){};
 		}
     }
 }

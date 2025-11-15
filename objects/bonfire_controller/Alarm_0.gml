@@ -1,0 +1,1 @@
+obj_room_manager.goto_map();

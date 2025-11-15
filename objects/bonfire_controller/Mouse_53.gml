@@ -7,10 +7,14 @@ if (point_in_rectangle(mouse_x, mouse_y,
     yes_btn_x1, yes_btn_y1,
 	yes_btn_x2, yes_btn_y2))
 {
-	if (global.bonfire_used) {
-        show_message("The bonfire has gone cold. It cannot be used again.");
-        exit; // do nothing further
-    }
+	//if (global.bonfire_used) {
+    //    show_message("The bonfire has gone cold. It cannot be used again.");
+    //    exit; // do nothing further
+    //}
+	var msg = instance_create_layer(0, 0, "Instances", obj_popup_message);
+	msg.message_text = scribble("You had a good rest")
+					.align(fa_center, fa_middle);
+	msg.function_to_run = function(){};
 
     global.bonfire_used = true;
 
@@ -23,7 +27,7 @@ if (point_in_rectangle(mouse_x, mouse_y,
 	empty_shop_card();
 	
 	global.map_needs_reset = true;  // flag that next room must regenerate
-	obj_room_manager.goto_map();
+	alarm[0] = 120;
 }
 
 // Button 2 clicked
@@ -31,8 +35,13 @@ if (point_in_rectangle(mouse_x, mouse_y,
     no_btn_x1, no_btn_y1,
 	no_btn_x2, no_btn_y2))
 {
-    show_message("You chose not to rest");
+    //show_message("You chose not to rest");
+	var msg = instance_create_layer(0, 0, "Instances", obj_popup_message);
+	msg.message_text = scribble("You chose not to rest")
+					.align(fa_center, fa_middle);
+	msg.function_to_run = function(){};
+	
 	global.just_exited_bonfire = true;
 	global.bonfire_used = false;
-	obj_room_manager.goto_map();
+	alarm[0] = 120;
 }

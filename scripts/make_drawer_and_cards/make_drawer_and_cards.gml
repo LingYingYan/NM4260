@@ -17,7 +17,7 @@ function make_drawer_and_cards(){
 	instance_destroy(obj_deck_viewonly_card);
 	
 	player_deck = obj_player_deck_manager.denumerate();
-	show_debug_message($"Player deck is {player_deck}");
+	//show_debug_message($"Player deck is {player_deck}");
 	
 	max_scroll = max(0, array_length(player_deck) * (card_height + card_spacing) - drawer_height);
 	
