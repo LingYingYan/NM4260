@@ -53,6 +53,7 @@ function generate_from_grid(){
 	player_inst.current_room = target_room;
 	player_inst.prev_room = target_room;
 	global.player_current_room = target_room;  // keep global in sync
+	player_inst.moving = false;
 
 	show_debug_message($"Player spawned at room ({target_room.grid_x}, {target_room.grid_y})");
 //    if (variable_global_exists("player")) {

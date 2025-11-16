@@ -1,4 +1,9 @@
 // Only respond if there's an avatar in play
+if (global.player_moving || Player.moving) {
+	show_debug_message("stopped triggered room entering")
+	exit;
+}
+
 show_debug_message("the left press event is triggered")
 
 if (!global.player_moving) {

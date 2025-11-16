@@ -1,3 +1,8 @@
+if (global.player_moving || Player.moving) {
+	show_debug_message("stopped triggered room entering")
+	exit;
+}
+
 // Prevent move if long press was done
 if (long_press_done) {
     audio_play_sound(buff, 1, false);
@@ -7,10 +12,7 @@ if (long_press_done) {
     exit; 
 }
 
-//if (global.player_moving || Player.moving) {
-//	show_debug_message("stopped triggered room entering")
-//	exit;
-//}
+
 
 if (!instance_exists(Player)) exit;
 var player = instance_find(Player, 0);
@@ -31,10 +33,13 @@ if (!target_room.revealed) {
     }
 
     if (canMove) {
+		
+		if (player.moving) exit;
         player.path_rooms = [curr, target_room]; // one step
         player.current_target_index = 1;
-        player.moving = true;
+		player.moving = true;
 		global.player_moving = true;
+        
 		show_debug_message("Player is moving")
 		
         global.player_current_room = target_room;
@@ -79,10 +84,14 @@ else {
     }
 	
     if (array_length(path) > 1) {
+		
+		if (player.moving) exit;
+		
         player.path_rooms = path;
         player.current_target_index = 1;
-        player.moving = true;
+		player.moving = true;
 		global.player_moving = true;
+        
 		show_debug_message("Player is moving")
 
         global.player_current_room = target_room;
