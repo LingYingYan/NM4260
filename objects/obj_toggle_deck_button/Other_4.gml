@@ -13,3 +13,7 @@ rot_speed = 0.2;
 
 depth = -25000;
 
+if (instance_exists(obj_deck_drawer)){
+	instance_destroy(obj_deck_drawer);
+	instance_create_layer(room_width - 20, room_height/2, "Instances", obj_deck_drawer);
+}
